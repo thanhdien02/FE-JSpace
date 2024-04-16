@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LayoutHomeUserHeader from "../module/common/LayoutHomeUserHeader";
 import { Outlet } from "react-router-dom";
 import LoginPage from "../page/CommonPage/LoginPage";
+import { useSelector } from "react-redux";
 
 const LayoutHomeUser: React.FC = () => {
+  const { accessToken } = useSelector((state: any) => state.auth);
   const [checkLogin, setCheckLogin] = useState(false);
 
+  useEffect(() => {
+    if (accessToken !== "") {
+      setCheckLogin(false);
+    }
+  }, [accessToken]);
   return (
     <div className="">
       <LoginPage

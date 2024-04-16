@@ -7,7 +7,7 @@ interface MyComponentProps {
   loading: boolean;
 }
 
-const Input: React.FC<MyComponentProps> = ({
+const Button: React.FC<MyComponentProps> = ({
   className,
   title,
   loading = false,
@@ -34,4 +34,4 @@ const Input: React.FC<MyComponentProps> = ({
   );
 };
 
-export default Input;
+export default Button;

@@ -43,7 +43,7 @@ const LoginPage: React.FC<PropComponent> = ({
 
   useEffect(() => {
     if (accessToken != "") {
-      navigate("/home");
+      navigate("/");
     } else if (roles.length > 0) {
       navigate("/register");
     }

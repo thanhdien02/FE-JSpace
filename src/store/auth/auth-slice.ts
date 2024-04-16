@@ -37,6 +37,10 @@ const authSlice: any = createSlice({
       ...state,
       loading: action.payload.loading,
     }),
+
+    authFetchMe: (state: any) => ({
+      ...state,
+    }),
     authGetRoles: (state: any) => ({
       ...state,
     }),
@@ -44,7 +48,7 @@ const authSlice: any = createSlice({
       ...state,
       roles: action.payload.roles,
     }),
-    authUpdateInfoLoginRedux: (state: any, action: any) => ({
+    authUpdateFetchRedux: (state: any, action: any) => ({
       ...state,
       accessToken: action.payload.accessToken,
       user: action.payload.user,
@@ -56,7 +60,9 @@ export const {
   authLogin,
   authUpdateRolesRedux,
   authGetRoles,
+  authFetchMe,
   authRegister,
   authUpdateLoadingRedux,
+  authUpdateFetchRedux,
 } = authSlice.actions;
 export default authSlice.reducer;

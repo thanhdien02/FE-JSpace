@@ -19,7 +19,7 @@ export const requestAuthLogin = (dataLogin: any) => {
 
 export const requestAuthFetchMe = (accessToken: string) => {
   if (!accessToken) return;
-  return axios.get(`${API}/api/v1/admins/profile`, {
+  return axios.get(`${API}/api/v1/auth/user/profile`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,

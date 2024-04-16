@@ -8,5 +8,4 @@ export default axios.create({
   },
 });
 
-export const API =
-  "https://jspace-service-2a930e79346f.herokuapp.com/jspace-service";
+export const API = "https://jspace-804e64747ec6.herokuapp.com/jspace-service";
