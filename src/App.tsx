@@ -23,7 +23,7 @@ function App() {
     if (accessToken == "") {
       const token = getToken();
       if (token?.accessToken == "null") {
-        navigate("/login");
+        navigate("/");
       }
       dispatch(authFetchMe());
     }
