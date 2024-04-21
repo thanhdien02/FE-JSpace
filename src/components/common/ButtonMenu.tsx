@@ -7,11 +7,19 @@ interface PropComponent {
   className?: string;
   path?: string;
   title?: string;
+  onClick?: any;
+  icon?: string
 }
-const ButtonMenu: React.FC<PropComponent> = ({ className, path, title }) => {
+const ButtonMenu: React.FC<PropComponent> = ({
+  className,
+  path,
+  title,
+  onClick = () => {},
+}) => {
   return (
     <>
       <NavLink
+        onClick={onClick}
         to={`${path}`}
         className={`button-menu-candidate text-gray-800 flex items-center justify-between bg-blue-50 py-3 px-4 rounded-md hover:text-primary transition-all ${className}`}
       >

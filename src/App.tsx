@@ -1,6 +1,6 @@
 import { Suspense, useEffect } from "react";
 import "./App.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LoginPage from "./page/CommonPage/LoginPage";
 import HomePage from "./page/CommonPage/HomePage";
 import LayoutHomeUser from "./layout/LayoutHomeUser";
@@ -14,18 +14,19 @@ import { authFetchMe } from "./store/auth/auth-slice";
 import LayoutManageCandidate from "./layout/LayoutManageCandidate";
 import ManageUpdateInformationCandidatePage from "./page/CandidatePage/ManageUpdateInformationCandidatePage";
 import ManageUploadResumeCandidate from "./page/CandidatePage/ManageUploadResumeCandidate";
-
+import ManageListResumeCandidate from "./page/CandidatePage/ManageListResumeCandidate";
+import ManageWallCandidate from "./page/CandidatePage/ManageWallCandidate";
 function App() {
   const { accessToken } = useSelector((state: any) => state.auth);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     if (accessToken == "") {
       const token = getToken();
       if (token?.accessToken == "null") {
-        navigate("/");
+        // navigate("/");
+      } else {
+        dispatch(authFetchMe());
       }
-      dispatch(authFetchMe());
     }
   }, [accessToken]);
   return (
@@ -57,6 +58,14 @@ function App() {
               element={
                 <ManageUploadResumeCandidate></ManageUploadResumeCandidate>
               }
+            ></Route>
+            <Route
+              path="/list-resume"
+              element={<ManageListResumeCandidate></ManageListResumeCandidate>}
+            ></Route>
+            <Route
+              path="/wall"
+              element={<ManageWallCandidate></ManageWallCandidate>}
             ></Route>
           </Route>
         </Routes>

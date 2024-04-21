@@ -21,7 +21,7 @@ const LayoutHomeUser: React.FC = () => {
         claseNameOverlay="opacity-40"
       ></LoginPage>
       <LayoutHomeUserHeader actionLogin={setCheckLogin}></LayoutHomeUserHeader>
-      <div className="bg-blue-50">
+      <div className="">
         <Outlet></Outlet>
       </div>
     </div>

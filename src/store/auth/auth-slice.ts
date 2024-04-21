@@ -30,6 +30,9 @@ const authSlice: any = createSlice({
     authLogin: (state: any) => ({
       ...state,
     }),
+    authLogout: (state: any) => ({
+      ...state,
+    }),
     authRegister: (state: any) => ({
       ...state,
     }),
@@ -62,6 +65,7 @@ export const {
   authGetRoles,
   authFetchMe,
   authRegister,
+  authLogout,
   authUpdateLoadingRedux,
   authUpdateFetchRedux,
 } = authSlice.actions;

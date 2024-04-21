@@ -60,7 +60,7 @@ const LoginPage: React.FC<PropComponent> = ({
 
   return (
     <div
-      className={`  flex fixed inset-0 transition-all ${className} ${
+      className={`  flex fixed inset-0 transition-all z-10 ${className} ${
         checkLogin ? "block" : "hidden"
       } `}
     >

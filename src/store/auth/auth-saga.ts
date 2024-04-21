@@ -1,8 +1,9 @@
 import { takeLatest } from "redux-saga/effects";
-import { authFetchMe, authLogin, authRegister } from "./auth-slice";
+import { authFetchMe, authLogin, authLogout, authRegister } from "./auth-slice";
 import {
   handleAuthFetchMe,
   handleAuthLogin,
+  handleAuthLogout,
   handleAuthRegister,
 } from "./auth-handlers";
 
@@ -10,4 +11,5 @@ export default function* authSaga() {
   yield takeLatest(authLogin.type, handleAuthLogin);
   yield takeLatest(authRegister.type, handleAuthRegister);
   yield takeLatest(authFetchMe.type, handleAuthFetchMe);
+  yield takeLatest(authLogout.type, handleAuthLogout);
 }

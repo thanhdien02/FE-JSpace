@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { InboxOutlined } from "@ant-design/icons";
-import { Button, message } from "antd";
+import { HomeOutlined, InboxOutlined, UserOutlined } from "@ant-design/icons";
+import { Breadcrumb, Button, message } from "antd";
 import type { UploadFile, UploadProps } from "antd";
 import Dragger from "antd/es/upload/Dragger";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,9 +27,6 @@ const ManageUploadResumeCandidate: React.FC = () => {
       setFile(file);
       return false;
     },
-    onPreview: (file) => {
-      console.log("🚀 ~ ManageUploadResumeCandidate ~ file:", file);
-    },
   };
   const handleUpload = () => {
     dispatch(fileUploadFile({ file, candidate_id: user?.id }));
@@ -49,7 +46,31 @@ const ManageUploadResumeCandidate: React.FC = () => {
 
   return (
     <>
-      <div className="p-10 flex flex-col items-center mx-auto">
+      <Breadcrumb
+        className="px-5 pt-5"
+        items={[
+          {
+            href: "/manage",
+            title: <HomeOutlined />,
+          },
+          {
+            href: "/list-resume",
+            title: (
+              <>
+                <UserOutlined />
+                <span>Danh sách CV</span>
+              </>
+            ),
+          },
+          {
+            title: "Application",
+          },
+        ]}
+      />
+      <h3 className="self-start p-5 font-semibold text-lg">
+        Tải hồ sơ xin việc.
+      </h3>
+      <div className="px-10 py-5 flex flex-col items-center mx-auto">
         <Dragger {...props} className="h-[200px]" maxCount={1}>
           <p className="ant-upload-drag-icon">
             <InboxOutlined />

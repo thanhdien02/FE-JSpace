@@ -3,14 +3,19 @@ import logo from "../../assets/logo3.png";
 import { useSelector } from "react-redux";
 import IconChervonDown from "../../components/icons/IconChervonDown";
 import IconBell from "../../components/icons/IconBell";
-import ButtonMenu from "../../components/common/ButtonMenu";
 import HeaderItem from "../../components/common/HeaderItem";
+import { NavLink } from "react-router-dom";
+import CandidateMenu from "../candidates/CandidateMenu";
+import { dataCandidateMenu } from "../../utils/dataFetch";
+import { useDispatch } from "react-redux";
+import { authLogout } from "../../store/auth/auth-slice";
 
 interface PropComponent {
   actionLogin?: any;
 }
 const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
   const handleMouseOverCandidateMenu = () => {
     const elementMouseOver: any = document.querySelector(
       ".candidate-menu-manage"
@@ -27,11 +32,18 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
       elementMouseOver.style.display = "none";
     }
   };
+  const handleCandidateMenu: any = (e: any) => {
+    if (e.title === "Đăng xuất") {
+      dispatch(authLogout());
+    }
+  };
   return (
     <>
-      <header className="flex lg:px-10 px-5 pb-3 pt-4 justify-between items-center">
+      <header className="flex lg:px-10 px-5 pb-3 pt-4 justify-between items-center shadow-md">
         <div className="flex items-center gap-5">
-          <img src={logo} alt="" className="w-[45px] object-cover" />
+          <NavLink to="/">
+            <img src={logo} alt="" className="w-[45px] object-cover" />
+          </NavLink>
           <ul className="lg:flex hidden gap-2">
             <HeaderItem title="Tìm việc" path="/"></HeaderItem>
             <HeaderItem title="Công ty" path="/companys"></HeaderItem>
@@ -40,7 +52,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
         </div>
         <div className="">
           {accessToken === "" ? (
-            <div className="flex justify-center items-center gap-1">
+            <div className="xl:flex hidden justify-center items-center gap-1">
               <button
                 className="px-2 py-2 hover:text-primary"
                 onClick={() => actionLogin(true)}
@@ -83,7 +95,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                           {user?.name}
                         </h3>
                         <p className="font-semibold text-gray-400">
-                          Mã ứng viên: #83283283
+                          Mã ứng viên: #{user?.id}
                         </p>
                         <p className="font-semibold text-gray-400">
                           {" "}
@@ -91,18 +103,11 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                         </p>
                       </div>
                     </div>
-
                     <span className="w-full h-[1px] bg-slate-300"></span>
-                    <ButtonMenu
-                      title="Thông tin cá nhân"
-                      path="/manage"
-                    ></ButtonMenu>
-                    <ButtonMenu title="Công việc đã lưu"></ButtonMenu>
-                    <ButtonMenu
-                      title="Quản lí hồ sơ xin việc"
-                      path="/upload-resume"
-                    ></ButtonMenu>
-                    <ButtonMenu title="Đăng xuất"></ButtonMenu>
+                    <CandidateMenu
+                      data={dataCandidateMenu}
+                      onClick={handleCandidateMenu}
+                    ></CandidateMenu>
                   </div>
                 </section>
               </div>

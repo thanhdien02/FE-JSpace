@@ -75,7 +75,6 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
                 }}
               />
               <input
-                // defaultValue={user?.name}
                 {...register("name", {
                   required: true,
                   maxLength: 40,
@@ -119,7 +118,6 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
               />
               <input
                 disabled={true}
-                // defaultValue={user?.email}
                 {...register("email", {
                   // // required: true,
                   // maxLength: 40,
@@ -158,9 +156,9 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
             <IconPhone className="absolute top-0 left-0 translate-x-[50%] translate-y-[50%] text-gray-400"></IconPhone>
             <input
               {...register("phone", {
-                required: true,
-                maxLength: 40,
-                minLength: 8,
+                // required: true,
+                // maxLength: 40,
+                // minLength: 8,
               })}
               placeholder="Mật khẩu"
               type="number"

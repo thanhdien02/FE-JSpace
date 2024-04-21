@@ -11,7 +11,7 @@ import {
   authUpdateRolesRedux,
 } from "./auth-slice";
 import { commonUpdateOAuthRedux } from "../common/common-slice";
-import { getToken, saveToken } from "../../utils/auth";
+import { getToken, logOut, saveToken } from "../../utils/auth";
 
 function* handleAuthLogin(dataLogin: any): Generator<any> {
   try {
@@ -49,6 +49,19 @@ function* handleAuthFetchMe(): Generator<any> {
   } finally {
   }
 }
+function* handleAuthLogout(): Generator<any> {
+  try {
+    logOut();
+    yield put(
+      authUpdateFetchRedux({
+        users: {},
+        accessToken: "",
+      })
+    );
+  } catch (error) {
+  } finally {
+  }
+}
 
 function* handleAuthRegister(dataRegister: any): Generator<any> {
   try {
@@ -71,4 +84,9 @@ function* handleAuthRegister(dataRegister: any): Generator<any> {
     yield put(authUpdateLoadingRedux({ loading: false }));
   }
 }
-export { handleAuthLogin, handleAuthFetchMe, handleAuthRegister };
+export {
+  handleAuthLogin,
+  handleAuthFetchMe,
+  handleAuthRegister,
+  handleAuthLogout,
+};

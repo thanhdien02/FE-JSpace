@@ -24,7 +24,6 @@ const SelectionRolePage: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data: FormData) => {
-    // console.log(data);
     dispatch(
       authRegister({ role: data?.radioOption, userInfo: infoUserOauth })
     );

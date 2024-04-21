@@ -18,3 +18,15 @@ export const requestFileUploadFile = (
     }
   );
 };
+export const requestFileGetAllFile = (
+  candidate_id: any,
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.get(`${API}/api/v1/candidates/${candidate_id}/resumes?size=100`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};

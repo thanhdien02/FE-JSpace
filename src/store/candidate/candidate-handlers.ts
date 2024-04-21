@@ -5,6 +5,7 @@ import {
   candidateUpdateLoadingRedux,
   candidateUpdateMessageRedux,
 } from "./candidate-slice";
+import { handleAuthFetchMe } from "../auth/auth-handlers";
 
 function* handleCandidateUpdateIdentification(
   dataCandidatUpdate: any
@@ -24,6 +25,8 @@ function* handleCandidateUpdateIdentification(
           messageCandidate: "success",
         })
       );
+      // update thông tin lại của user
+      yield call(handleAuthFetchMe);
     }
   } catch (error) {
   } finally {
