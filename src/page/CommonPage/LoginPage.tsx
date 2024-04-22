@@ -2,12 +2,12 @@ import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { authLogin } from "../../store/auth/auth-slice";
+import { authLogin, authUpdateLoadingRedux } from "../../store/auth/auth-slice";
 import { Button } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo3.png";
 import { useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import IconClose from "../../components/icons/IconClose";
 
 interface PropComponent {
@@ -22,12 +22,12 @@ const LoginPage: React.FC<PropComponent> = ({
   actionLogin,
   claseNameOverlay,
 }) => {
-  const { accessToken, roles } = useSelector((state: any) => state.auth);
-  const navigate = useNavigate();
+  const { loading } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
   const login: any = useGoogleLogin({
     onSuccess: async (response: any) => {
       try {
+        dispatch(authUpdateLoadingRedux({ loading: true }));
         const dataEmail = await axios.get(
           "https://www.googleapis.com/oauth2/v3/userinfo",
           {
@@ -40,14 +40,6 @@ const LoginPage: React.FC<PropComponent> = ({
       } catch (error) {}
     },
   });
-
-  useEffect(() => {
-    if (accessToken != "") {
-      navigate("/");
-    } else if (roles.length > 0) {
-      navigate("/register");
-    }
-  }, [accessToken, roles]);
 
   useEffect(() => {
     const elementBody = document.body;
@@ -106,6 +98,7 @@ const LoginPage: React.FC<PropComponent> = ({
               icon={<GoogleOutlined />}
               className="bg-primary m-auto min-w-[400px] flex gap-3 justify-center items-baseline !transition-all"
               size={"large"}
+              loading={loading}
               onClick={() => login()}
             >
               Đăng nhập với Google

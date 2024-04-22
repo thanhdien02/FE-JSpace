@@ -13,6 +13,7 @@ const LayoutHomeUser: React.FC = () => {
       setCheckLogin(false);
     }
   }, [accessToken]);
+
   return (
     <div className="">
       <LoginPage
@@ -21,7 +22,7 @@ const LayoutHomeUser: React.FC = () => {
         claseNameOverlay="opacity-40"
       ></LoginPage>
       <LayoutHomeUserHeader actionLogin={setCheckLogin}></LayoutHomeUserHeader>
-      <div className="">
+      <div className="bg-white">
         <Outlet></Outlet>
       </div>
     </div>

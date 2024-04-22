@@ -17,8 +17,11 @@ const HomeBannerPage: React.FC = () => {
   return (
     <>
       <div className="py-5 bg-gradient-to-b from-blue-50 to-white flex flex-col w-full min-h-[150px] justify-center items-center gap-y-5">
+        <h1 className="font-bold text-3xl text-primary line-clamp-1 py-2 mt-6">
+          Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc.
+        </h1>
         <form
-          className="flex w-[1100px] h-auto rounded-lg shadow-lg mt-12 bg-white"
+          className="flex w-[1100px] h-auto rounded-lg shadow-lg  bg-white"
           action="
         "
         >

@@ -17,6 +17,7 @@ function* handleAuthLogin(dataLogin: any): Generator<any> {
   try {
     const response: any = yield call(requestAuthLogin, dataLogin.payload);
 
+    yield put(authUpdateLoadingRedux({ loading: true }));
     if (response?.data?.result?.accessToken === "") {
       const listRole: any = yield call(requestAuthGetAllRoles);
 
@@ -31,7 +32,10 @@ function* handleAuthLogin(dataLogin: any): Generator<any> {
       );
       yield call(handleAuthFetchMe);
     }
-  } catch (error) {}
+  } catch (error) {
+  } finally {
+    yield put(authUpdateLoadingRedux({ loading: false }));
+  }
 }
 function* handleAuthFetchMe(): Generator<any> {
   try {
