@@ -155,27 +155,13 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
           <div className="mt-2 relative">
             <IconPhone className="absolute top-0 left-0 translate-x-[50%] translate-y-[50%] text-gray-400"></IconPhone>
             <input
-              {...register("phone", {
-                // required: true,
-                // maxLength: 40,
-                // minLength: 8,
-              })}
-              placeholder="Mật khẩu"
+              {...register("phone", {})}
+              placeholder="Số điện thoại"
               type="number"
               id="phone"
               autoComplete="off"
               className="h-full focus:border-solid focus:border-stone-400/70 transition-all outline-none pr-4 pl-12 py-3 border border-stone-200 border-solid w-full rounded-md"
             />
-            {/* <p className="text-red-500 py-2">
-              {" "}
-              {errors?.phone?.type === "required"
-                ? "*Bạn chưa điền mật khẩu."
-                : errors?.phone?.type === "maxLength"
-                ? "*Mật khẩu không được quá 40 ký tự"
-                : errors?.phone?.type === "minLength"
-                ? "*Mật khẩu không được ít hơn 8 ký tự"
-                : ""}
-            </p> */}
           </div>
         </div>
         <div className="flex justify-between mb-2">

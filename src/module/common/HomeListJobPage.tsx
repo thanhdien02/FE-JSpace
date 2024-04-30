@@ -15,14 +15,15 @@ const HomeListJobPage: React.FC = () => {
     <>
       <div className="bg-gray-100 ">
         <div className="mt-10 w-[1100px] mx-auto py-3">
-          <h3 className="font-medium text-xl text-primary my-3">
-            Danh sách việc làm
+          <h3 className="font-bold text-2xl text-primary my-3">
+           Các công việc phổ biến
           </h3>
           <div className="pb-5">
             <Select
               showSearch
               style={{ width: 200 }}
-              placeholder="Search to Select"
+              placeholder="Tìm kiếm theo"
+              className="h-10"
               optionFilterProp="children"
               filterOption={(input, option) =>
                 (option?.label ?? "").includes(input)
@@ -40,23 +41,7 @@ const HomeListJobPage: React.FC = () => {
                 {
                   value: "2",
                   label: "Closed",
-                },
-                {
-                  value: "3",
-                  label: "Communicated",
-                },
-                {
-                  value: "4",
-                  label: "Identified",
-                },
-                {
-                  value: "5",
-                  label: "Resolved",
-                },
-                {
-                  value: "6",
-                  label: "Cancelled",
-                },
+                }
               ]}
             />
           </div>
@@ -65,11 +50,12 @@ const HomeListJobPage: React.FC = () => {
             spaceBetween={50}
             slidesPerView={1}
             navigation
+            
             // pagination={{ clickable: true }}
             // scrollbar={{ draggable: true }}
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log("slide change")}
-            className="mySwiper"
+            className="swiper-job"
           >
             <SwiperSlide className="overflow-hidden">
               <div className="grid gap-4 grid-cols-3 bg-gray-100">

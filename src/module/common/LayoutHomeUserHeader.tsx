@@ -60,9 +60,13 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                 Đăng nhập
               </button>
               <span className="w-[2px] h-[25px] bg-slate-700/30"></span>
-              <button className="px-2 py-2 hover:text-primary">
+              <a
+                className="px-2 py-2 hover:text-primary"
+                href="https://jspace-employer.vercel.app/"
+                target="_blank"
+              >
                 Đăng bài tuyển dụng
-              </button>
+              </a>
             </div>
           ) : (
             <div className="flex gap-5 justify-between items-center">

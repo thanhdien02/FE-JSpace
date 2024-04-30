@@ -12,8 +12,8 @@ const LayoutManageCandidate: React.FC = () => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const date = new Date(user?.createdAt);
-  const formattedDate = date.toLocaleDateString("en-GB");
+  // const date = new Date(user?.createdAt);
+  // const formattedDate = date.toLocaleDateString("en-GB");
 
   const props: UploadProps = {
     beforeUpload: (file) => {
@@ -47,7 +47,7 @@ const LayoutManageCandidate: React.FC = () => {
           </div>
           <div className="flex flex-col min-w-[28%] h-fit p-3 gap-3 bg-white rounded-lg">
             <div className="flex gap-6 p-2">
-              <Upload {...props}>
+              <Upload {...props} className="">
                 {user?.picture ? (
                   <img
                     src={user?.picture}
@@ -62,10 +62,13 @@ const LayoutManageCandidate: React.FC = () => {
               </Upload>
               <div>
                 <p className="text-sm text-gray-400">Chào bạn trở lại</p>
-                <h3 className="text-line-clamp font-semibold text-lg">
+                <h3 className="line-clamp-1 font-semibold text-lg max-w-[200px]">
                   {user?.name}
                 </h3>
-                <p className="text-gray-500 text-sm">{formattedDate}</p>
+                <p className="text-gray-500 text-sm line-clamp-1">
+                  {user?.email}
+                </p>
+                {/* <p className="text-gray-500 text-sm">{formattedDate}</p> */}
               </div>
             </div>
             <span className="h-[1px] bg-gray-200 w-full"></span>

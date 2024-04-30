@@ -4,7 +4,8 @@ interface IAuth {
   user: any;
   accessToken: string;
   roles: IRole[];
-  loading: boolean;
+  loading?: boolean;
+  messageAuth?: string;
 }
 interface IRole {
   id: number;
@@ -18,6 +19,7 @@ const init: IAuth = {
   accessToken: "",
   roles: [],
   loading: false,
+  messageAuth: "",
 };
 const authSlice: any = createSlice({
   name: "auth",
@@ -36,11 +38,15 @@ const authSlice: any = createSlice({
     authRegister: (state: any) => ({
       ...state,
     }),
+    authRefreshToken: () => {},
     authUpdateLoadingRedux: (state: any, action: any) => ({
       ...state,
       loading: action.payload.loading,
     }),
-
+    authUpdateMessageRedux: (state: any, action: any) => ({
+      ...state,
+      messageAuth: action.payload.messageAuth,
+    }),
     authFetchMe: (state: any) => ({
       ...state,
     }),
@@ -68,5 +74,7 @@ export const {
   authLogout,
   authUpdateLoadingRedux,
   authUpdateFetchRedux,
+  authUpdateMessageRedux,
+  authRefreshToken,
 } = authSlice.actions;
 export default authSlice.reducer;

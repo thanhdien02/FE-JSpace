@@ -1,30 +1,26 @@
 import { call, put } from "redux-saga/effects";
 import {
   requestAuthFetchMe,
-  requestAuthGetAllRoles,
   requestAuthLogin,
+  requestAuthRefresh,
   requestAuthRegister,
 } from "./auth-requests";
 import {
   authUpdateFetchRedux,
   authUpdateLoadingRedux,
-  authUpdateRolesRedux,
+  authUpdateMessageRedux,
 } from "./auth-slice";
-import { commonUpdateOAuthRedux } from "../common/common-slice";
 import { getToken, logOut, saveToken } from "../../utils/auth";
+import { message } from "antd";
 
 function* handleAuthLogin(dataLogin: any): Generator<any> {
   try {
     const response: any = yield call(requestAuthLogin, dataLogin.payload);
+    console.log("🚀 ~ function*handleAuthLogin ~ response:", response);
 
     yield put(authUpdateLoadingRedux({ loading: true }));
     if (response?.data?.result?.accessToken === "") {
-      const listRole: any = yield call(requestAuthGetAllRoles);
-
-      yield put(authUpdateRolesRedux({ roles: listRole.data?.result }));
-      yield put(
-        commonUpdateOAuthRedux({ infoUserOauth: { ...dataLogin.payload } })
-      );
+      yield call(handleAuthRegister, { ...dataLogin.payload });
     } else {
       saveToken(
         response?.data?.result?.accessToken,
@@ -41,15 +37,26 @@ function* handleAuthFetchMe(): Generator<any> {
   try {
     const { accessToken } = getToken();
     const response: any = yield call(requestAuthFetchMe, accessToken);
-    if (response?.data?.result) {
+    console.log("🚀 ~ function*handleAuthFetchMe ~ response:", response);
+
+    if (response?.data?.result?.user?.role?.code == "CANDIDATE") {
       yield put(
         authUpdateFetchRedux({
           accessToken: accessToken,
-          user: response.data.result,
+          user: response.data.result.user,
         })
       );
+    } else if (response?.data?.result?.role?.code == "Employee") {
+      logOut();
+      message.error("Đây là tài khoản Employee.");
     }
-  } catch (error) {
+  } catch (error: any) {
+    console.log("🚀 ~ function*handleAuthFetchMe ~ error:", error);
+    if (error?.response?.data?.message == "unauthenticated") {
+      yield put(
+        authUpdateMessageRedux({ messageAuth: error?.response?.data?.message })
+      );
+    }
   } finally {
   }
 }
@@ -66,14 +73,13 @@ function* handleAuthLogout(): Generator<any> {
   } finally {
   }
 }
-
 function* handleAuthRegister(dataRegister: any): Generator<any> {
   try {
     yield put(authUpdateLoadingRedux({ loading: true }));
     const response: any = yield call(
       requestAuthRegister,
-      dataRegister?.payload?.role,
-      dataRegister?.payload?.userInfo
+      "CANDIDATE",
+      dataRegister
     );
     console.log(response?.result?.accessToken);
     if (response?.result?.accessToken != "") {
@@ -88,9 +94,24 @@ function* handleAuthRegister(dataRegister: any): Generator<any> {
     yield put(authUpdateLoadingRedux({ loading: false }));
   }
 }
+function* handleAuthRefrestToken(): Generator<any> {
+  try {
+    const { refreshToken } = getToken();
+    const response: any = yield call(requestAuthRefresh, refreshToken);
+    if (response?.data?.result) {
+      saveToken(response?.data?.result?.accessToken, refreshToken);
+      yield call(handleAuthRefrestToken);
+      yield put(authUpdateMessageRedux({ messageAuth: "" }));
+    }
+  } catch (error) {
+  } finally {
+  }
+}
+
 export {
   handleAuthLogin,
   handleAuthFetchMe,
   handleAuthRegister,
   handleAuthLogout,
+  handleAuthRefrestToken,
 };

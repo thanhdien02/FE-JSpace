@@ -1,5 +1,4 @@
 import { Suspense, useEffect } from "react";
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./page/CommonPage/LoginPage";
 import HomePage from "./page/CommonPage/HomePage";
@@ -10,25 +9,26 @@ import SelectionRolePage from "./page/CommonPage/SelectionRolePage";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getToken } from "./utils/auth";
-import { authFetchMe } from "./store/auth/auth-slice";
+import { authFetchMe, authRefreshToken } from "./store/auth/auth-slice";
 import LayoutManageCandidate from "./layout/LayoutManageCandidate";
 import ManageUpdateInformationCandidatePage from "./page/CandidatePage/ManageUpdateInformationCandidatePage";
 import ManageUploadResumeCandidate from "./page/CandidatePage/ManageUploadResumeCandidate";
 import ManageListResumeCandidate from "./page/CandidatePage/ManageListResumeCandidate";
 import ManageWallCandidate from "./page/CandidatePage/ManageWallCandidate";
 function App() {
-  const { accessToken } = useSelector((state: any) => state.auth);
+  const { accessToken, messageAuth } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     if (accessToken == "") {
       const token = getToken();
-      if (token?.accessToken == "null") {
-      } else {
-        console.log("12");
+      if (token?.accessToken != "null") {
         dispatch(authFetchMe());
       }
     }
-  }, [accessToken]);
+    if (messageAuth == "unauthenticated") {
+      dispatch(authRefreshToken());
+    }
+  }, [accessToken, messageAuth]);
   return (
     <>
       <Suspense>

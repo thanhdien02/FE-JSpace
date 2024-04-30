@@ -56,10 +56,6 @@ function* handleFileGetAllFile(dataCandadate_id: any): Generator<any> {
           files: response?.data?.result,
         })
       );
-      console.log(
-        "🚀 ~ function*handleFileGetAllFile ~ response?.data?.result:",
-        response?.data?.result
-      );
     }
   } catch (error) {
   } finally {
