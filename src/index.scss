@@ -35,6 +35,10 @@
   box-shadow: none !important;
 }
 
+.address >.ant-select-selector {
+  border: none !important;
+}
+
 /* CSS for swiper */
 .swiper-job.swiper {
   padding-bottom: 70px;

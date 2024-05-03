@@ -1,6 +1,7 @@
 import React from "react";
 import companylogo from "../../assets/bg-login.jpg";
 import logo from "../../assets/logo3.png";
+import LogoCarousel from "../../components/companylogo/LogoCarousel";
 const HomeListCompanyPage: React.FC = () => {
   return (
     <>
@@ -44,6 +45,10 @@ const HomeListCompanyPage: React.FC = () => {
               className="m-auto w-[80%] h-[50%] object-contain"
             />
           </div>
+        </div>
+
+        <div className="mt-5">
+          <LogoCarousel></LogoCarousel>
         </div>
       </div>
     </>

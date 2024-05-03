@@ -11,7 +11,7 @@ import {
 
 const ManageUploadResumeCandidate: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
-  const { loading, messageFile } = useSelector((state: any) => state.file);
+  const { loadingFile, messageFile } = useSelector((state: any) => state.file);
   const dispatch = useDispatch();
   const [file, setFile] = useState<UploadFile>();
 
@@ -87,12 +87,12 @@ const ManageUploadResumeCandidate: React.FC = () => {
           type="primary"
           onClick={handleUpload}
           disabled={file === undefined}
-          loading={loading}
+          loading={loadingFile}
           style={{ marginTop: 40 }}
           size="large"
           className=""
         >
-          {loading ? "Đang lưu" : "Lưu hồ sơ xin việc"}
+          {loadingFile ? "Đang lưu" : "Lưu hồ sơ xin việc"}
         </Button>
       </div>
     </>

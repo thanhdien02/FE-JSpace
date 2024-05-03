@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface IFile {
   files: any;
-  loading?: boolean;
+  loadingFile?: boolean;
   messageFile?: string;
 }
 
 const init: IFile = {
   files: {},
-  loading: false,
+  loadingFile: false,
   messageFile: "",
 };
 const fileSlice: any = createSlice({
@@ -20,7 +20,7 @@ const fileSlice: any = createSlice({
     }),
     fileUpdateLoadingRedux: (state: any, action: any) => ({
       ...state,
-      loading: action.payload.loading,
+      loadingFile: action.payload.loadingFile,
     }),
     fileUpdateFileRedux: (state: any, action: any) => ({
       ...state,

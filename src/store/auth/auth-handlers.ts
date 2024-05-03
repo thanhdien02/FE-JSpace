@@ -16,7 +16,6 @@ import { message } from "antd";
 function* handleAuthLogin(dataLogin: any): Generator<any> {
   try {
     const response: any = yield call(requestAuthLogin, dataLogin.payload);
-    console.log("🚀 ~ function*handleAuthLogin ~ response:", response);
 
     yield put(authUpdateLoadingRedux({ loading: true }));
     if (response?.data?.result?.accessToken === "") {
@@ -37,7 +36,6 @@ function* handleAuthFetchMe(): Generator<any> {
   try {
     const { accessToken } = getToken();
     const response: any = yield call(requestAuthFetchMe, accessToken);
-    console.log("🚀 ~ function*handleAuthFetchMe ~ response:", response);
 
     if (response?.data?.result?.user?.role?.code == "CANDIDATE") {
       yield put(
@@ -51,7 +49,6 @@ function* handleAuthFetchMe(): Generator<any> {
       message.error("Đây là tài khoản Employee.");
     }
   } catch (error: any) {
-    console.log("🚀 ~ function*handleAuthFetchMe ~ error:", error);
     if (error?.response?.data?.message == "unauthenticated") {
       yield put(
         authUpdateMessageRedux({ messageAuth: error?.response?.data?.message })
@@ -104,6 +101,7 @@ function* handleAuthRefrestToken(): Generator<any> {
       yield put(authUpdateMessageRedux({ messageAuth: "" }));
     }
   } catch (error) {
+    logOut();
   } finally {
   }
 }

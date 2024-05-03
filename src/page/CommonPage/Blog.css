@@ -32,3 +32,15 @@
   max-width: 100%;
   max-height: 100%;
 }
+/*  */
+.logo-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: right 7s linear; /* Thời gian chuyển động 2 giây */
+}
+
+.logo-container img {
+  width: 100px; /* Thay đổi kích thước tùy theo logo của bạn */
+  height: auto;
+}

@@ -86,7 +86,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                 </h3>
                 <IconChervonDown></IconChervonDown>
                 {/*  */}
-                <section className="candidate-menu-manage hidden z-10 absolute w-[380px] min-h-[300px] top-10 right-0 text-black cursor-default">
+                <section className="candidate-menu-manage hidden z-20 absolute w-[380px] min-h-[300px] top-10 right-0 text-black cursor-default">
                   <div className="flex flex-col bg-white gap-3 w-full h-full mt-[14px] p-5 shadow-md rounded-lg">
                     <div className="flex gap-8">
                       <img

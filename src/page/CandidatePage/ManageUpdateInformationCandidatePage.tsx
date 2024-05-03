@@ -164,9 +164,9 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
             />
           </div>
         </div>
-        <div className="flex justify-between mb-2">
+        <div className="flex justify-end items-center my-2">
           <Button
-            className="mt-5"
+            className="mt-5 "
             title="Lưu thông tin"
             loading={loading}
           ></Button>

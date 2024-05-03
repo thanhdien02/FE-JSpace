@@ -3,6 +3,7 @@ import LayoutHomeUserHeader from "../module/common/LayoutHomeUserHeader";
 import { Outlet } from "react-router-dom";
 import LoginPage from "../page/CommonPage/LoginPage";
 import { useSelector } from "react-redux";
+import LayoutHomeUserFooter from "../module/common/LayoutHomeUserFooter";
 
 const LayoutHomeUser: React.FC = () => {
   const { accessToken } = useSelector((state: any) => state.auth);
@@ -25,6 +26,7 @@ const LayoutHomeUser: React.FC = () => {
       <div className="bg-white">
         <Outlet></Outlet>
       </div>
+      <LayoutHomeUserFooter></LayoutHomeUserFooter>
     </div>
   );
 };

@@ -10,7 +10,7 @@ import { message } from "antd";
 
 function* handleFileUploadFile(dataUploadFile: any): Generator<any> {
   try {
-    yield put(fileUpdateLoadingRedux({ loading: true }));
+    yield put(fileUpdateLoadingRedux({ loadingFile: true }));
     const formData = new FormData();
     formData.append("file", dataUploadFile?.payload?.file);
     formData.append("name", dataUploadFile?.payload?.file?.name);
@@ -31,13 +31,13 @@ function* handleFileUploadFile(dataUploadFile: any): Generator<any> {
     }
   } catch (error) {
   } finally {
-    yield put(fileUpdateLoadingRedux({ loading: false }));
+    yield put(fileUpdateLoadingRedux({ loadingFile: false }));
   }
 }
 function* handleFileGetAllFile(dataCandadate_id: any): Generator<any> {
   console.log(dataCandadate_id);
   try {
-    yield put(fileUpdateLoadingRedux({ loading: true }));
+    yield put(fileUpdateLoadingRedux({ loadingFile: true }));
     const { accessToken } = getToken();
     const response: any = yield call(
       requestFileGetAllFile,
@@ -59,7 +59,7 @@ function* handleFileGetAllFile(dataCandadate_id: any): Generator<any> {
     }
   } catch (error) {
   } finally {
-    yield put(fileUpdateLoadingRedux({ loading: false }));
+    yield put(fileUpdateLoadingRedux({ loadingFile: false }));
   }
 }
 export { handleFileUploadFile, handleFileGetAllFile };

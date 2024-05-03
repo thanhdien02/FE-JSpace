@@ -23,3 +23,39 @@ export const dataCandidateMenu: any = [
     icon: React.createElement(LogoutOutlined),
   },
 ];
+export const dataSalary: any = [
+  {
+    value: "1",
+    label: "Dưới 2 triệu",
+  },
+  {
+    value: "2",
+    label: "Từ 2 - 5 triệu",
+  },
+  {
+    value: "3",
+    label: "Từ 5 - 10 triệu",
+  },
+  {
+    value: "4",
+    label: "Từ 10 - 20 triệu",
+  },
+];
+export const dataAddress: any = [
+  {
+    value: "1",
+    label: "TP HCM",
+  },
+  {
+    value: "2",
+    label: "Đồng Tháp",
+  },
+  {
+    value: "3",
+    label: "Hà Nội",
+  },
+  {
+    value: "4",
+    label: "Cần Thơ",
+  },
+];
