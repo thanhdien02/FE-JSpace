@@ -113,35 +113,18 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
                   position: "absolute",
                   top: "0",
                   left: "0",
-                  transform: "translate(65%, 65%)",
+                  transform: "translate(65%, 70%)",
                 }}
               />
               <input
                 disabled={true}
-                {...register("email", {
-                  // // required: true,
-                  // maxLength: 40,
-                  // pattern: {
-                  //   value: /^\S+@\S+$/i,
-                  //   message: "Trường yêu cầu email",
-                  // },
-                })}
+                {...register("email", {})}
                 placeholder="Email"
                 type="email"
                 autoComplete="off"
                 id="email"
-                className="h-full focus:border-solid focus:border-stone-400/70 transition-all outline-none pl-12 pr-4 py-3 border border-stone-200 border-solid w-full rounded-md"
+                className="disable-select h-full cursor-not-allowed select-none  focus:border-solid focus:border-stone-400/70 transition-all outline-none pl-12 pr-4 py-3 border border-stone-200 border-solid w-full rounded-md"
               />
-              {/* <p className="text-red-500 py-2">
-                {" "}
-                {errors?.email?.type === "required"
-                  ? "*Bạn chưa điền Email."
-                  : errors?.email?.type === "maxLength"
-                  ? "*Email không được quá 40 ký tự"
-                  : errors?.email?.type === "pattern"
-                  ? "*Trường yêu cầu email"
-                  : ""}
-              </p> */}
             </div>
           </div>
         </div>

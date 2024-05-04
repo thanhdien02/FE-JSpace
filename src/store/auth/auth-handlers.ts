@@ -27,7 +27,8 @@ function* handleAuthLogin(dataLogin: any): Generator<any> {
       );
       yield call(handleAuthFetchMe);
     }
-  } catch (error) {
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
   } finally {
     yield put(authUpdateLoadingRedux({ loading: false }));
   }
@@ -49,12 +50,12 @@ function* handleAuthFetchMe(): Generator<any> {
       message.error("Đây là tài khoản Employee.");
     }
   } catch (error: any) {
+    message.error(error?.response?.data?.message);
     if (error?.response?.data?.message == "unauthenticated") {
       yield put(
         authUpdateMessageRedux({ messageAuth: error?.response?.data?.message })
       );
     }
-  } finally {
   }
 }
 function* handleAuthLogout(): Generator<any> {
@@ -86,7 +87,8 @@ function* handleAuthRegister(dataRegister: any): Generator<any> {
       );
       yield call(handleAuthFetchMe);
     }
-  } catch (error) {
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
   } finally {
     yield put(authUpdateLoadingRedux({ loading: false }));
   }
@@ -95,9 +97,10 @@ function* handleAuthRefrestToken(): Generator<any> {
   try {
     const { refreshToken } = getToken();
     const response: any = yield call(requestAuthRefresh, refreshToken);
+
     if (response?.data?.result) {
       saveToken(response?.data?.result?.accessToken, refreshToken);
-      yield call(handleAuthRefrestToken);
+      yield call(handleAuthFetchMe);
       yield put(authUpdateMessageRedux({ messageAuth: "" }));
     }
   } catch (error) {

@@ -35,7 +35,7 @@
   box-shadow: none !important;
 }
 
-.address >.ant-select-selector {
+.address > .ant-select-selector {
   border: none !important;
 }
 
@@ -79,4 +79,11 @@
   font-size: 20px;
   color: white;
   border-radius: 9999px;
+}
+//
+.disable-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

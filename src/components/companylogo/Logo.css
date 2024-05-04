@@ -10,7 +10,6 @@
   transition: transform 2s ease-in-out; /* Hiệu ứng chuyển động */
 }
 
-
 .element {
   position: absolute;
   transform: translateX(-200px);
@@ -19,4 +18,18 @@
 .active-logo {
   left: 0px !important;
   transform: translateX(1528px);
+}
+/*  */
+.logo {
+  position: absolute;
+  width: 100px; /* Thay đổi kích thước logo theo ý muốn */
+  height: 100px; /* Thay đổi kích thước logo theo ý muốn */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.logo.active {
+  transform: translateY(0); /* Thay đổi từ translateX sang translateY */
 }

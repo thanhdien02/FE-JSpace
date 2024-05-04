@@ -76,11 +76,10 @@ const ManageUploadResumeCandidate: React.FC = () => {
             <InboxOutlined />
           </p>
           <p className="ant-upload-text">
-            Click or drag file to this area to upload
+            Nhấn hoặc kéo thả thế khu vực này để upload hồ sơ xin việc của bạn
           </p>
           <p className="ant-upload-hint">
-            Support for a single or bulk upload. Strictly prohibited from
-            uploading company data or other banned files.
+           Chỉ hỗ trợ cho pdf dưới 3Mb
           </p>
         </Dragger>
         <Button

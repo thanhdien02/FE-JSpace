@@ -61,11 +61,11 @@ const LayoutManageCandidate: React.FC = () => {
                 )}
               </Upload>
               <div>
-                <p className="text-sm text-gray-400">Chào bạn trở lại</p>
-                <h3 className="line-clamp-1 font-semibold text-lg max-w-[200px]">
+                <p className="text-xs text-gray-400 ">Chào bạn trở lại</p>
+                <h3 className="line-clamp-1 font-semibold text-lg max-w-[200px] leading-5">
                   {user?.name}
                 </h3>
-                <p className="text-gray-500 text-sm line-clamp-1">
+                <p className="text-gray-500 text-sm line-clamp-1 mt-1">
                   {user?.email}
                 </p>
                 {/* <p className="text-gray-500 text-sm">{formattedDate}</p> */}

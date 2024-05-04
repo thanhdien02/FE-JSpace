@@ -37,7 +37,7 @@ const ManageListResumeCandidate: React.FC = () => {
         {loadingFile ? (
           <Skeleton className="mt-5" />
         ) : (
-          <div className="grid grid-cols-2 mt-5 gap-10 h-[750px] overflow-auto">
+          <div className="grid grid-cols-2 mt-5 gap-10 max-h-[750px] overflow-auto">
             {files?.content?.length > 0 &&
               files?.content?.map((item: any) => (
                 <div

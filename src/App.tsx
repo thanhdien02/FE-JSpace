@@ -25,10 +25,12 @@ function App() {
         dispatch(authFetchMe());
       }
     }
+  }, [accessToken]);
+  useEffect(() => {
     if (messageAuth == "unauthenticated") {
       dispatch(authRefreshToken());
     }
-  }, [accessToken, messageAuth]);
+  }, [messageAuth]);
   return (
     <>
       <Suspense>

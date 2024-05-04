@@ -13,7 +13,6 @@ interface FormData {
 }
 
 const SelectionRolePage: React.FC = () => {
-  const dispatch = useDispatch();
   const { roles, loading } = useSelector((state: any) => state.auth);
   const { infoUserOauth } = useSelector((state: any) => state.common);
   const {
@@ -21,6 +20,7 @@ const SelectionRolePage: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = (data: FormData) => {

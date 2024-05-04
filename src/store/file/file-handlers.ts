@@ -29,7 +29,8 @@ function* handleFileUploadFile(dataUploadFile: any): Generator<any> {
         })
       );
     }
-  } catch (error) {
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
   } finally {
     yield put(fileUpdateLoadingRedux({ loadingFile: false }));
   }
@@ -45,7 +46,7 @@ function* handleFileGetAllFile(dataCandadate_id: any): Generator<any> {
       accessToken
     );
     if (response?.data?.code === 1000) {
-      message.success("Load dữ liệu thành công");
+      // message.success("Load dữ liệu thành công");
       yield put(
         fileUpdateMessageRedux({
           messageFile: "success",
@@ -57,7 +58,10 @@ function* handleFileGetAllFile(dataCandadate_id: any): Generator<any> {
         })
       );
     }
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.response?.data?.code !== 500) {
+      message.error(error?.response?.data?.message);
+    }
   } finally {
     yield put(fileUpdateLoadingRedux({ loadingFile: false }));
   }

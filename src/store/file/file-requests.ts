@@ -23,7 +23,7 @@ export const requestFileGetAllFile = (
   accessToken: string
 ) => {
   if (!accessToken) return;
-  return axios.get(`${API}/api/v1/candidates/${candidate_id}/resumes?size=100`, {
+  return axios.get(`${API}/api/v1/candidates/${candidate_id}/resumes`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,

@@ -6,6 +6,7 @@ import {
   candidateUpdateMessageRedux,
 } from "./candidate-slice";
 import { handleAuthFetchMe } from "../auth/auth-handlers";
+import { message } from "antd";
 
 function* handleCandidateUpdateIdentification(
   dataCandidatUpdate: any
@@ -25,10 +26,10 @@ function* handleCandidateUpdateIdentification(
           messageCandidate: "success",
         })
       );
-      // update thông tin lại của user
       yield call(handleAuthFetchMe);
     }
-  } catch (error) {
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
   } finally {
     yield put(candidateUpdateLoadingRedux({ loading: false }));
   }
