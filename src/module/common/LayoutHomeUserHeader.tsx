@@ -45,23 +45,24 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
             <img src={logo} alt="" className="w-[45px] object-cover" />
           </NavLink>
           <ul className="lg:flex hidden gap-2">
-            <HeaderItem title="Tìm việc" path="/"></HeaderItem>
+            <HeaderItem title="Trang chủ" path="/"></HeaderItem>
+            <HeaderItem title="Tìm việc" path="/jobs"></HeaderItem>
             <HeaderItem title="Công ty" path="/companys"></HeaderItem>
             <HeaderItem title="Bài biết" path="/blogs"></HeaderItem>
           </ul>
         </div>
         <div className="">
           {accessToken === "" ? (
-            <div className="xl:flex hidden justify-center items-center gap-1">
+            <div className="xl:flex hidden justify-center items-center gap-1 ">
               <button
-                className="px-2 py-2 hover:text-primary"
+                className="p-2 hover:text-primary"
                 onClick={() => actionLogin(true)}
               >
                 Đăng nhập
               </button>
               <span className="w-[2px] h-[25px] bg-slate-700/30"></span>
               <a
-                className="px-2 py-2 hover:text-primary"
+                className="p-2 hover:text-primary"
                 href="https://jspace-employer.vercel.app/"
                 target="_blank"
               >

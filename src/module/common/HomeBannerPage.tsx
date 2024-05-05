@@ -4,6 +4,9 @@ import React from "react";
 import bannerbg from "../../assets/banner1.jpg";
 import { dataAddress, dataSalary } from "../../utils/dataFetch";
 import NumberCounter from "../../components/numbercount/NumberCounter";
+
+
+
 const HomeBannerPage: React.FC = () => {
   const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -23,11 +26,11 @@ const HomeBannerPage: React.FC = () => {
             Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc.
           </h1>
           <form
-            className="flex w-[1100px] h-auto rounded-lg shadow-lg  bg-white"
+            className="flex w-[1100px] h-auto rounded-lg shadow-lg bg-white"
             action="
         "
           >
-            <div className="flex grow border border-solid border-gray-300 border-r-0 rounded-s-lg ">
+            <div className="flex grow  border-r-0 rounded-s-lg ">
               <Input
                 prefix={
                   <SearchOutlined className="text-xl ml-1 pr-3 text-black" />

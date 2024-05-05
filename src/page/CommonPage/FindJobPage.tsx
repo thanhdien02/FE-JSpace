@@ -1,8 +1,12 @@
 import React from "react";
+import JobBannerPage from "../../module/jobs/JobBannerPage";
 
 const FindJobPage: React.FC = () => {
-  return <>
-  </>;
+  return (
+    <>
+      <JobBannerPage></JobBannerPage>
+    </>
+  );
 };
 
 export default FindJobPage;
