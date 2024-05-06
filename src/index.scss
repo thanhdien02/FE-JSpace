@@ -11,6 +11,7 @@
 ::-webkit-scrollbar {
   width: 7px; /* Định kích thước chiều rộng của thanh cuộn */
   height: 10px;
+  border-radius: 5%;
 }
 
 ::-webkit-scrollbar-track {
@@ -39,7 +40,7 @@
   border: none !important;
 }
 
-/* CSS for swiper */
+/* CSS for swiper job */
 .swiper-job.swiper {
   padding-bottom: 70px;
 }
@@ -74,6 +75,46 @@
   top: 93%;
 }
 .swiper-job .swiper-button-next::after {
+  display: flex;
+  margin: auto;
+  font-size: 20px;
+  color: white;
+  border-radius: 9999px;
+}
+/* CSS for swiper job fit */
+.swiper-job-fit.swiper {
+  padding-top: 26px;
+}
+.swiper-job-fit .swiper-button-prev {
+  z-index: 100;
+  width: 35px;
+  height: 35px;
+  border-radius: 9999px;
+  background-color: #1967d2;
+  left: 90%;
+  top: 12%;
+}
+.swiper-job-fit .swiper-button-prev:hover {
+  opacity: 80 !important;
+}
+.swiper-job-fit .swiper-button-prev::after {
+  display: flex;
+  margin: auto;
+  font-size: 20px;
+  color: white;
+  border-radius: 9999px;
+}
+
+.swiper-job-fit .swiper-button-next {
+  width: 35px;
+  height: 35px;
+  border-radius: 9999px;
+  z-index: 100;
+  background-color: #1967d2;
+  left: 96%;
+  top: 12%;
+}
+.swiper-job-fit .swiper-button-next::after {
   display: flex;
   margin: auto;
   font-size: 20px;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import banner2 from "../../assets/banner-job1.jpg";
+import banner2 from "../../assets/banner3.jpg";
 import { Input, Select } from "antd";
 import {
   CloseOutlined,
@@ -9,16 +9,22 @@ import {
   SearchOutlined,
   UpOutlined,
 } from "@ant-design/icons";
-import { dataAddress, dataSalary } from "../../utils/dataFetch";
+import {
+  dataAddress,
+  dataExperience,
+  dataHighPosition,
+  dataSalary,
+  dataSkills,
+  dataTimeWork,
+} from "../../utils/dataFetch";
 interface Inputs {
   name?: string;
-  phone?: number;
-  email?: string;
-  id?: string;
+  salary?: string;
+  experience?: string;
+  location?: string;
 }
 const JobBannerPage: React.FC = () => {
   const {
-    register,
     handleSubmit,
     setValue,
     // formState: { errors },
@@ -32,7 +38,7 @@ const JobBannerPage: React.FC = () => {
     <>
       <div
         className={`relative w-full ease-linear duration-100 ${
-          searchAdvance ? "h-[280px]" : "h-[180px]"
+          searchAdvance ? "h-[250px]" : "h-[145px]"
         }`}
       >
         <img
@@ -41,16 +47,15 @@ const JobBannerPage: React.FC = () => {
           className="h-full w-full object-cover object-left-top"
         />
         {/* <div className=" h-full w-full object-cover bg-gradient-to-b from-gray-500 to-gray-500" ></div> */}
-        <div className="absolute inset-0 h-full pt-6">
+        <div className="absolute bg-gradient-to-b from-blue-50/10 to-white/20 inset-0 h-full pt-5">
           <form
             action=""
             onSubmit={handleSubmit(onSubmit)}
             className="w-[1100px] mx-auto rounded-lg bg-transparent"
           >
-            <div className="flex gap-4">
-              <div className="flex grow rounded-s-lg bg-transparent">
+            <div className="flex gap-4 ">
+              <div className="flex grow rounded-s-lg bg-transparent ">
                 <Input
-                  {...register("email")}
                   prefix={
                     <SearchOutlined className="text-xl ml-1 pr-3 text-gray-600" />
                   }
@@ -60,67 +65,74 @@ const JobBannerPage: React.FC = () => {
                       <CloseOutlined className="text-base px-1 hover:bg-slate-100 py-1 rounded-sm transition-all" />
                     ),
                   }}
-                  className="w-[40%] py-3 rounded-lg"
+                  className="w-[40%] py-2 rounded-lg"
                   size="middle"
-                  // onChange={onChange}
+                  onChange={(e) => {
+                    setValue("name", e.target.value);
+                  }}
                 />
                 <Select
                   showSearch
                   placeholder="Địa chỉ"
-                  className="address ml-4 w-[20%] py-3 text-base rounded-lg h-full bg-white"
+                  className="address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
                   }
                   options={dataAddress}
+                  onChange={(e) => {
+                    setValue("location", e);
+                  }}
                 />
 
                 <Select
                   showSearch
                   placeholder="Kinh nghiệm"
-                  className="address ml-4 w-[20%] py-3 text-base rounded-lg h-full bg-white"
+                  className="address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
                   }
                   onChange={(e) => {
-                    setValue("name", e);
+                    setValue("experience", e);
                   }}
-                  options={dataSalary}
+                  options={dataExperience}
                 />
                 <Select
                   showSearch
                   placeholder="Mức lương"
-                  className="address ml-4 w-[20%] py-3 text-base rounded-lg h-full bg-white"
+                  className="address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
                   }
+                  onChange={(e) => {
+                    setValue("salary", e);
+                  }}
                   options={dataSalary}
                 />
               </div>
               <button
                 type="submit"
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log("object");
-                }}
+                // onClick={(e) => {
+                //   e.preventDefault();
+                // }}
                 className="min-w-[100px] font-medium h-auto px-3 py-2 rounded-lg bg-primary text-white "
               >
                 Tìm kiếm
               </button>
             </div>
 
-            <div
-              className={`flex justify-between mt-5 `}
-              onClick={() => setSearchAdvance(!searchAdvance)}
-            >
+            <div className={`flex justify-between mt-5 `}>
               <div className="flex bg-blue-100/20 rounded-lg text-white">
                 <span className="m-auto px-4">
                   Tổng <strong className="text-blue-200">0</strong> kết quả
                 </span>{" "}
               </div>
-              <div className="flex  gap-1 py-2 px-4 cursor-pointer items-center font-medium bg-primary rounded-lg text-white">
+              <div
+                onClick={() => setSearchAdvance(!searchAdvance)}
+                className="flex  gap-1 py-2 px-4 cursor-pointer items-center font-medium bg-primary rounded-lg text-white"
+              >
                 <FilterOutlined />
                 <span>Lọc nâng cao</span>
                 {searchAdvance ? (
@@ -131,58 +143,46 @@ const JobBannerPage: React.FC = () => {
               </div>
             </div>
             {/*  */}
-            <div className="overflow-hidden">
+            <div className={`sticky top-0 overflow-hidden`}>
               <div
-                className={` flex gap-5 items-center mt-5 p-5 rounded-lg bg-blue-950/90 ease-linear duration-100 ${
+                className={`flex gap-5 items-center mt-5 p-5 rounded-lg bg-blue-950/90 ease-linear duration-100 ${
                   searchAdvance ? "" : "-translate-y-[100px]"
                 }`}
               >
-                <div className={`w-[20%]`}>
+                <div className={`w-[50%]`}>
                   <Select
-                    showSearch
-                    placeholder="Kinh nghiệm"
+                    mode="tags"
+                    style={{ width: "100%" }}
+                    onChange={(value) => console.log(`selected ${value}`)}
+                    tokenSeparators={[","]}
+                    allowClear
+                    placeholder="Kỹ năng"
+                    options={dataSkills}
                     className={`address w-full text-base rounded-lg h-10 bg-white`}
-                    optionFilterProp="children"
-                    filterOption={(input, option: any) =>
-                      (option?.label ?? "").includes(input)
-                    }
-                    options={dataSalary}
                   />
                 </div>
                 <div className={`w-[20%]`}>
                   <Select
                     showSearch
-                    placeholder="Kinh nghiệm"
+                    placeholder="Thời gian làm việc"
                     className={`address w-full text-base rounded-lg h-10 bg-white`}
                     optionFilterProp="children"
                     filterOption={(input, option: any) =>
                       (option?.label ?? "").includes(input)
                     }
-                    options={dataSalary}
+                    options={dataTimeWork}
                   />
                 </div>
                 <div className={`w-[20%]`}>
                   <Select
                     showSearch
-                    placeholder="Kinh nghiệm"
+                    placeholder="Cấp bậc"
                     className={`address w-full text-base rounded-lg h-10 bg-white`}
                     optionFilterProp="children"
                     filterOption={(input, option: any) =>
                       (option?.label ?? "").includes(input)
                     }
-                    options={dataSalary}
-                  />
-                </div>
-                <div className={`w-[20%]`}>
-                  <Select
-                    showSearch
-                    placeholder="Kinh nghiệm"
-                    className={`address w-full text-base rounded-lg h-10 bg-white`}
-                    optionFilterProp="children"
-                    filterOption={(input, option: any) =>
-                      (option?.label ?? "").includes(input)
-                    }
-                    options={dataSalary}
+                    options={dataHighPosition}
                   />
                 </div>
               </div>

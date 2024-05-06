@@ -25,37 +25,129 @@ export const dataCandidateMenu: any = [
 ];
 export const dataSalary: any = [
   {
-    value: "1",
+    value: "duoi2",
     label: "Dưới 2 triệu",
   },
   {
-    value: "2",
+    value: "2-5",
     label: "Từ 2 - 5 triệu",
   },
   {
-    value: "3",
+    value: "6-10",
     label: "Từ 5 - 10 triệu",
   },
   {
-    value: "4",
+    value: "11-20",
     label: "Từ 10 - 20 triệu",
+  },
+  {
+    value: "21-50",
+    label: "Từ 21 - 50 triệu",
+  },
+];
+export const dataExperience: any = [
+  {
+    value: "khongyeucau",
+    label: "Không yêu cầu",
+  },
+  {
+    value: "1nam",
+    label: "1 năm kinh nghiệm",
+  },
+  {
+    value: "2nam",
+    label: "2 năm kinh nghiệm",
+  },
+  {
+    value: "3nam",
+    label: "3 năm kinh nghiệm",
+  },
+  {
+    value: "4nam",
+    label: "4 năm kinh nghiệm",
+  },
+  {
+    value: "5nam",
+    label: "5 năm kinh nghiệm",
   },
 ];
 export const dataAddress: any = [
   {
-    value: "1",
+    value: "hcm",
     label: "TP HCM",
   },
   {
-    value: "2",
+    value: "dongthap",
     label: "Đồng Tháp",
   },
   {
-    value: "3",
+    value: "hanoi",
     label: "Hà Nội",
   },
   {
-    value: "4",
+    value: "cantho",
     label: "Cần Thơ",
+  },
+];
+export const dataTimeWork: any = [
+  {
+    value: "fulltime",
+    label: "Full time",
+  },
+  {
+    value: "parttime",
+    label: "Part time",
+  },
+];
+export const dataHighPosition: any = [
+  {
+    value: "giamdoc",
+    label: "Giám đốc",
+  },
+  {
+    value: "truongtruong",
+    label: "Trường phòng",
+  },
+  {
+    value: "phophong",
+    label: "Phó phòng",
+  },
+  {
+    value: "truongnhom",
+    label: "Trưởng nhóm",
+  },
+];
+export const dataSkills: any = [
+  {
+    value: "JAVA",
+    label: "JAVA",
+  },
+  {
+    value: "React JS",
+    label: "React JS",
+  },
+  {
+    value: "TypeScript",
+    label: "TypeScript",
+  },
+  {
+    value: "Spring Boot",
+    label: "Spring Boot", 
+  },
+  {
+    value: "Javascript",
+    label: "Javascript", 
+  },
+  {
+    value: "HTML",
+    label: "HTML", 
+  },
+  {
+    value: "CSS",
+    label: "CSS", 
+  },
+  {
+    value: "Vue",
+    label: "Vue", 
   },
 ];

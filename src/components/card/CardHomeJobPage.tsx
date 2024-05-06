@@ -1,6 +1,5 @@
 import React from "react";
 
-import logo from "../../assets/bg-login.jpg";
 import { Tag } from "antd";
 interface PropComponent {
   className?: string;
@@ -17,8 +16,12 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className }) => {
       <div
         className={`flex gap-3 bg-white rounded-md min-h-[100px] p-4 ${className}`}
       >
-        <div className="min-w-[21%]">
-          <img src={logo} alt="" className="w-full h-[70px] object-cover" />
+        <div className="min-w-[25%]">
+          <img
+            src="https://th.bing.com/th/id/R.01cd719c50a4066e50808738e6eff177?rik=6%2fm77v2X46RLyg&pid=ImgRaw&r=0"
+            alt=""
+            className="w-full h-[80px] object-cover"
+          />
         </div>
         <div className="grow flex flex-col gap-1 overflow-hidden">
           <h3
