@@ -1,9 +1,9 @@
 import React from "react";
+
 interface PropComponent {
   className?: string;
-  classIcon?: string;
 }
-const IconMapPin: React.FC<PropComponent> = ({ className, classIcon }) => {
+const IconPaperAirplan: React.FC<PropComponent> = ({ className }) => {
   return (
     <span className={`${className}`}>
       <svg
@@ -12,21 +12,16 @@ const IconMapPin: React.FC<PropComponent> = ({ className, classIcon }) => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className={`w-5 h-5 ${classIcon}`}
+        className="w-5 h-5"
       >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+          d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
         />
       </svg>
     </span>
   );
 };
 
-export default IconMapPin;
+export default IconPaperAirplan;

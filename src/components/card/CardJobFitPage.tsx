@@ -5,6 +5,7 @@ import IconBuilding from "../icons/IconBuilding";
 import IconTrash from "../icons/IconTrash";
 import IconHeart from "../icons/IconHeart";
 import IconHeartFill from "../icons/IconHeartFill";
+import { useNavigate } from "react-router-dom";
 interface PropComponent {
   className?: string;
   titleJob?: string;
@@ -15,6 +16,7 @@ interface PropComponent {
   onClick?: any;
 }
 const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -39,7 +41,9 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
             >
               <h3
                 className="line-clamp-2 min-w-[70%] font-medium cursor-pointer hover:text-primary transition-all"
-                onClick={() => {}}
+                onClick={() => {
+                  navigate("/jobs/1");
+                }}
               >
                 Font end developer for 2 years (Senior) 10 - 20tr many benifit
                 and team building. Apply now that bench

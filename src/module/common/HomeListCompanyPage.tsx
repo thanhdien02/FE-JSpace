@@ -92,7 +92,7 @@ const HomeListCompanyPage: React.FC = () => {
   return (
     <>
       <div>
-        <div className=" w-[1100px] mx-auto py-3 ">
+        <div className=" w-primary mx-auto py-3 ">
           <h3 className="font-bold text-2xl text-primary my-3">
             Các công ty phổ biến
           </h3>

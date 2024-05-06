@@ -16,6 +16,7 @@ import ManageUploadResumeCandidate from "./page/CandidatePage/ManageUploadResume
 import ManageListResumeCandidate from "./page/CandidatePage/ManageListResumeCandidate";
 import ManageWallCandidate from "./page/CandidatePage/ManageWallCandidate";
 import FindJobPage from "./page/CommonPage/FindJobPage";
+import JobDetailPage from "./page/CommonPage/JobDetailPage";
 function App() {
   const { accessToken, messageAuth } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
@@ -44,6 +45,10 @@ function App() {
             ></Route>
             <Route path="/jobs" element={<FindJobPage></FindJobPage>}></Route>
             <Route path="/blogs" element={<BlogsPage></BlogsPage>}></Route>
+            <Route
+              path="/jobs/:jobId"
+              element={<JobDetailPage></JobDetailPage>}
+            ></Route>
           </Route>
           <Route path="/login" element={<LoginPage></LoginPage>}></Route>
           <Route

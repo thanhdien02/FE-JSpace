@@ -3,6 +3,7 @@ import IconClose from "../../components/icons/IconClose";
 import IconHeart from "../../components/icons/IconHeart";
 import IconHeartFill from "../../components/icons/IconHeartFill";
 import IconChervonRight from "../../components/icons/IconChervonRight";
+import { NavLink } from "react-router-dom";
 
 const JobShortDetailPage: React.FC = () => {
   return (
@@ -11,7 +12,9 @@ const JobShortDetailPage: React.FC = () => {
         <div className="p-5 ">
           <IconClose className="absolute cursor-pointer p-1 rounded-sm right-2 top-2"></IconClose>
           <div className="cursor-pointer hover:underline text-primary flex items-center absolute top-12 right-2">
-            <p className="font-medium text-primary">Xem chi tiết</p>
+            <NavLink to="/jobs/2">
+              <p className="font-medium text-primary">Xem chi tiết</p>
+            </NavLink>
             <IconChervonRight className="self-end text-primary"></IconChervonRight>
           </div>
           <h2 className="font-bold text-xl ">

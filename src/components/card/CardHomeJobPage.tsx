@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Tag } from "antd";
+import { useNavigate } from "react-router-dom";
 interface PropComponent {
   className?: string;
   titleJob?: string;
@@ -11,6 +12,7 @@ interface PropComponent {
   onClick?: any;
 }
 const CardHomeJobPage: React.FC<PropComponent> = ({ className }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -26,7 +28,9 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className }) => {
         <div className="grow flex flex-col gap-1 overflow-hidden">
           <h3
             className="line-clamp-1 font-medium cursor-pointer hover:text-primary transition-all"
-            onClick={() => {}}
+            onClick={() => {
+              navigate("/jobs/1");
+            }}
           >
             Lorem ipsum dolor sit amet
           </h3>

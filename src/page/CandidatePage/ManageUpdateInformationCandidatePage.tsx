@@ -1,4 +1,4 @@
-import { MailOutlined, UserOutlined } from "@ant-design/icons";
+import { CameraOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -9,7 +9,7 @@ import {
   candidateUpdateCandidate,
   candidateUpdateMessageRedux,
 } from "../../store/candidate/candidate-slice";
-import { message } from "antd";
+import { message, Spin, Upload, UploadProps } from "antd";
 interface Inputs {
   name: string;
   phone: number;
@@ -45,6 +45,18 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
       dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
     }
   }, [messageCandidate]);
+  const props: UploadProps = {
+    beforeUpload: (file) => {
+      const isPNG = file.type === "image/png";
+      if (!isPNG) {
+        message.error(`${file.name} is not a png file`);
+      }
+      return isPNG || Upload.LIST_IGNORE;
+    },
+    onChange: (info) => {
+      console.log(info.fileList);
+    },
+  };
   return (
     <>
       <form
@@ -55,7 +67,30 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
         <h2 className="font-bold text-lg my-3 text-gray-800">
           Cài đặt thông tin cá nhân
         </h2>
-        <div className="flex gap-10">
+        <div className="flex justify-center pt-5">
+          <Upload {...props} className="relative inline-block">
+            {user?.picture ? (
+              <img
+                src={user?.picture}
+                alt=""
+                className="w-[75px] h-[75px] rounded-full cursor-pointer"
+              />
+            ) : (
+              <div className="w-[75px] h-[75px] rounded-full flex">
+                <Spin className="m-auto" />
+              </div>
+            )}
+            {user?.picture ? (
+              <CameraOutlined
+                className="absolute bottom-2 right-0 bg-blue-50 p-2 rounded-full cursor-pointer"
+                style={{ fontSize: "18px" }}
+              />
+            ) : (
+              ""
+            )}
+          </Upload>
+        </div>
+        <div className="flex gap-10 mt-5">
           <div className="grow-[1]">
             <label
               htmlFor="name"

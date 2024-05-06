@@ -51,7 +51,7 @@ const JobBannerPage: React.FC = () => {
           <form
             action=""
             onSubmit={handleSubmit(onSubmit)}
-            className="w-[1100px] mx-auto rounded-lg bg-transparent"
+            className="w-primary mx-auto rounded-lg bg-transparent"
           >
             <div className="flex gap-4 ">
               <div className="flex grow rounded-s-lg bg-transparent ">

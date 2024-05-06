@@ -39,7 +39,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
   };
   return (
     <>
-      <header className="flex lg:px-10 px-5 pb-3 pt-4 justify-between items-center shadow-md">
+      <header className="flex lg:px-10 px-5 pb-3 pt-4 justify-between items-center">
         <div className="flex items-center gap-5">
           <NavLink to="/">
             <img src={logo} alt="" className="w-[45px] object-cover" />

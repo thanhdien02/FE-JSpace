@@ -20,7 +20,7 @@ const HomeListJobPage: React.FC = () => {
   return (
     <>
       <div className="bg-gray-100 ">
-        <div className="mt-4 w-[1100px] mx-auto py-3">
+        <div className="mt-4 w-primary mx-auto py-3">
           <h3 className="font-bold text-2xl text-primary my-3">
             Các công việc phổ biến
           </h3>

@@ -5,8 +5,6 @@ import bannerbg from "../../assets/banner1.jpg";
 import { dataAddress, dataSalary } from "../../utils/dataFetch";
 import NumberCounter from "../../components/numbercount/NumberCounter";
 
-
-
 const HomeBannerPage: React.FC = () => {
   const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -26,7 +24,7 @@ const HomeBannerPage: React.FC = () => {
             Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc.
           </h1>
           <form
-            className="flex w-[1100px] h-auto rounded-lg shadow-lg bg-white"
+            className="flex w-primary h-auto rounded-lg shadow-lg bg-white"
             action="
         "
           >
