@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Tag } from "antd";
+import { Popover, Tag } from "antd";
 import { useNavigate } from "react-router-dom";
 interface PropComponent {
   className?: string;
@@ -26,14 +26,25 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className }) => {
           />
         </div>
         <div className="grow flex flex-col gap-1 overflow-hidden">
-          <h3
-            className="line-clamp-1 font-medium cursor-pointer hover:text-primary transition-all"
-            onClick={() => {
-              navigate("/jobs/1");
-            }}
+          <Popover
+            content={
+              <p className="w-[300px]">
+                Font end developer for 2 years (Senior) 10 - 20tr many benifit
+                and team building. Apply now that bench
+              </p>
+            }
           >
-            Lorem ipsum dolor sit amet
-          </h3>
+            <h3
+              className="line-clamp-1 font-medium cursor-pointer hover:text-primary transition-all"
+              onClick={() => {
+                navigate("/jobs/1");
+              }}
+            >
+              Font end developer for 2 years (Senior) 10 - 20tr many benifit and
+              team building. Apply now that bench
+            </h3>
+          </Popover>
+
           <h4 className="line-clamp-1 text-gray-500 text-sm">
             Công ty phần mềm FPT Lorem ipsum dolor sit, amet consectetur
             adipisicing elit. Quibusdam nulla temporibus dolorem consectetur

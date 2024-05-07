@@ -42,7 +42,7 @@ const LayoutManageCandidate: React.FC = () => {
       <LayoutHomeUserHeader></LayoutHomeUserHeader>
       <div className="bg-gray-200 min-h-screen py-5">
         <div className="flex flex-col lg:flex-row w-[80%] mx-auto gap-5 bg-gray-200">
-          <div className="grow bg-white rounded-lg">
+          <div className="grow bg-white rounded-lg h-fit">
             <Outlet></Outlet>
           </div>
           <div className="flex flex-col min-w-[28%] h-fit p-3 gap-3 bg-white rounded-lg">

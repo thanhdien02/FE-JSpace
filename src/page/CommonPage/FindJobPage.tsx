@@ -9,8 +9,6 @@ const FindJobPage: React.FC = () => {
       <JobBannerPage></JobBannerPage>
       <JobFitPage></JobFitPage>
       <JobResultFilterPage></JobResultFilterPage>
-
-      <div className="h-[400px]"></div>
     </>
   );
 };

@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from "./page/CommonPage/LoginPage";
 import HomePage from "./page/CommonPage/HomePage";
 import LayoutHomeUser from "./layout/LayoutHomeUser";
-import CompanyPage from "./page/CommonPage/CompanyPage";
+import CompanyPage from "./page/CompanyPage/CompanyPage";
 import BlogsPage from "./page/CommonPage/BlogsPage";
 import SelectionRolePage from "./page/CommonPage/SelectionRolePage";
 import { useSelector } from "react-redux";
@@ -17,6 +17,7 @@ import ManageListResumeCandidate from "./page/CandidatePage/ManageListResumeCand
 import ManageWallCandidate from "./page/CandidatePage/ManageWallCandidate";
 import FindJobPage from "./page/CommonPage/FindJobPage";
 import JobDetailPage from "./page/CommonPage/JobDetailPage";
+import CompanyDetailPage from "./page/CompanyPage/CompanyDetailPage";
 function App() {
   const { accessToken, messageAuth } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
@@ -42,6 +43,10 @@ function App() {
             <Route
               path="/companys"
               element={<CompanyPage></CompanyPage>}
+            ></Route>
+            <Route
+              path="/companys/:ompanyId"
+              element={<CompanyDetailPage></CompanyDetailPage>}
             ></Route>
             <Route path="/jobs" element={<FindJobPage></FindJobPage>}></Route>
             <Route path="/blogs" element={<BlogsPage></BlogsPage>}></Route>

@@ -4,6 +4,8 @@ import IconPaperAirplan from "../../components/icons/IconPaperAirplan";
 import IconHeart from "../../components/icons/IconHeart";
 import IconHeartFill from "../../components/icons/IconHeartFill";
 import { Popover } from "antd";
+import IconMapPin from "../../components/icons/IconMapPin";
+import IconBriefCase from "../../components/icons/IconBriefCase";
 
 interface PropComponent {
   className?: string;
@@ -22,7 +24,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
       <div className={`p-6 rounded-sm ${className}`}>
         <h2 className="text-xl font-bold line-clamp-1">Java Developer</h2>
         <div className="flex gap-14 mt-5">
-          <div className="flex gap-3 items-center">
+          <div className="flex gap-4 items-center">
             <IconMoney className="p-3 bg-primary rounded-full text-white"></IconMoney>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500 line-clamp-1">
@@ -31,8 +33,11 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
               <span className="font-medium line-clamp-1">Thỏa thuận</span>
             </div>
           </div>
-          <div className="flex gap-3 items-center">
-            <IconMoney className="p-3 bg-primary rounded-full text-white"></IconMoney>
+          <div className="flex gap-4 items-center">
+            <IconMapPin
+              classIcon="w-6 h-6"
+              className="p-3 bg-primary rounded-full text-white"
+            ></IconMapPin>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500 line-clamp-1">
                 Địa điểm
@@ -40,8 +45,8 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
               <span className="font-medium line-clamp-1">Đồng Tháp</span>
             </div>
           </div>
-          <div className="flex gap-3 items-center">
-            <IconMoney className="p-3 bg-primary rounded-full text-white"></IconMoney>
+          <div className="flex gap-4 items-center">
+            <IconBriefCase className="p-3 bg-primary rounded-full text-white"></IconBriefCase>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500 line-clamp-1">
                 Kinh Nghiệm

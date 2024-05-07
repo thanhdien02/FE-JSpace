@@ -7,7 +7,7 @@ import { fileGetAllFile } from "../../store/file/file-slice";
 import IconTrash from "../../components/icons/IconTrash";
 import IconDownload from "../../components/icons/IconDownload";
 import IconShare from "../../components/icons/IconShare";
-import { Skeleton } from "antd";
+import { Empty, Skeleton } from "antd";
 
 const ManageListResumeCandidate: React.FC = () => {
   const { files, loadingFile } = useSelector((state: any) => state.file);
@@ -36,6 +36,12 @@ const ManageListResumeCandidate: React.FC = () => {
 
         {loadingFile ? (
           <Skeleton className="mt-5" />
+        ) : files?.content?.length <= 0 ? (
+          <>
+            <div className="w-full mx-auto mt-5">
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+            </div>
+          </>
         ) : (
           <div className="grid grid-cols-2 mt-5 gap-10 max-h-[750px] overflow-auto">
             {files?.content?.length > 0 &&

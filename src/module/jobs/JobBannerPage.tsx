@@ -46,7 +46,6 @@ const JobBannerPage: React.FC = () => {
           alt=""
           className="h-full w-full object-cover object-left-top"
         />
-        {/* <div className=" h-full w-full object-cover bg-gradient-to-b from-gray-500 to-gray-500" ></div> */}
         <div className="absolute bg-gradient-to-b from-blue-50/10 to-white/20 inset-0 h-full pt-5">
           <form
             action=""
@@ -158,7 +157,7 @@ const JobBannerPage: React.FC = () => {
                     allowClear
                     placeholder="Kỹ năng"
                     options={dataSkills}
-                    className={`address w-full text-base rounded-lg h-10 bg-white`}
+                    className={`skill address w-full text-base rounded-lg bg-white`}
                   />
                 </div>
                 <div className={`w-[20%]`}>

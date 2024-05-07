@@ -1,15 +1,16 @@
 import React from "react";
 interface PropComponent {
   className?: string;
+  classIcon?: string;
 }
-const IconChervonRight: React.FC<PropComponent> = ({ className }) => {
+const IconChervonRight: React.FC<PropComponent> = ({ className, classIcon }) => {
   return (
     <span className={`${className}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
-        className="w-6 h-6"
+        className={`w-6 h-6 ${classIcon}`}
       >
         <path
           fillRule="evenodd"

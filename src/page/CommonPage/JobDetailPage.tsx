@@ -4,6 +4,7 @@ import JobDetailInformationCompanyPage from "../../module/jobs/JobDetailInformat
 import JobDetailInformationJobPage from "../../module/jobs/JobDetailInformationJobPage";
 import JobDetailDescriptionJobPage from "../../module/jobs/JobDetailDescriptionJobPage";
 import JobResultFilterPage from "../../module/jobs/JobResultFilterPage";
+import JobDetailInformationCommonPage from "../../module/jobs/JobDetailInformationCommonPage";
 
 const JobDetailPage: React.FC = () => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const JobDetailPage: React.FC = () => {
           </div>
           <div className="w-[30%] min-w-[30%] h-fit">
             <JobDetailInformationCompanyPage className="bg-white"></JobDetailInformationCompanyPage>
+            <JobDetailInformationCommonPage className="bg-white mt-5"></JobDetailInformationCommonPage>
           </div>
         </div>
         <JobResultFilterPage></JobResultFilterPage>
