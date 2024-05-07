@@ -1,22 +1,77 @@
 import React from "react";
 import bg from "../../assets/banner3.jpg";
+import IconLink from "../../components/icons/IconLink";
+import IconBuilding from "../../components/icons/IconBuilding";
+import IconGroupUser from "../../components/icons/IconGroupUser";
+import IconPlus from "../../components/icons/IconPlus";
+import { Popover } from "antd";
 const CompanyDetailInformationCommonPage: React.FC = () => {
   return (
     <>
-      <div className="bg-white w-primary mx-auto mt-5 min-h-[350px] shadow-sm">
+      <div className="relative bg-white w-primary mx-auto min-h-[320px] shadow-sm">
         <div className="relative">
           <img
             src={bg}
             className="w-full h-[200px] object-cover rounded-t-lg"
             alt=""
           />
-          <img src={bg} className="absolute -bottom-12 left-20 w-[100px] h-[100px] rounded-md object-cover" alt="" />
+          <img
+            src={bg}
+            className="absolute -bottom-12 left-20 w-[100px] h-[100px] rounded-md object-cover"
+            alt=""
+          />
         </div>
-        <div className="pl-52 pt-5">
-            <h2 className="text-xl font-bold">Công Ty TNHH MTV Viễn Thông Quốc Tế FPT</h2>
+        <div className="pl-52 pt-5 pr-5">
+          <div className="flex justify-between items-center gap-5">
             <div className="">
+              <Popover
+                content={
+                  <p className="w-[300px] max-w-[300px] font-medium">
+                    Công Ty TNHH MTV Viễn Thông Quốc Tế FPT Lorem, ipsum dolor
+                    sit amet consectetur adipisicing elit. Ex inventore, dolorum
+                    maxime commodi debitis neque doloribus nemo rerum atque
+                    dolores impedit adipisci! Voluptatum saepe expedita officia
+                    facilis dignissimos nesciunt perspiciatis.
+                  </p>
+                }
+              >
+                <h2 className="text-xl font-bold line-clamp-1">
+                  Công Ty TNHH MTV Viễn Thông Quốc Tế FPT Lorem, ipsum dolor sit
+                  amet consectetur adipisicing elit. Ex inventore, dolorum
+                  maxime commodi debitis neque doloribus nemo rerum atque
+                  dolores impedit adipisci! Voluptatum saepe expedita officia
+                  facilis dignissimos nesciunt perspiciatis.
+                </h2>
+              </Popover>
 
+              <div className="flex gap-10 mt-3">
+                <div className="flex items-center gap-2 max-w-[40%]">
+                  <IconLink classIcon="!w-5 !h-5"></IconLink>
+                  <span className="text-sm line-clamp-1">
+                    https://www.concentrix.com/ Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Est, culpa cumque deleniti
+                    dicta, assumenda vel molestiae laudantium omnis iure,
+                    veritatis asperiores ducimus recusandae? Accusantium
+                    temporibus, nisi ipsam dolore provident quae.
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <IconBuilding classIcon="!w-5 !h-5"></IconBuilding>
+                  <span className="text-sm line-clamp-1">1000+ nhân viên</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <IconGroupUser classIcon="!w-5 !h-5"></IconGroupUser>
+                  <span className="text-sm line-clamp-1">
+                    467 người theo dõi
+                  </span>
+                </div>
+              </div>
             </div>
+            <div className="cursor-pointer min-w-[210px] hover:opacity-80 transition-all flex items-center gap-2 px-6 py-3 rounded-md bg-primary text-white font-medium">
+              <IconPlus></IconPlus>
+              <span>Theo dõi công ty</span>
+            </div>
+          </div>
         </div>
       </div>
     </>

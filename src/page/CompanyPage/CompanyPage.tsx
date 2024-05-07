@@ -1,6 +1,7 @@
 import React from "react";
 import CompanyBannerPage from "../../module/companys/CompanyBannerPage";
 import CompanyResultFilterPage from "../../module/companys/CompanyResultFilterPage";
+import { Pagination } from "antd";
 
 const CompanyPage: React.FC = () => {
   return (
@@ -8,6 +9,9 @@ const CompanyPage: React.FC = () => {
       <CompanyBannerPage></CompanyBannerPage>
       <div className="bg-gray-100 py-5">
         <CompanyResultFilterPage className=""></CompanyResultFilterPage>
+        <div className="w-primary flex mx-auto mt-5">
+          <Pagination className="ml-auto font-medium" defaultCurrent={1} total={50} />
+        </div>
       </div>
     </>
   );
