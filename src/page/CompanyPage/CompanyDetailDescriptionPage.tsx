@@ -1,44 +1,99 @@
 import React from "react";
+import ContentSeeMore from "../../components/content/ContentSeeMore";
+import { Tabs, TabsProps } from "antd";
+import CompanyReviewPage from "../../module/companys/CompanyReviewPage";
 interface PropComponent {
   className?: string;
 }
+
 const CompanyDetailDescriptionPage: React.FC<PropComponent> = ({
   className,
 }) => {
+  const onChange = (key: string) => {
+    console.log(key);
+  };
+
+  const items: TabsProps["items"] = [
+    {
+      key: "1",
+      label: "Thông tin công ty",
+      children: (
+        <div>
+          <ContentSeeMore
+            content={`<strong>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+        possimus omnis eius architecto ex enim corporis dicta, nulla
+        debitis quis ab consequatur esse provident iusto maiores
+        laboriosam a? Labore, numquam?{" "}
+      </strong>
+      <u>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
+        quasi magnam molestias ex iure alias inventore, vel ad
+        consequuntur assumenda repudiandae facilis?
+      </u>
+      <strong>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+        possimus omnis eius architecto ex enim corporis dicta, nulla
+        debitis quis ab consequatur esse provident iusto maiores
+        laboriosam a? Labore, numquam?{" "}
+      </strong>
+      <u>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
+        quasi magnam molestias ex iure alias inventore, vel ad
+        consequuntur assumenda repudiandae facilis?
+      </u>
+      <strong>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+        possimus omnis eius architecto ex enim corporis dicta, nulla
+        debitis quis ab consequatur esse provident iusto maiores
+        laboriosam a? Labore, numquam?{" "}
+      </strong>
+      <u>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
+        quasi magnam molestias ex iure alias inventore, vel ad
+        consequuntur assumenda repudiandae facilis?
+      </u>
+      <strong>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+        possimus omnis eius architecto ex enim corporis dicta, nulla
+        debitis quis ab consequatur esse provident iusto maiores
+        laboriosam a? Labore, numquam?{" "}
+      </strong>
+      <u>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
+        quasi magnam molestias ex iure alias inventore, vel ad
+        consequuntur assumenda repudiandae facilis?
+      </u>
+      <strong>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+        possimus omnis eius architecto ex enim corporis dicta, nulla
+        debitis quis ab consequatur esse provident iusto maiores
+        laboriosam a? Labore, numquam?{" "}
+      </strong>
+      <u>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
+        quasi magnam molestias ex iure alias inventore, vel ad
+        consequuntur assumenda repudiandae facilis?
+      </u>`}
+          ></ContentSeeMore>
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: "Đánh giá công ty",
+      children: <CompanyReviewPage></CompanyReviewPage>,
+    },
+  ];
   return (
     <>
       <div className={`${className}`}>
-        <div>
-          <h2 className="text-primary font-bold text-xl">
-            Chi tiết thông tin công việc
-          </h2>
-
-          <p
-            className="mt-3"
-            // Prevent XSS Attack recommen from React Docs
-            dangerouslySetInnerHTML={{
-              __html: `<strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              maxime provident nam consequuntur, at quibusdam vero illo eveniet
-              temporibus animi ea accusamus sint. Explicabo consequatur, eligendi
-              nihil saepe dolorum quibusdam?</strong> <strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              maxime provident nam consequuntur, at quibusdam vero illo eveniet
-              temporibus animi ea accusamus sint. Explicabo consequatur, eligendi
-              nihil saepe dolorum quibusdam?</strong> <strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              maxime provident nam consequuntur, at quibusdam vero illo eveniet
-              temporibus animi ea accusamus sint. Explicabo consequatur, eligendi
-              nihil saepe dolorum quibusdam?</strong> <strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              maxime provident nam consequuntur, at quibusdam vero illo eveniet
-              temporibus animi ea accusamus sint. Explicabo consequatur, eligendi
-              nihil saepe dolorum quibusdam?</strong> <strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              maxime provident nam consequuntur, at quibusdam vero illo eveniet
-              temporibus animi ea accusamus sint. Explicabo consequatur, eligendi
-              nihil saepe dolorum quibusdam?</strong> <strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              maxime provident nam consequuntur, at quibusdam vero illo eveniet
-              temporibus animi ea accusamus sint. Explicabo consequatur, eligendi
-              nihil saepe dolorum quibusdam?</strong>`,
-            }}
-          ></p>
-        </div>
+        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
       </div>
     </>
   );

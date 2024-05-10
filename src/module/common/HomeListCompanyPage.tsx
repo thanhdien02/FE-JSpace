@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "../../components/companylogo/Logo.css";
 import "./style.css";
 import "swiper/css";
 import "swiper/css";

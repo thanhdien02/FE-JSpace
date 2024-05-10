@@ -10,6 +10,7 @@ const JobDetailPage: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  console.log("123456711");
   return (
     <>
       <JobDetailBannerPage></JobDetailBannerPage>

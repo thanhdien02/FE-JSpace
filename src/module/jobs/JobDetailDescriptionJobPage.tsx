@@ -1,7 +1,9 @@
 import React from "react";
+import ContentSeeMore from "../../components/content/ContentSeeMore";
 interface PropComponent {
   className?: string;
 }
+// eslint-disable-next-line react-refresh/only-export-components
 const JobDetailDescriptionJobPage: React.FC<PropComponent> = ({
   className,
 }) => {
@@ -12,20 +14,74 @@ const JobDetailDescriptionJobPage: React.FC<PropComponent> = ({
           <h2 className="text-primary font-bold text-xl">
             Chi tiết thông tin công việc
           </h2>
-          <p
-            className="entry-content line-clamp-6 mt-3"
-            // Prevent XSS Attack recommen from React Docs
-            dangerouslySetInnerHTML={{
-              __html: `<strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              maxime provident nam consequuntur, at quibusdam vero illo eveniet
-              temporibus animi ea accusamus sint. Explicabo consequatur, eligendi
-              nihil saepe dolorum quibusdam?</strong>`,
-            }}
-          ></p>
+          <ContentSeeMore
+            content={`<strong>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+              possimus omnis eius architecto ex enim corporis dicta, nulla
+              debitis quis ab consequatur esse provident iusto maiores
+              laboriosam a? Labore, numquam?{" "}
+            </strong>
+            <u>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
+              quasi magnam molestias ex iure alias inventore, vel ad
+              consequuntur assumenda repudiandae facilis?
+            </u>
+            <strong>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+              possimus omnis eius architecto ex enim corporis dicta, nulla
+              debitis quis ab consequatur esse provident iusto maiores
+              laboriosam a? Labore, numquam?{" "}
+            </strong>
+            <u>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
+              quasi magnam molestias ex iure alias inventore, vel ad
+              consequuntur assumenda repudiandae facilis?
+            </u>
+            <strong>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+              possimus omnis eius architecto ex enim corporis dicta, nulla
+              debitis quis ab consequatur esse provident iusto maiores
+              laboriosam a? Labore, numquam?{" "}
+            </strong>
+            <u>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
+              quasi magnam molestias ex iure alias inventore, vel ad
+              consequuntur assumenda repudiandae facilis?
+            </u>
+            <strong>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+              possimus omnis eius architecto ex enim corporis dicta, nulla
+              debitis quis ab consequatur esse provident iusto maiores
+              laboriosam a? Labore, numquam?{" "}
+            </strong>
+            <u>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
+              quasi magnam molestias ex iure alias inventore, vel ad
+              consequuntur assumenda repudiandae facilis?
+            </u>
+            <strong>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+              possimus omnis eius architecto ex enim corporis dicta, nulla
+              debitis quis ab consequatur esse provident iusto maiores
+              laboriosam a? Labore, numquam?{" "}
+            </strong>
+            <u>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
+              quasi magnam molestias ex iure alias inventore, vel ad
+              consequuntur assumenda repudiandae facilis?
+            </u>`}
+            // line="10"
+          ></ContentSeeMore>
         </div>
       </div>
     </>
   );
 };
 
-export default JobDetailDescriptionJobPage;
+// eslint-disable-next-line react-refresh/only-export-components
+export default React.memo(JobDetailDescriptionJobPage);

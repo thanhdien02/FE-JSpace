@@ -47,6 +47,7 @@ const HomeBannerPage: React.FC = () => {
                 <span className="bg-gray-300 h-[60%] w-full "></span>
               </span>
               <Select
+                allowClear
                 showSearch
                 placeholder="Địa chỉ"
                 className="address w-[30%] py-4 text-base !rounded-none h-full bg-white"
@@ -66,6 +67,7 @@ const HomeBannerPage: React.FC = () => {
               </span>
               <Select
                 showSearch
+                allowClear
                 placeholder="Mức lương"
                 className="address w-[29%] py-4 text-base !rounded-none h-full bg-white"
                 optionFilterProp="children"

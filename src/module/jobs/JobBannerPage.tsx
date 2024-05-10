@@ -72,6 +72,7 @@ const JobBannerPage: React.FC = () => {
                 />
                 <Select
                   showSearch
+                  allowClear
                   placeholder="Địa chỉ"
                   className="address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
@@ -86,6 +87,7 @@ const JobBannerPage: React.FC = () => {
 
                 <Select
                   showSearch
+                  allowClear
                   placeholder="Kinh nghiệm"
                   className="address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
@@ -99,6 +101,7 @@ const JobBannerPage: React.FC = () => {
                 />
                 <Select
                   showSearch
+                  allowClear
                   placeholder="Mức lương"
                   className="address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
