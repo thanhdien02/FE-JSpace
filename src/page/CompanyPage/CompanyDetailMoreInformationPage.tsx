@@ -33,9 +33,9 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
             ></IconMap>
             <span className="">Bản đồ</span>
           </div>
-          <p className="text-gray-500 text-sm mt-2">
+          <div className="text-gray-500 text-sm mt-2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus,
-          </p>
+          </div>
         </div>
       </div>
     </>

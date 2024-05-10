@@ -6,6 +6,7 @@ import IconHeartFill from "../../components/icons/IconHeartFill";
 import { Popover } from "antd";
 import IconMapPin from "../../components/icons/IconMapPin";
 import IconBriefCase from "../../components/icons/IconBriefCase";
+import IconClock from "../../components/icons/IconClock";
 
 interface PropComponent {
   className?: string;
@@ -54,6 +55,10 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
               <span className="font-medium line-clamp-1">2 năm</span>
             </div>
           </div>
+        </div>
+        <div className="flex gap-2 items-center mt-5 bg-blue-100 w-fit px-4 py-2 rounded-md">
+          <IconClock></IconClock>
+          <span>Hạn nộp hồ sơ: 13/06/2024</span>
         </div>
         <div className="flex gap-5 mt-5">
           <div className="grow flex items-center justify-center py-2 gap-3 hover:opacity-80 transition-all cursor-pointer bg-primary text-white font-medium  rounded-md">

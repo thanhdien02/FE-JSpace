@@ -59,7 +59,7 @@ const JobDetailInformationCompanyPage: React.FC<PropComponent> = ({
           </Popover>
         </div>
         <NavLink
-          to="/"
+          to="/companys/1"
           className="flex gap-2 mt-5 items-center justify-center text-primary font-medium"
         >
           <span>Xem trang công ty</span>
