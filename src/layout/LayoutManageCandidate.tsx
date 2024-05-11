@@ -90,20 +90,26 @@ const LayoutManageCandidate: React.FC = () => {
                 <Switch></Switch>
                 <span className="font-medium">Cho phép NTD tìm CV của bạn</span>
               </div>
-              <div className="px-4 py-2 font-semibold border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all">
+              <div className="px-4 py-2 font-medium border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all">
                 <p>Ai đã xem CV của bạn</p>
               </div>
               <NavLink
                 to="/wall"
-                className="px-4 py-2 font-semibold border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all"
+                className="px-4 py-2 font-medium border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all"
               >
-                <p>Tường của bạn</p>
+                <p>Trang cá nhân của bạn</p>
               </NavLink>
               <NavLink
-                to="/manage/jobs"
-                className="px-4 py-2 font-semibold border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all"
+                to="/manage/job-save"
+                className="px-4 py-2 font-medium border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all"
               >
                 <p>Công việc đã lưu</p>
+              </NavLink>
+              <NavLink
+                to="/manage/job-apply"
+                className="px-4 py-2 font-medium border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all"
+              >
+                <p>Công việc đã ứng tuyển</p>
               </NavLink>
             </div>
           </div>

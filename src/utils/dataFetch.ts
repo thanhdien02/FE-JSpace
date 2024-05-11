@@ -3,6 +3,7 @@ import React from "react";
 import IconIdentification from "../components/icons/IconIdentification";
 import IconText from "../components/icons/IconText";
 import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
+import IconHeart from "../components/icons/IconHeart";
 
 export const dataCandidateMenu: any = [
   {
@@ -19,12 +20,18 @@ export const dataCandidateMenu: any = [
   },
   {
     key: "3",
-    title: "Quản lí công việc",
-    path: "/manage/jobs",
-    icon: React.createElement(IconBriefCaseOutline),
+    title: "Quản lí công việc đã lưu",
+    path: "/manage/job-save",
+    icon: React.createElement(IconHeart),
   },
   {
     key: "4",
+    title: "Quản lí công việc đã ứng tuyển",
+    path: "/manage/job-apply",
+    icon: React.createElement(IconBriefCaseOutline),
+  },
+  {
+    key: "5",
     title: "Đăng xuất",
     path: "/",
     icon: React.createElement(LogoutOutlined),

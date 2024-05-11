@@ -58,7 +58,11 @@ const LoginPage: React.FC<PropComponent> = ({
     >
       <div
         className={`m-auto absolute inset-0 bg-black/30 ${claseNameOverlay}`}
-        onClick={() => actionLogin(false)}
+        onClick={() => {
+          if (!loading) {
+            actionLogin(false);
+          }
+        }}
       ></div>
       <div className="m-auto">
         <form
@@ -67,7 +71,7 @@ const LoginPage: React.FC<PropComponent> = ({
           onSubmit={() => {}}
         >
           <IconClose
-            actionCloseLogin={actionLogin}
+            actionCloseLogin={!loading ? actionLogin : () => {}}
             className="absolute top-2 right-2 hover:bg-blue-200 hover:text-white transition-all p-1 rounded-lg"
           ></IconClose>
 
