@@ -2,6 +2,7 @@ import { LogoutOutlined } from "@ant-design/icons";
 import React from "react";
 import IconIdentification from "../components/icons/IconIdentification";
 import IconText from "../components/icons/IconText";
+import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
 
 export const dataCandidateMenu: any = [
   {
@@ -18,6 +19,12 @@ export const dataCandidateMenu: any = [
   },
   {
     key: "3",
+    title: "Quản lí công việc",
+    path: "/manage/jobs",
+    icon: React.createElement(IconBriefCaseOutline),
+  },
+  {
+    key: "4",
     title: "Đăng xuất",
     path: "/",
     icon: React.createElement(LogoutOutlined),
@@ -132,22 +139,22 @@ export const dataSkills: any = [
   },
   {
     value: "Spring Boot",
-    label: "Spring Boot", 
+    label: "Spring Boot",
   },
   {
     value: "Javascript",
-    label: "Javascript", 
+    label: "Javascript",
   },
   {
     value: "HTML",
-    label: "HTML", 
+    label: "HTML",
   },
   {
     value: "CSS",
-    label: "CSS", 
+    label: "CSS",
   },
   {
     value: "Vue",
-    label: "Vue", 
+    label: "Vue",
   },
 ];

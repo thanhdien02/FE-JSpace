@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bg_wall from "../../assets/bg-login.jpg";
 import IconEdit from "../../components/icons/IconEdit";
 import Button from "../../components/input";
@@ -38,7 +38,7 @@ const ManageWallCandidate: React.FC = () => {
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
-  
+
   const props: UploadProps = {
     beforeUpload: (file) => {
       const isPNG = file.type === "image/png";
@@ -62,6 +62,9 @@ const ManageWallCandidate: React.FC = () => {
       {dot}
     </Popover>
   );
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // const description = "You can hover on the dot.";
   return (
     <>

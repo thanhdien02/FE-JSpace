@@ -1,26 +1,13 @@
 import React from "react";
 import ContentSeeMore from "../../components/content/ContentSeeMore";
-import { Tabs, TabsProps } from "antd";
-import CompanyReviewPage from "../../module/companys/CompanyReviewPage";
-interface PropComponent {
-  className?: string;
-}
+import CompanyDetailListJobPage from "./CompanyDetailListJobPage";
+import CompanyDetailListCompanyRelativePage from "./CompanyDetailListCompanyRelativePage";
 
-const CompanyDetailDescriptionPage: React.FC<PropComponent> = ({
-  className,
-}) => {
-  const onChange = (key: string) => {
-    console.log(key);
-  };
-
-  const items: TabsProps["items"] = [
-    {
-      key: "1",
-      label: "Thông tin công ty",
-      children: (
-        <div>
-          <ContentSeeMore
-            content={`<strong>
+const CompanyDetailDescriptionPage: React.FC = () => {
+  return (
+    <>
+      <ContentSeeMore
+        content={`<strong>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
         possimus omnis eius architecto ex enim corporis dicta, nulla
         debitis quis ab consequatur esse provident iusto maiores
@@ -80,21 +67,10 @@ const CompanyDetailDescriptionPage: React.FC<PropComponent> = ({
         quasi magnam molestias ex iure alias inventore, vel ad
         consequuntur assumenda repudiandae facilis?
       </u>`}
-          ></ContentSeeMore>
-        </div>
-      ),
-    },
-    {
-      key: "2",
-      label: "Đánh giá công ty",
-      children: <CompanyReviewPage></CompanyReviewPage>,
-    },
-  ];
-  return (
-    <>
-      <div className={`${className}`}>
-        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-      </div>
+      ></ContentSeeMore>
+      <span className="w-full block my-4 h-[1px] bg-gray-200/80"></span>
+      <CompanyDetailListJobPage></CompanyDetailListJobPage>
+      <CompanyDetailListCompanyRelativePage></CompanyDetailListCompanyRelativePage>
     </>
   );
 };

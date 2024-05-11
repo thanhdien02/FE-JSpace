@@ -1,8 +1,9 @@
 import React from "react";
 interface PropComponent {
   className?: string;
+  classIcon?: string;
 }
-const IconMoney: React.FC<PropComponent> = ({ className }) => {
+const IconMoney: React.FC<PropComponent> = ({ className, classIcon }) => {
   return (
     <span className={`${className}`}>
       <svg
@@ -11,7 +12,7 @@ const IconMoney: React.FC<PropComponent> = ({ className }) => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-6 h-6"
+        className={`w-6 h-6 ${classIcon}`}
       >
         <path
           strokeLinecap="round"

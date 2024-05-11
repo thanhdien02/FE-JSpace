@@ -9,6 +9,7 @@ import {
   candidateUpdateCandidate,
   candidateUpdateMessageRedux,
 } from "../../store/candidate/candidate-slice";
+import bg from "../../assets/banner3.jpg";
 import { message, Spin, Upload, UploadProps } from "antd";
 interface Inputs {
   name: string;
@@ -57,6 +58,9 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
       console.log(info.fileList);
     },
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <form
@@ -64,34 +68,43 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="px-10 py-5 shadow-lg "
       >
-        <h2 className="font-bold text-lg my-3 text-gray-800">
+        <h2 className="font-bold text-lg mt-3 text-gray-800">
           Cài đặt thông tin cá nhân
         </h2>
-        <div className="flex justify-center pt-5">
-          <Upload {...props} className="relative inline-block">
+        <div className="relative flex justify-center pt-5">
+          <div className="w-full relative">
+            <Upload {...props} className="absolute left-2 top-2">
+              <button
+                type="button"
+                className="bg-white py-1 px-2 rounded-sm  text-sm"
+              >
+                Chọn ảnh bìa
+              </button>
+            </Upload>
+            <img src={bg} className="w-full h-[150px] object-cover" alt="" />
+          </div>
+          <Upload {...props} className="absolute -bottom-8 inline-block">
             {user?.picture ? (
-              <img
-                src={user?.picture}
-                alt=""
-                className="w-[75px] h-[75px] rounded-full cursor-pointer"
-              />
+              <>
+                <img
+                  src={user?.picture}
+                  alt=""
+                  className="w-[75px] h-[75px] rounded-full cursor-pointer"
+                />
+                <CameraOutlined
+                  className="absolute bottom-2 right-0 bg-blue-50 p-2 rounded-full cursor-pointer"
+                  style={{ fontSize: "18px" }}
+                />
+              </>
             ) : (
               <div className="w-[75px] h-[75px] rounded-full flex">
                 <Spin className="m-auto" />
               </div>
             )}
-            {user?.picture ? (
-              <CameraOutlined
-                className="absolute bottom-2 right-0 bg-blue-50 p-2 rounded-full cursor-pointer"
-                style={{ fontSize: "18px" }}
-              />
-            ) : (
-              ""
-            )}
           </Upload>
         </div>
-        <div className="flex gap-10 mt-5">
-          <div className="grow-[1]">
+        <div className="grid grid-cols-2 gap-10 mt-10">
+          <div className="">
             <label
               htmlFor="name"
               className="block text-sm font-medium leading-6 text-gray-900"
@@ -133,7 +146,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="grow-[1]">
+          <div className="">
             <label
               htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
@@ -158,7 +171,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
                 type="email"
                 autoComplete="off"
                 id="email"
-                className="disable-select h-full cursor-not-allowed select-none  focus:border-solid focus:border-stone-400/70 transition-all outline-none pl-12 pr-4 py-3 border border-stone-200 border-solid w-full rounded-md"
+                className="h-full cursor-not-allowed select-none  focus:border-solid focus:border-stone-400/70 transition-all outline-none pl-12 pr-4 py-3 border border-stone-200 border-solid w-full rounded-md"
               />
             </div>
           </div>

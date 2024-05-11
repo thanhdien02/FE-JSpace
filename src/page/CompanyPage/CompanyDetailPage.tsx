@@ -1,7 +1,7 @@
 import React from "react";
 import CompanyDetailInformationCommonPage from "../../module/companys/CompanyDetailInformationCommonPage";
-import CompanyDetailDescriptionPage from "./CompanyDetailDescriptionPage";
-import CompanyDetailMoreInformationPage from "./CompanyDetailMoreInformationPage";
+import CompanyDetailMoreInformationPage from "../../module/companys/CompanyDetailMoreInformationPage";
+import CompanyDetailContentPage from "../../module/companys/CompanyDetailContentPage";
 
 const CompanyDetailPage: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const CompanyDetailPage: React.FC = () => {
         <CompanyDetailInformationCommonPage></CompanyDetailInformationCommonPage>
         <div className="flex w-primary mx-auto gap-5 mt-5">
           <div className="grow h-fit">
-            <CompanyDetailDescriptionPage className="bg-white p-5"></CompanyDetailDescriptionPage>
+            <CompanyDetailContentPage className="bg-white p-5"></CompanyDetailContentPage>
           </div>
           <div className="w-[30%] min-w-[30%] h-fit">
             <CompanyDetailMoreInformationPage className="bg-white"></CompanyDetailMoreInformationPage>
