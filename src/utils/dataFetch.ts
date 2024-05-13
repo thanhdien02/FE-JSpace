@@ -4,7 +4,7 @@ import IconIdentification from "../components/icons/IconIdentification";
 import IconText from "../components/icons/IconText";
 import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
 import IconHeart from "../components/icons/IconHeart";
-
+import IconBuilding from "../components/icons/IconBuilding";
 export const dataCandidateMenu: any = [
   {
     key: "1",
@@ -32,6 +32,12 @@ export const dataCandidateMenu: any = [
   },
   {
     key: "5",
+    title: "Quản lí công ty đã theo dõi",
+    path: "/manage/company-followed",
+    icon: React.createElement(IconBuilding),
+  },
+  {
+    key: "6",
     title: "Đăng xuất",
     path: "/",
     icon: React.createElement(LogoutOutlined),

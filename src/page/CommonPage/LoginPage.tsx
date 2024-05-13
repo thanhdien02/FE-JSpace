@@ -3,12 +3,14 @@ import { useGoogleLogin } from "@react-oauth/google";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { authLogin, authUpdateLoadingRedux } from "../../store/auth/auth-slice";
-import { Button } from "antd";
-import { GoogleOutlined } from "@ant-design/icons";
+import { Checkbox, CheckboxProps } from "antd";
+import { GoogleOutlined, UserOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo3.png";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import IconClose from "../../components/icons/IconClose";
+import { SubmitHandler, useForm } from "react-hook-form";
+import IconKey from "../../components/icons/IconKey";
 
 interface PropComponent {
   className?: string;
@@ -16,12 +18,24 @@ interface PropComponent {
   checkLogin?: boolean;
   actionLogin?: any;
 }
+interface Inputs {
+  email?: string;
+  password?: string;
+}
 const LoginPage: React.FC<PropComponent> = ({
   className = "",
   checkLogin,
   actionLogin,
   claseNameOverlay,
 }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (dataLogin: Inputs) => {
+    console.log("🚀 ~ dataUpdadeCandidate:", dataLogin);
+  };
   const { loading } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
   const login: any = useGoogleLogin({
@@ -49,7 +63,9 @@ const LoginPage: React.FC<PropComponent> = ({
       elementBody.style.overflow = "visible";
     }
   }, [checkLogin]);
-
+  const onChange: CheckboxProps["onChange"] = (e) => {
+    console.log(`checked = ${e.target.checked}`);
+  };
   return (
     <div
       className={`flex fixed inset-0 transition-all z-20 ${className} ${
@@ -67,8 +83,8 @@ const LoginPage: React.FC<PropComponent> = ({
       <div className="m-auto">
         <form
           action=""
-          className="relative p-6 rounded-lg my-5 bg-white min-h-[250px] min-w-[380px] shadow-lg border-solid border border-slate-500/30"
-          onSubmit={() => {}}
+          className="relative p-10 rounded-lg my-5 bg-white min-h-[250px] w-[500px] shadow-lg border-solid border border-slate-500/30"
+          onSubmit={handleSubmit(onSubmit)}
         >
           <IconClose
             actionCloseLogin={!loading ? actionLogin : () => {}}
@@ -83,30 +99,123 @@ const LoginPage: React.FC<PropComponent> = ({
               JSPACE
             </h1>
           </div>
-          <div className="max-w-[400px] mb-5 px-2">
-            <h4 className="mb-2 text-lg font-semibold">
-              Bạn đã sẵn sàng thực hiện bước tiếp theo?
-            </h4>
-            <p className="font-normal text-xs text-slate-500">
-              Bằng cách tạo tài khoản hoặc đăng nhập, bạn hiểu và đồng ý với
-              Điều khoản. Bạn cũng xác nhận chính sách Cookie và Quyền riêng tư
-              của Indeed. Bạn đồng ý nhận tin nhắn tiếp thị từ Indeed và có thể
-              hủy bỏ việc nhận tin nhắn như vậy bằng cách mở liên kết hủy đăng
-              ký trong tin nhắn của chúng tôi hoặc như được chỉ dẫn trong điều
-              khoản của chúng tôi.
-            </p>
-          </div>
-          <div className="flex px-2 pb-2">
-            <Button
-              type="primary"
-              icon={<GoogleOutlined />}
-              className="bg-primary m-auto min-w-[400px] flex gap-3 justify-center items-baseline !transition-all"
-              size={"large"}
-              loading={loading}
-              onClick={() => login()}
-            >
-              Đăng nhập với Google
-            </Button>
+          <div className="">
+            <div className="w-full">
+              <h4 className="mb-2 text-base font-semibold">
+                Bạn đã sẵn sàng để đăng nhập ?
+              </h4>
+              <div className="">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-6 text-gray-600"
+                >
+                  Tài khoản
+                </label>
+                <div className="mt-2 relative">
+                  <UserOutlined
+                    style={{
+                      // fontSize: "20px",
+                      color: "rgb(156 163 175)",
+                      position: "absolute",
+                      top: "0",
+                      left: "0",
+                      transform: "translate(60%, 75%)",
+                    }}
+                  />
+                  <input
+                    {...register("email", {
+                      required: true,
+                      maxLength: 40,
+                      minLength: 5,
+                      pattern: {
+                        value: /^\S+@\S+$/i,
+                        message: "Trường yêu cầu email",
+                      },
+                    })}
+                    type="email"
+                    placeholder="join@gmail.com"
+                    autoComplete="off"
+                    className="focus:border-solid h-full focus:border-stone-400/70 transition-all outline-none pr-4 pl-10 py-2 border border-stone-200 border-solid w-full rounded-md"
+                  />
+                  <p className="text-red-600 text-sm py-2">
+                    {" "}
+                    {errors?.email?.type === "required"
+                      ? "*Bạn chưa điền tài khoản."
+                      : errors?.email?.type === "maxLength"
+                      ? "*Tài khoản không được quá 40 ký tự"
+                      : errors?.email?.type === "minLength"
+                      ? "*Tài khoản không được ít hơn 5 ký tự"
+                      : errors?.email?.type === "pattern"
+                      ? "*Tài khoản phải là email"
+                      : ""}
+                  </p>
+                </div>
+              </div>
+              <div className="">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-600"
+                >
+                  Mật khẩu
+                </label>
+                <div className="mt-2 relative">
+                  <IconKey className="absolute top-0 left-0 translate-x-[50%] text-gray-400 translate-y-[50%] !w-5 !h-5"></IconKey>
+                  <input
+                    {...register("password", {
+                      required: true,
+                      maxLength: 40,
+                      minLength: 8,
+                    })}
+                    placeholder="*************"
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="password"
+                    className="h-full focus:border-solid  focus:border-stone-400/70 transition-all outline-none pr-4 pl-10 py-2 border border-stone-200 border-solid w-full rounded-md"
+                  />
+                  <p className="text-red-600 text-sm py-2">
+                    {" "}
+                    {errors?.password?.type === "required"
+                      ? "*Bạn chưa điền mật khẩu."
+                      : errors?.password?.type === "maxLength"
+                      ? "*Mật khẩu không được quá 40 ký tự"
+                      : errors?.password?.type === "minLength"
+                      ? "*Mật khẩu không được ít hơn 8 ký tự"
+                      : ""}
+                  </p>
+                </div>
+              </div>
+              <div className="w-full">
+                <Checkbox
+                  onChange={onChange}
+                  className="font-normal text-xs text-slate-500 gap-2"
+                >
+                  Bằng cách tạo tài khoản hoặc đăng nhập, bạn hiểu và đồng ý với
+                  Điều khoản.
+                </Checkbox>
+              </div>
+            </div>
+
+            <div className="flex w-full mt-5">
+              <button
+                disabled={loading}
+                type="submit"
+                className="bg-primary text-white px-4 py-2 w-full !hover:bg-primary rounded-lg flex gap-3 justify-center items-center hover:opacity-80 !transition-all"
+              >
+                Đăng nhập
+              </button>
+            </div>
+            <div className="flex w-full mt-3">
+              <button
+                disabled={loading}
+                type="button"
+                className="bg-red-500 text-white px-4 py-2 w-full !hover:bg-red-500 rounded-lg flex gap-3 justify-center items-center hover:opacity-80 !transition-all"
+                onClick={() => login()}
+              >
+                <GoogleOutlined />
+                Đăng nhập với Google
+              </button>
+            </div>
           </div>
         </form>
       </div>

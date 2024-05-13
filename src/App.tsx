@@ -1,25 +1,46 @@
-import { Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import LoginPage from "./page/CommonPage/LoginPage";
-import HomePage from "./page/CommonPage/HomePage";
-import LayoutHomeUser from "./layout/LayoutHomeUser";
-import CompanyPage from "./page/CompanyPage/CompanyPage";
-import BlogsPage from "./page/CommonPage/BlogsPage";
-import SelectionRolePage from "./page/CommonPage/SelectionRolePage";
+
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getToken } from "./utils/auth";
 import { authFetchMe, authRefreshToken } from "./store/auth/auth-slice";
-import LayoutManageCandidate from "./layout/LayoutManageCandidate";
-import ManageUpdateInformationCandidatePage from "./page/CandidatePage/ManageUpdateInformationCandidatePage";
-import ManageUploadResumeCandidate from "./page/CandidatePage/ManageUploadResumeCandidate";
-import ManageListResumeCandidate from "./page/CandidatePage/ManageListResumeCandidate";
-import ManageWallCandidate from "./page/CandidatePage/ManageWallCandidate";
-import FindJobPage from "./page/CommonPage/FindJobPage";
-import JobDetailPage from "./page/CommonPage/JobDetailPage";
-import CompanyDetailPage from "./page/CompanyPage/CompanyDetailPage";
-import ManageJobSavePage from "./page/CandidatePage/ManageJobSavePage";
-import ManageJobHadApplyPage from "./page/CandidatePage/ManageJobHadApplyPage";
+import HomePage from "./page/CommonPage/HomePage";
+const LoginPage = lazy(() => import("./page/CommonPage/LoginPage"));
+// const HomePage = lazy(() => import("./page/CommonPage/HomePage"));
+const LayoutHomeUser = lazy(() => import("./layout/LayoutHomeUser"));
+const CompanyPage = lazy(() => import("./page/CompanyPage/CompanyPage"));
+const BlogsPage = lazy(() => import("./page/CommonPage/BlogsPage"));
+const LayoutManageCandidate = lazy(
+  () => import("./layout/LayoutManageCandidate")
+);
+const ManageUpdateInformationCandidatePage = lazy(
+  () => import("./page/CandidatePage/ManageUpdateInformationCandidatePage")
+);
+const ManageUploadResumeCandidate = lazy(
+  () => import("./page/CandidatePage/ManageUploadResumeCandidate")
+);
+const ManageListResumeCandidate = lazy(
+  () => import("./page/CandidatePage/ManageListResumeCandidate")
+);
+const ManageWallCandidate = lazy(
+  () => import("./page/CandidatePage/ManageWallCandidate")
+);
+const FindJobPage = lazy(() => import("./page/CommonPage/FindJobPage"));
+const JobDetailPage = lazy(() => import("./page/CommonPage/JobDetailPage"));
+const CompanyDetailPage = lazy(
+  () => import("./page/CompanyPage/CompanyDetailPage")
+);
+const ManageJobSavePage = lazy(
+  () => import("./page/CandidatePage/ManageJobSavePage")
+);
+const ManageJobHadApplyPage = lazy(
+  () => import("./page/CandidatePage/ManageJobHadApplyPage")
+);
+const ManageCompanyFollowedPage = lazy(
+  () => import("./page/CandidatePage/ManageCompanyFollowedPage")
+);
+const RegisterPage = lazy(() => import("./page/CommonPage/RegisterPage"));
 function App() {
   const { accessToken, messageAuth } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
@@ -60,7 +81,7 @@ function App() {
           <Route path="/login" element={<LoginPage></LoginPage>}></Route>
           <Route
             path="/register"
-            element={<SelectionRolePage></SelectionRolePage>}
+            element={<RegisterPage></RegisterPage>}
           ></Route>
           <Route element={<LayoutManageCandidate></LayoutManageCandidate>}>
             <Route
@@ -90,6 +111,10 @@ function App() {
             <Route
               path="/manage/job-apply"
               element={<ManageJobHadApplyPage></ManageJobHadApplyPage>}
+            ></Route>
+            <Route
+              path="/manage/company-followed"
+              element={<ManageCompanyFollowedPage></ManageCompanyFollowedPage>}
             ></Route>
           </Route>
         </Routes>
