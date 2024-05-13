@@ -8,12 +8,7 @@ interface PropComponent {
   line?: string;
 }
 // eslint-disable-next-line react-refresh/only-export-components
-const ContentSeeMore: React.FC<PropComponent> = ({
-  className,
-  content,
-  line = "10",
-}) => {
-  console.log("🚀 ~ line:", line);
+const ContentSeeMore: React.FC<PropComponent> = ({ className, content }) => {
   const [seeMore, setSeeMore] = useState(false);
   useEffect(() => {
     let content: any = document.getElementById("message_container");
