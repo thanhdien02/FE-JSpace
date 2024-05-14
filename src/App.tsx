@@ -6,11 +6,14 @@ import { useDispatch } from "react-redux";
 import { getToken } from "./utils/auth";
 import { authFetchMe, authRefreshToken } from "./store/auth/auth-slice";
 import HomePage from "./page/CommonPage/HomePage";
+import CompanyPage from "./page/CompanyPage/CompanyPage";
+import BlogsPage from "./page/CommonPage/BlogsPage";
+import FindJobPage from "./page/CommonPage/FindJobPage";
 const LoginPage = lazy(() => import("./page/CommonPage/LoginPage"));
 // const HomePage = lazy(() => import("./page/CommonPage/HomePage"));
 const LayoutHomeUser = lazy(() => import("./layout/LayoutHomeUser"));
-const CompanyPage = lazy(() => import("./page/CompanyPage/CompanyPage"));
-const BlogsPage = lazy(() => import("./page/CommonPage/BlogsPage"));
+// const CompanyPage = lazy(() => import("./page/CompanyPage/CompanyPage"));
+// const BlogsPage = lazy(() => import("./page/CommonPage/BlogsPage"));
 const LayoutManageCandidate = lazy(
   () => import("./layout/LayoutManageCandidate")
 );
@@ -26,7 +29,7 @@ const ManageListResumeCandidate = lazy(
 const ManageWallCandidate = lazy(
   () => import("./page/CandidatePage/ManageWallCandidate")
 );
-const FindJobPage = lazy(() => import("./page/CommonPage/FindJobPage"));
+// const FindJobPage = lazy(() => import("./page/CommonPage/FindJobPage"));
 const JobDetailPage = lazy(() => import("./page/CommonPage/JobDetailPage"));
 const CompanyDetailPage = lazy(
   () => import("./page/CompanyPage/CompanyDetailPage")
@@ -73,6 +76,7 @@ function App() {
             ></Route>
             <Route path="/jobs" element={<FindJobPage></FindJobPage>}></Route>
             <Route path="/blogs" element={<BlogsPage></BlogsPage>}></Route>
+
             <Route
               path="/jobs/:jobId"
               element={<JobDetailPage></JobDetailPage>}

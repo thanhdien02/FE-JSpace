@@ -75,14 +75,14 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
               <div
                 onMouseOver={handleMouseOverCandidateMenu}
                 onMouseLeave={handleMouseLeaveCandidateMenu}
-                className="relative flex justify-center items-center gap-3 border border-solid rounded-lg py-2 px-4 border-blue-200 hover:border-primary hover:bg-blue-100 hover:text-primary cursor-pointer transition-all"
+                className="relative flex justify-center items-center gap-3 border border-solid rounded-lg py-2 px-2 border-gary-200  hover:bg-blue-100 hover:text-primary cursor-pointer transition-all"
               >
                 <img
                   src={user?.picture}
                   alt=""
-                  className="w-[35px] h-[35px] rounded-full"
+                  className="w-[30px] h-[30px] rounded-full"
                 />
-                <h3 className="text-line-clamp font-semibold max-w-[150px]">
+                <h3 className="text-line-clamp text-sm font-semibold max-w-[150px]">
                   {user?.name}
                 </h3>
                 <IconChervonDown></IconChervonDown>

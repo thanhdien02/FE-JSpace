@@ -73,7 +73,7 @@ const CardCompanyPage: React.FC<PropComponent> = () => {
                 <span className="">4.6</span>
               </div>
             </div>
-            <p className="line-clamp-2 text-sm">
+            <p className="line-clamp-2 text-sm text-gray-500">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
               illum dolore excepturi alias adipisci blanditiis sapiente natus
               exercitationem dolores temporibus explicabo error mollitia nam

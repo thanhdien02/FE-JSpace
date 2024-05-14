@@ -135,7 +135,7 @@ const LoginPage: React.FC<PropComponent> = ({
                     type="email"
                     placeholder="join@gmail.com"
                     autoComplete="off"
-                    className="focus:border-solid h-full focus:border-stone-400/70 transition-all outline-none pr-4 pl-10 py-2 border border-stone-200 border-solid w-full rounded-md"
+                    className=" focus:border-solid h-full focus:border-stone-400/70 transition-all outline-none pr-4 pl-10 py-2 border border-stone-200 border-solid w-full rounded-md"
                   />
                   <p className="text-red-600 text-sm py-2">
                     {" "}
@@ -205,7 +205,10 @@ const LoginPage: React.FC<PropComponent> = ({
                 Đăng nhập
               </button>
             </div>
-            <div className="flex w-full mt-3">
+            <div className="flex py-1">
+              <span className=" text-gray-500 text-xs mx-auto">Or</span>
+            </div>
+            <div className="flex w-full">
               <button
                 disabled={loading}
                 type="button"

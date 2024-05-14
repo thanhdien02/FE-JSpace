@@ -133,7 +133,7 @@ const JobBannerPage: React.FC = () => {
               </div>
               <div
                 onClick={() => setSearchAdvance(!searchAdvance)}
-                className="flex  gap-1 py-2 px-4 cursor-pointer items-center font-medium bg-primary rounded-lg text-white"
+                className="flex select-none gap-2 py-2 px-4 cursor-pointer items-center font-medium bg-primary rounded-lg text-white"
               >
                 <FilterOutlined />
                 <span>Lọc nâng cao</span>

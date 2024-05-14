@@ -20,7 +20,7 @@ const HomeListJobPage: React.FC = () => {
   return (
     <>
       <div className="bg-gray-100 ">
-        <div className="mt-4 w-primary mx-auto py-3">
+        <div className=" w-primary mx-auto py-3">
           <h3 className="font-bold text-2xl text-primary my-3">
             Các công việc phổ biến
           </h3>
@@ -56,7 +56,7 @@ const HomeListJobPage: React.FC = () => {
             spaceBetween={50}
             slidesPerView={1}
             navigation
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            // autoplay={{ delay: 4000, disableOnInteraction: false }}
             // loop
             // pagination={{ clickable: true }}
             // scrollbar={{ draggable: true }}

@@ -8,6 +8,10 @@ import { getToken } from "../utils/auth";
 import { useDispatch } from "react-redux";
 import { authFetchMe } from "../store/auth/auth-slice";
 import { CameraOutlined } from "@ant-design/icons";
+import IconText from "../components/icons/IconText";
+import IconWifi from "../components/icons/IconWifi";
+import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
+import IconHeart from "../components/icons/IconHeart";
 
 const LayoutManageCandidate: React.FC = () => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
@@ -82,34 +86,39 @@ const LayoutManageCandidate: React.FC = () => {
                 </div>
               </div>
               <span className="h-[1px] bg-gray-200 w-full"></span>
-              <div className="flex gap-5 p-1">
-                <Switch></Switch>
-                <span className="font-medium">Cho phép tìm việc</span>
-              </div>
+
               <div className="flex gap-5 p-1">
                 <Switch></Switch>
                 <span className="font-medium">Cho phép NTD tìm CV của bạn</span>
               </div>
-              <div className="px-4 py-2 font-medium border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all">
-                <p>Ai đã xem CV của bạn</p>
-              </div>
+              <span className="w-full bg-gray-200 h-[1px]"></span>
               <NavLink
                 to="/wall"
-                className="px-4 py-2 font-medium border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all"
+                className="flex items-center gap-3 pb-4 border-b-[1px] border-solid border-gray-200 cursor-pointer hover:opacity-80 transition-all"
               >
+                <IconText className="text-gray-600"></IconText>
                 <p>Trang cá nhân của bạn</p>
               </NavLink>
               <NavLink
                 to="/manage/job-save"
-                className="px-4 py-2 font-medium border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all"
+                className="flex items-center gap-3 pb-4 border-b-[1px] border-solid border-gray-200 cursor-pointer hover:opacity-80 transition-all"
               >
+                <IconHeart classIcon="!w-6 h-6" className="text-gray-600"></IconHeart>
                 <p>Công việc đã lưu</p>
               </NavLink>
               <NavLink
                 to="/manage/job-apply"
-                className="px-4 py-2 font-medium border border-solid border-gray-400 cursor-pointer hover:opacity-80 transition-all"
+                className="flex items-center gap-3 pb-4 border-b-[1px] border-solid border-gray-200 cursor-pointer hover:opacity-80 transition-all"
               >
+                <IconBriefCaseOutline className="text-gray-600"></IconBriefCaseOutline>
                 <p>Công việc đã ứng tuyển</p>
+              </NavLink>
+              <NavLink
+                to="/manage/company-followed"
+                className="flex items-center gap-3 pb-4 border-b-[1px] border-solid border-gray-200 cursor-pointer hover:opacity-80 transition-all"
+              >
+                <IconWifi className="text-gray-600"></IconWifi>
+                <p>Công ty đang theo dõi</p>
               </NavLink>
             </div>
           </div>
