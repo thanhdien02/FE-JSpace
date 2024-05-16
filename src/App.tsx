@@ -9,7 +9,6 @@ import HomePage from "./page/CommonPage/HomePage";
 import CompanyPage from "./page/CompanyPage/CompanyPage";
 import BlogsPage from "./page/CommonPage/BlogsPage";
 import FindJobPage from "./page/CommonPage/FindJobPage";
-const LoginPage = lazy(() => import("./page/CommonPage/LoginPage"));
 // const HomePage = lazy(() => import("./page/CommonPage/HomePage"));
 const LayoutHomeUser = lazy(() => import("./layout/LayoutHomeUser"));
 // const CompanyPage = lazy(() => import("./page/CompanyPage/CompanyPage"));
@@ -82,7 +81,6 @@ function App() {
               element={<JobDetailPage></JobDetailPage>}
             ></Route>
           </Route>
-          <Route path="/login" element={<LoginPage></LoginPage>}></Route>
           <Route
             path="/register"
             element={<RegisterPage></RegisterPage>}

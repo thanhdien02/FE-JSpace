@@ -3,6 +3,7 @@ import React from "react";
 interface PropComponent {
   className?: string;
   classIcon?: string;
+  onClick?: any;
 }
 const IconHeart: React.FC<PropComponent> = ({ className, classIcon }) => {
   return (

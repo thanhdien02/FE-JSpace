@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import IconMoney from "../../components/icons/IconMoney";
 import IconPaperAirplan from "../../components/icons/IconPaperAirplan";
 import IconHeart from "../../components/icons/IconHeart";
 import IconHeartFill from "../../components/icons/IconHeartFill";
-import { Popover } from "antd";
+import { message, Popover } from "antd";
 import IconMapPin from "../../components/icons/IconMapPin";
 import IconBriefCase from "../../components/icons/IconBriefCase";
 import IconClock from "../../components/icons/IconClock";
-
+import { useSelector } from "react-redux";
+import ApplyJobPage from "../../page/CommonPage/ApplyJobPage";
+import { CSSTransition } from "react-transition-group";
 interface PropComponent {
   className?: string;
   titleJob?: string;
@@ -20,6 +22,21 @@ interface PropComponent {
 const JobDetailInformationJobPage: React.FC<PropComponent> = ({
   className,
 }) => {
+  const { user } = useSelector((state: any) => state.auth);
+  const [checkApply, setCheckApply] = useState(false);
+  const handleSaveJob = () => {
+    if (!user?.id) {
+      message.info("Bạn cần đăng nhập để lưu tin");
+    }
+  };
+  const handleApplyJob = () => {
+    if (!user?.id) {
+      message.info("Bạn cần đăng nhập để ứng tuyển");
+    } else {
+      setCheckApply(!checkApply);
+    }
+  };
+
   return (
     <>
       <div className={`p-6 rounded-sm ${className}`}>
@@ -61,8 +78,13 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
           <span>Hạn nộp hồ sơ: 13/06/2024</span>
         </div>
         <div className="flex gap-5 mt-5">
-          <div className="grow flex items-center justify-center py-2 gap-3 hover:opacity-80 transition-all cursor-pointer bg-primary text-white font-medium  rounded-md">
-            <button className="">Ứng tuyển ngay</button>
+          <div
+            onClick={handleApplyJob}
+            className="grow flex items-center justify-center py-2 gap-3 hover:opacity-80 transition-all cursor-pointer bg-primary text-white font-medium  rounded-md"
+          >
+            <button className="" type="button">
+              Ứng tuyển ngay
+            </button>
             <IconPaperAirplan></IconPaperAirplan>
           </div>
           <Popover
@@ -72,13 +94,25 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
               </p>
             }
           >
-            <div className="w-[15%] hover:opacity-80 transition-all flex items-center border border-solid border-primary text-primary font-medium justify-center py-2 gap-2 rounded-md">
-              <button className="">{true ? "Đã lưu" : "Lưu tin"}</button>
+            <div
+              onClick={handleSaveJob}
+              className="w-[15%] hover:opacity-80 transition-all flex items-center border border-solid border-primary text-primary font-medium justify-center py-2 gap-2 rounded-md"
+            >
+              <button className="">{!true ? "Đã lưu" : "Lưu tin"}</button>
               {true ? <IconHeartFill></IconHeartFill> : <IconHeart></IconHeart>}
             </div>
           </Popover>
         </div>
       </div>
+
+      <CSSTransition
+        in={checkApply}
+        timeout={200}
+        classNames="fade"
+        unmountOnExit
+      >
+        <ApplyJobPage onClick={setCheckApply} className=""></ApplyJobPage>
+      </CSSTransition>
     </>
   );
 };

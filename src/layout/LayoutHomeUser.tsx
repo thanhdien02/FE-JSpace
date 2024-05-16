@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import LoginPage from "../page/CommonPage/LoginPage";
 import { useSelector } from "react-redux";
 import LayoutHomeUserFooter from "../module/common/LayoutHomeUserFooter";
+import { CSSTransition } from "react-transition-group";
 
 const LayoutHomeUser: React.FC = () => {
   const { accessToken } = useSelector((state: any) => state.auth);
@@ -17,11 +18,18 @@ const LayoutHomeUser: React.FC = () => {
 
   return (
     <div className="">
-      <LoginPage
-        checkLogin={checkLogin}
-        actionLogin={setCheckLogin}
-        claseNameOverlay="opacity-40"
-      ></LoginPage>
+      <CSSTransition
+        in={checkLogin}
+        timeout={200}
+        classNames="fade"
+        unmountOnExit
+      >
+        <LoginPage
+          actionLogin={setCheckLogin}
+          claseNameOverlay="opacity-40"
+        ></LoginPage>
+      </CSSTransition>
+
       <LayoutHomeUserHeader actionLogin={setCheckLogin}></LayoutHomeUserHeader>
       <div className="bg-white">
         <Outlet></Outlet>

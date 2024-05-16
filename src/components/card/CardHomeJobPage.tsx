@@ -1,7 +1,8 @@
 import React from "react";
-
-import { Popover, Tag } from "antd";
+import { message, Popover, Tag } from "antd";
 import { useNavigate } from "react-router-dom";
+import IconHeart from "../icons/IconHeart";
+import { useSelector } from "react-redux";
 interface PropComponent {
   className?: string;
   titleJob?: string;
@@ -12,11 +13,18 @@ interface PropComponent {
   onClick?: any;
 }
 const CardHomeJobPage: React.FC<PropComponent> = ({ className }) => {
+  const { user } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
+
+  const handleSaveJob = () => {
+    if (!user?.id) {
+      message.info("Bạn cần đăng nhập để lưu tin");
+    }
+  };
   return (
     <>
       <div
-        className={`flex gap-3 shadow-md bg-white rounded-md min-h-[100px] p-4 ${className}`}
+        className={`relative flex gap-3 shadow-md bg-white rounded-md min-h-[100px] p-4 ${className}`}
       >
         <div className="min-w-[25%]">
           <img
@@ -53,11 +61,16 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className }) => {
             odit!
           </h4>
           <div className="flex gap-1 overflow-hidden mt-1">
-            <Tag className="min-w-[50px] line-clamp-1 max-w-[100px]">Tag 1</Tag>
-            <Tag className="min-w-[50px] line-clamp-1 max-w-[100px]">Tag 1</Tag>
-
-            <Tag>Tag 2</Tag>
+            <Tag className="min-w-[40px] line-clamp-1 max-w-[100px]">Tag 1</Tag>
+            <Tag className="min-w-[40px] line-clamp-1 max-w-[100px]">Tag 1</Tag>
           </div>
+        </div>
+
+        <div
+          className="absolute bottom-2 right-2 cursor-pointer text-primary"
+          onClick={handleSaveJob}
+        >
+          <IconHeart className="" classIcon="!w-5 !h-5"></IconHeart>
         </div>
       </div>
     </>
