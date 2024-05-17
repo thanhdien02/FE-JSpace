@@ -12,9 +12,7 @@ import { Empty, Skeleton } from "antd";
 const ManageListResumeCandidate: React.FC = () => {
   const { files, loadingFile } = useSelector((state: any) => state.file);
   const { user } = useSelector((state: any) => state.auth);
-
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fileGetAllFile({ candidate_id: user?.id }));
   }, [user]);

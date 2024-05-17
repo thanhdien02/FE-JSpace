@@ -12,6 +12,7 @@ import IconText from "../components/icons/IconText";
 import IconWifi from "../components/icons/IconWifi";
 import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
 import IconHeart from "../components/icons/IconHeart";
+import IconDocumentArrowUp from "../components/icons/IconDocumentArrowUp";
 
 const LayoutManageCandidate: React.FC = () => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
@@ -100,10 +101,20 @@ const LayoutManageCandidate: React.FC = () => {
                 <p>Trang cá nhân của bạn</p>
               </NavLink>
               <NavLink
+                to="/list-resume"
+                className="flex items-center gap-3 pb-4 border-b-[1px] border-solid border-gray-200 cursor-pointer hover:opacity-80 transition-all"
+              >
+                <IconDocumentArrowUp className="text-gray-600"></IconDocumentArrowUp>
+                <p>Hồ sơ xin việc</p>
+              </NavLink>
+              <NavLink
                 to="/manage/job-save"
                 className="flex items-center gap-3 pb-4 border-b-[1px] border-solid border-gray-200 cursor-pointer hover:opacity-80 transition-all"
               >
-                <IconHeart classIcon="!w-6 h-6" className="text-gray-600"></IconHeart>
+                <IconHeart
+                  classIcon="!w-6 h-6"
+                  className="text-gray-600"
+                ></IconHeart>
                 <p>Công việc đã lưu</p>
               </NavLink>
               <NavLink

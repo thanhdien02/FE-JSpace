@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/logo3.png";
 import { useSelector } from "react-redux";
 import IconChervonDown from "../../components/icons/IconChervonDown";
@@ -9,12 +9,14 @@ import CandidateMenu from "../candidates/CandidateMenu";
 import { dataCandidateMenu } from "../../utils/dataFetch";
 import { useDispatch } from "react-redux";
 import { authLogout } from "../../store/auth/auth-slice";
+import { Divider } from "antd";
 
 interface PropComponent {
   actionLogin?: any;
 }
 const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
+  const [checkNotification, setCheckNotification] = useState(false);
   const dispatch = useDispatch();
   const handleMouseOverCandidateMenu = () => {
     const elementMouseOver: any = document.querySelector(
@@ -71,7 +73,39 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
             </div>
           ) : (
             <div className="flex gap-5 justify-between items-center">
-              <IconBell className="p-2 bg-blue-200 rounded-full text-primary cursor-pointer hover:opacity-80 transition-all"></IconBell>
+              <span className="relative p-2 bg-blue-200 rounded-full ">
+                <IconBell
+                  onClick={setCheckNotification}
+                  checkNotification={checkNotification}
+                  className="text-primary cursor-pointer hover:opacity-80 transition-all"
+                ></IconBell>
+                {!true ? (
+                  <span className="absolute -top-2 -right-2 flex ">
+                    <span className="m-auto w-6 h-6 text-center rounded-full bg-red-500 text-white  font-medium">
+                      2
+                    </span>{" "}
+                  </span>
+                ) : (
+                  <></>
+                )}
+                {checkNotification ? (
+                  <>
+                    <div
+                      className="fixed inset-0 bg-transparent z-10 cursor-pointer"
+                      onClick={() => setCheckNotification(!checkNotification)}
+                    ></div>
+                    <div className="absolute top-[150%] bg-white shadow-md min-w-[300px] min-h-[200px] z-20 right-0">
+                      <div className="p-4">
+                        <h3>Thông báo</h3>
+                      </div>
+                      <Divider className="mt-0"></Divider>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </span>
+
               <div
                 onMouseOver={handleMouseOverCandidateMenu}
                 onMouseLeave={handleMouseLeaveCandidateMenu}

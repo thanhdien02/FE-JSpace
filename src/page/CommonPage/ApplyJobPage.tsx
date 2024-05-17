@@ -3,11 +3,12 @@ import IconClose from "../../components/icons/IconClose";
 import RadioButton from "../../components/radio/RadioButton";
 import IconFolder from "../../components/icons/IconFolder";
 import Dragger from "antd/es/upload/Dragger";
-import { InboxOutlined } from "@ant-design/icons";
-import { Button, message, UploadFile, UploadProps } from "antd";
+import { EditOutlined, InboxOutlined } from "@ant-design/icons";
+import { Button, Divider, Empty, message, UploadFile, UploadProps } from "antd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
+  fileGetAllFile,
   fileUpdateMessageRedux,
   fileUploadFile,
 } from "../../store/file/file-slice";
@@ -17,10 +18,14 @@ interface PropComponent {
 }
 const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
   const { user } = useSelector((state: any) => state.auth);
-  const { loadingFile, messageFile } = useSelector((state: any) => state.file);
+  const { files, loadingFile, messageFile } = useSelector(
+    (state: any) => state.file
+  );
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState("");
   const [file, setFile] = useState<UploadFile>();
+  const [selectCV, setSelectCV] = useState(false);
+  const [cvchoose, setCVChoose] = useState<any>(null);
   const handleOptionChange = (e: any) => {
     setSelectedOption(e.target.value);
     console.log("🚀 ~ handleOptionChange ~ e.target.value:", e.target.value);
@@ -60,11 +65,14 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
       }
     }
   }, [messageFile]);
+  useEffect(() => {
+    dispatch(fileGetAllFile({ candidate_id: user?.id }));
+  }, [user]);
   return (
     <>
       <div className={`fixed inset-0 bg-black/40 z-20 flex ${className}`}>
         <div className="absolute inset-0" onClick={() => onClick(false)}></div>
-        <div className="relative m-auto w-[600px] h-[600px] bg-white rounded-md">
+        <div className="relative m-auto w-[650px] h-[600px] bg-white rounded-md">
           <div
             className="absolute top-2 right-2 cursor-pointer z-20"
             onClick={() => onClick(false)}
@@ -94,11 +102,7 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
                     onChange={handleOptionChange}
                     children={
                       <div className="px-3 pb-3">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Alias nihil sint illo nesciunt delectus iure
-                        distinctio eveniet inventore sequi nulla! Eius
-                        temporibus ipsum ab optio quaerat quis voluptate nisi
-                        expedita?
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                       </div>
                     }
                     className="border border-solid border-gray-200 rounded-md"
@@ -111,59 +115,112 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
                     onChange={handleOptionChange}
                     children={
                       <div className="px-4 pb-3">
-                        <h3 className="font-medium">CV đã tải lên</h3>
-                        <div className="flex flex-col gap-2 mt-2">
-                          <div className="px-4 py-2 w-full hover:border-primary transition-all border border-solid border-gray-200 rounded-md cursor-pointer">
-                            <span className="w-[80%] line-clamp-1">
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Sunt officia nesciunt nihil sint pariatur
-                              consectetur, voluptates rem atque numquam
-                              consequatur facere. Ad sapiente voluptates quo. Ex
-                              quod assumenda alias ad.
-                              CV_NguyenThanhDien_Intern_ReactJS.pdf
-                            </span>
+                        {selectCV ? (
+                          <div className="">
+                            <div className="flex items-center gap-3">
+                              <h3>CV đã tải lên:</h3>
+                              <p className="font-medium w-[50%] line-clamp-1">
+                                {cvchoose?.name}
+                              </p>
+                              <a
+                                href={cvchoose?.file?.path}
+                                target="_blank"
+                                className="text-primary font-medium"
+                              >
+                                Xem
+                              </a>
+                              <div
+                                onClick={() => setSelectCV(!selectCV)}
+                                className="ml-auto flex gap-2 px-4 py-2 bg-slate-200 rounded-md font-medium cursor-pointer"
+                              >
+                                <EditOutlined />
+                                <span>Thay đổi</span>
+                              </div>
+                            </div>
+                            <Divider orientation="right" className="">
+                              Thông tin
+                            </Divider>
+                            <div className="">
+                              <label htmlFor="name" className="text-base ">
+                                Họ và tên
+                                <span className="text-red-500">*</span>
+                              </label>
+                              <input
+                                id="name"
+                                type="text"
+                                value={user?.name}
+                                placeholder="Họ và tên"
+                                className="w-full mt-2 px-4 py-2 rounded-md outline-none border border-gray-200 border-solid"
+                              />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4 mt-4">
+                              <div className="">
+                                <label htmlFor="email" className="text-base ">
+                                  Email
+                                  <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                  id="email"
+                                  type="email"
+                                  value={user?.email}
+                                  placeholder="Email"
+                                  className="w-full mt-2 px-4 py-2 rounded-md outline-none border border-gray-200 border-solid"
+                                />
+                              </div>
+                              <div className="">
+                                <label htmlFor="phone" className="text-base ">
+                                  Số điện thoại
+                                  <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                  id="phone"
+                                  type="number"
+                                  value={user?.phone}
+                                  placeholder=" Số điện thoại"
+                                  className="w-full mt-2 px-4 py-2 rounded-md outline-none border border-gray-200 border-solid"
+                                />
+                              </div>
+                            </div>
                           </div>
-                          <div className="px-4 py-2 w-full hover:border-primary transition-all border border-solid border-gray-200 rounded-md cursor-pointer">
-                            <span className="w-[80%] line-clamp-1">
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Sunt officia nesciunt nihil sint pariatur
-                              consectetur, voluptates rem atque numquam
-                              consequatur facere. Ad sapiente voluptates quo. Ex
-                              quod assumenda alias ad.
-                              CV_NguyenThanhDien_Intern_ReactJS.pdf
-                            </span>
-                          </div>
-                          <div className="px-4 py-2 w-full hover:border-primary transition-all border border-solid border-gray-200 rounded-md cursor-pointer">
-                            <span className="w-[80%] line-clamp-1">
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Sunt officia nesciunt nihil sint pariatur
-                              consectetur, voluptates rem atque numquam
-                              consequatur facere. Ad sapiente voluptates quo. Ex
-                              quod assumenda alias ad.
-                              CV_NguyenThanhDien_Intern_ReactJS.pdf
-                            </span>
-                          </div>
-                          <div className="px-4 py-2 w-full hover:border-primary transition-all border border-solid border-gray-200 rounded-md cursor-pointer">
-                            <span className="w-[80%] line-clamp-1">
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Sunt officia nesciunt nihil sint pariatur
-                              consectetur, voluptates rem atque numquam
-                              consequatur facere. Ad sapiente voluptates quo. Ex
-                              quod assumenda alias ad.
-                              CV_NguyenThanhDien_Intern_ReactJS.pdf
-                            </span>
-                          </div>
-                          <div className="px-4 py-2 w-full hover:border-primary transition-all border border-solid border-gray-200 rounded-md cursor-pointer">
-                            <span className="w-[80%] line-clamp-1">
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Sunt officia nesciunt nihil sint pariatur
-                              consectetur, voluptates rem atque numquam
-                              consequatur facere. Ad sapiente voluptates quo. Ex
-                              quod assumenda alias ad.
-                              CV_NguyenThanhDien_Intern_ReactJS.pdf
-                            </span>
-                          </div>
-                        </div>
+                        ) : (
+                          <>
+                            <h3 className="font-medium">CV đã tải lên</h3>
+                            <div className="flex flex-col gap-3 mt-2">
+                              {files?.content?.length <= 0 ? (
+                                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                              ) : (
+                                files?.content?.length > 0 &&
+                                files?.content?.map((item: any) => (
+                                  <div
+                                    key={item?.id}
+                                    className="group/item flex items-center px-4 py-2 w-full hover:border-primary transition-all border border-solid border-gray-200 rounded-md cursor-pointer"
+                                  >
+                                    <span className="w-[70%] line-clamp-1">
+                                      {item?.name}
+                                    </span>
+                                    <a
+                                      target="_blank"
+                                      className="font-medium invisible group-hover/item:visible text-primary"
+                                      href={item?.file?.path}
+                                    >
+                                      Xem
+                                    </a>
+                                    <button
+                                      type="button"
+                                      onClick={() => {
+                                        setSelectCV(!selectCV);
+                                        setCVChoose(item);
+                                      }}
+                                      className="invisible group-hover/item:visible ml-auto px-2 py-1 hover:opacity-80 rounded-sm bg-primary text-sm font-semibold text-white"
+                                    >
+                                      Chọn CV
+                                    </button>
+                                  </div>
+                                ))
+                              )}
+                            </div>
+                          </>
+                        )}
                       </div>
                     }
                     className="border border-solid border-gray-200 rounded-md"
@@ -190,7 +247,6 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
                         </Dragger>
                         <div className="flex">
                           <Button
-                          
                             type="primary"
                             onClick={handleUpload}
                             disabled={file === undefined}
@@ -215,6 +271,7 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
             <button
               className="p-2 w-[100px] bg-red-500 rounded-md hover:opacity-80 transition-all text-white font-medium"
               type="button"
+              onClick={() => onClick(false)}
             >
               Hủy
             </button>

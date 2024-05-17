@@ -2,10 +2,19 @@ import React from "react";
 
 interface PropComponent {
   className?: string;
+  onClick?: any;
+  checkNotification?: boolean;
 }
-const IconBell: React.FC<PropComponent> = ({ className }) => {
+const IconBell: React.FC<PropComponent> = ({
+  className,
+  onClick,
+  checkNotification,
+}) => {
   return (
-    <span className={`${className}`}>
+    <span
+      className={`${className}`}
+      onClick={() => onClick(!checkNotification)}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 448 512"
