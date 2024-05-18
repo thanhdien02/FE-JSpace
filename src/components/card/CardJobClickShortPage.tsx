@@ -3,22 +3,41 @@ import React from "react";
 import IconMapPin from "../icons/IconMapPin";
 import IconBuilding from "../icons/IconBuilding";
 import { Popover } from "antd";
-import { useNavigate } from "react-router-dom";
 interface PropComponent {
-  className?: string;
-  titleJob?: string;
-  nameCompany?: string;
-  logo?: string;
-  salary?: string;
+  id: string;
+  title?: string;
+  salary?: number;
   location?: string;
+  closeDate?: string | string[];
+  description?: string;
+  quantity?: string;
+  experience?: string;
+  skills?: string | string[];
+  rank?: string;
+  jobType?: string;
+  gender?: string;
   onClick?: any;
+  onClickCheckActive?: any;
+  className?: string;
+  checkActive?: string;
 }
-const CardJobClickShortPage: React.FC<PropComponent> = ({ className }) => {
-  const navigate = useNavigate();
+
+const CardJobClickShortPage: React.FC<PropComponent> = ({
+  id,
+  className,
+  checkActive = "false",
+  onClick,
+  title,
+  location,
+  description,
+}) => {
+  console.log("🚀 ~ checkActive:", checkActive)
   return (
     <>
       <div
-        className={`flex gap-3 border boder-solid border-gray-200 bg-white hover:border-primary transition-all rounded-md min-h-[100px] p-4 ${className}`}
+        className={`group/item flex gap-3 border boder-solid  bg-white hover:border-primary transition-all rounded-md min-h-[100px] p-4 ${className} ${
+          checkActive == id ? "border-primary" : "border-gray-200"
+        }`}
       >
         <div className="min-w-[25%] max-h-[100px]">
           <img
@@ -29,22 +48,20 @@ const CardJobClickShortPage: React.FC<PropComponent> = ({ className }) => {
         </div>
         <div className="relative grow flex flex-col gap-1">
           <div className="flex justify-between">
-            <Popover
-              content={
-                <p className="w-[300px]">
-                  Font end developer for 2 years (Senior) 10 - 20tr many benifit
-                  and team building. Apply now that bench
-                </p>
-              }
-            >
+            <Popover content={<p className="w-[300px]">{title}</p>}>
               <h3
                 className="line-clamp-2 min-w-[70%] font-medium cursor-pointer hover:text-primary transition-all"
                 onClick={() => {
-                  navigate("/jobs/1");
+                  // navigate("/jobs/1");
+                  onClick({
+                    id: id,
+                    description: description,
+                    title: title,
+                    location: location,
+                  });
                 }}
               >
-                Font end developer for 2 years (Senior) 10 - 20tr many benifit
-                and team building. Apply now that bench
+                {title}
               </h3>
             </Popover>
           </div>
@@ -61,7 +78,7 @@ const CardJobClickShortPage: React.FC<PropComponent> = ({ className }) => {
           <div className="flex gap-1 overflow-hidden mt-2 items-center">
             <IconMapPin className="text-gray-500"></IconMapPin>
             <span className="line-clamp-1 text-sm text-gray-500">
-              Hồ Chí Minh
+              {location}
             </span>
           </div>
         </div>

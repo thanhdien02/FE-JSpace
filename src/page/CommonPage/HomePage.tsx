@@ -7,7 +7,7 @@ import HomeListCompanyPage from "../../module/common/HomeListCompanyPage";
 const HomePage: React.FC = () => {
   return (
     <>
-      <div className="min-h-[1500px] ">
+      <div className="min-h-[100px] ">
         <HomeBannerPage></HomeBannerPage>
         <HomeListJobPage></HomeListJobPage>
         <HomeListCompanyPage></HomeListCompanyPage>

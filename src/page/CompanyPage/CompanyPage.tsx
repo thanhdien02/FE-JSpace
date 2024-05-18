@@ -9,7 +9,7 @@ const CompanyPage: React.FC = () => {
       <CompanyBannerPage></CompanyBannerPage>
       <div className="bg-gray-100 py-5">
         <CompanyResultFilterPage className=""></CompanyResultFilterPage>
-        <div className="w-primary flex mx-auto mt-5">
+        <div className="w-primary max-w-full lg:px-0 px-5 flex mx-auto mt-5">
           <Pagination className="ml-auto font-medium" defaultCurrent={1} total={50} />
         </div>
       </div>

@@ -91,44 +91,44 @@ const HomeListCompanyPage: React.FC = () => {
   return (
     <>
       <div>
-        <div className=" w-primary mx-auto py-3 ">
-          <h3 className="font-bold text-2xl text-primary my-3">
+        <div className="w-primary max-w-full mx-auto py-3 ">
+          <h3 className="lg:px-0 px-5 font-bold text-2xl text-primary my-3">
             Các công ty phổ biến
           </h3>
-          <div className="grid grid-cols-5 gap-4 mt-6">
+          <div className="lg:px-0 px-5 grid lg:grid-cols-5 grid-cols-1 gap-5 mt-6">
             <div className="flex border border-solid border-gray-200 cursor-pointer rounded-md h-[200px] transition-all hover:shadow-md hover:shadow-blue-200">
               <img
                 src="https://th.bing.com/th/id/R.d968aaa271651e20446d370a31a1d022?rik=4BaJJh7fEvSAGQ&pid=ImgRaw&r=0"
                 alt=""
-                className="m-auto w-[80%] h-[50%] object-contain"
+                className="m-auto lg:w-[80%] w-full lg:h-[50%] h-[70%] object-contain"
               />
             </div>
             <div className="flex border border-solid border-gray-200 cursor-pointer rounded-md h-[200px] transition-all hover:shadow-md hover:shadow-blue-200">
               <img
                 src="https://nhanlucnganhluat.vn/uploads/images/1A7A1934/logo/2018-10/logo.png"
                 alt=""
-                className="m-auto w-[80%] h-[50%] object-contain"
+                className="m-auto lg:w-[80%] w-full lg:h-[50%] h-[70%] object-contain"
               />
             </div>
             <div className="flex border border-solid border-gray-200 cursor-pointer rounded-md h-[200px] transition-all hover:shadow-md hover:shadow-blue-200">
               <img
                 src="https://rubicmarketing.com/wp-content/uploads/2021/06/logo-Vinamilk.png"
                 alt=""
-                className="m-auto w-[80%] h-[50%] object-contain"
+                className="m-auto lg:w-[80%] w-full lg:h-[50%] h-[70%] object-contain"
               />
             </div>
             <div className="flex border border-solid border-gray-200 cursor-pointer rounded-md h-[200px] transition-all hover:shadow-md hover:shadow-blue-200">
               <img
                 src="https://th.bing.com/th/id/R.01cd719c50a4066e50808738e6eff177?rik=6%2fm77v2X46RLyg&pid=ImgRaw&r=0"
                 alt=""
-                className="m-auto w-[80%] h-[50%] object-contain"
+                className="m-auto lg:w-[80%] w-full lg:h-[50%] h-[70%] object-contain"
               />
             </div>
             <div className="flex border border-solid border-gray-200 cursor-pointer rounded-md h-[200px] transition-all hover:shadow-md hover:shadow-blue-200">
               <img
                 src="https://th.bing.com/th/id/OIP.oOSxQuhXwSaBp7N9OF_eOQHaHk?rs=1&pid=ImgDetMain"
                 alt=""
-                className="m-auto w-[80%] h-[50%] object-contain "
+                className="m-auto lg:w-[80%] w-full lg:h-[50%] h-[70%] object-contain "
               />
             </div>
           </div>

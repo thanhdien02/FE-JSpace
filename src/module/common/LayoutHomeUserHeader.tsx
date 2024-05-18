@@ -9,7 +9,9 @@ import CandidateMenu from "../candidates/CandidateMenu";
 import { dataCandidateMenu } from "../../utils/dataFetch";
 import { useDispatch } from "react-redux";
 import { authLogout } from "../../store/auth/auth-slice";
-import { Divider } from "antd";
+import { Button, Divider, Drawer, DrawerProps, Space } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
+import IconChervonRight from "../../components/icons/IconChervonRight";
 
 interface PropComponent {
   actionLogin?: any;
@@ -18,6 +20,15 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
   const [checkNotification, setCheckNotification] = useState(false);
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [size] = useState<DrawerProps["size"]>();
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
   const handleMouseOverCandidateMenu = () => {
     const elementMouseOver: any = document.querySelector(
       ".candidate-menu-manage"
@@ -53,7 +64,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
             <HeaderItem title="Bài biết" path="/blogs"></HeaderItem>
           </ul>
         </div>
-        <div className="">
+        <div className="lg:block hidden">
           {accessToken === "" ? (
             <div className="xl:flex hidden justify-center items-center gap-1 ">
               <button
@@ -153,6 +164,100 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
             </div>
           )}
         </div>
+
+        <div className="lg:hidden">
+          <MenuOutlined
+            className=" !font-semibold text-2xl p-2 bg-blue-100 rounded-full text-primary"
+            onClick={showDrawer}
+          />
+        </div>
+        <Drawer
+          title={<h1 className="text-primary text-xl font-bold">JSPACE</h1>}
+          placement="right"
+          size={size}
+          // closable={false}
+          onClose={onClose}
+          className="ease-linear duration-500"
+          open={open}
+          extra={
+            <Space>
+              <Button
+                type="primary"
+                onClick={() => {
+                  actionLogin(true);
+                  setOpen(false);
+                }}
+              >
+                Đăng nhập
+              </Button>
+            </Space>
+          }
+        >
+          <ul className="flex flex-col gap-5">
+            <li onClick={onClose}>
+              {" "}
+              <HeaderItem
+                className="text-[14px] "
+                classLink="pl-0"
+                title="Trang chủ"
+                path="/"
+              >
+                <IconChervonRight
+                  classIcon="!w-[18px] !h-[18px]"
+                  className="ml-auto"
+                ></IconChervonRight>
+              </HeaderItem>
+            </li>{" "}
+            <li onClick={onClose}>
+              <HeaderItem
+                className="text-[14px] "
+                classLink="pl-0"
+                title="Tìm việc"
+                path="/jobs"
+              >
+                <IconChervonRight
+                  classIcon="!w-[18px] !h-[18px]"
+                  className="ml-auto"
+                ></IconChervonRight>
+              </HeaderItem>{" "}
+            </li>
+            <li onClick={onClose}>
+              <HeaderItem
+                className="text-[14px] "
+                classLink="pl-0"
+                title="Công ty"
+                path="/companys"
+              >
+                <IconChervonRight
+                  classIcon="!w-[18px] !h-[18px]"
+                  className="ml-auto"
+                ></IconChervonRight>
+              </HeaderItem>{" "}
+            </li>
+            <li onClick={onClose}>
+              <HeaderItem
+                className="text-[14px] "
+                classLink="pl-0"
+                title="Bài biết"
+                path="/blogs"
+              >
+                <IconChervonRight
+                  classIcon="!w-[18px] !h-[18px]"
+                  className="ml-auto"
+                ></IconChervonRight>
+              </HeaderItem>{" "}
+            </li>
+          </ul>
+          <div className="w-full h-[1px] bg-gray-200 my-3"></div>
+          <div className="">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
+              incidunt doloremque porro tempore non in veniam. Assumenda ut
+              distinctio nobis dolorem! Rem sint vel vitae recusandae magnam
+              libero esse ipsa?
+            </p>
+          </div>
+        </Drawer>
       </header>
     </>
   );

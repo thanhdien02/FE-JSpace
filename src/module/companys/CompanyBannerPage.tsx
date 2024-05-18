@@ -23,7 +23,7 @@ const CompanyBannerPage: React.FC = () => {
           alt=""
           className="h-full w-full object-cover object-left-top"
         />
-        <div className="absolute flex bg-gradient-to-b from-blue-50/10 to-white/20 inset-0 h-full">
+        <div className="lg:px-0 px-5 absolute flex bg-gradient-to-b from-blue-50/10 to-white/20 inset-0 h-full">
           <form
             action=""
             onSubmit={handleSubmit(onSubmit)}
@@ -40,7 +40,7 @@ const CompanyBannerPage: React.FC = () => {
                     <CloseOutlined className="text-base px-1 hover:bg-slate-100 py-1 rounded-sm transition-all" />
                   ),
                 }}
-                className="w-[40%] py-2 rounded-lg"
+                className="lg:w-[40%] py-2 rounded-lg"
                 size="middle"
                 onChange={(e) => {
                   setValue("name", e.target.value);

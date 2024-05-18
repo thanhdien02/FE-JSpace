@@ -112,7 +112,7 @@ const LayoutManageCandidate: React.FC = () => {
                 className="flex items-center gap-3 pb-4 border-b-[1px] border-solid border-gray-200 cursor-pointer hover:opacity-80 transition-all"
               >
                 <IconHeart
-                  classIcon="!w-6 h-6"
+                  classIcon="!w-6 !h-6"
                   className="text-gray-600"
                 ></IconHeart>
                 <p>Công việc đã lưu</p>

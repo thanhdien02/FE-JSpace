@@ -20,16 +20,16 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
   return (
     <>
       <div
-        className={`flex gap-3 border boder-solid border-gray-200 bg-white hover:border-primary transition-all rounded-md min-h-[100px] p-4 ${className}`}
+        className={`relative flex gap-3 border boder-solid border-gray-200 bg-white hover:border-primary transition-all rounded-md min-h-[100px] w-full lg:p-4 p-2 ${className}`}
       >
-        <div className="min-w-[23%] max-h-[110px]">
+        <div className="lg:min-w-[23%] w-[100px] max-w-full h-[110px] lg:max-h-[110px]">
           <img
             src="https://th.bing.com/th/id/R.01cd719c50a4066e50808738e6eff177?rik=6%2fm77v2X46RLyg&pid=ImgRaw&r=0"
             alt=""
-            className="w-h-full h-full object-cover"
+            className="w-h-full h-full lg:object-cover object-contain"
           />
         </div>
-        <div className="relative grow flex flex-col gap-1">
+        <div className="relative grow w-full flex flex-col lg:gap-1">
           <div className="flex justify-between">
             <Popover
               content={
@@ -49,15 +49,18 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
                 and team building. Apply now that bench
               </h3>
             </Popover>
-            <div className="w-[33%]">
+            <div className="lg:block hidden w-[33%]">
               <span className="font-medium text-primary text-nowrap line-clamp-1 ">
                 500 - 1,500 USD{" "}
               </span>
             </div>
           </div>
           <div className="flex gap-1 items-center mt-2">
-            <IconBuilding className="text-gray-500"></IconBuilding>
-            <h4 className="line-clamp-1 text-gray-500 text-sm">
+            <IconBuilding
+              className="text-gray-500"
+              classIcon="lg:!w-5 lg:!h-5 !w-4 !h-4"
+            ></IconBuilding>
+            <h4 className="line-clamp-1 text-gray-500 lg:text-sm text-xs">
               Công ty phần mềm FPT Lorem ipsum dolor sit, amet consectetur
               adipisicing elit. Quibusdam nulla temporibus dolorem consectetur
               alias dicta expedita sapiente repellat voluptate explicabo dolor
@@ -66,23 +69,25 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
             </h4>
           </div>
           <div className="flex gap-1 overflow-hidden mt-2 items-center">
-            <IconMapPin className="text-gray-500"></IconMapPin>
-            <span className="line-clamp-1 text-sm text-gray-500">
+            <IconMapPin
+              className="text-gray-500"
+              classIcon="lg:!w-5 lg:!h-5 !w-4 !h-4"
+            ></IconMapPin>
+            <span className="line-clamp-1 lg:text-sm text-xs text-gray-500">
               Hồ Chí Minh
             </span>
           </div>
-
-          <div className="absolute flex gap-2 items-center -bottom-2 right-0">
-            <IconTrash
-              className="p-1 rounded-sm bg-red-100 cursor-pointer text-red-600 hover:opacity-80 transition-all"
-              classIcon="w-5 h-5"
-            ></IconTrash>
-            {true ? (
-              <IconHeartFill className="p-1 rounded-sm bg-blue-100 cursor-pointer text-primary hover:opacity-80 transition-all"></IconHeartFill>
-            ) : (
-              <IconHeart className="p-1 rounded-sm bg-blue-100 cursor-pointer text-primary hover:opacity-80 transition-all"></IconHeart>
-            )}
-          </div>
+        </div>
+        <div className="absolute flex gap-2 items-center bottom-2 right-2">
+          <IconTrash
+            className="p-1 rounded-sm bg-red-100 cursor-pointer text-red-600 hover:opacity-80 transition-all"
+            classIcon="w-5 h-5"
+          ></IconTrash>
+          {true ? (
+            <IconHeartFill className="p-1 rounded-sm bg-blue-100 cursor-pointer text-primary hover:opacity-80 transition-all"></IconHeartFill>
+          ) : (
+            <IconHeart className="p-1 rounded-sm bg-blue-100 cursor-pointer text-primary hover:opacity-80 transition-all"></IconHeart>
+          )}
         </div>
       </div>
     </>

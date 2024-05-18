@@ -7,7 +7,7 @@ const JobFitPage: React.FC = () => {
   return (
     <>
       <div className="bg-gray-100 py-5">
-        <section className="w-primary mx-auto bg-white shadow-sm rounded-lg p-5">
+        <section className="w-primary max-w-full mx-auto bg-white shadow-sm rounded-lg p-5">
           <h2 className="text-xl font-bold text-primary">
             Gợi ý việc làm phù hợp
           </h2>
@@ -18,22 +18,22 @@ const JobFitPage: React.FC = () => {
             navigation
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log("slide change")}
-            className="swiper-job-fit"
+            className="swiper-job-fit "
           >
             <SwiperSlide className="ease-linear">
-              <div className="grid grid-cols-2 gap-5 mt-5">
+              <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5">
                 <CardJobFitPage></CardJobFitPage>
                 <CardJobFitPage></CardJobFitPage>
               </div>
             </SwiperSlide>
             <SwiperSlide className="ease-linear">
-              <div className="grid grid-cols-2 gap-5 mt-5">
+              <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5">
                 <CardJobFitPage></CardJobFitPage>
                 <CardJobFitPage></CardJobFitPage>
               </div>
             </SwiperSlide>
             <SwiperSlide className="ease-linear">
-              <div className="grid grid-cols-2 gap-5 mt-5">
+              <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5">
                 <CardJobFitPage></CardJobFitPage>
                 <CardJobFitPage></CardJobFitPage>
               </div>

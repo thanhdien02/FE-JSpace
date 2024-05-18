@@ -26,7 +26,7 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className }) => {
       <div
         className={`relative flex gap-3 shadow-md bg-white rounded-md min-h-[100px] p-4 ${className}`}
       >
-        <div className="min-w-[25%]">
+        <div className="min-w-[25%] w-full">
           <img
             src="https://th.bing.com/th/id/R.01cd719c50a4066e50808738e6eff177?rik=6%2fm77v2X46RLyg&pid=ImgRaw&r=0"
             alt=""

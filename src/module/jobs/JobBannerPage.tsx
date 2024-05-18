@@ -38,7 +38,7 @@ const JobBannerPage: React.FC = () => {
     <>
       <div
         className={`relative w-full ease-linear duration-100 ${
-          searchAdvance ? "h-[250px]" : "h-[145px]"
+          searchAdvance ? "h-[300px] lg:h-[250px]" : "h-[145px]"
         }`}
       >
         <img
@@ -50,9 +50,9 @@ const JobBannerPage: React.FC = () => {
           <form
             action=""
             onSubmit={handleSubmit(onSubmit)}
-            className="w-primary mx-auto rounded-lg bg-transparent"
+            className="lg:px-0 px-5 w-primary max-w-full mx-auto rounded-lg bg-transparent"
           >
-            <div className="flex gap-4 ">
+            <div className="flex gap-4">
               <div className="flex grow rounded-s-lg bg-transparent ">
                 <Input
                   prefix={
@@ -64,7 +64,7 @@ const JobBannerPage: React.FC = () => {
                       <CloseOutlined className="text-base px-1 hover:bg-slate-100 py-1 rounded-sm transition-all" />
                     ),
                   }}
-                  className="w-[40%] py-2 rounded-lg"
+                  className="lg:w-[40%] py-2 rounded-lg"
                   size="middle"
                   onChange={(e) => {
                     setValue("name", e.target.value);
@@ -74,7 +74,7 @@ const JobBannerPage: React.FC = () => {
                   showSearch
                   allowClear
                   placeholder="Địa chỉ"
-                  className="address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
+                  className="hidden lg:block address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
@@ -89,7 +89,7 @@ const JobBannerPage: React.FC = () => {
                   showSearch
                   allowClear
                   placeholder="Kinh nghiệm"
-                  className="address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
+                  className="hidden lg:block address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
@@ -103,7 +103,7 @@ const JobBannerPage: React.FC = () => {
                   showSearch
                   allowClear
                   placeholder="Mức lương"
-                  className="address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
+                  className="hidden lg:block address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
@@ -126,7 +126,7 @@ const JobBannerPage: React.FC = () => {
             </div>
 
             <div className={`flex justify-between mt-5 `}>
-              <div className="flex bg-blue-100/20 rounded-lg text-white">
+              <div className="flex lg:bg-blue-100/20 bg-gray-400/30 rounded-lg text-white">
                 <span className="m-auto px-4">
                   Tổng <strong className="text-blue-200">0</strong> kết quả
                 </span>{" "}
@@ -147,11 +147,11 @@ const JobBannerPage: React.FC = () => {
             {/*  */}
             <div className={`sticky top-0 overflow-hidden`}>
               <div
-                className={`flex gap-5 items-center mt-5 p-5 rounded-lg bg-blue-950/90 ease-linear duration-100 ${
-                  searchAdvance ? "" : "-translate-y-[100px]"
+                className={`flex flex-wrap gap-5 items-center mt-5 p-5 rounded-lg bg-blue-950/90 ease-linear duration-100 ${
+                  searchAdvance ? "" : "-translate-y-[130%]"
                 }`}
               >
-                <div className={`w-[50%]`}>
+                <div className={`lg:w-[50%] w-full`}>
                   <Select
                     mode="tags"
                     style={{ width: "100%" }}
@@ -163,7 +163,7 @@ const JobBannerPage: React.FC = () => {
                     className={`skill address w-full text-base rounded-lg bg-white`}
                   />
                 </div>
-                <div className={`w-[20%]`}>
+                <div className={`lg:w-[20%] w-auto`}>
                   <Select
                     showSearch
                     placeholder="Thời gian làm việc"
@@ -175,7 +175,7 @@ const JobBannerPage: React.FC = () => {
                     options={dataTimeWork}
                   />
                 </div>
-                <div className={`w-[20%]`}>
+                <div className={`lg:w-[20%] w-auto`}>
                   <Select
                     showSearch
                     placeholder="Cấp bậc"

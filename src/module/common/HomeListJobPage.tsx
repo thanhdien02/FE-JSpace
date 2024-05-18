@@ -20,8 +20,8 @@ const HomeListJobPage: React.FC = () => {
   return (
     <>
       <div className="bg-gray-100 ">
-        <div className=" w-primary mx-auto py-3">
-          <h3 className="font-bold text-2xl text-primary my-3">
+        <div className="lg:px-0 px-3 w-primary max-w-full mx-auto py-3">
+          <h3 className="font-bold text-2xl text-primary lg:my-3 my-2">
             Các công việc phổ biến
           </h3>
           <div className="pb-5">
@@ -62,7 +62,7 @@ const HomeListJobPage: React.FC = () => {
             // scrollbar={{ draggable: true }}
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log("slide change")}
-            className="swiper-job"
+            className="swiper-job hidden lg:block"
           >
             <SwiperSlide className="ease-linear">
               <div className="grid gap-4 grid-cols-3 bg-gray-100">
@@ -98,6 +98,43 @@ const HomeListJobPage: React.FC = () => {
                 <CardHomeJobPage></CardHomeJobPage>
                 <CardHomeJobPage></CardHomeJobPage>
                 <CardHomeJobPage></CardHomeJobPage>
+                <CardHomeJobPage></CardHomeJobPage>
+                <CardHomeJobPage></CardHomeJobPage>
+                <CardHomeJobPage></CardHomeJobPage>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation
+            // autoplay={{ delay: 4000, disableOnInteraction: false }}
+            // loop
+            // pagination={{ clickable: true }}
+            // scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log("slide change")}
+            className="swiper-job lg:hidden block"
+          >
+            <SwiperSlide className="ease-linear">
+              <div className="grid gap-4 grid-rows-3 bg-gray-100">
+                <CardHomeJobPage></CardHomeJobPage>
+                <CardHomeJobPage></CardHomeJobPage>
+                <CardHomeJobPage></CardHomeJobPage>
+              </div>
+            </SwiperSlide>
+
+            <SwiperSlide className="ease-linear">
+              <div className="grid gap-4 grid-rows-3 bg-gray-100">
+                <CardHomeJobPage></CardHomeJobPage>
+                <CardHomeJobPage></CardHomeJobPage>
+                <CardHomeJobPage></CardHomeJobPage>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="ease-linear">
+              <div className="grid gap-4 grid-rows-3 bg-gray-100">
                 <CardHomeJobPage></CardHomeJobPage>
                 <CardHomeJobPage></CardHomeJobPage>
                 <CardHomeJobPage></CardHomeJobPage>

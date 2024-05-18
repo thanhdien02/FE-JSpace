@@ -4,8 +4,25 @@ import IconHeart from "../../components/icons/IconHeart";
 import IconHeartFill from "../../components/icons/IconHeartFill";
 import IconChervonRight from "../../components/icons/IconChervonRight";
 import { NavLink } from "react-router-dom";
-
-const JobShortDetailPage: React.FC = () => {
+interface PropComponent {
+  id?: string;
+  title?: string;
+  salary?: number;
+  location?: string;
+  closeDate?: string | string[];
+  description?: string;
+  quantity?: string;
+  experience?: string;
+  skills?: string | string[];
+  rank?: string;
+  jobType?: string;
+  gender?: string;
+  onClick?: any;
+  className?: string;
+  checkActive?: string;
+  dataJob?: any;
+}
+const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
   return (
     <>
       <div className="w-full sticky top-0 h-screen">
@@ -17,15 +34,13 @@ const JobShortDetailPage: React.FC = () => {
             </NavLink>
             <IconChervonRight className="self-end text-primary"></IconChervonRight>
           </div>
-          <h2 className="font-bold text-xl ">
-            Fullstack Java (Biết Tiếng Anh)
-          </h2>
+          <h2 className="font-bold text-xl ">{dataJob?.title}</h2>
           <div className="flex gap-3 mt-3">
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
               20 - 30 triệu
             </span>
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
-              Hồ Chí Minh
+              {dataJob?.location}
             </span>
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
               Không yêu cầu kinh nghiệm
@@ -49,69 +64,14 @@ const JobShortDetailPage: React.FC = () => {
           )}
         </div>
         <div className="overflow-auto h-[600px] py-5 pl-5">
-          {/* <ContentSeeMore
-            content={`<strong>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-              possimus omnis eius architecto ex enim corporis dicta, nulla
-              debitis quis ab consequatur esse provident iusto maiores
-              laboriosam a? Labore, numquam?{" "}
-            </strong>
-            <u>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
-              quasi magnam molestias ex iure alias inventore, vel ad
-              consequuntur assumenda repudiandae facilis?
-            </u>
-            <strong>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-              possimus omnis eius architecto ex enim corporis dicta, nulla
-              debitis quis ab consequatur esse provident iusto maiores
-              laboriosam a? Labore, numquam?{" "}
-            </strong>
-            <u>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
-              quasi magnam molestias ex iure alias inventore, vel ad
-              consequuntur assumenda repudiandae facilis?
-            </u>
-            <strong>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-              possimus omnis eius architecto ex enim corporis dicta, nulla
-              debitis quis ab consequatur esse provident iusto maiores
-              laboriosam a? Labore, numquam?{" "}
-            </strong>
-            <u>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
-              quasi magnam molestias ex iure alias inventore, vel ad
-              consequuntur assumenda repudiandae facilis?
-            </u>
-            <strong>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-              possimus omnis eius architecto ex enim corporis dicta, nulla
-              debitis quis ab consequatur esse provident iusto maiores
-              laboriosam a? Labore, numquam?{" "}
-            </strong>
-            <u>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
-              quasi magnam molestias ex iure alias inventore, vel ad
-              consequuntur assumenda repudiandae facilis?
-            </u>
-            <strong>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-              possimus omnis eius architecto ex enim corporis dicta, nulla
-              debitis quis ab consequatur esse provident iusto maiores
-              laboriosam a? Labore, numquam?{" "}
-            </strong>
-            <u>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Distinctio beatae cupiditate non amet odit iusto at. Quaerat,
-              quasi magnam molestias ex iure alias inventore, vel ad
-              consequuntur assumenda repudiandae facilis?
-            </u>`}
-           
-          ></ContentSeeMore> */}
+          <p
+            id="message_container"
+            className=" relative transition-all mt-3 overflow-hidden leading-6"
+            // Prevent XSS Attack recommen from React Docs
+            dangerouslySetInnerHTML={{
+              __html: `${dataJob?.description}`,
+            }}
+          ></p>
         </div>
       </div>
     </>

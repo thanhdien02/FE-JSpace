@@ -4,7 +4,6 @@ import IconEdit from "../../components/icons/IconEdit";
 import Button from "../../components/input";
 import { useSelector } from "react-redux";
 import {
-  Carousel,
   message,
   Popover,
   Progress,
@@ -35,9 +34,6 @@ const ManageWallCandidate: React.FC = () => {
     }
   };
 
-  const onChange = (currentSlide: number) => {
-    console.log(currentSlide);
-  };
 
   const props: UploadProps = {
     beforeUpload: (file) => {
@@ -77,7 +73,7 @@ const ManageWallCandidate: React.FC = () => {
           >
             <div className="invisible absolute background-identification transition-all top-2 left-2 ">
               <Upload {...props}>
-                <div className="flex items-center gap-2 bg-primary text-white rounded-md cursor-pointer p-2 font-medium">
+                <div className="flex items-center gap-2 bg-primary text-white rounded-md cursor-pointer px-2 py-1 font-medium">
                   <IconCamera></IconCamera>
                   <span>Cập nhật ảnh bìa</span>
                 </div>
@@ -90,17 +86,22 @@ const ManageWallCandidate: React.FC = () => {
               className="w-full h-[270px] object-cover "
             />
           </div>
-          <div className="relative flex w-[80%] justify-between ml-auto p-4 py-10">
+          <div className="relative flex w-[80%] justify-between ml-auto p-4 py-8">
             <Upload
               {...props}
-              className="absolute -left-[150px] -top-16 cursor-pointer"
+              className="bg-white rounded-full absolute -left-[150px] -top-16 cursor-pointer"
             >
               {user?.picture ? (
-                <img
-                  src={user?.picture}
-                  alt=""
-                  className=" w-[130px] h-[130px] rounded-full border-solid border-4 border-transparent hover:border-gray-200 transition-all duration-300"
-                />
+                <>
+                  <img
+                    src={user?.picture}
+                    alt=""
+                    className=" w-[130px] h-[130px] object-cover rounded-full border-solid border-4 border-transparent hover:border-gray-200 transition-all duration-300"
+                  />
+                  <span className="absolute bottom-2 right-2 p-1 bg-gray-200 rounded-full">
+                    <IconCamera></IconCamera>
+                  </span>
+                </>
               ) : (
                 <div className="flex w-[130px] h-[130px] bg-gray-200 rounded-full">
                   <Spin className="m-auto"></Spin>
@@ -115,7 +116,6 @@ const ManageWallCandidate: React.FC = () => {
           <div className="flex gap-3 pb-10 px-5">
             <Button loading={false} title="Thông tin"></Button>
             <Button loading={false} title="Tải CV"></Button>
-            <Button loading={false} title="Chia sẽ"></Button>
           </div>
         </div>
         <div className="mt-10 bg-white min-h-[200px] p-5 ">
@@ -148,23 +148,6 @@ const ManageWallCandidate: React.FC = () => {
                 },
               ]}
             />
-            <Carousel
-              afterChange={onChange}
-              className="w-[700px] py-5 h-[220px]"
-            >
-              <div>
-                <h3 className="h-[200px] bg-primary">1</h3>
-              </div>
-              <div>
-                <h3 className="h-[200px] bg-primary">2</h3>
-              </div>
-              <div>
-                <h3 className="h-[200px] bg-primary">3</h3>
-              </div>
-              <div>
-                <h3 className="h-[200px] bg-primary">4</h3>
-              </div>
-            </Carousel>
           </div>
         </div>
         <div className="mt-10 bg-white min-h-[200px] p-5 ">
