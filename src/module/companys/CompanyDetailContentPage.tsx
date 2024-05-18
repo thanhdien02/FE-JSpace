@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Tabs, TabsProps } from "antd";
 import CompanyReviewPage from "./CompanyReviewPage";
 import CompanyDetailDescriptionPage from "./CompanyDetailDescriptionPage";
@@ -23,6 +23,9 @@ const CompanyDetailContentPage: React.FC<PropComponent> = ({ className }) => {
       children: <CompanyReviewPage></CompanyReviewPage>,
     },
   ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div className={`${className}`}>

@@ -14,12 +14,12 @@ const JobDetailPage: React.FC = () => {
     <>
       <JobDetailBannerPage></JobDetailBannerPage>
       <section className="bg-gray-100 py-5">
-        <div className="flex w-primary mx-auto gap-5">
+        <div className="flex lg:flex-row flex-col w-primary max-w-full mx-auto gap-5">
           <div className="grow h-fit">
             <JobDetailInformationJobPage className="bg-white"></JobDetailInformationJobPage>
             <JobDetailDescriptionJobPage className="bg-white mt-5 p-5"></JobDetailDescriptionJobPage>
           </div>
-          <div className="w-[30%] min-w-[30%] h-fit">
+          <div className="lg:w-[30%] lg:min-w-[30%] h-fit">
             <JobDetailInformationCompanyPage className="bg-white"></JobDetailInformationCompanyPage>
             <JobDetailInformationCommonPage className="bg-white mt-5"></JobDetailInformationCommonPage>
           </div>

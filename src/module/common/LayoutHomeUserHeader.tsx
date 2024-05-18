@@ -24,9 +24,13 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
   const [size] = useState<DrawerProps["size"]>();
   const showDrawer = () => {
     setOpen(true);
+    const elementBody = document.body;
+    elementBody.style.overflow = "hidden";
   };
 
   const onClose = () => {
+    const elementBody = document.body;
+    elementBody.style.overflow = "visible";
     setOpen(false);
   };
   const handleMouseOverCandidateMenu = () => {
@@ -250,12 +254,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
           </ul>
           <div className="w-full h-[1px] bg-gray-200 my-3"></div>
           <div className="">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-              incidunt doloremque porro tempore non in veniam. Assumenda ut
-              distinctio nobis dolorem! Rem sint vel vitae recusandae magnam
-              libero esse ipsa?
-            </p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
           </div>
         </Drawer>
       </header>

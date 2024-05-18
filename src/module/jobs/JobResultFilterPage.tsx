@@ -37,7 +37,6 @@ const JobResultFilterPage: React.FC = () => {
           </div>
           <div className="flex mt-5 gap-5 w-full">
             <div className={`min-w-[38%] w-full flex flex-col gap-3`}>
-              {/* <CardJobClickShortPage></CardJobClickShortPage> */}
               {dataJobs?.length > 0 &&
                 dataJobs?.map((item: any) => (
                   <CardJobClickShortPage

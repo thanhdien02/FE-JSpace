@@ -8,11 +8,11 @@ import { Popover } from "antd";
 const CompanyDetailInformationCommonPage: React.FC = () => {
   return (
     <>
-      <div className="relative bg-white w-primary mx-auto min-h-[320px] shadow-sm">
+      <div className="relative bg-white w-primary max-w-full mx-auto min-h-[320px] shadow-sm">
         <div className="relative">
           <img
             src={bg}
-            className="w-full h-[200px] object-cover rounded-t-lg"
+            className="w-full lg:h-[200px] h-[150px] object-cover rounded-t-lg"
             alt=""
           />
           <img
@@ -21,8 +21,8 @@ const CompanyDetailInformationCommonPage: React.FC = () => {
             alt=""
           />
         </div>
-        <div className="pl-52 pt-5 pr-5">
-          <div className="flex justify-between items-center gap-5">
+        <div className="lg:pl-52 lg:mt-0 mt-10 pt-5 lg:pr-5 pb-5 lg:pb-0">
+          <div className="lg:px-0 px-5 flex justify-between flex-wrap lg:flex-nowrap items-center gap-5">
             <div className="">
               <Popover
                 content={
@@ -35,7 +35,7 @@ const CompanyDetailInformationCommonPage: React.FC = () => {
                   </p>
                 }
               >
-                <h2 className="text-xl font-bold line-clamp-1">
+                <h2 className="text-xl font-bold line-clamp-1 w-full">
                   Công Ty TNHH MTV Viễn Thông Quốc Tế FPT Lorem, ipsum dolor sit
                   amet consectetur adipisicing elit. Ex inventore, dolorum
                   maxime commodi debitis neque doloribus nemo rerum atque
@@ -44,15 +44,11 @@ const CompanyDetailInformationCommonPage: React.FC = () => {
                 </h2>
               </Popover>
 
-              <div className="flex gap-10 mt-3">
-                <div className="flex items-center gap-2 max-w-[40%]">
+              <div className="flex flex-wrap lg:gap-10 gap-5 mt-3">
+                <div className="flex items-center gap-2 lg:max-w-[40%]">
                   <IconLink classIcon="!w-5 !h-5"></IconLink>
                   <span className="text-sm line-clamp-1">
-                    https://www.concentrix.com/ Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Est, culpa cumque deleniti
-                    dicta, assumenda vel molestiae laudantium omnis iure,
-                    veritatis asperiores ducimus recusandae? Accusantium
-                    temporibus, nisi ipsam dolore provident quae.
+                    https://www.concentrix.com
                   </span>
                 </div>
                 <div className="flex items-center gap-2">

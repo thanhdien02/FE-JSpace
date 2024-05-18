@@ -124,6 +124,44 @@
   color: white;
   border-radius: 9999px;
 }
+/* CSS for swiper job fit phone */
+.swiper-job-fit-phone.swiper {
+  padding-top: 26px;
+}
+.swiper-job-fit-phone .swiper-button-prev {
+  z-index: 100;
+  width: 35px;
+  height: 35px;
+  border-radius: 9999px;
+  background-color: #1967d2;
+  @apply lg:left-[90%] left-[75%] lg:top-[12%] top-[15%]  
+}
+.swiper-job-fit-phone .swiper-button-prev:hover {
+  opacity: 80 !important;
+}
+.swiper-job-fit-phone .swiper-button-prev::after {
+  display: flex;
+  margin: auto;
+  font-size: 20px;
+  color: white;
+  border-radius: 9999px;
+}
+
+.swiper-job-fit-phone .swiper-button-next {
+  width: 35px;
+  height: 35px;
+  border-radius: 9999px;
+  z-index: 100;
+  background-color: #1967d2;
+  @apply lg:left-[96%] left-[90%]  lg:top-[12%] top-[15%] 
+}
+.swiper-job-fit-phone .swiper-button-next::after {
+  display: flex;
+  margin: auto;
+  font-size: 20px;
+  color: white;
+  border-radius: 9999px;
+}
 
 // mutil select antd
 .skill.address .ant-select-selector {

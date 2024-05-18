@@ -41,7 +41,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
     <>
       <div className={`p-6 rounded-sm ${className}`}>
         <h2 className="text-xl font-bold line-clamp-1">Java Developer</h2>
-        <div className="flex gap-14 mt-5">
+        <div className="flex flex-wrap gap-6 lg:gap-14 mt-5 ">
           <div className="flex gap-4 items-center">
             <IconMoney className="p-3 bg-primary rounded-full text-white"></IconMoney>
             <div className="flex flex-col">
@@ -96,7 +96,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
           >
             <div
               onClick={handleSaveJob}
-              className="w-[15%] hover:opacity-80 transition-all flex items-center border border-solid border-primary text-primary font-medium justify-center py-2 gap-2 rounded-md"
+              className="min-w-[15%] lg:px-0 px-2 max-w-full hover:opacity-80 transition-all flex items-center border border-solid border-primary text-primary font-medium justify-center py-2 gap-2 rounded-md"
             >
               <button className="">{!true ? "Đã lưu" : "Lưu tin"}</button>
               {true ? <IconHeartFill></IconHeartFill> : <IconHeart></IconHeart>}

@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CompanyBannerPage from "../../module/companys/CompanyBannerPage";
 import CompanyResultFilterPage from "../../module/companys/CompanyResultFilterPage";
 import { Pagination } from "antd";
 
 const CompanyPage: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <CompanyBannerPage></CompanyBannerPage>
       <div className="bg-gray-100 py-5">
         <CompanyResultFilterPage className=""></CompanyResultFilterPage>
         <div className="w-primary max-w-full lg:px-0 px-5 flex mx-auto mt-5">
-          <Pagination className="ml-auto font-medium" defaultCurrent={1} total={50} />
+          <Pagination
+            className="ml-auto font-medium"
+            defaultCurrent={1}
+            total={50}
+          />
         </div>
       </div>
     </>

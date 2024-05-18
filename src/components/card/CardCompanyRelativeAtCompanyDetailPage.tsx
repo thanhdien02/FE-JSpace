@@ -8,14 +8,14 @@ const CardCompanyRelativeAtCompanyDetailPage: React.FC = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="relative flex gap-5 w-full items-center p-5 shadow-sm h-[150px] border border-solid border-gray-200 rounded-md">
-        <div className="w-[20%]">
-          <img src={logo} alt="" className="w-[100px] object-cover h-[100px]" />
+      <div className="relative flex gap-5 w-full items-center lg:p-5 p-3 shadow-sm min-h-[100px] border border-solid border-gray-200 rounded-md">
+        <div className="lg:w-[20%] w-[25%]">
+          <img src={logo} alt="" className="lg:w-[100px] min-w-[70px] object-cover lg:h-[100px] h-[70px]" />
         </div>
-        <div className="flex flex-col w-full self-start">
+        <div className="grow flex flex-col w-full self-start">
           <Popover content={<p className="w-[300px]">Công ty TNHH FPT</p>}>
             <h4
-              className="w-[80%] cursor-pointer text-base font-medium line-clamp-1"
+              className="lg:w-[80%] cursor-pointer text-base font-medium line-clamp-1"
               onClick={() => {
                 navigate("/companys/1");
               }}
@@ -24,7 +24,7 @@ const CardCompanyRelativeAtCompanyDetailPage: React.FC = () => {
             </h4>
           </Popover>
 
-          <h5 className="text-gray-500 line-clamp-1 text-base mt-1">
+          <h5 className="text-gray-500 line-clamp-1 lg:text-base mt-1">
             Quy mô: 500 nhân viên
           </h5>
           <p className="text-sm text-gray-500">Có 300 người theo dõi</p>
@@ -37,7 +37,7 @@ const CardCompanyRelativeAtCompanyDetailPage: React.FC = () => {
             </span>
           </div>
         </div>
-        <div className="absolute bottom-3 right-3 flex items-center gap-2">
+        <div className=" absolute bottom-3 right-3 lg:flex hidden items-center gap-2">
           <div className="flex items-center select-none gap-2 bg-primary text-white py-1 px-2 cursor-pointer">
             {!true ? (
               <>

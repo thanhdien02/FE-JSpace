@@ -2,10 +2,15 @@ import React from "react";
 import CardCompanyRelativeAtCompanyDetailPage from "../../components/card/CardCompanyRelativeAtCompanyDetailPage";
 import { Pagination } from "antd";
 
-const CompanyDetailListCompanyRelativePage: React.FC = () => {
+interface PropComponent {
+  className?: string;
+}
+const CompanyDetailListCompanyRelativePage: React.FC<PropComponent> = ({
+  className,
+}) => {
   return (
     <>
-      <div className="">
+      <div className={`${className}`}>
         <h2 className="font-medium text-lg">Các công ty liên quan</h2>
         <div className="flex flex-col gap-5 mt-5">
           <CardCompanyRelativeAtCompanyDetailPage></CardCompanyRelativeAtCompanyDetailPage>

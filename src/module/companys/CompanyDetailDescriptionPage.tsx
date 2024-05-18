@@ -70,7 +70,7 @@ const CompanyDetailDescriptionPage: React.FC = () => {
       ></ContentSeeMore>
       <span className="w-full block my-4 h-[1px] bg-gray-200/80"></span>
       <CompanyDetailListJobPage></CompanyDetailListJobPage>
-      <CompanyDetailListCompanyRelativePage></CompanyDetailListCompanyRelativePage>
+      <CompanyDetailListCompanyRelativePage className="mt-5"></CompanyDetailListCompanyRelativePage>
     </>
   );
 };
