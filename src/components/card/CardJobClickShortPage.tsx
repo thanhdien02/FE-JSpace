@@ -31,7 +31,6 @@ const CardJobClickShortPage: React.FC<PropComponent> = ({
   location,
   description,
 }) => {
-  console.log("🚀 ~ checkActive:", checkActive)
   return (
     <>
       <div

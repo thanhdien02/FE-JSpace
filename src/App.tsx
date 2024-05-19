@@ -87,7 +87,7 @@ function App() {
           ></Route>
           <Route element={<LayoutManageCandidate></LayoutManageCandidate>}>
             <Route
-              path="/manage"
+              path="/manage/information-account"
               element={
                 <ManageUpdateInformationCandidatePage></ManageUpdateInformationCandidatePage>
               }

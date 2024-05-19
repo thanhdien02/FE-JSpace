@@ -16,7 +16,7 @@ const ManageJobHadApplyPage: React.FC = () => {
     <>
       <div className="p-5">
         <h3 className="text-lg font-bold">Quản lí công việc đã ứng tuyển</h3>
-        <div className="mt-5 flex gap-5 items-center">
+        <div className="lg:mt-5 mt-3 flex flex-wrap lg:gap-5 gap-3 items-center">
           <div className="flex items-center gap-2">
             <input
               placeholder="Nhập tên công việc"

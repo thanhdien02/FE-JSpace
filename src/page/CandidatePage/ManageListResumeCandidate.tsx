@@ -18,8 +18,8 @@ const ManageListResumeCandidate: React.FC = () => {
   }, [user]);
   return (
     <>
-      <div className="p-10">
-        <div className="flex justify-between">
+      <div className="lg:p-10 p-5">
+        <div className="flex flex-wrap gap-2 justify-between">
           <h3 className="font-semibold text-xl">
             Hồ sơ xin việc đã được tải lên.
           </h3>
@@ -28,7 +28,7 @@ const ManageListResumeCandidate: React.FC = () => {
             className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg font-medium hover:opacity-80 transition-all"
           >
             <IconUpload className="font-medium"></IconUpload>
-            Tải CV lên
+            <span className="text-nowrap">Tải CV lên</span>
           </NavLink>
         </div>
 
@@ -41,7 +41,7 @@ const ManageListResumeCandidate: React.FC = () => {
             </div>
           </>
         ) : (
-          <div className="grid grid-cols-2 mt-5 gap-10 max-h-[750px] overflow-auto">
+          <div className="grid lg:grid-cols-2 grid-cols-1 mt-5 lg:gap-10 gap-5 max-h-[750px] overflow-auto">
             {files?.content?.length > 0 &&
               files?.content?.map((item: any) => (
                 <div

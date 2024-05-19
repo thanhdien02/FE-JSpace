@@ -9,7 +9,7 @@ export const dataCandidateMenu: any = [
   {
     key: "1",
     title: "Quản lí thông tin",
-    path: "/manage",
+    path: "/manage/information-account",
     icon: React.createElement(IconIdentification),
   },
   {
@@ -41,6 +41,33 @@ export const dataCandidateMenu: any = [
     title: "Đăng xuất",
     path: "/",
     icon: React.createElement(LogoutOutlined),
+  },
+];
+export const dataCandidateMenuResponsive: any = [
+  {
+    key: "1",
+    title: "Quản lí thông tin",
+    path: "/manage/information-account",
+  },
+  {
+    key: "2",
+    title: "Quản lí CV",
+    path: "/list-resume",
+  },
+  {
+    key: "3",
+    title: "Quản lí công việc đã lưu",
+    path: "/manage/job-save",
+  },
+  {
+    key: "4",
+    title: "Quản lí công việc đã ứng tuyển",
+    path: "/manage/job-apply",
+  },
+  {
+    key: "5",
+    title: "Quản lí công ty đã theo dõi",
+    path: "/manage/company-followed",
   },
 ];
 export const dataSalary: any = [

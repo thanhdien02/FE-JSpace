@@ -6,7 +6,10 @@ import IconBell from "../../components/icons/IconBell";
 import HeaderItem from "../../components/common/HeaderItem";
 import { NavLink } from "react-router-dom";
 import CandidateMenu from "../candidates/CandidateMenu";
-import { dataCandidateMenu } from "../../utils/dataFetch";
+import {
+  dataCandidateMenu,
+  dataCandidateMenuResponsive,
+} from "../../utils/dataFetch";
 import { useDispatch } from "react-redux";
 import { authLogout } from "../../store/auth/auth-slice";
 import { Button, Divider, Drawer, DrawerProps, Space } from "antd";
@@ -56,7 +59,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
   };
   return (
     <>
-      <header className="flex lg:px-10 px-5 pb-2 pt-3 justify-between items-center">
+      <header className="flex lg:px-10 px-5 pb-3 pt-4 justify-between items-center">
         <div className="flex items-center gap-5">
           <NavLink to="/">
             <img src={logo} alt="" className="w-[45px] object-cover" />
@@ -185,24 +188,62 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
           open={open}
           extra={
             <Space>
-              <Button
-                type="primary"
-                onClick={() => {
-                  actionLogin(true);
-                  setOpen(false);
-                }}
-              >
-                Đăng nhập
-              </Button>
+              {user?.id ? (
+                <>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      dispatch(authLogout());
+                      setOpen(false);
+                    }}
+                  >
+                    Thông báo
+                  </Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      dispatch(authLogout());
+                      setOpen(false);
+                    }}
+                  >
+                    Đăng xuất
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    actionLogin(true);
+                    setOpen(false);
+                  }}
+                >
+                  Đăng nhập
+                </Button>
+              )}
             </Space>
           }
         >
-          <ul className="flex flex-col gap-5">
-            <li onClick={onClose}>
+          {user?.id && (
+            <div className="flex gap-3">
+              <img
+                src={user?.picture}
+                className="w-[50px] h-[50px] rounded-full"
+                alt=""
+              />
+              <div className="">
+                <h3 className="font-medium line-clamp-1">{user?.name}</h3>
+                <h4 className="line-clamp-1 text-gray-500 break-all">
+                  {user?.email}
+                </h4>
+              </div>
+            </div>
+          )}
+          <ul className={`flex flex-col gap-5 ${user?.id ? "mt-5" : ""}`}>
+            <div onClick={onClose}>
               {" "}
               <HeaderItem
                 className="text-[14px] "
-                classLink="pl-0"
+                classLink="!pl-0"
                 title="Trang chủ"
                 path="/"
               >
@@ -211,11 +252,11 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                   className="ml-auto"
                 ></IconChervonRight>
               </HeaderItem>
-            </li>{" "}
-            <li onClick={onClose}>
+            </div>{" "}
+            <div onClick={onClose}>
               <HeaderItem
                 className="text-[14px] "
-                classLink="pl-0"
+                classLink="!pl-0"
                 title="Tìm việc"
                 path="/jobs"
               >
@@ -224,11 +265,11 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                   className="ml-auto"
                 ></IconChervonRight>
               </HeaderItem>{" "}
-            </li>
-            <li onClick={onClose}>
+            </div>
+            <div onClick={onClose}>
               <HeaderItem
                 className="text-[14px] "
-                classLink="pl-0"
+                classLink="!pl-0"
                 title="Công ty"
                 path="/companys"
               >
@@ -237,11 +278,11 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                   className="ml-auto"
                 ></IconChervonRight>
               </HeaderItem>{" "}
-            </li>
-            <li onClick={onClose}>
+            </div>
+            <div onClick={onClose}>
               <HeaderItem
                 className="text-[14px] "
-                classLink="pl-0"
+                classLink="!pl-0"
                 title="Bài biết"
                 path="/blogs"
               >
@@ -250,12 +291,33 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                   className="ml-auto"
                 ></IconChervonRight>
               </HeaderItem>{" "}
-            </li>
+            </div>
           </ul>
           <div className="w-full h-[1px] bg-gray-200 my-3"></div>
-          <div className="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-          </div>
+          {user?.id && (
+            <div className="">
+              <ul className="flex flex-col gap-5">
+                {user?.id &&
+                  dataCandidateMenuResponsive.length > 0 &&
+                  dataCandidateMenuResponsive?.map((item: any) => (
+                    <div onClick={onClose} key={item?.key}>
+                      {" "}
+                      <HeaderItem
+                        className="text-[14px] "
+                        classLink="!pl-0"
+                        title={item?.title}
+                        path={item?.path}
+                      >
+                        <IconChervonRight
+                          classIcon="!w-[18px] !h-[18px]"
+                          className="ml-auto"
+                        ></IconChervonRight>
+                      </HeaderItem>
+                    </div>
+                  ))}
+              </ul>
+            </div>
+          )}
         </Drawer>
       </header>
     </>

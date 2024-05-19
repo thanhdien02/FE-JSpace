@@ -66,7 +66,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
       <form
         action=""
         onSubmit={handleSubmit(onSubmit)}
-        className="px-10 py-5 shadow-lg "
+        className="lg:px-10 px-5 py-5 shadow-lg "
       >
         <h2 className="font-bold text-lg mt-3 text-gray-800">
           Cài đặt thông tin cá nhân
@@ -103,7 +103,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
             )}
           </Upload>
         </div>
-        <div className="grid grid-cols-2 gap-10 mt-10">
+        <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-10 mt-10">
           <div className="">
             <label
               htmlFor="name"

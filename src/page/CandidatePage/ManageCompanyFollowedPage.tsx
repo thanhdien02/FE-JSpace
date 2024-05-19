@@ -17,7 +17,7 @@ const ManageCompanyFollowedPage: React.FC = () => {
     <>
       <div className="p-5">
         <h3 className="text-lg font-bold">Quản lí công công ty đã theo dõi</h3>
-        <div className="mt-5 flex gap-5 items-center">
+        <div className="lg:mt-5 mt-3 flex flex-wrap lg:gap-5 gap-3 items-center">
           <div className="flex items-center gap-2">
             <input
               placeholder="Nhập tên công ty"
@@ -39,7 +39,7 @@ const ManageCompanyFollowedPage: React.FC = () => {
             <Radio value={3}>Lượt theo dõi nhiều nhất</Radio>
           </Radio.Group>
         </div>
-        <div className="grid grid-cols-2 gap-5 mt-7">
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-7">
           <CardCompanyFollowedPage></CardCompanyFollowedPage>
           <CardCompanyFollowedPage></CardCompanyFollowedPage>
           <CardCompanyFollowedPage></CardCompanyFollowedPage>

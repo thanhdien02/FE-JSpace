@@ -50,7 +50,7 @@ const LayoutManageCandidate: React.FC = () => {
     <>
       <LayoutHomeUserHeader></LayoutHomeUserHeader>
       <div className="bg-gray-200 ">
-        <div className="w-[1200px] mx-auto min-h-screen py-5">
+        <div className="w-[1200px] max-w-full mx-auto min-h-screen py-5">
           <div className="flex flex-col lg:flex-row w-full mx-auto gap-5 bg-gray-200">
             <div className="grow w-full bg-white rounded-lg h-fit">
               <Outlet></Outlet>

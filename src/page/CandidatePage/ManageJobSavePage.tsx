@@ -17,7 +17,7 @@ const ManageJobSavePage: React.FC = () => {
     <>
       <div className="p-5">
         <h2 className="text-xl font-bold">Danh sách công việc đã lưu</h2>
-        <div className="mt-5 flex gap-5 items-center">
+        <div className="lg:mt-5 mt-3 flex flex-wrap lg:gap-5 gap-2 items-center">
           <h3 className="text-base text-gray-500">Hiển thị theo:</h3>
           <Radio.Group onChange={onChange} value={value}>
             <Radio value={1}>Cập nhật gần nhất</Radio>
