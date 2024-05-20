@@ -16,7 +16,7 @@ const CardManageJobHadApplyPage: React.FC = () => {
           <img
             src={logo}
             alt=""
-            className="w-[100px] object-cover lg:h-[100px] h-[80px]"
+            className="lg:w-full min-w-[80px] object-cover lg:min-h-[100px] lg:h-full max-h-full h-[80px]"
           />
         </div>
         <div className="flex flex-col w-full self-start">
@@ -50,7 +50,7 @@ const CardManageJobHadApplyPage: React.FC = () => {
           </div>
         </div>
         <div className="absolute bottom-3 right-3 flex items-center gap-2">
-          <span className="text-sm select-none bg-green-500 text-white py-1 px-3 rounded-sm cursor-pointer">
+          <span className="md:text-sm text-xs select-none bg-green-500 text-white py-1 px-3 rounded-sm cursor-pointer">
             APPROVE
           </span>
         </div>

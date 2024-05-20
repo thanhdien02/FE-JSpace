@@ -15,6 +15,7 @@ import { authLogout } from "../../store/auth/auth-slice";
 import { Button, Divider, Drawer, DrawerProps, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import IconChervonRight from "../../components/icons/IconChervonRight";
+import NotificationPage from "../../page/CommonPage/NotificationPage";
 
 interface PropComponent {
   actionLogin?: any;
@@ -22,6 +23,7 @@ interface PropComponent {
 const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
   const [checkNotification, setCheckNotification] = useState(false);
+  const [checkNotificationShort, setCheckNotificationShort] = useState(false);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [size] = useState<DrawerProps["size"]>();
@@ -93,8 +95,8 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
             <div className="flex gap-5 justify-between items-center">
               <span className="relative p-2 bg-blue-200 rounded-full ">
                 <IconBell
-                  onClick={setCheckNotification}
-                  checkNotification={checkNotification}
+                  onClick={setCheckNotificationShort}
+                  checkNotification={checkNotificationShort}
                   className="text-primary cursor-pointer hover:opacity-80 transition-all"
                 ></IconBell>
                 {!true ? (
@@ -106,13 +108,15 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                 ) : (
                   <></>
                 )}
-                {checkNotification ? (
+                {checkNotificationShort ? (
                   <>
                     <div
                       className="fixed inset-0 bg-transparent z-10 cursor-pointer"
-                      onClick={() => setCheckNotification(!checkNotification)}
+                      onClick={() =>
+                        setCheckNotificationShort(!checkNotificationShort)
+                      }
                     ></div>
-                    <div className="absolute top-[150%] bg-white shadow-md min-w-[300px] min-h-[200px] z-20 right-0">
+                    <div className="absolute top-[155%] bg-white shadow-md min-w-[300px] min-h-[200px] z-20 right-0">
                       <div className="p-4">
                         <h3>Thông báo</h3>
                       </div>
@@ -193,8 +197,9 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                   <Button
                     type="primary"
                     onClick={() => {
-                      dispatch(authLogout());
+                      // dispatch(authLogout());
                       setOpen(false);
+                      setCheckNotification(true);
                     }}
                   >
                     Thông báo
@@ -319,6 +324,10 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
             </div>
           )}
         </Drawer>
+
+        {checkNotification && (
+          <NotificationPage onClick={setCheckNotification}></NotificationPage>
+        )}
       </header>
     </>
   );
