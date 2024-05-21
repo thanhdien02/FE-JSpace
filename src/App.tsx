@@ -9,6 +9,7 @@ import HomePage from "./page/CommonPage/HomePage";
 import CompanyPage from "./page/CompanyPage/CompanyPage";
 import BlogsPage from "./page/CommonPage/BlogsPage";
 import FindJobPage from "./page/CommonPage/FindJobPage";
+import ManageChangePasswordPage from "./page/CandidatePage/ManageChangePasswordPage";
 // const HomePage = lazy(() => import("./page/CommonPage/HomePage"));
 const LayoutHomeUser = lazy(() => import("./layout/LayoutHomeUser"));
 // const CompanyPage = lazy(() => import("./page/CompanyPage/CompanyPage"));
@@ -109,6 +110,10 @@ function App() {
             <Route
               path="/manage/job-save"
               element={<ManageJobSavePage></ManageJobSavePage>}
+            ></Route>
+            <Route
+              path="/manage/change-password"
+              element={<ManageChangePasswordPage></ManageChangePasswordPage>}
             ></Route>
             <Route
               path="/manage/job-apply"

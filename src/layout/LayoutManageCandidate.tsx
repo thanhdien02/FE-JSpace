@@ -13,6 +13,7 @@ import IconWifi from "../components/icons/IconWifi";
 import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
 import IconHeart from "../components/icons/IconHeart";
 import IconDocumentArrowUp from "../components/icons/IconDocumentArrowUp";
+import IconArrowRightLeft from "../components/icons/IconArrowRightLeft";
 
 const LayoutManageCandidate: React.FC = () => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
@@ -130,6 +131,13 @@ const LayoutManageCandidate: React.FC = () => {
               >
                 <IconWifi className="text-gray-600"></IconWifi>
                 <p>Công ty đang theo dõi</p>
+              </NavLink>
+              <NavLink
+                to="/manage/change-password"
+                className="flex items-center gap-3 pb-4 border-b-[1px] border-solid border-gray-200 cursor-pointer hover:opacity-80 transition-all"
+              >
+                <IconArrowRightLeft className="text-gray-600"></IconArrowRightLeft>
+                <p>Đổi mật khẩu</p>
               </NavLink>
             </div>
           </div>
