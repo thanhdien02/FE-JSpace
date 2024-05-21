@@ -59,6 +59,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
       dispatch(authLogout());
     }
   };
+
   return (
     <>
       <header className="flex lg:px-10 px-5 pb-3 pt-4 justify-between items-center">
