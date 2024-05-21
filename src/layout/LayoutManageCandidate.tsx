@@ -14,6 +14,9 @@ import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
 import IconHeart from "../components/icons/IconHeart";
 import IconDocumentArrowUp from "../components/icons/IconDocumentArrowUp";
 import IconArrowRightLeft from "../components/icons/IconArrowRightLeft";
+import IconHome from "../components/icons/IconHome";
+import IconBuilding from "../components/icons/IconBuilding";
+import IconUser from "../components/icons/IconUser";
 
 const LayoutManageCandidate: React.FC = () => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
@@ -56,7 +59,7 @@ const LayoutManageCandidate: React.FC = () => {
             <div className="grow w-full bg-white rounded-lg h-fit">
               <Outlet></Outlet>
             </div>
-            <div className="flex flex-col min-w-[29%] h-fit p-5 gap-3 bg-white rounded-lg">
+            <div className="md:flex hidden flex-col min-w-[29%] h-fit p-5 gap-3 bg-white rounded-lg">
               <div className="flex gap-5 p-2">
                 <Upload {...props} className="relative w-[65px]">
                   {user?.picture ? (
@@ -146,10 +149,59 @@ const LayoutManageCandidate: React.FC = () => {
       <a
         href="https://m.me/267479709792373"
         target="_blank"
-        className="fixed z-30 flex md:right-10 right-5 md:w-16 md:h-16 w-14 h-14 md:bottom-10 bottom-5 bg-primary rounded-full"
+        className="fixed z-30 flex md:right-10 right-5 md:w-16 md:h-16 w-14 h-14 md:bottom-10 bottom-20 bg-primary rounded-full"
       >
         <CommentOutlined className="m-auto text-3xl text-white" />
       </a>
+      <div className="md:hidden fixed z-20 right-0 py-1 left-0 bottom-0 bg-white flex justify-evenly h-[60px] border-t-[1px] border-solid border-gray-200">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? `text-primary flex flex-col items-center justify-center`
+              : `flex flex-col items-center justify-center`
+          }
+        >
+          <IconHome className="my-1" classIcon="!w-5 !h-5"></IconHome>
+          <span className="text-xs">Trang chủ</span>
+        </NavLink>
+        <NavLink
+          to="/jobs"
+          className={({ isActive }) =>
+            isActive
+              ? `text-primary flex flex-col items-center justify-center`
+              : `flex flex-col items-center justify-center`
+          }
+        >
+          <IconBriefCaseOutline
+            className="my-1"
+            classIcon="!w-5 !h-5"
+          ></IconBriefCaseOutline>
+          <span className="text-xs">Tìm việc</span>
+        </NavLink>
+        <NavLink
+          to="/companys"
+          className={({ isActive }) =>
+            isActive
+              ? `text-primary flex flex-col items-center justify-center`
+              : `flex flex-col items-center justify-center`
+          }
+        >
+          <IconBuilding className="my-1" classIcon="!w-5 !h-5"></IconBuilding>
+          <span className="text-xs">Công ty</span>
+        </NavLink>
+        <NavLink
+          to="/manage/common"
+          className={({ isActive }) =>
+            isActive
+              ? `text-primary flex flex-col items-center justify-center`
+              : `flex flex-col items-center justify-center`
+          }
+        >
+          <IconUser className="my-1" classIcon="!w-5 !h-5"></IconUser>
+          <span className="text-xs">Thông tin</span>
+        </NavLink>
+      </div>
     </>
   );
 };

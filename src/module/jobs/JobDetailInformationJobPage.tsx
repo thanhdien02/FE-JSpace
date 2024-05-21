@@ -35,6 +35,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
     } else {
       setCheckApply(!checkApply);
     }
+    setCheckApply(!checkApply);
   };
 
   return (
