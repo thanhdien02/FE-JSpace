@@ -7,7 +7,7 @@ import { message, Spin, Switch, Upload, UploadProps } from "antd";
 import { getToken } from "../utils/auth";
 import { useDispatch } from "react-redux";
 import { authFetchMe } from "../store/auth/auth-slice";
-import { CameraOutlined } from "@ant-design/icons";
+import { CameraOutlined, CommentOutlined } from "@ant-design/icons";
 import IconText from "../components/icons/IconText";
 import IconWifi from "../components/icons/IconWifi";
 import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
@@ -143,6 +143,13 @@ const LayoutManageCandidate: React.FC = () => {
           </div>
         </div>
       </div>
+      <a
+        href="https://m.me/267479709792373"
+        target="_blank"
+        className="fixed z-30 flex md:right-10 right-5 md:w-16 md:h-16 w-14 h-14 md:bottom-10 bottom-5 bg-primary rounded-full"
+      >
+        <CommentOutlined className="m-auto text-3xl text-white" />
+      </a>
     </>
   );
 };

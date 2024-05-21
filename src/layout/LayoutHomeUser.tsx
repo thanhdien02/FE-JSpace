@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import LayoutHomeUserFooter from "../module/common/LayoutHomeUserFooter";
 import { CSSTransition } from "react-transition-group";
 import IconChervonUp from "../components/icons/IconChervonUp";
+import { CommentOutlined } from "@ant-design/icons";
 
 const LayoutHomeUser: React.FC = () => {
   const { accessToken } = useSelector((state: any) => state.auth);
@@ -62,13 +63,19 @@ const LayoutHomeUser: React.FC = () => {
         unmountOnExit
       >
         <div
-          className="fixed bottom-5 right-5 cursor-pointer bg-primary text-white rounded-full p-[6px]"
+          className="fixed md:bottom-12 bottom-6 z-10 md:left-10 left-5 cursor-pointer bg-primary text-white rounded-full p-[6px]"
           onClick={scrollToTop}
         >
           <IconChervonUp classIcon="!w-6 !h-6"></IconChervonUp>
         </div>
       </CSSTransition>
-
+      <a
+        href="https://m.me/267479709792373"
+        target="_blank"
+        className="fixed z-30 flex md:right-10 right-5 md:w-16 md:h-16 w-14 h-14 md:bottom-10 bottom-5 bg-primary rounded-full"
+      >
+        <CommentOutlined className="m-auto text-3xl text-white" />
+      </a>
       <LayoutHomeUserFooter></LayoutHomeUserFooter>
     </div>
   );
