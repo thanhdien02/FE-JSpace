@@ -76,7 +76,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
         </div>
         <div className="lg:block hidden">
           {accessToken === "" ? (
-            <div className="xl:flex hidden justify-center items-center gap-1 ">
+            <div className="lg:flex hidden justify-center items-center gap-1 ">
               <button
                 className="p-2 hover:text-primary"
                 onClick={() => actionLogin(true)}
