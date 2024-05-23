@@ -1,0 +1,35 @@
+{
+  "home": {
+    "name": "Home",
+    "totalwork": "Total work",
+    "latestjob": "Latest jobs",
+    "updatetime": "Update time",
+    "jobpupolar": "Popular jobs",
+    "companypupolar": "Popular companys",
+    "titlebannerhome": "Find jobs quickly 24 hours, latest jobs nationwide",
+    "placeholdernamejob": "The job you are looking for ?"
+  },
+  "findjob": {
+    "name": "Job",
+    "filteradvance": "Advanced filtering",
+    "display": "Priority displayed according to"
+  },
+  "blog": {
+    "name": "Blog"
+  },
+  "company": {
+    "name": "Company"
+  },
+  "candidate": {
+    "name": "elcas"
+  },
+  "login": "Login",
+  "register": "Register",
+  "postjob": "Post job",
+  "search": "Search",
+  "placeholdernamejob": "The name of the job",
+  "placeholderaddress": "Address",
+  "placeholderexperience": "Experience",
+  "placeholdersalary": "Salary",
+  "result": "result"
+}

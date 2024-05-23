@@ -16,6 +16,7 @@ import { Button, Divider, Drawer, DrawerProps, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import IconChervonRight from "../../components/icons/IconChervonRight";
 import NotificationPage from "../../page/CommonPage/NotificationPage";
+import { useTranslation } from "react-i18next";
 
 interface PropComponent {
   actionLogin?: any;
@@ -27,6 +28,12 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [size] = useState<DrawerProps["size"]>();
+
+  // dich
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
   const showDrawer = () => {
     setOpen(true);
     const elementBody = document.body;
@@ -68,10 +75,10 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
             <img src={logo} alt="" className="w-[45px] object-cover" />
           </NavLink>
           <ul className="lg:flex hidden gap-2">
-            <HeaderItem title="Trang chủ" path="/"></HeaderItem>
-            <HeaderItem title="Tìm việc" path="/jobs"></HeaderItem>
-            <HeaderItem title="Công ty" path="/companys"></HeaderItem>
-            <HeaderItem title="Bài biết" path="/blogs"></HeaderItem>
+            <HeaderItem title={t("home.name")} path="/"></HeaderItem>
+            <HeaderItem title={t("findjob.name")} path="/jobs"></HeaderItem>
+            <HeaderItem title={t("company.name")} path="/companys"></HeaderItem>
+            <HeaderItem title={t("blog.name")} path="/blogs"></HeaderItem>
           </ul>
         </div>
         <div className="lg:block hidden">
@@ -81,7 +88,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                 className="p-2 hover:text-primary"
                 onClick={() => actionLogin(true)}
               >
-                Đăng nhập
+                {t("login")}
               </button>
               <span className="w-[2px] h-[25px] bg-slate-700/30"></span>
               <a
@@ -89,8 +96,22 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                 href="https://jspace-employer.vercel.app/"
                 target="_blank"
               >
-                Đăng bài tuyển dụng
+                {t("postjob")}
               </a>
+              <div className="flex gap-1 items-center">
+                <img
+                  src="https://static.topcv.vn/srp/website/images/flags/vietnam.png"
+                  alt=""
+                  onClick={() => changeLanguage("vi")}
+                  className="w-6 h-6 cursor-pointer object-contain"
+                />
+                <img
+                  src="https://static.topcv.vn/srp/website/images/flags/uk.jpeg"
+                  alt=""
+                  onClick={() => changeLanguage("en")}
+                  className="w-6 h-6 cursor-pointer object-contain"
+                />
+              </div>
             </div>
           ) : (
             <div className="flex gap-5 justify-between items-center">
@@ -172,6 +193,20 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                     ></CandidateMenu>
                   </div>
                 </section>
+              </div>
+              <div className="flex gap-1 items-center">
+                <img
+                  src="https://static.topcv.vn/srp/website/images/flags/vietnam.png"
+                  alt=""
+                  onClick={() => changeLanguage("vi")}
+                  className="w-6 h-6 cursor-pointer object-contain"
+                />
+                <img
+                  src="https://static.topcv.vn/srp/website/images/flags/uk.jpeg"
+                  alt=""
+                  onClick={() => changeLanguage("en")}
+                  className="w-6 h-6 cursor-pointer object-contain"
+                />
               </div>
             </div>
           )}

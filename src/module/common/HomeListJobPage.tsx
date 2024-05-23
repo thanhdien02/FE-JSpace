@@ -15,14 +15,16 @@ import {
 } from "swiper/modules";
 import { Select } from "antd";
 import CardHomeJobPage from "../../components/card/CardHomeJobPage";
+import { useTranslation } from "react-i18next";
 
 const HomeListJobPage: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <>
       <div className="bg-gray-100 ">
         <div className="lg:px-0 px-3 w-primary max-w-full mx-auto py-3">
           <h3 className="font-bold text-2xl text-primary lg:my-3 my-2">
-            Các công việc phổ biến
+            {t("home.jobpupolar")}
           </h3>
           <div className="pb-5">
             <Select
@@ -42,11 +44,15 @@ const HomeListJobPage: React.FC = () => {
               options={[
                 {
                   value: "1",
-                  label: "Not Identified",
+                  label: "Mức lương cao nhất",
                 },
                 {
                   value: "2",
-                  label: "Closed",
+                  label: "Công việc nổi bật",
+                },
+                {
+                  value: "2",
+                  label: "Theo thời gian",
                 },
               ]}
             />

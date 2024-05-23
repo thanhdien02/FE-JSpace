@@ -14,6 +14,7 @@ import IconUser from "../components/icons/IconUser";
 
 const LayoutHomeUser: React.FC = () => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
+  // const { login } = useSelector((state: any) => state.common);
   const [checkLogin, setCheckLogin] = useState(false);
   const [checkScrolltoTop, setCheckScrolltoTop] = useState(false);
   useEffect(() => {

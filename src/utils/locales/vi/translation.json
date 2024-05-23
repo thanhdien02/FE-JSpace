@@ -1,0 +1,32 @@
+{
+  "home": {
+    "name": "Trang chủ",
+    "latestjob": "Việc làm mới nhất",
+    "titlebannerhome": "Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc",
+    "totalwork": "Tổng số công việc",
+    "updatetime": "Thời gian cập nhật",
+    "companypupolar": "Các công ty phổ biến",
+    "jobpupolar": "Các công việc phổ biến",
+    "placeholdernamejob": "Công việc bạn đang tìm kiếm ?"
+  },
+  "findjob": {
+    "name": "Tìm việc",
+    "filteradvance": "Lọc nâng cao",
+    "display": "Ưu tiên hiển thị theo"
+  },
+  "company": {
+    "name": "Công ty"
+  },
+  "blog": {
+    "name": "Bài viết"
+  },
+  "login": "Đăng nhập",
+  "register": "Đăng ký",
+  "postjob": "Đăng bài tuyển dụng",
+  "search": "Tìm kiếm",
+  "placeholdernamejob": "Tên công việc",
+  "placeholderaddress": "Địa chỉ",
+  "placeholderexperience": "Kinh nghiệm",
+  "placeholdersalary": "Mức lương",
+  "result": "kết quả"
+}

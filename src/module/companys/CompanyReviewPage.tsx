@@ -2,10 +2,20 @@ import React, { useEffect, useState } from "react";
 import IconChervonDown from "../../components/icons/IconChervonDown";
 import CardCommentCompanyPage from "../../components/card/CardCommentCompanyPage";
 import IconChervonUp from "../../components/icons/IconChervonUp";
+import { useSelector } from "react-redux";
+import { message } from "antd";
 
 const CompanyReviewPage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
   const [comment, setComment] = useState(false);
   useEffect(() => {}, []);
+  const WriteReview = () => {
+    if (user?.id) {
+      setComment(!comment);
+    } else {
+      message.info("Bạn cần đăng nhập để bình luậm");
+    }
+  };
   return (
     <>
       <div className="">
@@ -17,9 +27,7 @@ const CompanyReviewPage: React.FC = () => {
           <div className="flex justify-between">
             <h3 className="text-base font-medium">Bình luận (10)</h3>
             <div
-              onClick={() => {
-                setComment(!comment);
-              }}
+              onClick={WriteReview}
               className="flex transition-all gap-2 items-center px-3 py-1 rounded-sm bg-primary text-white cursor-pointer"
             >
               <span className="select-none">Viết bình luận</span>

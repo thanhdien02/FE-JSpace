@@ -17,6 +17,7 @@ import {
   dataSkills,
   dataTimeWork,
 } from "../../utils/dataFetch";
+import { useTranslation } from "react-i18next";
 interface Inputs {
   name?: string;
   salary?: string;
@@ -29,6 +30,7 @@ const JobBannerPage: React.FC = () => {
     setValue,
     // formState: { errors },
   } = useForm<Inputs>();
+  const { t } = useTranslation();
   const [searchAdvance, setSearchAdvance] = useState(false);
   const onSubmit: SubmitHandler<Inputs> = (dataSearchJob: Inputs) => {
     console.log("🚀 ~ dataSearchJob:", dataSearchJob);
@@ -121,7 +123,7 @@ const JobBannerPage: React.FC = () => {
                 // }}
                 className="min-w-[100px] font-medium h-auto px-3 py-2 rounded-lg bg-primary text-white "
               >
-                Tìm kiếm
+                {t("search")}
               </button>
             </div>
 

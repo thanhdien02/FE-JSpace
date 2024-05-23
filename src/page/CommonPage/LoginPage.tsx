@@ -16,6 +16,7 @@ interface PropComponent {
   className?: string;
   claseNameOverlay?: string;
   actionLogin?: any;
+  onClick?: any;
 }
 interface Inputs {
   email?: string;

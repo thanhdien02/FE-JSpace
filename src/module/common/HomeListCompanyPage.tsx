@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./style.css";
 import "swiper/css";
 import "swiper/css";
@@ -6,6 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/swiper-bundle.css";
+import { useTranslation } from "react-i18next";
 
 const newArray = [
   "https://th.bing.com/th/id/R.01cd719c50a4066e50808738e6eff177?rik=6%2fm77v2X46RLyg&pid=ImgRaw&r=0",
@@ -73,10 +74,6 @@ interface IParallax {
   listImages?: any;
 }
 const Parallax: React.FC<IParallax> = ({ listImages }) => {
-  useEffect(() => {
-    // const copy: any = document.querySelector(".logos-slide")?.cloneNode(true);
-    // document.querySelector(".logos")?.appendChild(copy);
-  }, []);
   return (
     <div className="logos flex">
       <div className="logos-slide flex">
@@ -88,12 +85,13 @@ const Parallax: React.FC<IParallax> = ({ listImages }) => {
   );
 };
 const HomeListCompanyPage: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <>
       <div>
         <div className="w-primary max-w-full mx-auto py-3 ">
           <h3 className="lg:px-0 px-5 font-bold text-2xl text-primary my-3">
-            Các công ty phổ biến
+            {t("home.companypupolar")}
           </h3>
           <div className="hidden lg:px-0 px-5 lg:grid lg:grid-cols-5 grid-cols-1 gap-5 mt-6">
             <div className="flex border border-solid border-gray-200 cursor-pointer rounded-md h-[200px] transition-all hover:shadow-md hover:shadow-blue-200">
@@ -126,7 +124,7 @@ const HomeListCompanyPage: React.FC = () => {
             </div>
             <div className="flex border border-solid border-gray-200 cursor-pointer rounded-md h-[200px] transition-all hover:shadow-md hover:shadow-blue-200">
               <img
-                src="https://th.bing.com/th/id/OIP.oOSxQuhXwSaBp7N9OF_eOQHaHk?rs=1&pid=ImgDetMain"
+                src="https://th.bing.com/th/id/OIP.CLfoEF9Qlytjg7tuhCAk_QHaHa?rs=1&pid="
                 alt=""
                 className="m-auto lg:w-[80%] w-full lg:h-[50%] h-[70%] object-contain "
               />

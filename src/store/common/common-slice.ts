@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface ICommon {
   infoUserOauth: any;
+  login?: boolean;
 }
 
 const init: ICommon = {
-    infoUserOauth: {},
+  infoUserOauth: {},
+  login: false,
 };
 const commonSlice: any = createSlice({
   name: "common",
@@ -15,7 +17,12 @@ const commonSlice: any = createSlice({
       ...state,
       infoUserOauth: action.payload.infoUserOauth,
     }),
+    commonUpdateLoginRedux: (state: any, action: any) => ({
+      ...state,
+      login: action.payload.login,
+    }),
   },
 });
-export const { commonChange, commonUpdateOAuthRedux } = commonSlice.actions;
+export const { commonUpdateLoginRedux, commonUpdateOAuthRedux } =
+  commonSlice.actions;
 export default commonSlice.reducer;
