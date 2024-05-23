@@ -17,6 +17,7 @@ import { MenuOutlined } from "@ant-design/icons";
 import IconChervonRight from "../../components/icons/IconChervonRight";
 import NotificationPage from "../../page/CommonPage/NotificationPage";
 import { useTranslation } from "react-i18next";
+import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 
 interface PropComponent {
   actionLogin?: any;
@@ -86,7 +87,9 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
             <div className="lg:flex hidden justify-center items-center gap-1 ">
               <button
                 className="p-2 hover:text-primary"
-                onClick={() => actionLogin(true)}
+                onClick={() =>
+                  dispatch(commonUpdateLoginRedux({ loginCheck: true }))
+                }
               >
                 {t("login")}
               </button>

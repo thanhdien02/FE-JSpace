@@ -1,16 +1,31 @@
-import { Popover } from "antd";
+import { message, Popover } from "antd";
 import React from "react";
 import logo from "../../assets/banner3.jpg";
 import IconTrash from "../icons/IconTrash";
 import IconPlus from "../icons/IconPlus";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 const CardCompanyRelativeAtCompanyDetailPage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleFollowCompany = () => {
+    if (!user?.id) {
+      message.info("Bạn cần đăng nhập để theo dõi công ty.");
+      dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    }
+  };
   return (
     <>
       <div className="relative flex gap-5 w-full items-center lg:p-5 p-3 shadow-sm min-h-[100px] border border-solid border-gray-200 rounded-md">
         <div className="lg:w-[20%] w-[25%]">
-          <img src={logo} alt="" className="lg:w-[100px] min-w-[70px] object-cover lg:h-[100px] h-[70px]" />
+          <img
+            src={logo}
+            alt=""
+            className="lg:w-[100px] min-w-[70px] object-cover lg:h-[100px] h-[70px]"
+          />
         </div>
         <div className="grow flex flex-col w-full self-start">
           <Popover content={<p className="w-[300px]">Công ty TNHH FPT</p>}>
@@ -37,7 +52,10 @@ const CardCompanyRelativeAtCompanyDetailPage: React.FC = () => {
             </span>
           </div>
         </div>
-        <div className=" absolute bottom-3 right-3 lg:flex hidden items-center gap-2">
+        <div
+          onClick={handleFollowCompany}
+          className="absolute bottom-3 right-3 lg:flex hidden items-center gap-2"
+        >
           <div className="flex items-center select-none gap-2 bg-primary text-white py-1 px-2 cursor-pointer">
             {!true ? (
               <>

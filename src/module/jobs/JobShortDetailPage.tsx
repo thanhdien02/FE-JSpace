@@ -1,9 +1,13 @@
 import React from "react";
-import IconClose from "../../components/icons/IconClose";
+// import IconClose from "../../components/icons/IconClose";
 import IconHeart from "../../components/icons/IconHeart";
 import IconHeartFill from "../../components/icons/IconHeartFill";
 import IconChervonRight from "../../components/icons/IconChervonRight";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { message } from "antd";
+import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 interface PropComponent {
   id?: string;
   title?: string;
@@ -23,11 +27,27 @@ interface PropComponent {
   dataJob?: any;
 }
 const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
+  const { user } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
+  const handleSaveJob = () => {
+    if (!user?.id) {
+      message.info("Bạn cần đăng nhập để lưu tin");
+      dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    }
+  };
+  const handleApplyJob = () => {
+    if (!user?.id) {
+      message.info("Bạn cần đăng nhập để ứng tuyển");
+      dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    } else {
+      // setCheckApply(!checkApply);
+    }
+  };
   return (
     <>
       <div className="w-full sticky top-0 h-screen">
         <div className="p-5 ">
-          <IconClose className="absolute cursor-pointer p-1 rounded-sm right-2 top-2"></IconClose>
+          {/* <IconClose className="absolute cursor-pointer p-1 rounded-sm right-2 top-2"></IconClose> */}
           <div className="cursor-pointer hover:underline text-primary flex items-center absolute top-12 right-2">
             <NavLink to="/jobs/2">
               <p className="font-medium text-primary">Xem chi tiết</p>
@@ -48,19 +68,27 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
           </div>
         </div>
         <div className="flex gap-2 items-center px-5 pb-5">
-          <button className="w-[90%] mx-auto p-2 bg-primary text-white rounded-md">
+          <button
+            className="w-[90%] mx-auto p-2 bg-primary text-white rounded-md"
+            type="button"
+            onClick={handleApplyJob}
+          >
             Ứng tuyển ngay
           </button>
           {true ? (
-            <IconHeartFill
-              classIcon="w-6 h-6"
+            <span
+              onClick={handleSaveJob}
               className="cursor-pointer px-4 border text-primary border-primary border-solid py-2 rounded-md font-bold"
-            ></IconHeartFill>
+            >
+              <IconHeartFill classIcon="w-6 h-6"></IconHeartFill>
+            </span>
           ) : (
-            <IconHeart
-              classIcon="w-6 h-6"
+            <span
+              onClick={handleSaveJob}
               className="cursor-pointer px-4 border text-primary border-primary border-solid py-2 rounded-md font-bold"
-            ></IconHeart>
+            >
+              <IconHeart classIcon="w-6 h-6"></IconHeart>
+            </span>
           )}
         </div>
         <div className="overflow-auto h-[600px] py-5 pl-5">

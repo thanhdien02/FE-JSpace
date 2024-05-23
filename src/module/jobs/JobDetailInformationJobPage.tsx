@@ -10,6 +10,8 @@ import IconClock from "../../components/icons/IconClock";
 import { useSelector } from "react-redux";
 import ApplyJobPage from "../../page/CommonPage/ApplyJobPage";
 import { CSSTransition } from "react-transition-group";
+import { useDispatch } from "react-redux";
+import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 interface PropComponent {
   className?: string;
   titleJob?: string;
@@ -24,18 +26,20 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
 }) => {
   const { user } = useSelector((state: any) => state.auth);
   const [checkApply, setCheckApply] = useState(false);
+  const dispatch = useDispatch();
   const handleSaveJob = () => {
     if (!user?.id) {
       message.info("Bạn cần đăng nhập để lưu tin");
+      dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     }
   };
   const handleApplyJob = () => {
     if (!user?.id) {
       message.info("Bạn cần đăng nhập để ứng tuyển");
+      dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       setCheckApply(!checkApply);
     }
-    setCheckApply(!checkApply);
   };
 
   return (

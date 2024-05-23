@@ -1,11 +1,14 @@
 import React from "react";
-import { Popover } from "antd";
+import { message, Popover } from "antd";
 import IconMapPin from "../icons/IconMapPin";
 import IconBuilding from "../icons/IconBuilding";
 import IconTrash from "../icons/IconTrash";
 import IconHeart from "../icons/IconHeart";
 import IconHeartFill from "../icons/IconHeartFill";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 interface PropComponent {
   className?: string;
   titleJob?: string;
@@ -16,7 +19,15 @@ interface PropComponent {
   onClick?: any;
 }
 const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
+  const { user } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleSaveJob = () => {
+    if (!user?.id) {
+      message.info("Bạn cần đăng nhập để lưu tin.");
+      dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    }
+  };
   return (
     <>
       <div
@@ -84,9 +95,19 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
             classIcon="w-5 h-5"
           ></IconTrash>
           {true ? (
-            <IconHeartFill className="p-1 rounded-sm bg-blue-100 cursor-pointer text-primary hover:opacity-80 transition-all"></IconHeartFill>
+            <span
+              onClick={handleSaveJob}
+              className="p-1 rounded-sm bg-blue-100 cursor-pointer text-primary hover:opacity-80 transition-all"
+            >
+              <IconHeartFill></IconHeartFill>
+            </span>
           ) : (
-            <IconHeart className="p-1 rounded-sm bg-blue-100 cursor-pointer text-primary hover:opacity-80 transition-all"></IconHeart>
+            <span
+              onClick={handleSaveJob}
+              className="p-1 rounded-sm bg-blue-100 cursor-pointer text-primary hover:opacity-80 transition-all"
+            >
+              <IconHeart></IconHeart>
+            </span>
           )}
         </div>
       </div>

@@ -4,16 +4,20 @@ import CardCommentCompanyPage from "../../components/card/CardCommentCompanyPage
 import IconChervonUp from "../../components/icons/IconChervonUp";
 import { useSelector } from "react-redux";
 import { message } from "antd";
+import { commonUpdateLoginRedux } from "../../store/common/common-slice";
+import { useDispatch } from "react-redux";
 
 const CompanyReviewPage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
   const [comment, setComment] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {}, []);
   const WriteReview = () => {
     if (user?.id) {
       setComment(!comment);
     } else {
-      message.info("Bạn cần đăng nhập để bình luậm");
+      message.info("Bạn cần đăng nhập để bình luận");
+      dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     }
   };
   return (

@@ -11,15 +11,18 @@ import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
 import IconHome from "../components/icons/IconHome";
 import IconBuilding from "../components/icons/IconBuilding";
 import IconUser from "../components/icons/IconUser";
+import { useDispatch } from "react-redux";
+import { commonUpdateLoginRedux } from "../store/common/common-slice";
 
 const LayoutHomeUser: React.FC = () => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
-  // const { login } = useSelector((state: any) => state.common);
+  const { loginCheck } = useSelector((state: any) => state.common);
+  const dispatch = useDispatch();
   const [checkLogin, setCheckLogin] = useState(false);
   const [checkScrolltoTop, setCheckScrolltoTop] = useState(false);
   useEffect(() => {
     if (accessToken !== "") {
-      setCheckLogin(false);
+      dispatch(commonUpdateLoginRedux({ loginCheck: false }));
     }
   }, [accessToken]);
   const scrollToTop = () => {
@@ -46,15 +49,12 @@ const LayoutHomeUser: React.FC = () => {
   return (
     <div className="">
       <CSSTransition
-        in={checkLogin}
+        in={loginCheck}
         timeout={200}
         classNames="fade"
         unmountOnExit
       >
-        <LoginPage
-          actionLogin={setCheckLogin}
-          claseNameOverlay="opacity-40"
-        ></LoginPage>
+        <LoginPage claseNameOverlay="opacity-40"></LoginPage>
       </CSSTransition>
 
       <LayoutHomeUserHeader actionLogin={setCheckLogin}></LayoutHomeUserHeader>
@@ -82,6 +82,8 @@ const LayoutHomeUser: React.FC = () => {
         <CommentOutlined className="m-auto text-3xl text-white" />
       </a>
       <LayoutHomeUserFooter></LayoutHomeUserFooter>
+
+      {/* phone */}
       <div className="md:hidden fixed z-20 right-0 py-1 left-0 bottom-0 bg-white flex justify-evenly h-[60px] border-t-[1px] border-solid border-gray-200">
         <NavLink
           to="/"

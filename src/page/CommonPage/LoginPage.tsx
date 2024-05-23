@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import IconClose from "../../components/icons/IconClose";
 import { SubmitHandler, useForm } from "react-hook-form";
 import IconKey from "../../components/icons/IconKey";
+import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 
 interface PropComponent {
   className?: string;
@@ -24,7 +25,6 @@ interface Inputs {
 }
 const LoginPage: React.FC<PropComponent> = ({
   className = "",
-  actionLogin,
   claseNameOverlay,
 }) => {
   const {
@@ -70,7 +70,7 @@ const LoginPage: React.FC<PropComponent> = ({
         className={`m-auto absolute inset-0 bg-black/50 ${claseNameOverlay}`}
         onClick={() => {
           if (!loading) {
-            actionLogin(false);
+            dispatch(commonUpdateLoginRedux({ loginCheck: false }));
           }
         }}
       ></div>
@@ -79,10 +79,17 @@ const LoginPage: React.FC<PropComponent> = ({
         className="relative m-auto lg:p-10 p-5 rounded-lg bg-white min-h-[250px] lg:w-[500px] w-[350px] shadow-lg border-solid border border-slate-500/30"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <IconClose
-          actionCloseLogin={!loading ? actionLogin : () => {}}
+        <span
+          onClick={() => {
+            if (!loading)
+              dispatch(commonUpdateLoginRedux({ loginCheck: false }));
+          }}
           className="absolute top-2 right-2 hover:bg-gray-200 transition-all rounded-md"
-        ></IconClose>
+        >
+          <IconClose
+          // actionCloseLogin={!loading ? actionLogin : () => {}}
+          ></IconClose>
+        </span>
 
         <div className="flex justify-center flex-col items-center gap-2 mb-5">
           <NavLink to="/" className="block">

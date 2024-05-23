@@ -4,8 +4,19 @@ import IconLink from "../../components/icons/IconLink";
 import IconBuilding from "../../components/icons/IconBuilding";
 import IconGroupUser from "../../components/icons/IconGroupUser";
 import IconPlus from "../../components/icons/IconPlus";
-import { Popover } from "antd";
+import { message, Popover } from "antd";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 const CompanyDetailInformationCommonPage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
+  const handleFollowCompany = () => {
+    if (!user?.id) {
+      message.info("Bạn cần đăng nhập để theo dõi công ty");
+      dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    }
+  };
   return (
     <>
       <div className="relative bg-white w-primary max-w-full mx-auto min-h-[320px] shadow-sm">
@@ -63,7 +74,10 @@ const CompanyDetailInformationCommonPage: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="cursor-pointer min-w-[210px] hover:opacity-80 transition-all flex items-center gap-2 px-6 py-3 rounded-md bg-primary text-white font-medium">
+            <div
+              onClick={handleFollowCompany}
+              className="cursor-pointer min-w-[210px] hover:opacity-80 transition-all flex items-center gap-2 px-6 py-3 rounded-md bg-primary text-white font-medium"
+            >
               <IconPlus></IconPlus>
               <span>Theo dõi công ty</span>
             </div>
