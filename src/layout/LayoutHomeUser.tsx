@@ -18,7 +18,6 @@ const LayoutHomeUser: React.FC = () => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
   const { loginCheck } = useSelector((state: any) => state.common);
   const dispatch = useDispatch();
-  const [checkLogin, setCheckLogin] = useState(false);
   const [checkScrolltoTop, setCheckScrolltoTop] = useState(false);
   useEffect(() => {
     if (accessToken !== "") {
@@ -57,7 +56,7 @@ const LayoutHomeUser: React.FC = () => {
         <LoginPage claseNameOverlay="opacity-40"></LoginPage>
       </CSSTransition>
 
-      <LayoutHomeUserHeader actionLogin={setCheckLogin}></LayoutHomeUserHeader>
+      <LayoutHomeUserHeader></LayoutHomeUserHeader>
       <div className="bg-white">
         <Outlet></Outlet>
       </div>
@@ -124,7 +123,9 @@ const LayoutHomeUser: React.FC = () => {
         {!user?.id ? (
           <div
             className="flex flex-col items-center justify-center"
-            onClick={() => setCheckLogin(!checkLogin)}
+            onClick={() =>
+              dispatch(commonUpdateLoginRedux({ loginCheck: true }))
+            }
           >
             {" "}
             <IconUser className="my-1" classIcon="!w-5 !h-5"></IconUser>

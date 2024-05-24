@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import CardJobClickShortPage from "../../components/card/CardJobClickShortPage";
 import JobShortDetailPage from "./JobShortDetailPage";
 import { dataDefaultJob, dataJobs } from "../../utils/dataFetch";
+import { useTranslation } from "react-i18next";
 
 const JobResultFilterPage: React.FC = () => {
+  const { t } = useTranslation();
   const [filterShow, setFilterShow] = useState(1);
   // const [checkShort, setCheckSort] = useState(false);
   const [dataJobShort, setDataJobShort] = useState<any>(dataDefaultJob);
@@ -18,21 +20,21 @@ const JobResultFilterPage: React.FC = () => {
         <div className="w-primary mx-auto py-5">
           <div className="flex items-center gap-4">
             <h3 className="font-medium text-primary text-lg">
-              Ưu tiên hiển thị theo:
+              {t("findjob.suggestsuitablejob")}:
             </h3>
             <Radio.Group onChange={onChange} value={filterShow}>
               <Radio className="font-medium text-base" value={1}>
-                Liên quan
+                {t("findjob.relateto")}
               </Radio>
               <Radio className="font-medium text-base" value={2}>
-                Ngày đăng
+                {t("findjob.salary")}
               </Radio>
               <Radio className="font-medium text-base" value={3}>
-                Lương cao đến thấp
+                {t("findjob.bythetime")}
               </Radio>
-              <Radio className="font-medium text-base" value={4}>
+              {/* <Radio className="font-medium text-base" value={4}>
                 Cần tuyển gấp
-              </Radio>
+              </Radio> */}
             </Radio.Group>
           </div>
           <div className="flex mt-5 gap-5 w-full">

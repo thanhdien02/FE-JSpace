@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import IconMap from "../../components/icons/IconMap";
 import GoogleMapReact from "google-map-react";
 import { TbMapPinFilled } from "react-icons/tb";
+import { useTranslation } from "react-i18next";
 interface PropComponent {
   className?: string;
 }
@@ -41,6 +42,7 @@ const MapTitleAddress: React.FC<IMapTitleAddress> = ({
 const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
   className,
 }) => {
+  const { t } = useTranslation();
   const [coords, setCoords] = useState<any>(null);
 
   const [name] = useState<any>("Đồng Tháp Cao Lãnh, Đồng Tháp");
@@ -62,7 +64,7 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
     <>
       <div className={`px-6 py-4  ${className}`}>
         <h2 className="text-lg font-semibold text-primary">
-          Thông tin công ty
+          {t("companydetail.informationcompany")}
         </h2>
         <div className="mt-2">
           <div className="flex gap-3 items-center">
@@ -70,7 +72,7 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
               className="text-primary"
               classIcon="!w-6 !h-6"
             ></IconMapPin>
-            <span className="">Địa chỉ công ty</span>
+            <span className=""> {t("companydetail.companyaddress")}</span>
           </div>
           <p className="text-gray-500 text-sm mt-2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus,
@@ -81,7 +83,7 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
           <span className="w-full h-[1px] bg-gray-300 block my-4"></span>
           <div className="flex gap-3 items-center mt-3">
             <IconMap className="text-primary" classIcon="!w-6 !h-6"></IconMap>
-            <span className="">Bản đồ</span>
+            <span className="">{t("companydetail.map")}</span>
           </div>
 
           <div></div>

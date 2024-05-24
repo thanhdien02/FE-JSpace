@@ -18,7 +18,8 @@ i18n
         translation: viTranslation,
       },
     },
-    fallbackLng: "en", // Ngôn ngữ dự phòng
+    fallbackLng: "vi", // Ngôn ngữ dự phòng
+    lng: "vi", // Ngôn ngữ mặc định
     interpolation: {
       escapeValue: false, // React đã tự động bảo vệ XSS
     },

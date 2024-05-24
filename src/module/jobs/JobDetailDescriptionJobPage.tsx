@@ -1,5 +1,6 @@
 import React from "react";
 import ContentSeeMore from "../../components/content/ContentSeeMore";
+import { useTranslation } from "react-i18next";
 interface PropComponent {
   className?: string;
 }
@@ -7,12 +8,13 @@ interface PropComponent {
 const JobDetailDescriptionJobPage: React.FC<PropComponent> = ({
   className,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className={`${className}`}>
         <div>
           <h2 className="text-primary font-bold text-xl">
-            Chi tiết thông tin công việc
+            {t("jobdetail.description")}
           </h2>
           <ContentSeeMore
             content={`<strong>

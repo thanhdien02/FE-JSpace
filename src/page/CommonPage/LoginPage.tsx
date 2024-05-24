@@ -67,7 +67,7 @@ const LoginPage: React.FC<PropComponent> = ({
   return (
     <div className={`flex fixed inset-0 z-40 ${className}`}>
       <div
-        className={`m-auto absolute inset-0 bg-black/50 ${claseNameOverlay}`}
+        className={`m-auto absolute inset-0 bg-black/50 cursor-pointer ${claseNameOverlay}`}
         onClick={() => {
           if (!loading) {
             dispatch(commonUpdateLoginRedux({ loginCheck: false }));
@@ -84,7 +84,7 @@ const LoginPage: React.FC<PropComponent> = ({
             if (!loading)
               dispatch(commonUpdateLoginRedux({ loginCheck: false }));
           }}
-          className="absolute top-2 right-2 hover:bg-gray-200 transition-all rounded-md"
+          className="absolute top-2 right-2 hover:bg-gray-200 transition-all rounded-md cursor-pointer"
         >
           <IconClose
           // actionCloseLogin={!loading ? actionLogin : () => {}}

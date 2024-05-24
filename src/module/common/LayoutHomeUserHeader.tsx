@@ -19,10 +19,8 @@ import NotificationPage from "../../page/CommonPage/NotificationPage";
 import { useTranslation } from "react-i18next";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 
-interface PropComponent {
-  actionLogin?: any;
-}
-const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
+interface PropComponent {}
+const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
   const [checkNotification, setCheckNotification] = useState(false);
   const [checkNotificationShort, setCheckNotificationShort] = useState(false);
@@ -257,7 +255,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = ({ actionLogin }) => {
                 <Button
                   type="primary"
                   onClick={() => {
-                    actionLogin(true);
+                    dispatch(commonUpdateLoginRedux({ loginCheck: true }));
                     setOpen(false);
                   }}
                 >

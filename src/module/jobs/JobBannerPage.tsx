@@ -60,7 +60,7 @@ const JobBannerPage: React.FC = () => {
                   prefix={
                     <SearchOutlined className="text-xl ml-1 pr-3 text-gray-600" />
                   }
-                  placeholder="Tên công việc"
+                  placeholder={t("placeholdernamejob")}
                   allowClear={{
                     clearIcon: (
                       <CloseOutlined className="text-base px-1 hover:bg-slate-100 py-1 rounded-sm transition-all" />
@@ -75,7 +75,7 @@ const JobBannerPage: React.FC = () => {
                 <Select
                   showSearch
                   allowClear
-                  placeholder="Địa chỉ"
+                  placeholder={t("placeholderaddress")}
                   className="hidden lg:block address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
@@ -90,7 +90,7 @@ const JobBannerPage: React.FC = () => {
                 <Select
                   showSearch
                   allowClear
-                  placeholder="Kinh nghiệm"
+                  placeholder={t("placeholderexperience")}
                   className="hidden lg:block address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
@@ -104,7 +104,7 @@ const JobBannerPage: React.FC = () => {
                 <Select
                   showSearch
                   allowClear
-                  placeholder="Mức lương"
+                  placeholder={t("placeholdersalary")}
                   className="hidden lg:block address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
@@ -130,7 +130,7 @@ const JobBannerPage: React.FC = () => {
             <div className={`flex justify-between mt-5 `}>
               <div className="flex lg:bg-blue-100/20 bg-gray-400/30 rounded-lg text-white">
                 <span className="m-auto px-4">
-                  Tổng <strong className="text-blue-200">0</strong> kết quả
+                  <strong className="text-blue-200">0</strong> {t("result")}
                 </span>{" "}
               </div>
               <div
@@ -138,7 +138,7 @@ const JobBannerPage: React.FC = () => {
                 className="flex select-none gap-2 py-2 px-4 cursor-pointer items-center font-medium bg-primary rounded-lg text-white"
               >
                 <FilterOutlined />
-                <span>Lọc nâng cao</span>
+                <span>{t("findjob.filteradvance")}</span>
                 {searchAdvance ? (
                   <UpOutlined className="transition-all" />
                 ) : (
@@ -160,7 +160,7 @@ const JobBannerPage: React.FC = () => {
                     onChange={(value) => console.log(`selected ${value}`)}
                     tokenSeparators={[","]}
                     allowClear
-                    placeholder="Kỹ năng"
+                    placeholder={t("skills")}
                     options={dataSkills}
                     className={`skill address w-full text-base rounded-lg bg-white`}
                   />
@@ -168,7 +168,7 @@ const JobBannerPage: React.FC = () => {
                 <div className={`lg:w-[20%] w-auto`}>
                   <Select
                     showSearch
-                    placeholder="Thời gian làm việc"
+                    placeholder={t("jobtype")}
                     className={`address w-full text-base rounded-lg h-10 bg-white`}
                     optionFilterProp="children"
                     filterOption={(input, option: any) =>
@@ -180,7 +180,7 @@ const JobBannerPage: React.FC = () => {
                 <div className={`lg:w-[20%] w-auto`}>
                   <Select
                     showSearch
-                    placeholder="Cấp bậc"
+                    placeholder={t("rank")}
                     className={`address w-full text-base rounded-lg h-10 bg-white`}
                     optionFilterProp="children"
                     filterOption={(input, option: any) =>

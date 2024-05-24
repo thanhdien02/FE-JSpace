@@ -4,6 +4,7 @@ import banner2 from "../../assets/banner3.jpg";
 import { Input, Select } from "antd";
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
 import { dataAddress, dataExperience, dataSalary } from "../../utils/dataFetch";
+import { useTranslation } from "react-i18next";
 interface Inputs {
   name?: string;
   salary?: string;
@@ -11,6 +12,7 @@ interface Inputs {
   location?: string;
 }
 const JobDetailBannerPage: React.FC = () => {
+  const { t } = useTranslation();
   const { handleSubmit, setValue } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (dataSearchJob: Inputs) => {
     console.log("🚀 ~ dataSearchJob:", dataSearchJob);
@@ -36,7 +38,7 @@ const JobDetailBannerPage: React.FC = () => {
                   prefix={
                     <SearchOutlined className="text-xl ml-1 pr-3 text-gray-600" />
                   }
-                  placeholder="Tên công việc"
+                  placeholder={t("placeholdernamejob")}
                   allowClear={{
                     clearIcon: (
                       <CloseOutlined className="text-base px-1 hover:bg-slate-100 py-1 rounded-sm transition-all" />
@@ -51,7 +53,7 @@ const JobDetailBannerPage: React.FC = () => {
                 <Select
                   showSearch
                   allowClear
-                  placeholder="Địa chỉ"
+                  placeholder={t("placeholderaddress")}
                   className="lg:block hidden address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
@@ -66,7 +68,7 @@ const JobDetailBannerPage: React.FC = () => {
                 <Select
                   showSearch
                   allowClear
-                  placeholder="Kinh nghiệm"
+                  placeholder={t("placeholderexperience")}
                   className="lg:block hidden address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
@@ -80,7 +82,7 @@ const JobDetailBannerPage: React.FC = () => {
                 <Select
                   showSearch
                   allowClear
-                  placeholder="Mức lương"
+                  placeholder={t("placeholdersalary")}
                   className="lg:block hidden address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
@@ -96,7 +98,7 @@ const JobDetailBannerPage: React.FC = () => {
                 type="submit"
                 className="min-w-[100px] font-medium h-auto px-3 py-2 rounded-lg bg-primary text-white "
               >
-                Tìm kiếm
+                {t("search")}
               </button>
             </div>
           </form>

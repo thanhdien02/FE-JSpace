@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Tabs, TabsProps } from "antd";
 import CompanyReviewPage from "./CompanyReviewPage";
 import CompanyDetailDescriptionPage from "./CompanyDetailDescriptionPage";
+import { useTranslation } from "react-i18next";
 interface PropComponent {
   className?: string;
 }
@@ -11,15 +12,16 @@ const CompanyDetailContentPage: React.FC<PropComponent> = ({ className }) => {
     console.log(key);
   };
 
+  const { t } = useTranslation();
   const items: TabsProps["items"] = [
     {
       key: "1",
-      label: "Thông tin công ty",
+      label: `${t("companydetail.informationcompany")}`,
       children: <CompanyDetailDescriptionPage></CompanyDetailDescriptionPage>,
     },
     {
       key: "2",
-      label: "Đánh giá công ty",
+      label: `${t("companydetail.reviewcompany")}`,
       children: <CompanyReviewPage></CompanyReviewPage>,
     },
   ];

@@ -5,12 +5,14 @@ import IconMapPin from "../../components/icons/IconMapPin";
 import { Popover } from "antd";
 import { NavLink } from "react-router-dom";
 import IconUtunRight from "../../components/icons/IconUtunRight";
+import { useTranslation } from "react-i18next";
 interface PropComponent {
   className?: string;
 }
 const JobDetailInformationCompanyPage: React.FC<PropComponent> = ({
   className,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className={`p-5 ${className}`}>
@@ -37,14 +39,14 @@ const JobDetailInformationCompanyPage: React.FC<PropComponent> = ({
         <div className="flex items-start gap-1 mt-5">
           <div className="flex w-[40%] text-gray-500 gap-2 items-center">
             <IconGroupUser classIcon="w-5 h-5" className=""></IconGroupUser>
-            <span>Quy mô:</span>
+            <span className="line-clamp-1">{t("jobdetail.companysize")}:</span>
           </div>
           <p className="grow">25-99 nhân viên</p>
         </div>
         <div className="flex items-start gap-1 mt-5">
           <div className="flex min-w-[40%] text-gray-500 gap-2 items-center">
             <IconMapPin classIcon="w-5 h-5" className=""></IconMapPin>
-            <span>Địa điểm:</span>
+            <span>{t("jobdetail.address")}:</span>
           </div>
           <Popover
             content={
@@ -62,7 +64,7 @@ const JobDetailInformationCompanyPage: React.FC<PropComponent> = ({
           to="/companys/1"
           className="flex gap-2 mt-5 items-center justify-center text-primary font-medium"
         >
-          <span>Xem trang công ty</span>
+          <span>{t("jobdetail.seecompanypage")}</span>
           <IconUtunRight></IconUtunRight>
         </NavLink>
       </div>

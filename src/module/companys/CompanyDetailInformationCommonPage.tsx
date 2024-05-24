@@ -8,8 +8,10 @@ import { message, Popover } from "antd";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
+import { useTranslation } from "react-i18next";
 const CompanyDetailInformationCommonPage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleFollowCompany = () => {
     if (!user?.id) {
@@ -64,12 +66,14 @@ const CompanyDetailInformationCommonPage: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <IconBuilding classIcon="!w-5 !h-5"></IconBuilding>
-                  <span className="text-sm line-clamp-1">1000+ nhân viên</span>
+                  <span className="text-sm line-clamp-1">
+                    1000+ {t("companydetail.employee")}
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <IconGroupUser classIcon="!w-5 !h-5"></IconGroupUser>
                   <span className="text-sm line-clamp-1">
-                    467 người theo dõi
+                    467 {t("companydetail.follower")}
                   </span>
                 </div>
               </div>
@@ -79,7 +83,7 @@ const CompanyDetailInformationCommonPage: React.FC = () => {
               className="cursor-pointer min-w-[210px] hover:opacity-80 transition-all flex items-center gap-2 px-6 py-3 rounded-md bg-primary text-white font-medium"
             >
               <IconPlus></IconPlus>
-              <span>Theo dõi công ty</span>
+              <span>{t("companydetail.follow")}</span>
             </div>
           </div>
         </div>

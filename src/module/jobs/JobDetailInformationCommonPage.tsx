@@ -3,6 +3,7 @@ import IconGroupUser from "../../components/icons/IconGroupUser";
 import IconClock from "../../components/icons/IconClock";
 import IconBriefCase from "../../components/icons/IconBriefCase";
 import { HourglassOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 interface PropComponent {
   className?: string;
@@ -10,17 +11,23 @@ interface PropComponent {
 const JobDetailInformationCommonPage: React.FC<PropComponent> = ({
   className,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className={`p-5 ${className}`}>
-        <h2 className="text-xl font-bold">Thông tin chung</h2>
+        <h2 className="text-xl font-bold">
+          {t("jobdetail.informationcommon")}
+        </h2>
         <div className="mt-5 flex flex-col gap-5">
           <div className="flex gap-4 items-center">
-            <HourglassOutlined style={{fontSize: "23px"}} className="p-3 bg-primary rounded-full text-white" />
+            <HourglassOutlined
+              style={{ fontSize: "23px" }}
+              className="p-3 bg-primary rounded-full text-white"
+            />
             {/* <IconMoney className="p-3 bg-primary rounded-full text-white"></IconMoney> */}
             <div className="flex flex-col">
               <span className="text-sm text-gray-500 line-clamp-1">
-                Cấp bậc
+                {t("rank")}
               </span>
               <span className="font-medium line-clamp-1">Nhân viên</span>
             </div>
@@ -29,7 +36,7 @@ const JobDetailInformationCommonPage: React.FC<PropComponent> = ({
             <IconBriefCase className="p-3 bg-primary rounded-full text-white"></IconBriefCase>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500 line-clamp-1">
-                Kinh nghiệm
+                {t("experience")}
               </span>
               <span className="font-medium line-clamp-1">3 năm</span>
             </div>
@@ -38,7 +45,7 @@ const JobDetailInformationCommonPage: React.FC<PropComponent> = ({
             <IconGroupUser className="p-3 bg-primary rounded-full text-white"></IconGroupUser>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500 line-clamp-1">
-                Số lượng tuyển
+                {t("quantity")}
               </span>
               <span className="font-medium line-clamp-1">2 người</span>
             </div>
@@ -47,7 +54,7 @@ const JobDetailInformationCommonPage: React.FC<PropComponent> = ({
             <IconClock className="p-3 bg-primary rounded-full text-white"></IconClock>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500 line-clamp-1">
-                Hình thức làm việc
+                {t("jobtype")}
               </span>
               <span className="font-medium line-clamp-1">Toàn thời gian</span>
             </div>

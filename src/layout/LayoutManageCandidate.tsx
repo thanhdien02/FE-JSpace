@@ -67,7 +67,7 @@ const LayoutManageCandidate: React.FC = () => {
                       <img
                         src={user?.picture}
                         alt=""
-                        className="w-[65px] h-[65px] rounded-full cursor-pointer"
+                        className="w-[65px] h-[65px] rounded-full cursor-pointer object-cover"
                       />
                       <CameraOutlined
                         className="absolute bottom-2 -right-1 bg-blue-50 p-2 rounded-full cursor-pointer"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import IconChervonDown from "../icons/IconChervonDown";
 import IconChervonUp from "../icons/IconChervonUp";
+import { useTranslation } from "react-i18next";
 
 interface PropComponent {
   className?: string;
@@ -9,6 +10,7 @@ interface PropComponent {
 }
 // eslint-disable-next-line react-refresh/only-export-components
 const ContentSeeMore: React.FC<PropComponent> = ({ className, content }) => {
+  const { t } = useTranslation();
   const [seeMore, setSeeMore] = useState(false);
   useEffect(() => {
     let content: any = document.getElementById("message_container");
@@ -51,12 +53,12 @@ const ContentSeeMore: React.FC<PropComponent> = ({ className, content }) => {
       >
         {seeMore ? (
           <div className="font-medium mx-auto flex items-center gap-1 text-sm">
-            <span>Rút ngắn</span>
+            <span>{t("seeless")}</span>
             <IconChervonUp className="self-end"></IconChervonUp>
           </div>
         ) : (
           <div className="font-medium mx-auto flex items-center gap-1 text-sm">
-            <span>Xem thêm</span>
+            <span>{t("seemore")}</span>
             <IconChervonDown></IconChervonDown>
           </div>
         )}

@@ -12,6 +12,7 @@ import ApplyJobPage from "../../page/CommonPage/ApplyJobPage";
 import { CSSTransition } from "react-transition-group";
 import { useDispatch } from "react-redux";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
+import { useTranslation } from "react-i18next";
 interface PropComponent {
   className?: string;
   titleJob?: string;
@@ -25,6 +26,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
   className,
 }) => {
   const { user } = useSelector((state: any) => state.auth);
+  const { t } = useTranslation();
   const [checkApply, setCheckApply] = useState(false);
   const dispatch = useDispatch();
   const handleSaveJob = () => {
@@ -51,7 +53,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
             <IconMoney className="p-3 bg-primary rounded-full text-white"></IconMoney>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500 line-clamp-1">
-                Mức lương
+                {t("placeholdersalary")}
               </span>
               <span className="font-medium line-clamp-1">Thỏa thuận</span>
             </div>
@@ -63,7 +65,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
             ></IconMapPin>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500 line-clamp-1">
-                Địa điểm
+                {t("placeholderaddress")}
               </span>
               <span className="font-medium line-clamp-1">Đồng Tháp</span>
             </div>
@@ -72,7 +74,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
             <IconBriefCase className="p-3 bg-primary rounded-full text-white"></IconBriefCase>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500 line-clamp-1">
-                Kinh Nghiệm
+                {t("placeholderexperience")}
               </span>
               <span className="font-medium line-clamp-1">2 năm</span>
             </div>
@@ -80,7 +82,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
         </div>
         <div className="flex gap-2 items-center mt-5 bg-blue-100 w-fit px-4 py-2 rounded-md">
           <IconClock></IconClock>
-          <span>Hạn nộp hồ sơ: 13/06/2024</span>
+          <span>{t("jobdetail.endsudmit")}: 13/06/2024</span>
         </div>
         <div className="flex gap-5 mt-5">
           <div
@@ -88,14 +90,14 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
             className="grow flex items-center justify-center py-2 gap-3 hover:opacity-80 transition-all cursor-pointer bg-primary text-white font-medium  rounded-md"
           >
             <button className="" type="button">
-              Ứng tuyển ngay
+              {t("apply")}
             </button>
             <IconPaperAirplan></IconPaperAirplan>
           </div>
           <Popover
             content={
               <p className="text-center font-medium">
-                {true ? "Bỏ lưu" : "Lưu tin"}
+                {true ? `${t("unsave")}` : `${t("save")}`}
               </p>
             }
           >
@@ -103,7 +105,9 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
               onClick={handleSaveJob}
               className="min-w-[15%] lg:px-0 px-2 max-w-full hover:opacity-80 transition-all flex items-center border border-solid border-primary text-primary font-medium justify-center py-2 gap-2 rounded-md"
             >
-              <button className="">{!true ? "Đã lưu" : "Lưu tin"}</button>
+              <button className="">
+                {!true ? `${t("unsave")}` : `${t("save")}`}
+              </button>
               {true ? <IconHeartFill></IconHeartFill> : <IconHeart></IconHeart>}
             </div>
           </Popover>

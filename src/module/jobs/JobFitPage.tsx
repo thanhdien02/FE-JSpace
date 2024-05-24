@@ -4,7 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Scrollbar } from "swiper/modules";
 import { Radio, RadioChangeEvent } from "antd";
 import { Pagination } from "antd";
+import { useTranslation } from "react-i18next";
 const JobFitPage: React.FC = () => {
+  const { t } = useTranslation();
   const [filterShow, setFilterShow] = useState(1);
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
@@ -15,7 +17,7 @@ const JobFitPage: React.FC = () => {
       <div className="bg-gray-100 py-5">
         <section className="w-primary max-w-full mx-auto bg-white shadow-sm rounded-lg p-5">
           <h2 className="text-xl font-bold text-primary">
-            Gợi ý việc làm phù hợp
+            {t("findjob.suggestsuitablejob")}
           </h2>
           <Swiper
             modules={[Navigation, Scrollbar, A11y]}

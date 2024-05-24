@@ -93,7 +93,7 @@ const HomeListCompanyPage: React.FC = () => {
           <h3 className="lg:px-0 px-5 font-bold text-2xl text-primary my-3">
             {t("home.companypupolar")}
           </h3>
-          <div className="hidden lg:px-0 px-5 lg:grid lg:grid-cols-5 grid-cols-1 gap-5 mt-6">
+          <div className="lg:px-0 px-5 lg:grid lg:grid-cols-5 grid-cols-1 gap-5 mt-6">
             <div className="flex border border-solid border-gray-200 cursor-pointer rounded-md h-[200px] transition-all hover:shadow-md hover:shadow-blue-200">
               <img
                 src="https://th.bing.com/th/id/R.d968aaa271651e20446d370a31a1d022?rik=4BaJJh7fEvSAGQ&pid=ImgRaw&r=0"

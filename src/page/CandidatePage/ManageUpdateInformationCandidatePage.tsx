@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import Button from "../../components/input";
 import IconPhone from "../../components/icons/IconPhone";
 import {
+  candidateUpdateAvatar,
+  candidateUpdateBackground,
   candidateUpdateCandidate,
   candidateUpdateMessageRedux,
 } from "../../store/candidate/candidate-slice";
@@ -19,7 +21,7 @@ interface Inputs {
 }
 const ManageUpdateInformationCandidatePage: React.FC = () => {
   const { accessToken, user } = useSelector((state: any) => state.auth);
-  const { loading, messageCandidate } = useSelector(
+  const { loadingCandidate, messageCandidate } = useSelector(
     (state: any) => state.candidate
   );
   const dispatch = useDispatch();
@@ -46,17 +48,41 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
       dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
     }
   }, [messageCandidate]);
-  const props: UploadProps = {
+  const propsBackground: UploadProps = {
     beforeUpload: (file) => {
-      const isPNG = file.type === "image/png";
+      const isPNG = file.type === "image/png" || "image/jpg";
       if (!isPNG) {
         message.error(`${file.name} is not a png file`);
       }
       return isPNG || Upload.LIST_IGNORE;
     },
-    onChange: (info) => {
-      console.log(info.fileList);
+    onChange: (info: any) => {
+      dispatch(
+        candidateUpdateBackground({
+          file: info.file,
+          candidate_id: user?.id,
+        })
+      );
     },
+    customRequest: () => {},
+  };
+  const propsAvatar: UploadProps = {
+    beforeUpload: (file) => {
+      const isPNG = file.type === "image/png" || "image/jpg";
+      if (!isPNG) {
+        message.error(`${file.name} is not a png file`);
+      }
+      return isPNG || Upload.LIST_IGNORE;
+    },
+    onChange: (info: any) => {
+      dispatch(
+        candidateUpdateAvatar({
+          file: info.file,
+          candidate_id: user?.id,
+        })
+      );
+    },
+    customRequest: () => {},
   };
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -72,36 +98,47 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
           Cài đặt thông tin cá nhân
         </h2>
         <div className="relative flex justify-center pt-5">
-          <div className="w-full relative">
-            <Upload {...props} className="absolute left-2 top-2">
-              <button
-                type="button"
-                className="bg-white py-1 px-2 rounded-sm  text-sm"
-              >
-                Chọn ảnh bìa
-              </button>
-            </Upload>
-            <img src={bg} className="w-full h-[150px] object-cover" alt="" />
-          </div>
-          <Upload {...props} className="absolute -bottom-8 inline-block">
-            {user?.picture ? (
-              <>
+          {loadingCandidate ? (
+            <div className="w-full flex justify-center items-center h-[150px] bg-gray-200">
+              <Spin />
+            </div>
+          ) : (
+            <div className="w-full relative">
+              <Upload {...propsBackground} className="absolute left-2 top-2">
+                <button
+                  type="button"
+                  className="bg-white py-1 px-2 rounded-sm  text-sm"
+                >
+                  Chọn ảnh bìa
+                </button>
+              </Upload>
+              <img
+                src={user?.background ? user?.background : bg}
+                className="w-full h-[150px] object-cover"
+                alt=""
+              />
+            </div>
+          )}
+
+          <div className="absolute -bottom-8 inline-block">
+            {!loadingCandidate ? (
+              <Upload {...propsAvatar}>
                 <img
-                  src={user?.picture}
+                  src={user?.picture ? user?.picture : bg}
                   alt=""
-                  className="w-[75px] h-[75px] rounded-full cursor-pointer"
+                  className="w-[75px] h-[75px] rounded-full cursor-pointer object-cover"
                 />
                 <CameraOutlined
                   className="absolute bottom-2 right-0 bg-blue-50 p-2 rounded-full cursor-pointer"
                   style={{ fontSize: "18px" }}
                 />
-              </>
+              </Upload>
             ) : (
-              <div className="w-[75px] h-[75px] rounded-full flex">
+              <div className="w-[75px] h-[75px] rounded-full flex bg-gray-100">
                 <Spin className="m-auto" />
               </div>
             )}
-          </Upload>
+          </div>
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-10 mt-10">
           <div className="">
@@ -199,7 +236,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
           <Button
             className="mt-5 "
             title="Lưu thông tin"
-            loading={loading}
+            loading={loadingCandidate}
           ></Button>
         </div>
       </form>

@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { message } from "antd";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
+import { useTranslation } from "react-i18next";
 interface PropComponent {
   id?: string;
   title?: string;
@@ -28,6 +29,7 @@ interface PropComponent {
 }
 const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
   const { user } = useSelector((state: any) => state.auth);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleSaveJob = () => {
     if (!user?.id) {
@@ -50,7 +52,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
           {/* <IconClose className="absolute cursor-pointer p-1 rounded-sm right-2 top-2"></IconClose> */}
           <div className="cursor-pointer hover:underline text-primary flex items-center absolute top-12 right-2">
             <NavLink to="/jobs/2">
-              <p className="font-medium text-primary">Xem chi tiết</p>
+              <p className="font-medium text-primary">{t("detail")}</p>
             </NavLink>
             <IconChervonRight className="self-end text-primary"></IconChervonRight>
           </div>
@@ -73,7 +75,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
             type="button"
             onClick={handleApplyJob}
           >
-            Ứng tuyển ngay
+            {t("apply")}
           </button>
           {true ? (
             <span

@@ -1,6 +1,7 @@
 import React from "react";
 import CardCompanyRelativeAtCompanyDetailPage from "../../components/card/CardCompanyRelativeAtCompanyDetailPage";
 import { Pagination } from "antd";
+import { useTranslation } from "react-i18next";
 
 interface PropComponent {
   className?: string;
@@ -8,10 +9,13 @@ interface PropComponent {
 const CompanyDetailListCompanyRelativePage: React.FC<PropComponent> = ({
   className,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       <div className={`${className}`}>
-        <h2 className="font-medium text-lg">Các công ty liên quan</h2>
+        <h2 className="font-medium text-lg">
+          {t("companydetail.relatedcompany")}
+        </h2>
         <div className="flex flex-col gap-5 mt-5">
           <CardCompanyRelativeAtCompanyDetailPage></CardCompanyRelativeAtCompanyDetailPage>
           <CardCompanyRelativeAtCompanyDetailPage></CardCompanyRelativeAtCompanyDetailPage>

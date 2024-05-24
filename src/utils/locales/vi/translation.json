@@ -12,13 +12,40 @@
   "findjob": {
     "name": "Tìm việc",
     "filteradvance": "Lọc nâng cao",
-    "display": "Ưu tiên hiển thị theo"
+    "display": "Ưu tiên hiển thị theo:",
+    "suggestsuitablejob": "Gợi ý việc làm phù hợp",
+    "relateto": "Liên quan",
+    "salary": "Lương cao nhất",
+    "bythetime": "Theo thời gian"
   },
   "company": {
-    "name": "Công ty"
+    "name": "Công ty",
+    "placeholdercompany": "Tên công ty"
+  },
+  "companydetail": {
+    "companysize": "Quy mô",
+    "address": "Địa chỉ",
+    "follow": "Theo dõi công ty",
+    "unfollow": "Bỏ theo dõi công ty",
+    "employee": "nhân viên",
+    "follower": "người theo dõi",
+    "informationcompany": "Thông tin công ty",
+    "reviewcompany": "Đánh giá công ty",
+    "companyaddress": "Địa chỉ công ty",
+    "map": "Bản đồ",
+    "companywork": "Công việc của công ty",
+    "relatedcompany": "Công ty liên quan"
   },
   "blog": {
     "name": "Bài viết"
+  },
+  "jobdetail": {
+    "informationcommon": "Thông tin chung",
+    "seecompanypage": "Xem trang công ty",
+    "endsudmit": "Hạn nộp hồ sơ",
+    "description": "Thông tin chi tiết công việc",
+    "companysize": "Quy mô",
+    "address": "Địa chỉ"
   },
   "login": "Đăng nhập",
   "register": "Đăng ký",
@@ -28,5 +55,16 @@
   "placeholderaddress": "Địa chỉ",
   "placeholderexperience": "Kinh nghiệm",
   "placeholdersalary": "Mức lương",
-  "result": "kết quả"
+  "result": "kết quả",
+  "skills": "Kỹ năng",
+  "jobtype": "Loại công việc",
+  "rank": "Cập bậc",
+  "experience": "Kinh nghiệm",
+  "quantity": "Số lượng tuyển",
+  "detail": "Xem chi tiết",
+  "apply": "Ứng tuyển ngày",
+  "save": "Lưu tin",
+  "unsave": "Bỏ lưu",
+  "seemore": "Xem thêm",
+  "seeless": "Rút ngắn"
 }

@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface ICandidate {
   candidate: any;
-  loading?: boolean;
+  loadingCandidate?: boolean;
   messageCandidate?: string;
 }
 
 const init: ICandidate = {
   candidate: {},
-  loading: false,
+  loadingCandidate: false,
   messageCandidate: "",
 };
 const candidateSlice: any = createSlice({
@@ -20,17 +20,21 @@ const candidateSlice: any = createSlice({
     }),
     candidateUpdateLoadingRedux: (state: any, action: any) => ({
       ...state,
-      loading: action.payload.loading,
+      loadingCandidate: action.payload.loadingCandidate,
     }),
     candidateUpdateMessageRedux: (state: any, action: any) => ({
       ...state,
       messageCandidate: action.payload.messageCandidate,
     }),
+    candidateUpdateBackground: () => {},
+    candidateUpdateAvatar: () => {},
   },
 });
 export const {
   candidateUpdateCandidate,
   candidateUpdateLoadingRedux,
   candidateUpdateMessageRedux,
+  candidateUpdateBackground,
+  candidateUpdateAvatar,
 } = candidateSlice.actions;
 export default candidateSlice.reducer;

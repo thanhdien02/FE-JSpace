@@ -10,18 +10,45 @@
     "placeholdernamejob": "The job you are looking for ?"
   },
   "findjob": {
-    "name": "Job",
+    "name": "Jobs",
     "filteradvance": "Advanced filtering",
-    "display": "Priority displayed according to"
+    "display": "Priority displayed according to: ",
+    "suggestsuitablejob": "Suggest suitable jobs",
+    "relateto": "Relate to",
+    "salary": "Highest salary",
+    "bythetime": "By the time"
   },
   "blog": {
-    "name": "Blog"
+    "name": "Blogs"
   },
   "company": {
-    "name": "Company"
+    "name": "Companys",
+    "placeholdercompany": "Company name"
+  },
+  "companydetail": {
+    "companysize": "Scale",
+    "address": "Address",
+    "follow": "Follow company",
+    "unfollow": "Unfollow company",
+    "employee": "employees",
+    "follower": "followers",
+    "informationcompany": "Company nformation",
+    "reviewcompany": "Company reviews",
+    "companyaddress": "Company address",
+    "map": "Map",
+    "companywork": "Company's work",
+    "relatedcompany": "Related company"
   },
   "candidate": {
-    "name": "elcas"
+    "name": ""
+  },
+  "jobdetail": {
+    "informationcommon": "Common information ",
+    "seecompanypage": "See company page",
+    "endsudmit": "The deadline for submission",
+    "description": "Job details",
+    "companysize": "Size",
+    "address": "Address"
   },
   "login": "Login",
   "register": "Register",
@@ -31,5 +58,16 @@
   "placeholderaddress": "Address",
   "placeholderexperience": "Experience",
   "placeholdersalary": "Salary",
-  "result": "result"
+  "result": "result",
+  "skills": "Skills",
+  "jobtype": "Job Type",
+  "rank": "Rank",
+  "experience": "Experience",
+  "quantity": "Quantity",
+  "detail": "See detail",
+  "apply": "Apply now",
+  "save": "Save",
+  "unsave": "Unsave",
+  "seemore": "See more",
+  "seeless": "See less"
 }
