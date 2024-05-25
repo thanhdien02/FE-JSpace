@@ -1,4 +1,48 @@
 {
+  "manage": {
+    "cv": {
+      "title": "Hồ sơ xin việc đã được tải lên.",
+      "uploadcv": "Tải CV lên"
+    },
+    "information": {
+      "title": "Cập nhật thông tin tài khoản",
+      "selectbackground": "Chọn ảnh bìa",
+      "username": "Họ và Tên",
+      "phone": "Số điện thoại",
+      "email": "Địa chỉ Email"
+    },
+    "followedcompany": {
+      "title": "Quản lí công ty đã theo dõi",
+      "showby": "Hiển thị theo",
+      "mostrecent": "Gần đây nhất",
+      "mostfollowers": "Nhiều người theo dõi nhất"
+    },
+    "appliedjob": {
+      "title": "Quản lí công việc đã ứng tuyển",
+      "showby": "Hiển thị theo",
+      "mostrecent": "Gần đây nhất",
+      "highestsalary": "Lương cao nhất"
+    },
+    "savedjob": {
+      "title": "Quản lí công việc đã lưu",
+      "showby": "Hiển thị theo",
+      "mostrecent": "Gần đây nhất",
+      "highestsalary": "Lương cao nhất"
+    },
+    "welcomback": "Chào bạn trở lại"
+  },
+  "menu": {
+    "cv": "Quản lí CV",
+    "save": "Quản lí công việc đã lưu",
+    "apply": "Quản lí công việc đã ứng tuyển",
+    "follow": "Quản lí công ty đã theo dõi",
+    "information": "Quản lí thông tin",
+    "personinformation": "Trang cá nhân",
+    "jobapplication": "Hồ sơ xin việc",
+    "changepassword": "Đổi mật khẩu",
+    "allowrecruitor": "Cho phép NTD tìm CV của bạn",
+    "candidatecode": "Mã ứng viên"
+  },
   "home": {
     "name": "Trang chủ",
     "latestjob": "Việc làm mới nhất",
@@ -48,6 +92,12 @@
     "address": "Địa chỉ"
   },
   "login": "Đăng nhập",
+  "loginwithgoogle": "Đăng nhập với Google",
+  "term": "Bằng cách tạo tài khoản hoặc đăng nhập, bạn hiểu và đồng ý với Điều khoản.",
+  "account": "Tài khoản",
+  "password": "Mật khẩu",
+  "welcomlogin": "Bạn đã sẵn sàng đăng nhập ?",
+  "logout": "Đăng xuất",
   "register": "Đăng ký",
   "postjob": "Đăng bài tuyển dụng",
   "search": "Tìm kiếm",
@@ -55,6 +105,7 @@
   "placeholderaddress": "Địa chỉ",
   "placeholderexperience": "Kinh nghiệm",
   "placeholdersalary": "Mức lương",
+  "placeholdercompany": "Nhập tên công ty",
   "result": "kết quả",
   "skills": "Kỹ năng",
   "jobtype": "Loại công việc",
@@ -66,5 +117,8 @@
   "save": "Lưu tin",
   "unsave": "Bỏ lưu",
   "seemore": "Xem thêm",
-  "seeless": "Rút ngắn"
+  "seeless": "Rút ngắn",
+  "information": "Thông tin",
+  "notification": "Thông báo",
+  "buttonsave": "Lưu thông tin"
 }

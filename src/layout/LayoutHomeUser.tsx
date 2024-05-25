@@ -13,8 +13,10 @@ import IconBuilding from "../components/icons/IconBuilding";
 import IconUser from "../components/icons/IconUser";
 import { useDispatch } from "react-redux";
 import { commonUpdateLoginRedux } from "../store/common/common-slice";
+import { useTranslation } from "react-i18next";
 
 const LayoutHomeUser: React.FC = () => {
+  const { t } = useTranslation();
   const { user, accessToken } = useSelector((state: any) => state.auth);
   const { loginCheck } = useSelector((state: any) => state.common);
   const dispatch = useDispatch();
@@ -93,7 +95,7 @@ const LayoutHomeUser: React.FC = () => {
           }
         >
           <IconHome className="my-1" classIcon="!w-5 !h-5"></IconHome>
-          <span className="text-xs">Trang chủ</span>
+          <span className="text-xs">{t("home.name")}</span>
         </NavLink>
         <NavLink
           to="/jobs"
@@ -107,7 +109,7 @@ const LayoutHomeUser: React.FC = () => {
             className="my-1"
             classIcon="!w-5 !h-5"
           ></IconBriefCaseOutline>
-          <span className="text-xs">Tìm việc</span>
+          <span className="text-xs">{t("findjob.name")}</span>
         </NavLink>
         <NavLink
           to="/companys"
@@ -118,7 +120,7 @@ const LayoutHomeUser: React.FC = () => {
           }
         >
           <IconBuilding className="my-1" classIcon="!w-5 !h-5"></IconBuilding>
-          <span className="text-xs">Công ty</span>
+          <span className="text-xs">{t("company.name")}</span>
         </NavLink>
         {!user?.id ? (
           <div
@@ -129,7 +131,7 @@ const LayoutHomeUser: React.FC = () => {
           >
             {" "}
             <IconUser className="my-1" classIcon="!w-5 !h-5"></IconUser>
-            <span className="text-xs">Đăng nhập</span>
+            <span className="text-xs">{t("login")}</span>
           </div>
         ) : (
           <>
@@ -143,7 +145,7 @@ const LayoutHomeUser: React.FC = () => {
               }
             >
               <IconUser className="my-1" classIcon="!w-5 !h-5"></IconUser>
-              <span className="text-xs">Thông tin</span>
+              <span className="text-xs">{t("information")}</span>
             </NavLink>
           </>
         )}

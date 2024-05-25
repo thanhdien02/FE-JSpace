@@ -1,46 +1,47 @@
-import { LogoutOutlined } from "@ant-design/icons";
 import React from "react";
 import IconIdentification from "../components/icons/IconIdentification";
 import IconText from "../components/icons/IconText";
 import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
 import IconHeart from "../components/icons/IconHeart";
 import IconBuilding from "../components/icons/IconBuilding";
+import IconLogout from "../components/icons/IconLogout";
+
 export const dataCandidateMenu: any = [
   {
     key: "1",
-    title: "Quản lí thông tin",
+    title: "menu.information",
     path: "/manage/information-account",
     icon: React.createElement(IconIdentification),
   },
   {
     key: "2",
-    title: "Quản lí CV",
+    title: "menu.cv",
     path: "/list-resume",
     icon: React.createElement(IconText),
   },
   {
     key: "3",
-    title: "Quản lí công việc đã lưu",
+    title: "menu.save",
     path: "/manage/job-save",
     icon: React.createElement(IconHeart),
   },
   {
     key: "4",
-    title: "Quản lí công việc đã ứng tuyển",
+    title: "menu.apply",
     path: "/manage/job-apply",
     icon: React.createElement(IconBriefCaseOutline),
   },
   {
     key: "5",
-    title: "Quản lí công ty đã theo dõi",
+    title: "menu.follow",
     path: "/manage/company-followed",
     icon: React.createElement(IconBuilding),
   },
   {
     key: "6",
-    title: "Đăng xuất",
+    title: "logout",
     path: "/",
-    icon: React.createElement(LogoutOutlined),
+    icon: React.createElement(IconLogout),
   },
 ];
 export const dataCandidateMenuResponsive: any = [

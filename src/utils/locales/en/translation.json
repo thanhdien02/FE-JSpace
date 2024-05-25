@@ -1,4 +1,48 @@
 {
+  "manage": {
+    "cv": {
+      "title": "Job application has been uploaded.",
+      "uploadcv": "Upload CV"
+    },
+    "information": {
+      "title": "Update account information",
+      "selectbackground": "Select background",
+      "username": "Username",
+      "phone": "Phone number",
+      "email": "Email address"
+    },
+    "followedcompany": {
+      "title": "Manage followed company",
+      "showby": "Show by",
+      "mostrecent": "Most recent",
+      "mostfollowers": "Most followers"
+    },
+    "appliedjob": {
+      "title": "Manage applied jobs",
+      "showby": "Show by",
+      "mostrecent": "Most recent",
+      "highestsalary": "Highest salary"
+    },
+    "savedjob": {
+      "title": "Manage saved jobs",
+      "showby": "Show by",
+      "mostrecent": "Most recent",
+      "highestsalary": "Highest salary"
+    },
+    "welcomback": "Welcom back"
+  },
+  "menu": {
+    "cv": "Manage CV",
+    "save": "Manage saved jobs",
+    "apply": "Manage applied jobs",
+    "follow": "Manage followed companys",
+    "information": "Manage information",
+    "personinformation": "Personal page",
+    "jobapplication": "Job application",
+    "changepassword": "Change password",
+    "allowrecruitor": "Allow recruiters to find your CV",
+    "candidatecode": "Candidate code"
+  },
   "home": {
     "name": "Home",
     "totalwork": "Total work",
@@ -51,6 +95,12 @@
     "address": "Address"
   },
   "login": "Login",
+  "loginwithgoogle": "Login with Google",
+  "term": "By creating an account or logging in, you understand and agree to the Terms.",
+  "account": "Account",
+  "password": "Password",
+  "welcomlogin": "Are you ready to log in?",
+  "logout": "Log out",
   "register": "Register",
   "postjob": "Post job",
   "search": "Search",
@@ -58,6 +108,7 @@
   "placeholderaddress": "Address",
   "placeholderexperience": "Experience",
   "placeholdersalary": "Salary",
+  "placeholdercompany": "Enter company name",
   "result": "result",
   "skills": "Skills",
   "jobtype": "Job Type",
@@ -69,5 +120,8 @@
   "save": "Save",
   "unsave": "Unsave",
   "seemore": "See more",
-  "seeless": "See less"
+  "seeless": "See less",
+  "information": "Information",
+  "notification": "Notification",
+  "buttonsave": "Save information"
 }

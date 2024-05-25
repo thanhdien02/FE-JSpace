@@ -13,6 +13,7 @@ import {
 } from "../../store/candidate/candidate-slice";
 import bg from "../../assets/banner3.jpg";
 import { message, Spin, Upload, UploadProps } from "antd";
+import { useTranslation } from "react-i18next";
 interface Inputs {
   name: string;
   phone: number;
@@ -24,6 +25,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
   const { loadingCandidate, messageCandidate } = useSelector(
     (state: any) => state.candidate
   );
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const {
     register,
@@ -95,7 +97,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
         className="lg:px-10 px-5 py-5 shadow-lg "
       >
         <h2 className="font-bold text-lg mt-3 text-gray-800">
-          Cài đặt thông tin cá nhân
+          {t("manage.information.title")}
         </h2>
         <div className="relative flex justify-center pt-5">
           {loadingCandidate ? (
@@ -109,7 +111,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
                   type="button"
                   className="bg-white py-1 px-2 rounded-sm  text-sm"
                 >
-                  Chọn ảnh bìa
+                  {t("manage.information.selectbackground")}
                 </button>
               </Upload>
               <img
@@ -146,7 +148,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
               htmlFor="name"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Họ và Tên
+              {t("manage.information.username")}
             </label>
             <div className="mt-2 relative">
               <UserOutlined
@@ -188,7 +190,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
               htmlFor="email"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Địa chỉ Email
+              {t("manage.information.email")}
             </label>
             <div className="mt-2 relative">
               <MailOutlined
@@ -218,7 +220,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
             htmlFor="phone"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Số điện thoại
+            {t("manage.information.phone")}
           </label>
           <div className="mt-2 relative">
             <IconPhone className="absolute top-0 left-0 translate-x-[50%] translate-y-[50%] text-gray-400"></IconPhone>
@@ -235,7 +237,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
         <div className="flex justify-end items-center my-2">
           <Button
             className="mt-5 "
-            title="Lưu thông tin"
+            title={t("buttonsave")}
             loading={loadingCandidate}
           ></Button>
         </div>

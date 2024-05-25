@@ -8,10 +8,12 @@ import IconTrash from "../../components/icons/IconTrash";
 import IconDownload from "../../components/icons/IconDownload";
 import IconShare from "../../components/icons/IconShare";
 import { Empty, Skeleton } from "antd";
+import { useTranslation } from "react-i18next";
 
 const ManageListResumeCandidate: React.FC = () => {
   const { files, loadingFile } = useSelector((state: any) => state.file);
   const { user } = useSelector((state: any) => state.auth);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fileGetAllFile({ candidate_id: user?.id }));
@@ -20,15 +22,13 @@ const ManageListResumeCandidate: React.FC = () => {
     <>
       <div className="lg:p-10 p-5">
         <div className="flex flex-wrap gap-2 justify-between">
-          <h3 className="font-semibold text-xl">
-            Hồ sơ xin việc đã được tải lên.
-          </h3>
+          <h3 className="font-semibold text-xl">{t("manage.cv.title")}</h3>
           <NavLink
             to="/upload-resume"
             className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg font-medium hover:opacity-80 transition-all"
           >
             <IconUpload className="font-medium"></IconUpload>
-            <span className="text-nowrap">Tải CV lên</span>
+            <span className="text-nowrap"> {t("manage.cv.uploadcv")}</span>
           </NavLink>
         </div>
 

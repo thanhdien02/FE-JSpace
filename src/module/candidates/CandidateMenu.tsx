@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import IconArrowRight from "../../components/icons/IconArrowRight";
+import { useTranslation } from "react-i18next";
 
 interface PropComponent {
   className?: string;
@@ -12,6 +13,7 @@ const CandidateMenu: React.FC<PropComponent> = ({
   data,
   onClick,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       {data?.length > 0 &&
@@ -24,7 +26,9 @@ const CandidateMenu: React.FC<PropComponent> = ({
           >
             <div className="flex gap-4 font-medium text-[14px] items-center">
               {item?.icon}
-              <p className="text-line-clamp max-w-[200px]">{item?.title}</p>
+              <p className="text-line-clamp max-w-[200px]">
+                {t(`${item?.title}`)}
+              </p>
             </div>
             <IconArrowRight className="arrow-menu text-blue-50 transition-all"></IconArrowRight>
           </NavLink>

@@ -34,7 +34,6 @@ const ManageWallCandidate: React.FC = () => {
     }
   };
 
-
   const props: UploadProps = {
     beforeUpload: (file) => {
       const isPNG = file.type === "image/png";
@@ -81,7 +80,7 @@ const ManageWallCandidate: React.FC = () => {
             </div>
 
             <img
-              src={bg_wall}
+              src={user?.background ? user?.background : bg_wall}
               alt=""
               className="w-full h-[270px] object-cover "
             />

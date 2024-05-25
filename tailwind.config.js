@@ -8,6 +8,8 @@ export default {
       },
       fontFamily: {
         primary: ["DM Sans", "sans-serif"],
+        secondary: ["Poppins", "sans-serif"],
+        third: ["Noto Sans", "sans-serif"],
       },
       colors: {
         primary: "#1967D2",

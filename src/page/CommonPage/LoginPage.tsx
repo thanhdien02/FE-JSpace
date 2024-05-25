@@ -12,6 +12,7 @@ import IconClose from "../../components/icons/IconClose";
 import { SubmitHandler, useForm } from "react-hook-form";
 import IconKey from "../../components/icons/IconKey";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
+import { useTranslation } from "react-i18next";
 
 interface PropComponent {
   className?: string;
@@ -36,6 +37,7 @@ const LoginPage: React.FC<PropComponent> = ({
     console.log("🚀 ~ dataUpdadeCandidate:", dataLogin);
   };
   const { loading } = useSelector((state: any) => state.auth);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const login: any = useGoogleLogin({
     onSuccess: async (response: any) => {
@@ -101,15 +103,13 @@ const LoginPage: React.FC<PropComponent> = ({
         </div>
         <div className="">
           <div className="w-full">
-            <h4 className="mb-2 text-base font-semibold">
-              Bạn đã sẵn sàng để đăng nhập ?
-            </h4>
+            <h4 className="mb-2 text-base font-semibold">{t("welcomlogin")}</h4>
             <div className="">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-600"
               >
-                Tài khoản
+                {t("account")}
               </label>
               <div className="mt-2 relative">
                 <UserOutlined
@@ -156,7 +156,7 @@ const LoginPage: React.FC<PropComponent> = ({
                 htmlFor="password"
                 className="block text-sm font-medium leading-6 text-gray-600"
               >
-                Mật khẩu
+                {t("password")}
               </label>
               <div className="mt-2 relative">
                 <IconKey className="absolute top-0 left-0 translate-x-[50%] text-gray-400 translate-y-[50%] !w-5 !h-5"></IconKey>
@@ -190,8 +190,7 @@ const LoginPage: React.FC<PropComponent> = ({
                 onChange={onChange}
                 className="font-normal text-xs text-slate-500 gap-2"
               >
-                Bằng cách tạo tài khoản hoặc đăng nhập, bạn hiểu và đồng ý với
-                Điều khoản.
+                {t("term")}
               </Checkbox>
             </div>
           </div>
@@ -202,7 +201,7 @@ const LoginPage: React.FC<PropComponent> = ({
               type="submit"
               className="bg-primary text-white px-4 py-2 w-full !hover:bg-primary rounded-lg flex gap-3 justify-center items-center hover:opacity-80 !transition-all"
             >
-              Đăng nhập
+              {t("login")}
             </button>
           </div>
           <div className="flex py-1">
@@ -224,7 +223,7 @@ const LoginPage: React.FC<PropComponent> = ({
               ) : (
                 <>
                   <GoogleOutlined />
-                  Đăng nhập với Google
+                  {t("loginwithgoogle")}
                 </>
               )}
             </button>

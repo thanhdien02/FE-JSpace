@@ -141,7 +141,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                     ></div>
                     <div className="absolute top-[155%] bg-white shadow-md min-w-[300px] min-h-[200px] z-20 right-0">
                       <div className="p-4">
-                        <h3>Thông báo</h3>
+                        <h3>{t("notification")}</h3>
                       </div>
                       <Divider className="mt-0"></Divider>
                     </div>
@@ -179,7 +179,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                           {user?.name}
                         </h3>
                         <p className="font-semibold text-gray-400">
-                          Mã ứng viên: #{user?.id}
+                          {t("menu.candidatecode")}: #{user?.id}
                         </p>
                         <p className="font-semibold text-gray-400">
                           {" "}
@@ -239,7 +239,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                       setCheckNotification(true);
                     }}
                   >
-                    Thông báo
+                    {t("notification")}
                   </Button>
                   <Button
                     type="primary"
@@ -248,7 +248,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                       setOpen(false);
                     }}
                   >
-                    Đăng xuất
+                    {t("logout")}
                   </Button>
                 </>
               ) : (
@@ -259,7 +259,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                     setOpen(false);
                   }}
                 >
-                  Đăng nhập
+                  {t("login")}
                 </Button>
               )}
             </Space>
@@ -286,7 +286,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
               <HeaderItem
                 className="text-[14px] "
                 classLink="!pl-0"
-                title="Trang chủ"
+                title={t("home.name")}
                 path="/"
               >
                 <IconChervonRight
@@ -299,7 +299,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
               <HeaderItem
                 className="text-[14px] "
                 classLink="!pl-0"
-                title="Tìm việc"
+                title={t("findjob.name")}
                 path="/jobs"
               >
                 <IconChervonRight
@@ -312,7 +312,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
               <HeaderItem
                 className="text-[14px] "
                 classLink="!pl-0"
-                title="Công ty"
+                title={t("company.name")}
                 path="/companys"
               >
                 <IconChervonRight
@@ -325,7 +325,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
               <HeaderItem
                 className="text-[14px] "
                 classLink="!pl-0"
-                title="Bài biết"
+                title={t("blog.name")}
                 path="/blogs"
               >
                 <IconChervonRight
@@ -360,6 +360,20 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
               </ul>
             </div>
           )}
+          <div className="flex gap-1 items-center mt-5">
+            <img
+              src="https://static.topcv.vn/srp/website/images/flags/vietnam.png"
+              alt=""
+              onClick={() => changeLanguage("vi")}
+              className="w-11 h-7 cursor-pointer object-cover"
+            />
+            <img
+              src="https://static.topcv.vn/srp/website/images/flags/uk.jpeg"
+              alt=""
+              onClick={() => changeLanguage("en")}
+              className="w-11 h-7 cursor-pointer object-cover"
+            />
+          </div>
         </Drawer>
 
         {checkNotification && (

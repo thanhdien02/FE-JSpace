@@ -1,8 +1,10 @@
 import { Pagination, Radio, RadioChangeEvent } from "antd";
 import React, { useEffect, useState } from "react";
 import CardCompanyFollowedPage from "../../components/card/CardCompanyFollowedPage";
+import { useTranslation } from "react-i18next";
 
 const ManageCompanyFollowedPage: React.FC = () => {
+  const { t } = useTranslation();
   const [value, setValue] = useState(1);
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
@@ -15,11 +17,13 @@ const ManageCompanyFollowedPage: React.FC = () => {
   return (
     <>
       <div className="p-5">
-        <h3 className="text-lg font-bold">Quản lí công công ty đã theo dõi</h3>
+        <h3 className="text-lg font-bold">
+          {t("manage.followedcompany.title")}
+        </h3>
         <div className="lg:mt-5 mt-3 flex flex-wrap lg:gap-5 gap-3 items-center">
           <div className="flex items-center gap-2">
             <input
-              placeholder="Nhập tên công ty"
+              placeholder={t("placeholdercompany")}
               onChange={(e) => {
                 console.log("🚀 ~ e:", e.target.value);
               }}
@@ -29,13 +33,15 @@ const ManageCompanyFollowedPage: React.FC = () => {
               type="button"
               className="text-nowrap bg-primary text-white py-2 px-4 rounded-lg hover:opacity-80 transition-all"
             >
-              Tìm kiếm
+              {t("search")}
             </button>
           </div>
-          <h3 className="text-base text-gray-500 ">Hiển thị theo:</h3>
+          <h3 className="text-base text-gray-500 ">
+            {t("manage.followedcompany.showby")}:
+          </h3>
           <Radio.Group onChange={onChange} value={value}>
-            <Radio value={1}>Gần đây nhất</Radio>
-            <Radio value={3}>Lượt theo dõi nhiều nhất</Radio>
+            <Radio value={1}>{t("manage.followedcompany.mostrecent")}</Radio>
+            <Radio value={3}>{t("manage.followedcompany.mostfollowers")}</Radio>
           </Radio.Group>
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-7">
