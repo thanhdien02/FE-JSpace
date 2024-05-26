@@ -18,6 +18,22 @@ export const requestFileUploadFile = (
     }
   );
 };
+export const requestFileDeleteFile = (
+  candidate_id: any,
+  accessToken: string,
+  resume_id: any
+) => {
+  if (!accessToken) return;
+  return axios.delete(
+    `${API}/api/v1/candidates/${candidate_id}/delete-resume?resumeId=${resume_id}`,
+    {
+      headers: {
+        "Content-Type": "multipart/form-datas",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
 export const requestFileGetAllFile = (
   candidate_id: any,
   accessToken: string

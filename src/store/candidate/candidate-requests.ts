@@ -53,3 +53,21 @@ export const requestCandidateUpdateAvatar = (
     }
   );
 };
+
+export const requestCandidateSaveJob = (
+  candidate_id: string,
+  post_id: string,
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.post(
+    `${API}/api/v1/candidates/${candidate_id}/posts/like?postId=${post_id}`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};

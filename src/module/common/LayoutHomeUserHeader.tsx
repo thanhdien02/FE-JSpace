@@ -61,7 +61,9 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
     }
   };
   const handleCandidateMenu: any = (e: any) => {
-    if (e.title === "Đăng xuất") {
+    console.log("🚀 ~ e:", e);
+    console.log("object");
+    if (e.title === "logout") {
       dispatch(authLogout());
     }
   };

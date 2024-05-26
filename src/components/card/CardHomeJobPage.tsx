@@ -1,71 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { message, Popover, Tag } from "antd";
 import { useNavigate } from "react-router-dom";
 import IconHeart from "../icons/IconHeart";
 import { useSelector } from "react-redux";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 import { useDispatch } from "react-redux";
+import IconHeartFill from "../icons/IconHeartFill";
+import {
+  candidateSaveJob,
+  candidateUpdateMessageRedux,
+} from "../../store/candidate/candidate-slice";
 interface PropComponent {
   className?: string;
-  titleJob?: string;
-  nameCompany?: string;
-  logo?: string;
-  salary?: string;
-  location?: string;
   onClick?: any;
+  item?: any;
 }
-const CardHomeJobPage: React.FC<PropComponent> = ({ className }) => {
+const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
   const { user } = useSelector((state: any) => state.auth);
+  const { messageCandidate } = useSelector((state: any) => state.candidate);
+  const [checkSave, setCheckSave] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSaveJob = () => {
     if (!user?.id) {
       message.info("Bạn cần đăng nhập để lưu tin");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    } else {
+      dispatch(
+        candidateSaveJob({ candidate_id: user?.id, post_id: item?.post?.id })
+      );
     }
   };
+  useEffect(() => {
+    if (messageCandidate === `savesuccess${item?.post?.id}`) {
+      setCheckSave(true);
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    }
+  }, [messageCandidate]);
+  useEffect(() => {
+    setCheckSave(item?.liked);
+  }, []);
   return (
     <>
       <div
         className={`relative flex gap-3 shadow-md bg-white rounded-md min-h-[100px] p-4 ${className}`}
       >
-        <div className="min-w-[25%] w-full">
+        <div className="min-w-[80px] w-[80px] h-[80px]">
           <img
-            src="https://th.bing.com/th/id/R.01cd719c50a4066e50808738e6eff177?rik=6%2fm77v2X46RLyg&pid=ImgRaw&r=0"
+            src={item?.post?.company?.logo}
             alt=""
-            className="w-full h-[80px] object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="grow flex flex-col gap-1 overflow-hidden">
-          <Popover
-            content={
-              <p className="w-[300px]">
-                Font end developer for 2 years (Senior) 10 - 20tr many benifit
-                and team building. Apply now that bench
-              </p>
-            }
-          >
+          <Popover content={<p className="w-[300px]">{item?.post?.title}</p>}>
             <h3
               className="line-clamp-1 font-medium cursor-pointer hover:text-primary transition-all"
               onClick={() => {
                 navigate("/jobs/1");
               }}
             >
-              Font end developer for 2 years (Senior) 10 - 20tr many benifit and
-              team building. Apply now that bench
+              {item?.post?.title}
             </h3>
           </Popover>
 
           <h4 className="line-clamp-1 text-gray-500 text-sm">
-            Công ty phần mềm FPT Lorem ipsum dolor sit, amet consectetur
-            adipisicing elit. Quibusdam nulla temporibus dolorem consectetur
-            alias dicta expedita sapiente repellat voluptate explicabo dolor
-            rerum distinctio maiores, harum impedit nisi. Perferendis, tenetur
-            odit!
+            {item?.post?.description}
           </h4>
           <div className="flex gap-1 overflow-hidden mt-1">
-            <Tag className="min-w-[40px] line-clamp-1 max-w-[100px]">Tag 1</Tag>
-            <Tag className="min-w-[40px] line-clamp-1 max-w-[100px]">Tag 1</Tag>
+            <Tag className="min-w-[40px] line-clamp-1 max-w-[100px]">
+              {item?.post?.location?.province}
+            </Tag>
+            <Tag className="min-w-[40px] line-clamp-1 max-w-[100px]">
+              {item?.post?.jobType?.code}
+            </Tag>
           </div>
         </div>
 
@@ -73,7 +81,11 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className }) => {
           className="absolute bottom-2 right-2 cursor-pointer text-primary"
           onClick={handleSaveJob}
         >
-          <IconHeart className="" classIcon="!w-5 !h-5"></IconHeart>
+          {checkSave ? (
+            <IconHeartFill className="" classIcon="!w-5 !h-5"></IconHeartFill>
+          ) : (
+            <IconHeart className="" classIcon="!w-5 !h-5"></IconHeart>
+          )}
         </div>
       </div>
     </>

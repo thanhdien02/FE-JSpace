@@ -17,6 +17,23 @@ export const requestAuthLogin = (dataLogin: any) => {
   });
 };
 
+export const requestAuthLogin1 = (dataLogin: any) => {
+  const credentials = Buffer.from("abc_client:abc123").toString("base64");
+  console.log("🚀 ~ requestAuthLogin1 ~ credentials:", credentials)
+  return axios.post(
+    `https://shoee.click/api/token`,
+    {
+      ...dataLogin,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${credentials}`,
+      },
+    }
+  );
+};
+
 export const requestAuthFetchMe = (accessToken: string) => {
   if (!accessToken) return;
   return axios.get(`${API}/api/v1/auth/candidate/profile`, {

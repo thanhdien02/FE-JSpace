@@ -5,7 +5,11 @@ import {
   fileUpdateLoadingRedux,
   fileUpdateMessageRedux,
 } from "./file-slice";
-import { requestFileGetAllFile, requestFileUploadFile } from "./file-requests";
+import {
+  requestFileDeleteFile,
+  requestFileGetAllFile,
+  requestFileUploadFile,
+} from "./file-requests";
 import { message } from "antd";
 
 function* handleFileUploadFile(dataUploadFile: any): Generator<any> {
@@ -35,8 +39,31 @@ function* handleFileUploadFile(dataUploadFile: any): Generator<any> {
     yield put(fileUpdateLoadingRedux({ loadingFile: false }));
   }
 }
+function* handleFileDeleteFile(dataDeleteFile: any): Generator<any> {
+  try {
+    yield put(fileUpdateLoadingRedux({ loadingFile: true }));
+    const { accessToken } = getToken();
+    const response: any = yield call(
+      requestFileDeleteFile,
+      dataDeleteFile?.payload?.candidate_id,
+      accessToken,
+      dataDeleteFile?.payload?.resume_id
+    );
+    if (response?.data?.code === 1000) {
+      message.success("Xóa hồ sơ thành công");
+      yield call(handleFileGetAllFile, {
+        payload: {
+          candidate_id: dataDeleteFile?.payload?.candidate_id,
+        },
+      });
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(fileUpdateLoadingRedux({ loadingFile: false }));
+  }
+}
 function* handleFileGetAllFile(dataCandadate_id: any): Generator<any> {
-  console.log(dataCandadate_id);
   try {
     yield put(fileUpdateLoadingRedux({ loadingFile: true }));
     const { accessToken } = getToken();
@@ -46,7 +73,6 @@ function* handleFileGetAllFile(dataCandadate_id: any): Generator<any> {
       accessToken
     );
     if (response?.data?.code === 1000) {
-      // message.success("Load dữ liệu thành công");
       yield put(
         fileUpdateMessageRedux({
           messageFile: "success",
@@ -66,4 +92,4 @@ function* handleFileGetAllFile(dataCandadate_id: any): Generator<any> {
     yield put(fileUpdateLoadingRedux({ loadingFile: false }));
   }
 }
-export { handleFileUploadFile, handleFileGetAllFile };
+export { handleFileUploadFile, handleFileGetAllFile, handleFileDeleteFile };

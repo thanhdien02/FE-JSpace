@@ -33,6 +33,7 @@ const fileSlice: any = createSlice({
     fileGetAllFile: (state: any) => ({
       ...state,
     }),
+    fileDeleteFile: () => {},
   },
 });
 export const {
@@ -41,5 +42,6 @@ export const {
   fileUpdateMessageRedux,
   fileGetAllFile,
   fileUpdateFileRedux,
+  fileDeleteFile,
 } = fileSlice.actions;
 export default fileSlice.reducer;

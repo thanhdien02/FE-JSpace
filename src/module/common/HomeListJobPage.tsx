@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css";
@@ -13,12 +13,24 @@ import {
   Pagination,
   Scrollbar,
 } from "swiper/modules";
-import { Select } from "antd";
+import { Select, Skeleton } from "antd";
 import CardHomeJobPage from "../../components/card/CardHomeJobPage";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { jobGetHomeJob } from "../../store/job/job-slice";
 
 const HomeListJobPage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
+  const { homeJobs, loadingJob } = useSelector((state: any) => state.job);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user?.id) {
+      dispatch(jobGetHomeJob({ candidate_id: user.id }));
+    }
+  }, [user]);
   return (
     <>
       <div className="bg-gray-100 ">
@@ -70,47 +82,48 @@ const HomeListJobPage: React.FC = () => {
             onSlideChange={() => console.log("slide change")}
             className="swiper-job hidden lg:block"
           >
-            <SwiperSlide className="ease-linear">
-              <div className="grid gap-4 grid-cols-3 bg-gray-100">
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="ease-linear">
-              <div className="grid gap-4 grid-cols-3 bg-gray-100">
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="ease-linear">
-              <div className="grid gap-4 grid-cols-3 bg-gray-100">
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-              </div>
-            </SwiperSlide>
+            {loadingJob || !homeJobs.length ? (
+              <Skeleton />
+            ) : (
+              <>
+                <SwiperSlide className="ease-linear">
+                  <div className="grid gap-4 grid-cols-3 bg-gray-100">
+                    {homeJobs.length > 0 &&
+                      homeJobs?.map((item: any) => (
+                        <CardHomeJobPage
+                          key={item?.post?.id}
+                          item={item}
+                        ></CardHomeJobPage>
+                      ))}
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide className="ease-linear">
+                  <div className="grid gap-4 grid-cols-3 bg-gray-100">
+                    {homeJobs.length > 0 &&
+                      homeJobs?.map((item: any) => (
+                        <CardHomeJobPage
+                          key={item?.post?.id}
+                          item={item}
+                        ></CardHomeJobPage>
+                      ))}
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide className="ease-linear">
+                  <div className="grid gap-4 grid-cols-3 bg-gray-100">
+                    {homeJobs.length > 0 &&
+                      homeJobs?.map((item: any) => (
+                        <CardHomeJobPage
+                          key={item?.post?.id}
+                          item={item}
+                        ></CardHomeJobPage>
+                      ))}
+                  </div>
+                </SwiperSlide>
+              </>
+            )}
           </Swiper>
 
+          {/* Phone */}
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
             spaceBetween={50}

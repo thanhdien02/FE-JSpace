@@ -1,6 +1,7 @@
 import { call, put } from "redux-saga/effects";
 import { getToken, Token } from "../../utils/auth";
 import {
+  requestCandidateSaveJob,
   requestCandidateUpdateAvatar,
   requestCandidateUpdateBackground,
   requestCandidateUpdateIdentification,
@@ -94,8 +95,35 @@ function* handleCandidateUpdateAvatar(
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
   }
 }
+function* handleCandidateSaveJob(dataCandiateSaveJob: any): Generator<any> {
+  try {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestCandidateSaveJob,
+      dataCandiateSaveJob?.payload?.candidate_id,
+      dataCandiateSaveJob?.payload?.post_id,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      console.log("🚀 ~ function*handleCandidateSaveJob ~ response:", response);
+      message.success("Lưu tin thành công.");
+      yield put(
+        candidateUpdateMessageRedux({
+          messageCandidate:
+            `savesuccess` + dataCandiateSaveJob?.payload?.post_id,
+        })
+      );
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
+  }
+}
 export {
   handleCandidateUpdateIdentification,
   handleCandidateUpdateBackground,
   handleCandidateUpdateAvatar,
+  handleCandidateSaveJob,
 };
