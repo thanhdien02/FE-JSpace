@@ -19,16 +19,16 @@ const ManageJobSavePage: React.FC = () => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (user?.id) {
       dispatch(jobGetSavedJob({ candidate_id: user?.id, page: page, size: 8 }));
     }
   }, [user, page]);
+
+
   return (
     <>
       <div className="p-5">

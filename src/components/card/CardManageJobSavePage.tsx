@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../../assets/bg-login.jpg";
 import IconTrash from "../icons/IconTrash";
 import IconMoney from "../icons/IconMoney";
 import { Popover } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { candidateUnSaveJob } from "../../store/candidate/candidate-slice";
+import { jobGetSavedJob } from "../../store/job/job-slice";
 
 interface PropComponent {
   className?: string;
@@ -13,7 +17,27 @@ const CardManageJobSavePage: React.FC<PropComponent> = ({
   className,
   item,
 }) => {
+  const { user } = useSelector((state: any) => state.auth);
+  const { loadingCandidate, messageCandidate } = useSelector(
+    (state: any) => state.candidate
+  );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleUnSavedJob = () => {
+    if (user?.id && !loadingCandidate) {
+      dispatch(
+        candidateUnSaveJob({
+          candidate_id: user?.id,
+          post_id: item?.id,
+        })
+      );
+    }
+  };
+  useEffect(() => {
+    if (messageCandidate === `unsavesuccess${item?.id}`) {
+      dispatch(jobGetSavedJob({ candidate_id: user?.id, page: 1, size: 8 }));
+    }
+  }, [messageCandidate]);
   return (
     <>
       <div
@@ -22,12 +46,21 @@ const CardManageJobSavePage: React.FC<PropComponent> = ({
         <div className="absolute top-2 right-2 hidden lg:flex items-center gap-2 font-medium text-primary px-2 py-1 rounded-sm cursor-pointer">
           <IconMoney classIcon="!w-5 !h-5"></IconMoney>
           <span className="text-sm">
-            {item?.minPay != "0" ? `${item?.minPay} -` : ""} {item?.maxPay}
+            {item?.minPay != "0"
+              ? `${item?.minPay.toLocaleString("vi", {
+                  style: "currency",
+                  currency: "VND",
+                })} -`
+              : ""}{" "}
+            {item?.maxPay.toLocaleString("vi", {
+              style: "currency",
+              currency: "VND",
+            })}
           </span>
         </div>
         <div className="lg:w-[20%] md:w-[20%] w-[30%] self-start mt-2">
           <img
-            src={logo}
+            src={item?.company?.logo ? item?.company?.logo : logo}
             alt=""
             className="w-full max-w-full object-cover md:h-[110px] h-[70px]"
           />
@@ -65,7 +98,10 @@ const CardManageJobSavePage: React.FC<PropComponent> = ({
           >
             Ứng tuyển
           </span>
-          <div className="flex items-center select-none gap-1 bg-slate-200 py-1 px-2 cursor-pointer">
+          <div
+            onClick={handleUnSavedJob}
+            className="flex items-center select-none gap-1 bg-slate-200 py-1 px-2 cursor-pointer"
+          >
             <IconTrash></IconTrash>
             <span className="md:text-sm text-xs rounded-sm">Bỏ lưu</span>
           </div>

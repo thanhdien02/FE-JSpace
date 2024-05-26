@@ -85,14 +85,23 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
           </Popover>
 
           <h4 className="line-clamp-1 text-gray-500 text-sm">
-            {item?.post?.description}
+            {item?.post?.company?.name}
           </h4>
           <div className="flex gap-1 overflow-hidden mt-1">
             <Tag className="min-w-[40px] line-clamp-1 max-w-[100px]">
               {item?.post?.location?.province}
             </Tag>
-            <Tag className="min-w-[40px] line-clamp-1 max-w-[100px]">
-              {item?.post?.jobType?.code}
+            <Tag className="min-w-[40px] line-clamp-1 max-w-[130px]">
+              {item?.post?.minPay != "0"
+                ? `${item?.post?.minPay.toLocaleString("vi", {
+                    style: "currency",
+                    currency: "VND",
+                  })} -`
+                : ""}{" "}
+              {item?.post?.maxPay.toLocaleString("vi", {
+                style: "currency",
+                currency: "VND",
+              })}
             </Tag>
           </div>
         </div>
