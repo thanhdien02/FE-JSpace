@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import CardManageJobSavePage from "../../components/card/CardManageJobSavePage";
-import { Pagination, Radio, RadioChangeEvent } from "antd";
+import { Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { jobGetSavedJob } from "../../store/job/job-slice";
+import { useSelector } from "react-redux";
 
 const ManageJobSavePage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
+  const { savedJobs, loadingJob, paginationSavedJob } = useSelector(
+    (state: any) => state.job
+  );
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [value, setValue] = useState(1);
-
+  const [page, setPage] = useState(1);
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
@@ -15,6 +23,12 @@ const ManageJobSavePage: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (user?.id) {
+      dispatch(jobGetSavedJob({ candidate_id: user?.id, page: page, size: 8 }));
+    }
+  }, [user, page]);
   return (
     <>
       <div className="p-5">
@@ -29,13 +43,31 @@ const ManageJobSavePage: React.FC = () => {
           </Radio.Group>
         </div>
         <div className="flex flex-col gap-5 mt-5">
-          <CardManageJobSavePage></CardManageJobSavePage>
-          <CardManageJobSavePage></CardManageJobSavePage>
-          <CardManageJobSavePage></CardManageJobSavePage>
-          <CardManageJobSavePage></CardManageJobSavePage>
+          {loadingJob ? (
+            <Skeleton />
+          ) : (
+            savedJobs?.length > 0 &&
+            savedJobs.map((item: any) => (
+              <CardManageJobSavePage
+                key={item?.id}
+                item={item}
+              ></CardManageJobSavePage>
+            ))
+          )}
         </div>
+
         <div className="flex justify-end mt-5">
-          <Pagination defaultCurrent={1} total={50} />
+          {savedJobs.length <= 0 ? (
+            <></>
+          ) : (
+            <Pagination
+              total={paginationSavedJob?.totalElements}
+              onChange={(e) => setPage(e)}
+              className="inline-block"
+              current={page}
+              pageSize={paginationSavedJob?.pageSize}
+            />
+          )}
         </div>
       </div>
     </>

@@ -9,6 +9,7 @@ interface IFile {
   fitJobs?: any;
   loadingJob?: boolean;
   messageJob?: string;
+  paginationSavedJob?: any;
 }
 
 const init: IFile = {
@@ -20,6 +21,7 @@ const init: IFile = {
   fitJobs: {},
   loadingJob: false,
   messageJob: "",
+  paginationSavedJob: {},
 };
 const jobSlice: any = createSlice({
   name: "job",
@@ -28,6 +30,9 @@ const jobSlice: any = createSlice({
     jobGetJobById: () => {},
     jobUpdateJob: () => {},
     jobGetHomeJob: () => {},
+    jobGetSavedJob: () => {},
+    jobGetJobFilter: () => {},
+    jobPostJob: () => {},
     jobUpdateLoadingRedux: (state: any, action: any) => ({
       ...state,
       loadingJob: action.payload.loadingJob,
@@ -36,12 +41,18 @@ const jobSlice: any = createSlice({
       ...state,
       homeJobs: action.payload.homeJobs,
     }),
+    jobUpdateSavedJobRedux: (state: any, action: any) => ({
+      ...state,
+      savedJobs: action.payload.savedJobs,
+    }),
     jobUpdateMessageRedux: (state: any, action: any) => ({
       ...state,
       messageJob: action.payload.messageJob,
     }),
-    jobGetJobFilter: () => {},
-    jobPostJob: () => {},
+    jobUpdateSavedPaginationRedux: (state: any, action: any) => ({
+      ...state,
+      paginationSavedJob: action.payload.paginationSavedJob,
+    }),
   },
 });
 export const {
@@ -53,5 +64,8 @@ export const {
   jobPostJob,
   jobGetHomeJob,
   jobUpdateHomeJobRedux,
+  jobGetSavedJob,
+  jobUpdateSavedJobRedux,
+  jobUpdateSavedPaginationRedux,
 } = jobSlice.actions;
 export default jobSlice.reducer;

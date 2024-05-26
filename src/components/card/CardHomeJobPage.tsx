@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import IconHeartFill from "../icons/IconHeartFill";
 import {
   candidateSaveJob,
+  candidateUnSaveJob,
   candidateUpdateMessageRedux,
 } from "../../store/candidate/candidate-slice";
 interface PropComponent {
@@ -17,23 +18,42 @@ interface PropComponent {
 }
 const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
   const { user } = useSelector((state: any) => state.auth);
-  const { messageCandidate } = useSelector((state: any) => state.candidate);
+  const { messageCandidate, loadingCandidate } = useSelector(
+    (state: any) => state.candidate
+  );
   const [checkSave, setCheckSave] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleSaveJob = () => {
+  const handleSaveAndUnSaveJob = () => {
     if (!user?.id) {
       message.info("Bạn cần đăng nhập để lưu tin");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
-      dispatch(
-        candidateSaveJob({ candidate_id: user?.id, post_id: item?.post?.id })
-      );
+      if (!loadingCandidate) {
+        if (checkSave) {
+          dispatch(
+            candidateUnSaveJob({
+              candidate_id: user?.id,
+              post_id: item?.post?.id,
+            })
+          );
+        } else {
+          dispatch(
+            candidateSaveJob({
+              candidate_id: user?.id,
+              post_id: item?.post?.id,
+            })
+          );
+        }
+      }
     }
   };
   useEffect(() => {
     if (messageCandidate === `savesuccess${item?.post?.id}`) {
       setCheckSave(true);
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    } else if (messageCandidate === `unsavesuccess${item?.post?.id}`) {
+      setCheckSave(false);
       dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
     }
   }, [messageCandidate]);
@@ -79,7 +99,7 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
 
         <div
           className="absolute bottom-2 right-2 cursor-pointer text-primary"
-          onClick={handleSaveJob}
+          onClick={handleSaveAndUnSaveJob}
         >
           {checkSave ? (
             <IconHeartFill className="" classIcon="!w-5 !h-5"></IconHeartFill>

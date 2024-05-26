@@ -2,6 +2,7 @@ import { call, put } from "redux-saga/effects";
 import { getToken, Token } from "../../utils/auth";
 import {
   requestCandidateSaveJob,
+  requestCandidateUnSaveJob,
   requestCandidateUpdateAvatar,
   requestCandidateUpdateBackground,
   requestCandidateUpdateIdentification,
@@ -43,7 +44,6 @@ function* handleCandidateUpdateIdentification(
 function* handleCandidateUpdateBackground(
   dataBackgroundCandidate: any
 ): Generator<any> {
-  console.log("🚀 ~ dataBackgroundCandidate:", dataBackgroundCandidate);
   try {
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
     const token: Token = getToken();
@@ -83,7 +83,6 @@ function* handleCandidateUpdateAvatar(
       dataAvatarCandidate?.payload?.candidate_id,
       token?.accessToken
     );
-    console.log("🚀 ~ response:", response);
     if (response?.data?.code === 1000) {
       message.success("Cập nhật background thành công.");
       yield call(handleAuthFetchMe);
@@ -106,7 +105,6 @@ function* handleCandidateSaveJob(dataCandiateSaveJob: any): Generator<any> {
       token?.accessToken
     );
     if (response?.data?.code === 1000) {
-      console.log("🚀 ~ function*handleCandidateSaveJob ~ response:", response);
       message.success("Lưu tin thành công.");
       yield put(
         candidateUpdateMessageRedux({
@@ -121,9 +119,35 @@ function* handleCandidateSaveJob(dataCandiateSaveJob: any): Generator<any> {
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
   }
 }
+function* handleCandidateUnSaveJob(dataCandiateSaveJob: any): Generator<any> {
+  try {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestCandidateUnSaveJob,
+      dataCandiateSaveJob?.payload?.candidate_id,
+      dataCandiateSaveJob?.payload?.post_id,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      message.success("Loại bỏ lưu thành công.");
+      yield put(
+        candidateUpdateMessageRedux({
+          messageCandidate:
+            `unsavesuccess` + dataCandiateSaveJob?.payload?.post_id,
+        })
+      );
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
+  }
+}
 export {
   handleCandidateUpdateIdentification,
   handleCandidateUpdateBackground,
   handleCandidateUpdateAvatar,
   handleCandidateSaveJob,
+  handleCandidateUnSaveJob,
 };

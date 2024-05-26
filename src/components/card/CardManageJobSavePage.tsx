@@ -1,18 +1,29 @@
 import React from "react";
-
 import logo from "../../assets/bg-login.jpg";
 import IconTrash from "../icons/IconTrash";
 import IconMoney from "../icons/IconMoney";
 import { Popover } from "antd";
 import { useNavigate } from "react-router-dom";
-const CardManageJobSavePage: React.FC = () => {
+
+interface PropComponent {
+  className?: string;
+  item?: any;
+}
+const CardManageJobSavePage: React.FC<PropComponent> = ({
+  className,
+  item,
+}) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="relative flex md:gap-5 gap-3 w-full items-center md:p-3 p-2 shadow-sm lg:h-[150px] border border-solid border-gray-200 rounded-md">
+      <div
+        className={`relative flex md:gap-5 gap-3 w-full items-center md:p-3 p-2 shadow-sm lg:h-[150px] border border-solid border-gray-200 rounded-md ${className}`}
+      >
         <div className="absolute top-2 right-2 hidden lg:flex items-center gap-2 font-medium text-primary px-2 py-1 rounded-sm cursor-pointer">
           <IconMoney classIcon="!w-5 !h-5"></IconMoney>
-          <span className="text-sm">Thỏa thuận</span>
+          <span className="text-sm">
+            {item?.minPay != "0" ? `${item?.minPay} -` : ""} {item?.maxPay}
+          </span>
         </div>
         <div className="lg:w-[20%] md:w-[20%] w-[30%] self-start mt-2">
           <img
@@ -22,34 +33,26 @@ const CardManageJobSavePage: React.FC = () => {
           />
         </div>
         <div className="flex flex-col w-full self-start">
-          <Popover
-            content={
-              <p className="w-[300px]">
-                Font end developer for 2 years (Senior) 10 - 20tr many benifit
-                and team building. Apply now that bench
-              </p>
-            }
-          >
+          <Popover content={<p className="w-[300px]">{item?.title}</p>}>
             <h4
               className="lg:w-[80%] cursor-pointer text-base font-medium line-clamp-1"
               onClick={() => {
                 navigate("/jobs/1");
               }}
             >
-              Font end developer for 2 years (Senior) 10 - 20tr many benifit and
-              team building. Apply now that bench
+              {item?.title}
             </h4>
           </Popover>
 
           <h5 className="text-gray-500 line-clamp-1 lg:text-base md:text-sm text-xs mt-1">
-            Công ty Cổ phần Solazu
+            {item?.company?.name}
           </h5>
           <p className="md:text-sm text-xs text-gray-500">
-            Đã lưu: 20/04/2024 - 14:43
+            Ngày kết thúc: {item?.closeDate}
           </p>
           <div className="flex gap-3 items-center md:mt-3 mt-2">
             <span className="p-1 text-xs bg-gray-200 rounded-sm">
-              Ho Chi Minh
+              {item?.location?.province}
             </span>
           </div>
         </div>

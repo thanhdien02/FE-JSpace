@@ -1,12 +1,14 @@
 import { takeLatest } from "redux-saga/effects";
 import {
   candidateSaveJob,
+  candidateUnSaveJob,
   candidateUpdateAvatar,
   candidateUpdateBackground,
   candidateUpdateCandidate,
 } from "./candidate-slice";
 import {
   handleCandidateSaveJob,
+  handleCandidateUnSaveJob,
   handleCandidateUpdateAvatar,
   handleCandidateUpdateBackground,
   handleCandidateUpdateIdentification,
@@ -23,4 +25,5 @@ export default function* authSaga() {
   );
   yield takeLatest(candidateUpdateAvatar.type, handleCandidateUpdateAvatar);
   yield takeLatest(candidateSaveJob.type, handleCandidateSaveJob);
+  yield takeLatest(candidateUnSaveJob.type, handleCandidateUnSaveJob);
 }

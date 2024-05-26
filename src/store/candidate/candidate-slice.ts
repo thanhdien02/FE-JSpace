@@ -29,6 +29,7 @@ const candidateSlice: any = createSlice({
     candidateUpdateBackground: () => {},
     candidateUpdateAvatar: () => {},
     candidateSaveJob: () => {},
+    candidateUnSaveJob: () => {},
   },
 });
 export const {
@@ -38,5 +39,6 @@ export const {
   candidateUpdateBackground,
   candidateUpdateAvatar,
   candidateSaveJob,
+  candidateUnSaveJob,
 } = candidateSlice.actions;
 export default candidateSlice.reducer;
