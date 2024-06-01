@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import banner2 from "../../assets/banner3.jpg";
 import { Input, Select } from "antd";
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
-import { dataAddress, dataExperience, dataSalary } from "../../utils/dataFetch";
+import { dataSalary } from "../../utils/dataFetch";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {
+  commonGetExperience,
+  commonGetLocation,
+} from "../../store/common/common-slice";
 interface Inputs {
   name?: string;
   salary?: string;
@@ -12,12 +18,18 @@ interface Inputs {
   location?: string;
 }
 const JobDetailBannerPage: React.FC = () => {
+  const { locations, experiences } = useSelector((state: any) => state.common);
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const { handleSubmit, setValue } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (dataSearchJob: Inputs) => {
     console.log("🚀 ~ dataSearchJob:", dataSearchJob);
     // dispatch(candidateUpdateCandidate(dataUpdadeCandidate));
   };
+  useEffect(() => {
+    dispatch(commonGetLocation());
+    dispatch(commonGetExperience());
+  }, []);
   return (
     <>
       <div className={`relative w-full lg:h-[85px] h-[80px]`}>
@@ -59,7 +71,8 @@ const JobDetailBannerPage: React.FC = () => {
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
                   }
-                  options={dataAddress}
+                  options={locations}
+                  fieldNames={{ label: "province", value: "value" }}
                   onChange={(e) => {
                     setValue("location", e);
                   }}
@@ -77,7 +90,8 @@ const JobDetailBannerPage: React.FC = () => {
                   onChange={(e) => {
                     setValue("experience", e);
                   }}
-                  options={dataExperience}
+                  fieldNames={{ label: "code", value: "value" }}
+                  options={experiences}
                 />
                 <Select
                   showSearch

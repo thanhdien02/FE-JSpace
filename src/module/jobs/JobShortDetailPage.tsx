@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import IconHeart from "../../components/icons/IconHeart";
 import IconHeartFill from "../../components/icons/IconHeartFill";
 import IconChervonRight from "../../components/icons/IconChervonRight";
@@ -9,6 +9,13 @@ import { message } from "antd";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 import { useTranslation } from "react-i18next";
 import IconClock from "../../components/icons/IconClock";
+import {
+  candidateSaveJob,
+  candidateUnSaveJob,
+  candidateUpdateMessageRedux,
+} from "../../store/candidate/candidate-slice";
+import { CSSTransition } from "react-transition-group";
+import ApplyJobPage from "../../page/CommonPage/ApplyJobPage";
 interface PropComponent {
   id?: string;
   onClick?: any;
@@ -16,22 +23,60 @@ interface PropComponent {
   dataJob?: any;
 }
 const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
+  const { messageCandidate, loadingCandidate } = useSelector(
+    (state: any) => state.candidate
+  );
   const { user } = useSelector((state: any) => state.auth);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const handleSaveJob = () => {
+  const [checkApply, setCheckApply] = useState(false);
+  const [checkSave, setCheckSave] = useState(false);
+  const handleSaveAndUnsaved = () => {
     if (!user?.id) {
       message.info("Bạn cần đăng nhập để lưu tin");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    } else {
+      if (!loadingCandidate) {
+        if (checkSave) {
+          dispatch(
+            candidateUnSaveJob({
+              candidate_id: user?.id,
+              post_id: dataJob?.post?.id,
+            })
+          );
+        } else {
+          dispatch(
+            candidateSaveJob({
+              candidate_id: user?.id,
+              post_id: dataJob?.post?.id,
+            })
+          );
+        }
+      }
     }
   };
   const handleApplyJob = () => {
     if (!user?.id) {
       message.info("Bạn cần đăng nhập để ứng tuyển");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    } else {
+      if (!dataJob?.applied) {
+        setCheckApply(!checkApply);
+      }
     }
   };
-
+  useEffect(() => {
+    if (messageCandidate === `savesuccess${dataJob?.post?.id}`) {
+      setCheckSave(true);
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    } else if (messageCandidate === `unsavesuccess${dataJob?.post?.id}`) {
+      setCheckSave(false);
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    }
+  }, [messageCandidate]);
+  useEffect(() => {
+    setCheckSave(dataJob?.liked);
+  }, [dataJob]);
   return (
     <>
       <div className="w-full sticky top-0 h-screen">
@@ -69,18 +114,18 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
             type="button"
             onClick={handleApplyJob}
           >
-            {dataJob?.liked ? `${t("applied")}` : `${t("apply")}`}
+            {dataJob?.applied ? `${t("applied")}` : `${t("apply")}`}
           </button>
-          {dataJob?.liked ? (
+          {checkSave ? (
             <span
-              onClick={handleSaveJob}
+              onClick={handleSaveAndUnsaved}
               className="cursor-pointer px-4 border text-primary border-primary border-solid py-2 rounded-md font-bold"
             >
               <IconHeartFill classIcon="w-6 h-6"></IconHeartFill>
             </span>
           ) : (
             <span
-              onClick={handleSaveJob}
+              onClick={handleSaveAndUnsaved}
               className="cursor-pointer px-4 border text-primary border-primary border-solid py-2 rounded-md font-bold"
             >
               <IconHeart classIcon="w-6 h-6"></IconHeart>
@@ -97,6 +142,20 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
           ></p>
         </div>
       </div>
+
+      {/*  */}
+      <CSSTransition
+        in={checkApply}
+        timeout={200}
+        classNames="fade"
+        unmountOnExit
+      >
+        <ApplyJobPage
+          onClick={setCheckApply}
+          className=""
+          jobId={dataJob?.post?.id}
+        ></ApplyJobPage>
+      </CSSTransition>
     </>
   );
 };

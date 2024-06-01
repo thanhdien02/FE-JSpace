@@ -1,6 +1,9 @@
 import { call, put } from "redux-saga/effects";
 import { getToken, Token } from "../../utils/auth";
-import { applyUpdateLoadingRedux } from "./apply-slice";
+import {
+  applyUpdateLoadingRedux,
+  applyUpdateMessageRedux,
+} from "./apply-slice";
 import { requestApplyJobApply } from "./apply-requests";
 import { message } from "antd";
 
@@ -16,6 +19,11 @@ function* handleApplyJobApply(dataApplyJob: any): Generator<any> {
       token?.accessToken
     );
     if (response?.data?.code === 1000) {
+      yield put(
+        applyUpdateMessageRedux({
+          messageApply: "success" + dataApplyJob?.payload?.job_id,
+        })
+      );
       message.success("Ứng tuyển thành công.");
     }
   } catch (error: any) {

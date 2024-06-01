@@ -9,9 +9,11 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { jobGetJobByIdWithCandidate } from "../../store/job/job-slice";
 import { useSelector } from "react-redux";
+import { applyUpdateMessageRedux } from "../../store/apply/apply-slice";
 
 const JobDetailPage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
+  const { messageApply } = useSelector((state: any) => state.apply);
   const dispatch = useDispatch();
   const { jobId } = useParams();
 
@@ -24,7 +26,16 @@ const JobDetailPage: React.FC = () => {
         jobGetJobByIdWithCandidate({ job_id: jobId, candidate_id: user?.id })
       );
     }
-  }, [user, jobId]);
+  }, [user, jobId, messageApply]);
+  useEffect(() => {
+    if (messageApply == "success") {
+      dispatch(
+        jobGetJobByIdWithCandidate({ job_id: jobId, candidate_id: user?.id })
+      );
+      dispatch(applyUpdateMessageRedux({ messageApply: "" }));
+    }
+  }, [messageApply]);
+
   return (
     <>
       <JobDetailBannerPage></JobDetailBannerPage>

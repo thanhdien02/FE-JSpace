@@ -88,7 +88,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
   }, [messageCandidate]);
   useEffect(() => {
     setCheckSave(jobByIdWithCandidate?.liked);
-  }, []);
+  }, [jobByIdWithCandidate]);
   return (
     <>
       <div className={`p-6 rounded-sm ${className}`}>
@@ -235,7 +235,11 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
         classNames="fade"
         unmountOnExit
       >
-        <ApplyJobPage onClick={setCheckApply} className=""></ApplyJobPage>
+        <ApplyJobPage
+          onClick={setCheckApply}
+          className=""
+          jobId={jobByIdWithCandidate?.post?.id}
+        ></ApplyJobPage>
       </CSSTransition>
     </>
   );

@@ -70,7 +70,7 @@ const CardManageJobSavePage: React.FC<PropComponent> = ({
             <h4
               className="lg:w-[80%] cursor-pointer text-base font-medium line-clamp-1"
               onClick={() => {
-                navigate("/jobs/1");
+                navigate(`/jobs/${item?.id}`);
               }}
             >
               {item?.title}

@@ -22,18 +22,23 @@ import {
 } from "../../store/file/file-slice";
 import Loading from "../../components/loading/Loading";
 import { applyJobApply } from "../../store/apply/apply-slice";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 interface PropComponent {
   className?: string;
+  jobId?: string;
   onClick?: any;
 }
-const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
+const ApplyJobPage: React.FC<PropComponent> = ({
+  className,
+  onClick,
+  jobId,
+}) => {
   const { user } = useSelector((state: any) => state.auth);
   const { loadingApply } = useSelector((state: any) => state.apply);
   const { files, loadingFile, messageFile } = useSelector(
     (state: any) => state.file
   );
-  const { jobId } = useParams();
+  // const { jobId } = useParams();
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState("");
   const [file, setFile] = useState<UploadFile>();

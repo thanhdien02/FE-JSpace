@@ -202,13 +202,13 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                   src="https://static.topcv.vn/srp/website/images/flags/vietnam.png"
                   alt=""
                   onClick={() => changeLanguage("vi")}
-                  className="w-6 h-6 cursor-pointer object-contain"
+                  className="w-6 h-4 cursor-pointer object-cover"
                 />
                 <img
                   src="https://static.topcv.vn/srp/website/images/flags/uk.jpeg"
                   alt=""
                   onClick={() => changeLanguage("en")}
-                  className="w-6 h-6 cursor-pointer object-contain"
+                  className="w-6 h-4 cursor-pointer object-cover"
                 />
               </div>
             </div>

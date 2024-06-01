@@ -2,10 +2,12 @@ import React from "react";
 import IconGroupUser from "../../components/icons/IconGroupUser";
 import IconClock from "../../components/icons/IconClock";
 import IconBriefCase from "../../components/icons/IconBriefCase";
-import { HourglassOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Skeleton } from "antd";
+import IconAcademic from "../../components/icons/IconAcademic";
+import IconCog from "../../components/icons/IconCog";
+import IconClipboardDocument from "../../components/icons/IconClipboardDocument";
 
 interface PropComponent {
   className?: string;
@@ -29,20 +31,6 @@ const JobDetailInformationCommonPage: React.FC<PropComponent> = ({
           </div>
         ) : (
           <div className="mt-5 flex flex-col gap-5">
-            <div className="flex gap-4 items-center">
-              <HourglassOutlined
-                style={{ fontSize: "23px" }}
-                className="p-3 bg-primary rounded-full text-white"
-              />
-              <div className="flex flex-col">
-                <span className="text-sm text-gray-500 line-clamp-1">
-                  {t("rank")}
-                </span>
-                <span className="font-medium line-clamp-1">
-                  {jobByIdWithCandidate?.post?.rank?.code}
-                </span>
-              </div>
-            </div>
             <div className="flex gap-4 items-center">
               <IconBriefCase className="p-3 bg-primary rounded-full text-white"></IconBriefCase>
               <div className="flex flex-col">
@@ -73,6 +61,44 @@ const JobDetailInformationCommonPage: React.FC<PropComponent> = ({
                 </span>
                 <span className="font-medium line-clamp-1">
                   {jobByIdWithCandidate?.post?.jobType?.code}
+                </span>
+              </div>
+            </div>
+            <div className="flex gap-4 items-center">
+              <IconAcademic className="p-3 bg-primary rounded-full text-white"></IconAcademic>
+              <div className="flex flex-col">
+                <span className="text-sm text-gray-500 line-clamp-1">
+                  {t("rank")}
+                </span>
+                <span className="font-medium line-clamp-1">
+                  {jobByIdWithCandidate?.post?.rank?.code}
+                </span>
+              </div>
+            </div>
+            <div className="flex gap-4 items-center">
+              <IconCog className="p-3 bg-primary rounded-full text-white"></IconCog>
+              <div className="flex flex-col">
+                <span className="text-sm text-gray-500 line-clamp-1">
+                  {t("gender")}
+                </span>
+                <span className="font-medium line-clamp-1">
+                  {jobByIdWithCandidate?.post?.gender?.code}
+                </span>
+              </div>
+            </div>
+            <div className="flex gap-4 items-center">
+              <IconClipboardDocument className="p-3 bg-primary rounded-full text-white"></IconClipboardDocument>
+              <div className="flex flex-col">
+                <span className="text-sm text-gray-500 line-clamp-1">
+                  {t("skills")}
+                </span>
+                <span className="font-medium line-clamp-1 mt-1">
+                  {jobByIdWithCandidate?.post?.skills?.length > 0 &&
+                    jobByIdWithCandidate?.post?.skills?.map((item: any) => (
+                      <span className="p-1 bg-gray-200 mr-2" key={item?.id}>
+                        {item?.name}
+                      </span>
+                    ))}
                 </span>
               </div>
             </div>

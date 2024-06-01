@@ -114,6 +114,7 @@
   "jobtype": "Job Type",
   "rank": "Rank",
   "experience": "Experience",
+  "gender": "Gender",
   "quantity": "Quantity",
   "detail": "See detail",
   "apply": "Apply now",

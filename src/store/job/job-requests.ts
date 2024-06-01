@@ -44,7 +44,7 @@ export const requestJobGetHomeJob = (
 export const requestJobGetRelativeJob = (
   candidate_id: string,
   page: string = "1",
-  size: string = "9",
+  size: string = "12",
   accessToken: string
 ) => {
   if (!accessToken) return;
