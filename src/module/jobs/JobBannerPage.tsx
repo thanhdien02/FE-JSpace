@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import banner2 from "../../assets/banner3.jpg";
 import { Input, Select } from "antd";
@@ -9,15 +9,17 @@ import {
   SearchOutlined,
   UpOutlined,
 } from "@ant-design/icons";
-import {
-  dataAddress,
-  dataExperience,
-  dataHighPosition,
-  dataSalary,
-  dataSkills,
-  dataTimeWork,
-} from "../../utils/dataFetch";
+import { dataSalary } from "../../utils/dataFetch";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  commonGetExperience,
+  commonGetJobType,
+  commonGetLocation,
+  commonGetRank,
+  commonGetSkills,
+} from "../../store/common/common-slice";
 interface Inputs {
   name?: string;
   salary?: string;
@@ -25,6 +27,10 @@ interface Inputs {
   location?: string;
 }
 const JobBannerPage: React.FC = () => {
+  const { locations, ranks, jobTypes, experiences, skills } = useSelector(
+    (state: any) => state.common
+  );
+  const dispatch = useDispatch();
   const {
     handleSubmit,
     setValue,
@@ -36,6 +42,13 @@ const JobBannerPage: React.FC = () => {
     console.log("🚀 ~ dataSearchJob:", dataSearchJob);
     // dispatch(candidateUpdateCandidate(dataUpdadeCandidate));
   };
+  useEffect(() => {
+    dispatch(commonGetLocation());
+    dispatch(commonGetJobType());
+    dispatch(commonGetRank());
+    dispatch(commonGetExperience());
+    dispatch(commonGetSkills());
+  }, []);
   return (
     <>
       <div
@@ -76,12 +89,13 @@ const JobBannerPage: React.FC = () => {
                   showSearch
                   allowClear
                   placeholder={t("placeholderaddress")}
+                  fieldNames={{ label: "province", value: "value" }}
                   className="hidden lg:block address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
                   }
-                  options={dataAddress}
+                  options={locations}
                   onChange={(e) => {
                     setValue("location", e);
                   }}
@@ -99,7 +113,8 @@ const JobBannerPage: React.FC = () => {
                   onChange={(e) => {
                     setValue("experience", e);
                   }}
-                  options={dataExperience}
+                  fieldNames={{ label: "code", value: "value" }}
+                  options={experiences}
                 />
                 <Select
                   showSearch
@@ -161,7 +176,8 @@ const JobBannerPage: React.FC = () => {
                     tokenSeparators={[","]}
                     allowClear
                     placeholder={t("skills")}
-                    options={dataSkills}
+                    options={skills.length > 0 ? skills : []}
+                    fieldNames={{ label: "name", value: "id" }}
                     className={`skill address w-full text-base rounded-lg bg-white`}
                   />
                 </div>
@@ -169,24 +185,26 @@ const JobBannerPage: React.FC = () => {
                   <Select
                     showSearch
                     placeholder={t("jobtype")}
+                    fieldNames={{ label: "code", value: "value" }}
                     className={`address w-full text-base rounded-lg h-10 bg-white`}
                     optionFilterProp="children"
                     filterOption={(input, option: any) =>
                       (option?.label ?? "").includes(input)
                     }
-                    options={dataTimeWork}
+                    options={jobTypes}
                   />
                 </div>
                 <div className={`lg:w-[20%] w-auto`}>
                   <Select
                     showSearch
                     placeholder={t("rank")}
+                    fieldNames={{ label: "code", value: "value" }}
                     className={`address w-full text-base rounded-lg h-10 bg-white`}
                     optionFilterProp="children"
                     filterOption={(input, option: any) =>
                       (option?.label ?? "").includes(input)
                     }
-                    options={dataHighPosition}
+                    options={ranks}
                   />
                 </div>
               </div>

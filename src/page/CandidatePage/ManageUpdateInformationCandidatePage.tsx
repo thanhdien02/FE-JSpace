@@ -1,6 +1,6 @@
 import { CameraOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 import React, { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Button from "../../components/input";
@@ -14,9 +14,10 @@ import {
 import bg from "../../assets/banner3.jpg";
 import { message, Spin, Upload, UploadProps } from "antd";
 import { useTranslation } from "react-i18next";
+import InputNumber from "../../components/input/InputNumber";
 interface Inputs {
   name: string;
-  phone: number;
+  phone: string;
   email: string;
   id: string;
 }
@@ -31,6 +32,7 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (dataUpdadeCandidate: Inputs) => {
@@ -224,13 +226,17 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
           </label>
           <div className="mt-2 relative">
             <IconPhone className="absolute top-0 left-0 translate-x-[50%] translate-y-[50%] text-gray-400"></IconPhone>
-            <input
-              {...register("phone", {})}
-              placeholder="Số điện thoại"
-              type="number"
-              id="phone"
-              autoComplete="off"
-              className="h-full focus:border-solid focus:border-stone-400/70 transition-all outline-none pr-4 pl-12 py-3 border border-stone-200 border-solid w-full rounded-md"
+            <Controller
+              name="phone"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <InputNumber
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Số điện thoại"
+                />
+              )}
             />
           </div>
         </div>

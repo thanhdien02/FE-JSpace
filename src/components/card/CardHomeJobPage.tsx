@@ -77,7 +77,7 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
             <h3
               className="line-clamp-1 font-medium cursor-pointer hover:text-primary transition-all"
               onClick={() => {
-                navigate("/jobs/1");
+                navigate(`/jobs/${item?.post?.id}`);
               }}
             >
               {item?.post?.title}
@@ -88,10 +88,10 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
             {item?.post?.company?.name}
           </h4>
           <div className="flex gap-1 overflow-hidden mt-1">
-            <Tag className="min-w-[40px] line-clamp-1 max-w-[100px]">
+            <Tag className="min-w-[40px] line-clamp-1 max-w-[600px]">
               {item?.post?.location?.province}
             </Tag>
-            <Tag className="min-w-[40px] line-clamp-1 max-w-[130px]">
+            <Tag className="min-w-[40px] line-clamp-1 max-w-[115px]">
               {item?.post?.minPay != "0"
                 ? `${item?.post?.minPay.toLocaleString("vi", {
                     style: "currency",

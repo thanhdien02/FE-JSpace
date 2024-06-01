@@ -174,7 +174,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                       <img
                         src={user?.picture}
                         alt=""
-                        className="w-[40px] h-[40px] rounded-lg"
+                        className="w-[40px] h-[40px] rounded-lg object-cover"
                       />
                       <div className="text-sm">
                         <h3 className="font-semibold text-line-clamp max-w-[250px]">

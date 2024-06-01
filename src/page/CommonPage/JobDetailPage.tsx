@@ -5,11 +5,26 @@ import JobDetailInformationJobPage from "../../module/jobs/JobDetailInformationJ
 import JobDetailDescriptionJobPage from "../../module/jobs/JobDetailDescriptionJobPage";
 import JobResultFilterPage from "../../module/jobs/JobResultFilterPage";
 import JobDetailInformationCommonPage from "../../module/jobs/JobDetailInformationCommonPage";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { jobGetJobByIdWithCandidate } from "../../store/job/job-slice";
+import { useSelector } from "react-redux";
 
 const JobDetailPage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
+  const { jobId } = useParams();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [jobId]);
+  useEffect(() => {
+    if (user?.id) {
+      dispatch(
+        jobGetJobByIdWithCandidate({ job_id: jobId, candidate_id: user?.id })
+      );
+    }
+  }, [user, jobId]);
   return (
     <>
       <JobDetailBannerPage></JobDetailBannerPage>

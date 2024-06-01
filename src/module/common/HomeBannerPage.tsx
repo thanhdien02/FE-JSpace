@@ -1,18 +1,30 @@
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
 import { Input, Select } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import bannerbg from "../../assets/banner3.jpg";
-import { dataAddress, dataExperience, dataSalary } from "../../utils/dataFetch";
+import { dataSalary } from "../../utils/dataFetch";
 import NumberCounter from "../../components/numbercount/NumberCounter";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import {
+  commonGetExperience,
+  commonGetLocation,
+} from "../../store/common/common-slice";
+import { useSelector } from "react-redux";
 
 const HomeBannerPage: React.FC = () => {
+  const { locations, experiences } = useSelector((state: any) => state.common);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     console.log(e);
   };
+  useEffect(() => {
+    dispatch(commonGetLocation());
+    dispatch(commonGetExperience());
+  }, []);
   return (
     <>
       <div className="relative">
@@ -57,12 +69,8 @@ const HomeBannerPage: React.FC = () => {
                 filterOption={(input, option: any) =>
                   (option?.label ?? "").includes(input)
                 }
-                // filterSort={(optionA, optionB) =>
-                //   (optionA?.label ?? "")
-                //     .toLowerCase()
-                //     .localeCompare((optionB?.label ?? "").toLowerCase())
-                // }
-                options={dataAddress}
+                fieldNames={{ label: "province", value: "value" }}
+                options={locations}
               />
               <span className="hidden lg:flex z-10 bg-white w-[1px] items-center">
                 <span className="bg-gray-300 h-[60%] w-full "></span>
@@ -76,12 +84,8 @@ const HomeBannerPage: React.FC = () => {
                 filterOption={(input, option: any) =>
                   (option?.label ?? "").includes(input)
                 }
-                // filterSort={(optionA, optionB) =>
-                //   (optionA?.label ?? "")
-                //     .toLowerCase()
-                //     .localeCompare((optionB?.label ?? "").toLowerCase())
-                // }
-                options={dataExperience}
+                options={experiences}
+                fieldNames={{ label: "code", value: "value" }}
               />
               <span className="hidden lg:flex z-10 bg-white w-[1px]  items-center">
                 <span className="hidden lg:flex bg-gray-300 h-[60%] w-full "></span>
@@ -95,11 +99,7 @@ const HomeBannerPage: React.FC = () => {
                 filterOption={(input, option: any) =>
                   (option?.label ?? "").includes(input)
                 }
-                // filterSort={(optionA, optionB) =>
-                //   (optionA?.label ?? "")
-                //     .toLowerCase()
-                //     .localeCompare((optionB?.label ?? "").toLowerCase())
-                // }
+                fieldNames={{ label: "code", value: "value" }}
                 options={dataSalary}
               />
             </div>

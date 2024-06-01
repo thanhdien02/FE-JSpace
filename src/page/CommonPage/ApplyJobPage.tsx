@@ -4,7 +4,15 @@ import RadioButton from "../../components/radio/RadioButton";
 import IconFolder from "../../components/icons/IconFolder";
 import Dragger from "antd/es/upload/Dragger";
 import { EditOutlined, InboxOutlined } from "@ant-design/icons";
-import { Button, Divider, Empty, message, UploadFile, UploadProps } from "antd";
+import {
+  Button,
+  Divider,
+  Empty,
+  message,
+  Skeleton,
+  UploadFile,
+  UploadProps,
+} from "antd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
@@ -12,20 +20,26 @@ import {
   fileUpdateMessageRedux,
   fileUploadFile,
 } from "../../store/file/file-slice";
+import Loading from "../../components/loading/Loading";
+import { applyJobApply } from "../../store/apply/apply-slice";
+import { useParams } from "react-router-dom";
 interface PropComponent {
   className?: string;
   onClick?: any;
 }
 const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
   const { user } = useSelector((state: any) => state.auth);
+  const { loadingApply } = useSelector((state: any) => state.apply);
   const { files, loadingFile, messageFile } = useSelector(
     (state: any) => state.file
   );
+  const { jobId } = useParams();
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState("");
   const [file, setFile] = useState<UploadFile>();
   const [selectCV, setSelectCV] = useState(false);
   const [cvchoose, setCVChoose] = useState<any>(null);
+
   const handleOptionChange = (e: any) => {
     setSelectedOption(e.target.value);
     console.log("🚀 ~ handleOptionChange ~ e.target.value:", e.target.value);
@@ -52,6 +66,20 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
   };
   const handleUpload = () => {
     dispatch(fileUploadFile({ file, candidate_id: user?.id }));
+  };
+  const handleApply = () => {
+    if (user?.id) {
+      if (selectedOption == "option2") {
+        console.log("🚀 ~ cvchoose:", cvchoose);
+        dispatch(
+          applyJobApply({
+            candidate_id: user?.id,
+            job_id: jobId,
+            resume_id: cvchoose?.id,
+          })
+        );
+      }
+    }
   };
   useEffect(() => {
     if (messageFile == "success") {
@@ -149,7 +177,8 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
                                 <input
                                   id="name"
                                   type="text"
-                                  value={user?.name}
+                                  value={user?.name ? user?.name : ""}
+                                  onChange={() => {}}
                                   placeholder="Họ và tên"
                                   className="w-full mt-2 px-4 py-2 rounded-md outline-none border border-gray-200 border-solid"
                                 />
@@ -164,6 +193,7 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
                                     id="email"
                                     type="email"
                                     value={user?.email}
+                                    onChange={() => {}}
                                     placeholder="Email"
                                     className="w-full mt-2 px-4 py-2 rounded-md outline-none border border-gray-200 border-solid"
                                   />
@@ -177,6 +207,7 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
                                     id="phone"
                                     type="number"
                                     value={user?.phone}
+                                    onChange={() => {}}
                                     placeholder=" Số điện thoại"
                                     className="w-full mt-2 px-4 py-2 rounded-md outline-none border border-gray-200 border-solid"
                                   />
@@ -187,7 +218,9 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
                             <>
                               <h3 className="font-medium">CV đã tải lên</h3>
                               <div className="flex flex-col gap-3 mt-2">
-                                {files?.content?.length <= 0 ? (
+                                {loadingFile ? (
+                                  <Skeleton />
+                                ) : files?.content?.length <= 0 ? (
                                   <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                                 ) : (
                                   files?.content?.length > 0 &&
@@ -283,8 +316,10 @@ const ApplyJobPage: React.FC<PropComponent> = ({ className, onClick }) => {
               <button
                 className="grow px-4 py-2 rounded-md bg-primary text-white font-medium hover:opacity-80 transition-all"
                 type="button"
+                onClick={handleApply}
+                disabled={loadingApply}
               >
-                Ứng tuyển
+                {loadingApply ? <Loading></Loading> : <span>Ứng tuyển</span>}
               </button>
             </div>
           </div>
