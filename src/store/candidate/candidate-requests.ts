@@ -87,3 +87,36 @@ export const requestCandidateUnSaveJob = (
     }
   );
 };
+
+export const requestCandidateDeleteAvatar = (
+  avatar_id: string,
+  candidate_id: string = "",
+  accessToken: string
+) => {
+  if (accessToken === undefined || candidate_id == "") return;
+  return axios.delete(
+    `${API}/api/v1/candidates/${candidate_id}/delete-avatar?avatarId=${avatar_id}`,
+    {
+      headers: {
+        "Content-Type": "multipart/form-datas",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+export const requestCandidateDeleteBackground = (
+  background_id: string,
+  candidate_id: string = "",
+  accessToken: string
+) => {
+  if (accessToken === undefined || candidate_id == "") return;
+  return axios.delete(
+    `${API}/api/v1/candidates/${candidate_id}/delete-background?backgroundId=${background_id}`,
+    {
+      headers: {
+        "Content-Type": "multipart/form-datas",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};

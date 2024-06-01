@@ -1,20 +1,19 @@
 import { CameraOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Button from "../../components/input";
 import IconPhone from "../../components/icons/IconPhone";
 import {
-  candidateUpdateAvatar,
-  candidateUpdateBackground,
   candidateUpdateCandidate,
   candidateUpdateMessageRedux,
 } from "../../store/candidate/candidate-slice";
-import bg from "../../assets/banner3.jpg";
-import { message, Spin, Upload, UploadProps } from "antd";
+import { Avatar, message, Spin } from "antd";
 import { useTranslation } from "react-i18next";
 import InputNumber from "../../components/input/InputNumber";
+import CandidateChangeAccountAvatarPage from "./CandidateChangeAccountAvatarPage";
+import CandidateChangeAccountBackgroundPage from "./CandidateChangeAccountBackgroundPage";
 interface Inputs {
   name: string;
   phone: string;
@@ -28,6 +27,8 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
   );
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [checkChangeAvatar, setCheckChangeAvatar] = useState(false);
+  const [checkChangeBackground, setCheckChangeBackground] = useState(false);
   const {
     register,
     handleSubmit,
@@ -52,42 +53,6 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
       dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
     }
   }, [messageCandidate]);
-  const propsBackground: UploadProps = {
-    beforeUpload: (file) => {
-      const isPNG = file.type === "image/png" || "image/jpg";
-      if (!isPNG) {
-        message.error(`${file.name} is not a png file`);
-      }
-      return isPNG || Upload.LIST_IGNORE;
-    },
-    onChange: (info: any) => {
-      dispatch(
-        candidateUpdateBackground({
-          file: info.file,
-          candidate_id: user?.id,
-        })
-      );
-    },
-    customRequest: () => {},
-  };
-  const propsAvatar: UploadProps = {
-    beforeUpload: (file) => {
-      const isPNG = file.type === "image/png" || "image/jpg";
-      if (!isPNG) {
-        message.error(`${file.name} is not a png file`);
-      }
-      return isPNG || Upload.LIST_IGNORE;
-    },
-    onChange: (info: any) => {
-      dispatch(
-        candidateUpdateAvatar({
-          file: info.file,
-          candidate_id: user?.id,
-        })
-      );
-    },
-    customRequest: () => {},
-  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -101,47 +66,76 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
         <h2 className="font-bold text-lg mt-3 text-gray-800">
           {t("manage.information.title")}
         </h2>
-        <div className="relative flex justify-center pt-5">
-          {loadingCandidate ? (
-            <div className="w-full flex justify-center items-center h-[150px] bg-gray-200">
-              <Spin />
-            </div>
-          ) : (
-            <div className="w-full relative">
-              <Upload {...propsBackground} className="absolute left-2 top-2">
-                <button
-                  type="button"
-                  className="bg-white py-1 px-2 rounded-sm  text-sm"
-                >
-                  {t("manage.information.selectbackground")}
-                </button>
-              </Upload>
-              <img
-                src={user?.background ? user?.background : bg}
-                className="w-full h-[150px] object-cover"
-                alt=""
-              />
-            </div>
-          )}
-
-          <div className="absolute -bottom-8 inline-block">
-            {!loadingCandidate ? (
-              <Upload {...propsAvatar}>
-                <img
-                  src={user?.picture ? user?.picture : bg}
-                  alt=""
-                  className="w-[75px] h-[75px] rounded-full cursor-pointer object-cover"
-                />
-                <CameraOutlined
-                  className="absolute bottom-2 right-0 bg-blue-50 p-2 rounded-full cursor-pointer"
-                  style={{ fontSize: "18px" }}
-                />
-              </Upload>
-            ) : (
-              <div className="w-[75px] h-[75px] rounded-full flex bg-gray-100">
-                <Spin className="m-auto" />
+        <div className="flex relative pt-5 h-[200px] justify-center">
+          <div className="absolute inset-0 bottom-8 bg-blue-100">
+            <>
+              <div
+                onClick={() => setCheckChangeBackground(!checkChangeBackground)}
+                className="absolute top-2 cursor-pointer left-2 px-2 py-1 rounded-md bg-slate-100 hover:opacity-90 hover:text-primary transition-all"
+              >
+                <span className="">Đổi ảnh bìa</span>
               </div>
-            )}
+
+              {loadingCandidate ? (
+                <div className="flex bg-gray-200 h-full w-full">
+                  <Spin className="m-auto" />
+                </div>
+              ) : (
+                <img
+                  src={
+                    user?.background
+                      ? user?.background
+                      : "https://biz.prlog.org/jspace/logo.png"
+                  }
+                  alt=""
+                  className={`w-full h-full ${
+                    user?.background ? "object-cover" : "object-contain"
+                  }`}
+                />
+              )}
+            </>
+          </div>
+          <div className="flex justify-center self-end ">
+            <div
+              className="relative inline-block"
+              onClick={() => {
+                setCheckChangeAvatar(!checkChangeAvatar);
+              }}
+            >
+              {!loadingCandidate ? (
+                <div>
+                  {user?.picture ? (
+                    <>
+                      <img
+                        src={user?.picture}
+                        alt=""
+                        className="w-[80px] h-[80px] rounded-full cursor-pointer object-cover bg-white"
+                      />
+                      <CameraOutlined
+                        className="absolute bottom-2 right-0 bg-blue-50 p-2 rounded-full cursor-pointer"
+                        style={{ fontSize: "18px" }}
+                      />
+                    </>
+                  ) : (
+                    <div className="bg-white rounded-full">
+                      <Avatar
+                        className="mx-auto "
+                        size={80}
+                        icon={<UserOutlined />}
+                      />
+                      <CameraOutlined
+                        className="absolute bottom-2 right-0 bg-blue-50 p-2 rounded-full cursor-pointer"
+                        style={{ fontSize: "18px" }}
+                      />
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="w-[80px] h-[80px] rounded-full flex bg-white">
+                  <Spin className="m-auto" />
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 lg:gap-10 mt-10">
@@ -248,6 +242,18 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
           ></Button>
         </div>
       </form>
+
+      {/* change image */}
+      {checkChangeAvatar && (
+        <CandidateChangeAccountAvatarPage
+          onClick={setCheckChangeAvatar}
+        ></CandidateChangeAccountAvatarPage>
+      )}
+      {checkChangeBackground && (
+        <CandidateChangeAccountBackgroundPage
+          onClick={setCheckChangeBackground}
+        ></CandidateChangeAccountBackgroundPage>
+      )}
     </>
   );
 };

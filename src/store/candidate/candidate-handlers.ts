@@ -1,6 +1,8 @@
 import { call, put } from "redux-saga/effects";
 import { getToken, Token } from "../../utils/auth";
 import {
+  requestCandidateDeleteAvatar,
+  requestCandidateDeleteBackground,
   requestCandidateSaveJob,
   requestCandidateUnSaveJob,
   requestCandidateUpdateAvatar,
@@ -144,10 +146,58 @@ function* handleCandidateUnSaveJob(dataCandiateSaveJob: any): Generator<any> {
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
   }
 }
+function* handleCandidateDeleteAvatarCandidate(
+  dataUpdateAvatarEmployer: any
+): Generator<any> {
+  try {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestCandidateDeleteAvatar,
+      dataUpdateAvatarEmployer?.payload?.avatar_id,
+      dataUpdateAvatarEmployer?.payload?.candidate_id,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      message.success("Xóa avatar thành công.");
+      yield call(handleAuthFetchMe);
+    } else {
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
+  }
+}
+function* handleCandidateDeleteBackgroundCandidate(
+  dataUpdateBackgroundEmployer: any
+): Generator<any> {
+  try {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestCandidateDeleteBackground,
+      dataUpdateBackgroundEmployer?.payload?.background_id,
+      dataUpdateBackgroundEmployer?.payload?.candidate_id,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      message.success("Xóa background thành công.");
+      yield call(handleAuthFetchMe);
+    } else {
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
+  }
+}
 export {
   handleCandidateUpdateIdentification,
   handleCandidateUpdateBackground,
   handleCandidateUpdateAvatar,
   handleCandidateSaveJob,
   handleCandidateUnSaveJob,
+  handleCandidateDeleteAvatarCandidate,
+  handleCandidateDeleteBackgroundCandidate,
 };
