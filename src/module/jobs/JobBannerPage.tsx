@@ -84,6 +84,14 @@ const JobBannerPage: React.FC = () => {
           maxPay: endSalary,
         })
       );
+    } else {
+      dispatch(
+        jobGetFilterJob({
+          candidate_id: user?.id,
+          page: 1,
+          size: 12,
+        })
+      );
     }
   }, [user?.id]);
   const handleChangeJobTitle = (

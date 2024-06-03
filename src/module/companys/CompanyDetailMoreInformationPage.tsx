@@ -62,7 +62,7 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
 
   return (
     <>
-      <div className={`px-6 py-4  ${className}`}>
+      <div className={`px-6 py-4 ${className}`}>
         <h2 className="text-lg font-semibold text-primary">
           {t("companydetail.informationcompany")}
         </h2>
@@ -94,7 +94,7 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
             ></MapTitleAddress>
             <GoogleMapReact
               bootstrapURLKeys={{
-                key: import.meta.env.VITE_REACT_KEY_MAP,
+                key: "AIzaSyDcwGyRxRbcNGWOFQVT87A1mkxEOfm8t0w",
               }}
               defaultCenter={coords}
               center={coords}

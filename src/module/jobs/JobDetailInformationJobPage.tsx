@@ -18,6 +18,7 @@ import {
   candidateUnSaveJob,
   candidateUpdateMessageRedux,
 } from "../../store/candidate/candidate-slice";
+import { formatToMillion } from "../../utils/common-function";
 interface PropComponent {
   className?: string;
   titleJob?: string;
@@ -109,44 +110,29 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
                     {t("placeholdersalary")}
                   </span>
                   <span className="font-medium line-clamp-1">
-                    {/* Trong khoảng */}
                     {jobByIdWithCandidate?.post?.minPay != "0" &&
                     jobByIdWithCandidate?.post?.maxPay != "0" &&
                     jobByIdWithCandidate?.post?.maxPay != "2147483647"
-                      ? `${jobByIdWithCandidate?.post?.minPay.toLocaleString(
-                          "vi",
-                          {
-                            style: "currency",
-                            currency: "VND",
-                          }
-                        )} - ${jobByIdWithCandidate?.post?.maxPay.toLocaleString(
-                          "vi",
-                          {
-                            style: "currency",
-                            currency: "VND",
-                          }
+                      ? `${formatToMillion(
+                          parseInt(jobByIdWithCandidate?.post?.minPay, 10),
+                          "not"
+                        )} - ${formatToMillion(
+                          parseInt(jobByIdWithCandidate?.post?.maxPay, 10)
                         )}`
                       : ""}
                     {/* Lên tới */}
                     {jobByIdWithCandidate?.post?.minPay == "0" &&
                     jobByIdWithCandidate?.post?.maxPay != "0"
-                      ? `Lên tới ${jobByIdWithCandidate?.post?.maxPay.toLocaleString(
-                          "vi",
-                          {
-                            style: "currency",
-                            currency: "VND",
-                          }
+                      ? `Lên tới ${formatToMillion(
+                          parseInt(jobByIdWithCandidate?.post?.maxPay, 10)
                         )}`
                       : ""}
                     {/* Trên */}
                     {jobByIdWithCandidate?.post?.minPay != "0" &&
-                    jobByIdWithCandidate?.post?.maxPay == "2147483647"
-                      ? `Trên ${jobByIdWithCandidate?.post?.minPay.toLocaleString(
-                          "vi",
-                          {
-                            style: "currency",
-                            currency: "VND",
-                          }
+                    (jobByIdWithCandidate?.post?.maxPay == "2147483647" ||
+                      jobByIdWithCandidate?.post?.maxPay == "0")
+                      ? `Trên ${formatToMillion(
+                          parseInt(jobByIdWithCandidate?.post?.minPay, 10)
                         )}`
                       : ""}
                   </span>
@@ -162,7 +148,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
                     {t("placeholderaddress")}
                   </span>
                   <span className="font-medium line-clamp-1">
-                    {jobByIdWithCandidate?.post?.location.toString()}
+                    {jobByIdWithCandidate?.post?.location?.province}
                   </span>
                 </div>
               </div>
@@ -173,7 +159,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
                     {t("placeholderexperience")}
                   </span>
                   <span className="font-medium line-clamp-1">
-                    {jobByIdWithCandidate?.post?.experience?.toString()}
+                    {jobByIdWithCandidate?.post?.experience?.code}
                   </span>
                 </div>
               </div>

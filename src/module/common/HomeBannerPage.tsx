@@ -106,6 +106,7 @@ const HomeBannerPage: React.FC = () => {
                 filterOption={(input, option: any) =>
                   (option?.label ?? "").includes(input)
                 }
+                value={location}
                 onChange={handleChangeLocation}
                 fieldNames={{ label: "province", value: "value" }}
                 options={locations}

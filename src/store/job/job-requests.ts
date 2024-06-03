@@ -10,16 +10,17 @@ export const requestJobGetJobById = (job_id: string) => {
 };
 export const requestJobGetJobByIdWithCandidate = (
   candidate_id: string,
-  job_id: string,
-  accessToken: string
+  job_id: string
 ) => {
-  if (!accessToken) return;
-  return axios.get(`${API}/api/v1/candidates/${candidate_id}/posts/${job_id}`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  if (candidate_id == null || candidate_id == undefined) candidate_id = "";
+  return axios.get(
+    `${API}/api/v1/posts/${job_id}?candidateId=${candidate_id}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 export const requestJobGetHomeJob = (

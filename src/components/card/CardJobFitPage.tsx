@@ -43,7 +43,7 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
               <h3
                 className="line-clamp-2 min-w-[70%] font-medium cursor-pointer hover:text-primary transition-all"
                 onClick={() => {
-                  navigate("/jobs/1");
+                  navigate(`/jobs/${item?.post?.id}`);
                 }}
               >
                 {item?.post?.title}
@@ -89,7 +89,7 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
               classIcon="lg:!w-5 lg:!h-5 !w-4 !h-4"
             ></IconMapPin>
             <span className="line-clamp-1 lg:text-sm text-xs text-gray-500">
-              {item?.post?.location.toString()}
+              {item?.post?.location.province}
             </span>
           </div>
         </div>

@@ -80,7 +80,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
   }, [dataJob]);
   return (
     <>
-      <div className="w-full sticky top-0 h-screen">
+      <div className="w-full sticky top-0 h-fit">
         <div className="p-5 ">
           <h2 className="font-bold text-xl ">{dataJob?.post?.title}</h2>
           <div className="flex gap-3 mt-3">
@@ -107,13 +107,13 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
                 : ""}
             </span>
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
-              {dataJob?.post?.location.toString()}
+              {dataJob?.post?.location.province}
             </span>
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
-              {dataJob?.post?.experience.toString()}
+              {dataJob?.post?.experience?.code}
             </span>
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
-              {dataJob?.post?.rank.toString()}
+              {dataJob?.post?.rank?.code}
             </span>
           </div>
         </div>
@@ -157,16 +157,19 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
             </span>
           )}
         </div>
-        {/* <div className="flex gap-1">
+        <div className="flex gap-2 px-5 pb-5 items-center">
+          <span className="font-semibold"> Kỹ năng: </span>
           {dataJob?.post?.skills.length > 0 &&
             dataJob?.post?.skills.map((item: any, index: number) => (
-              <span>{item?.name}</span>
+              <span key={index} className="p-1 bg-gray-200">
+                {item?.name}
+              </span>
             ))}
-        </div> */}
-        <div className="overflow-auto h-[600px] py-5 pl-5">
+        </div>
+        <div className="overflow-auto h-[500px] py-5 pl-5">
           <p
             id="message_container"
-            className=" relative transition-all mt-3 overflow-hidden leading-6"
+            className="entry-content content-html relative transition-all mt-3 overflow-hidden leading-6"
             dangerouslySetInnerHTML={{
               __html: `${dataJob?.post?.description}`,
             }}

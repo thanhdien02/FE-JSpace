@@ -65,7 +65,10 @@ function* handleJobGetRelativeJob(dataGetRelativeJob: any): Generator<any> {
   }
 }
 function* handleJobGetFilterJob(dataGetFilterJob: any): Generator<any> {
-  console.log("🚀 ~ function*handleJobGetFilterJob ~ dataGetFilterJob:", dataGetFilterJob)
+  console.log(
+    "🚀 ~ function*handleJobGetFilterJob ~ dataGetFilterJob:",
+    dataGetFilterJob
+  );
   try {
     yield put(jobUpdateLoadingRedux({ loadingJob: true }));
     const response: any = yield call(
@@ -155,13 +158,11 @@ function* handleJobGetJobByIdWithCandidate(
 ): Generator<any> {
   try {
     yield put(jobUpdateLoadingRedux({ loadingJob: true }));
-    const token: Token = getToken();
 
     const response: any = yield call(
       requestJobGetJobByIdWithCandidate,
       dataGetJobById?.payload?.candidate_id,
-      dataGetJobById?.payload?.job_id,
-      token?.accessToken
+      dataGetJobById?.payload?.job_id
     );
     if (response?.data?.code === 1000) {
       yield put(

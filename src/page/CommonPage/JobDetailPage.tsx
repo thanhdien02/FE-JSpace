@@ -20,11 +20,9 @@ const JobDetailPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, [jobId]);
   useEffect(() => {
-    if (user?.id) {
-      dispatch(
-        jobGetJobByIdWithCandidate({ job_id: jobId, candidate_id: user?.id })
-      );
-    }
+    dispatch(
+      jobGetJobByIdWithCandidate({ job_id: jobId, candidate_id: user?.id })
+    );
   }, [user, jobId, messageApply]);
   useEffect(() => {
     if (messageApply == "success") {

@@ -57,7 +57,7 @@ const CardJobClickShortPage: React.FC<PropComponent> = ({
           <div className="flex gap-1 overflow-hidden mt-2 items-center">
             <IconMapPin className="text-gray-500"></IconMapPin>
             <span className="line-clamp-1 text-sm text-gray-500">
-              {item?.post?.location}
+              {item?.post?.location?.province}
             </span>
           </div>
         </div>

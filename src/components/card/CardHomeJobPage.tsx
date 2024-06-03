@@ -90,7 +90,7 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
           </h4>
           <div className="flex gap-1 overflow-hidden mt-1">
             <Tag className="min-w-[40px] line-clamp-1 max-w-[600px]">
-              {item?.post?.location.toString()}
+              {item?.post?.location?.province}
             </Tag>
             <Tag className="min-w-[40px] line-clamp-1 max-w-[115px]">
               {item?.post?.minPay != "0" &&
