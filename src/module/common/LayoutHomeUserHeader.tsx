@@ -362,18 +362,18 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
               </ul>
             </div>
           )}
-          <div className="flex gap-1 items-center mt-5">
+          <div className="flex gap-1 items-center">
             <img
               src="https://static.topcv.vn/srp/website/images/flags/vietnam.png"
               alt=""
               onClick={() => changeLanguage("vi")}
-              className="w-11 h-7 cursor-pointer object-cover"
+              className="w-6 h-4 cursor-pointer object-cover"
             />
             <img
               src="https://static.topcv.vn/srp/website/images/flags/uk.jpeg"
               alt=""
               onClick={() => changeLanguage("en")}
-              className="w-11 h-7 cursor-pointer object-cover"
+              className="w-6 h-4 cursor-pointer object-cover"
             />
           </div>
         </Drawer>

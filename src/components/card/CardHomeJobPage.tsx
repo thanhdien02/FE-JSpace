@@ -11,6 +11,7 @@ import {
   candidateUnSaveJob,
   candidateUpdateMessageRedux,
 } from "../../store/candidate/candidate-slice";
+import { formatToMillion } from "../../utils/common-function";
 interface PropComponent {
   className?: string;
   onClick?: any;
@@ -89,19 +90,26 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
           </h4>
           <div className="flex gap-1 overflow-hidden mt-1">
             <Tag className="min-w-[40px] line-clamp-1 max-w-[600px]">
-              {item?.post?.location?.province}
+              {item?.post?.location.toString()}
             </Tag>
             <Tag className="min-w-[40px] line-clamp-1 max-w-[115px]">
-              {item?.post?.minPay != "0"
-                ? `${item?.post?.minPay.toLocaleString("vi", {
-                    style: "currency",
-                    currency: "VND",
-                  })} -`
-                : ""}{" "}
-              {item?.post?.maxPay.toLocaleString("vi", {
-                style: "currency",
-                currency: "VND",
-              })}
+              {item?.post?.minPay != "0" &&
+              item?.post?.maxPay != "0" &&
+              item?.post?.maxPay != "2147483647"
+                ? `${formatToMillion(
+                    parseInt(item?.post?.minPay, 10),
+                    "not"
+                  )} - ${formatToMillion(parseInt(item?.post?.maxPay, 10))}`
+                : ""}
+              {/* Lên tới */}
+              {item?.post?.minPay == "0" && item?.post?.maxPay != "0"
+                ? `Lên tới ${formatToMillion(parseInt(item?.post?.maxPay, 10))}`
+                : ""}
+              {/* Trên */}
+              {item?.post?.minPay != "0" &&
+              (item?.post?.maxPay == "2147483647" || item?.post?.maxPay == "0")
+                ? `Trên ${formatToMillion(parseInt(item?.post?.minPay, 10))}`
+                : ""}
             </Tag>
           </div>
         </div>

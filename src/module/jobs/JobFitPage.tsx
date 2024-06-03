@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardJobFitPage from "../../components/card/CardJobFitPage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Scrollbar } from "swiper/modules";
-import { Radio, RadioChangeEvent } from "antd";
+import { Radio, RadioChangeEvent, Skeleton } from "antd";
 import { Pagination } from "antd";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import { chunkArray } from "../../utils/common-function";
+
 const JobFitPage: React.FC = () => {
+  const { filterJobs, loadingJob } = useSelector((state: any) => state.job);
   const { t } = useTranslation();
+  const [dataJob, setDataJob] = useState<any>(null);
   const [filterShow, setFilterShow] = useState(1);
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
     setFilterShow(e.target.value);
   };
+  useEffect(() => {
+    if (filterJobs?.length > 0) {
+      setDataJob(chunkArray(filterJobs, 2));
+    }
+  }, [filterJobs]);
   return (
     <>
       <div className="bg-gray-100 py-5">
@@ -19,35 +30,38 @@ const JobFitPage: React.FC = () => {
           <h2 className="text-xl font-bold text-primary">
             {t("findjob.suggestsuitablejob")}
           </h2>
-          <Swiper
-            modules={[Navigation, Scrollbar, A11y]}
-            spaceBetween={50}
-            slidesPerView={1}
-            navigation
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
-            className="lg:block hidden swiper-job-fit "
-          >
-            <SwiperSlide className="ease-linear">
-              <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5">
-                <CardJobFitPage></CardJobFitPage>
-                <CardJobFitPage></CardJobFitPage>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="ease-linear">
-              <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5">
-                <CardJobFitPage></CardJobFitPage>
-                <CardJobFitPage></CardJobFitPage>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="ease-linear">
-              <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5">
-                <CardJobFitPage></CardJobFitPage>
-                <CardJobFitPage></CardJobFitPage>
-              </div>
-            </SwiperSlide>
-          </Swiper>
+          {loadingJob ? (
+            <div className="p-5">
+              <Skeleton />
+            </div>
+          ) : (
+            <Swiper
+              modules={[Navigation, Scrollbar, A11y]}
+              spaceBetween={50}
+              slidesPerView={1}
+              navigation
+              onSwiper={(swiper) => console.log(swiper)}
+              onSlideChange={() => console.log("slide change")}
+              className="lg:block hidden swiper-job-fit "
+            >
+              {dataJob?.length > 0 &&
+                dataJob?.map((item: any) => (
+                  <SwiperSlide className="ease-linear" key={uuidv4()}>
+                    <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5">
+                      {item?.length > 0 &&
+                        item?.map((item: any) => (
+                          <CardJobFitPage
+                            key={uuidv4()}
+                            item={item}
+                          ></CardJobFitPage>
+                        ))}
+                    </div>
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          )}
 
+          {/* phone */}
           <Swiper
             modules={[Navigation, Scrollbar, A11y]}
             spaceBetween={50}

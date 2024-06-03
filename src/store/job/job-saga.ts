@@ -1,6 +1,7 @@
 import { takeLatest } from "redux-saga/effects";
 
 import {
+  jobGetFilterJob,
   jobGetHomeJob,
   jobGetJobById,
   jobGetJobByIdWithCandidate,
@@ -8,6 +9,7 @@ import {
   jobGetSavedJob,
 } from "./job-slice";
 import {
+  handleJobGetFilterJob,
   handleJobGetHomeJob,
   handleJobGetJobById,
   handleJobGetJobByIdWithCandidate,
@@ -18,6 +20,7 @@ import {
 export default function* authSaga() {
   yield takeLatest(jobGetHomeJob.type, handleJobGetHomeJob);
   yield takeLatest(jobGetRelativeJob.type, handleJobGetRelativeJob);
+  yield takeLatest(jobGetFilterJob.type, handleJobGetFilterJob);
   yield takeLatest(jobGetSavedJob.type, handleJobGetSavedJob);
   yield takeLatest(jobGetJobById.type, handleJobGetJobById);
   yield takeLatest(

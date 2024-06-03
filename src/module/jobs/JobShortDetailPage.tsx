@@ -16,6 +16,7 @@ import {
 } from "../../store/candidate/candidate-slice";
 import { CSSTransition } from "react-transition-group";
 import ApplyJobPage from "../../page/CommonPage/ApplyJobPage";
+import { formatToMillion } from "../../utils/common-function";
 interface PropComponent {
   id?: string;
   onClick?: any;
@@ -84,13 +85,35 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
           <h2 className="font-bold text-xl ">{dataJob?.post?.title}</h2>
           <div className="flex gap-3 mt-3">
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
-              20 - 30 triệu
+              {dataJob?.post?.minPay != "0" &&
+              dataJob?.post?.maxPay != "0" &&
+              dataJob?.post?.maxPay != "2147483647"
+                ? `${formatToMillion(
+                    parseInt(dataJob?.post?.minPay, 10),
+                    "not"
+                  )} - ${formatToMillion(parseInt(dataJob?.post?.maxPay, 10))}`
+                : ""}
+              {/* Lên tới */}
+              {dataJob?.post?.minPay == "0" && dataJob?.post?.maxPay != "0"
+                ? `Lên tới ${formatToMillion(
+                    parseInt(dataJob?.post?.maxPay, 10)
+                  )}`
+                : ""}
+              {/* Trên */}
+              {dataJob?.post?.minPay != "0" &&
+              (dataJob?.post?.maxPay == "2147483647" ||
+                dataJob?.post?.maxPay == "0")
+                ? `Trên ${formatToMillion(parseInt(dataJob?.post?.minPay, 10))}`
+                : ""}
             </span>
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
-              {dataJob?.post?.location?.province}
+              {dataJob?.post?.location.toString()}
             </span>
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
-              {dataJob?.post?.experience?.code}
+              {dataJob?.post?.experience.toString()}
+            </span>
+            <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
+              {dataJob?.post?.rank.toString()}
             </span>
           </div>
         </div>
@@ -110,7 +133,9 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
         </div>
         <div className="flex gap-2 items-center px-5 pb-5">
           <button
-            className="w-[90%] mx-auto p-2 bg-primary text-white rounded-md"
+            className={`w-[90%] mx-auto p-2 text-white rounded-md ${
+              !dataJob?.applied ? "bg-primary" : "bg-green-500"
+            }`}
             type="button"
             onClick={handleApplyJob}
           >
@@ -132,6 +157,12 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
             </span>
           )}
         </div>
+        {/* <div className="flex gap-1">
+          {dataJob?.post?.skills.length > 0 &&
+            dataJob?.post?.skills.map((item: any, index: number) => (
+              <span>{item?.name}</span>
+            ))}
+        </div> */}
         <div className="overflow-auto h-[600px] py-5 pl-5">
           <p
             id="message_container"

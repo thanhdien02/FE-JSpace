@@ -40,7 +40,8 @@ const ContentSeeMore: React.FC<PropComponent> = ({ className, content }) => {
     <div className={`${className}`}>
       <p
         id="message_container"
-        className=" relative transition-all mt-3 overflow-hidden leading-6"
+
+        className="entry-content content-html relative transition-all mt-3 overflow-hidden leading-6"
         // Prevent XSS Attack recommen from React Docs
         dangerouslySetInnerHTML={{
           __html: `${content}`,

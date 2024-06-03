@@ -92,14 +92,14 @@ const JobDetailInformationCommonPage: React.FC<PropComponent> = ({
                 <span className="text-sm text-gray-500 line-clamp-1">
                   {t("skills")}
                 </span>
-                <span className="font-medium line-clamp-1 mt-1">
+                <div className="font-medium line-clamp-1 mt-1 flex flex-wrap gap-2">
                   {jobByIdWithCandidate?.post?.skills?.length > 0 &&
                     jobByIdWithCandidate?.post?.skills?.map((item: any) => (
-                      <span className="p-1 bg-gray-200 mr-2" key={item?.id}>
+                      <span className="p-1 bg-gray-200" key={item?.id}>
                         {item?.name}
                       </span>
                     ))}
-                </span>
+                </div>
               </div>
             </div>
           </div>

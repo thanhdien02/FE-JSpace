@@ -3,20 +3,19 @@ import JobDetailBannerPage from "../../module/jobs/JobDetailBannerPage";
 import JobDetailInformationCompanyPage from "../../module/jobs/JobDetailInformationCompanyPage";
 import JobDetailInformationJobPage from "../../module/jobs/JobDetailInformationJobPage";
 import JobDetailDescriptionJobPage from "../../module/jobs/JobDetailDescriptionJobPage";
-import JobResultFilterPage from "../../module/jobs/JobResultFilterPage";
 import JobDetailInformationCommonPage from "../../module/jobs/JobDetailInformationCommonPage";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { jobGetJobByIdWithCandidate } from "../../store/job/job-slice";
 import { useSelector } from "react-redux";
 import { applyUpdateMessageRedux } from "../../store/apply/apply-slice";
+import JobDetailRelativeJobPage from "../../module/jobs/JobDetailRelativeJobPage";
 
 const JobDetailPage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
   const { messageApply } = useSelector((state: any) => state.apply);
   const dispatch = useDispatch();
   const { jobId } = useParams();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [jobId]);
@@ -50,7 +49,7 @@ const JobDetailPage: React.FC = () => {
             <JobDetailInformationCommonPage className="bg-white mt-5"></JobDetailInformationCommonPage>
           </div>
         </div>
-        <JobResultFilterPage></JobResultFilterPage>
+        <JobDetailRelativeJobPage></JobDetailRelativeJobPage>
       </section>
     </>
   );

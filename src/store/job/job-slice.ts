@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 interface IFile {
   jobById?: any;
   jobByIdWithCandidate?: any;
-  resultJobs: any;
+  filterJobs: any;
   appliedJobs?: any;
   savedJobs?: any;
   relativeJobs?: any;
@@ -17,7 +17,7 @@ interface IFile {
 const init: IFile = {
   jobById: {},
   jobByIdWithCandidate: {},
-  resultJobs: {},
+  filterJobs: {},
   appliedJobs: {},
   savedJobs: {},
   relativeJobs: {},
@@ -37,11 +37,15 @@ const jobSlice: any = createSlice({
     jobGetHomeJob: () => {},
     jobGetRelativeJob: () => {},
     jobGetSavedJob: () => {},
-    jobGetJobFilter: () => {},
+    jobGetFilterJob: () => {},
     jobPostJob: () => {},
     jobUpdateJobByIdRedux: (state: any, action: any) => ({
       ...state,
       jobById: action.payload.jobById,
+    }),
+    jobUpdateFilterJobRedux: (state: any, action: any) => ({
+      ...state,
+      filterJobs: action.payload.filterJobs,
     }),
     jobUpdateJobByIdWithCandidateRedux: (state: any, action: any) => ({
       ...state,
@@ -77,7 +81,7 @@ export const {
   jobGetJobById,
   jobUpdateLoadingRedux,
   jobUpdateMessageRedux,
-  jobGetJobFilter,
+  jobGetFilterJob,
   jobUpdateJob,
   jobPostJob,
   jobGetHomeJob,
@@ -90,5 +94,6 @@ export const {
   jobUpdateJobByIdWithCandidateRedux,
   jobGetRelativeJob,
   jobUpdateRelativeJobRedux,
+  jobUpdateFilterJobRedux,
 } = jobSlice.actions;
 export default jobSlice.reducer;

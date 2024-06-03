@@ -24,6 +24,7 @@
     "@types/react-transition-group": "^4.4.10",
     "@types/redux-logger": "^3.0.13",
     "@types/redux-saga": "^0.10.5",
+    "@types/uuid": "^9.0.8",
     "antd": "^5.16.0",
     "axios": "^1.6.8",
     "cookie": "^0.6.0",

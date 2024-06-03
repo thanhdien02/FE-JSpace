@@ -1,6 +1,7 @@
 import { call, put } from "redux-saga/effects";
 import { getToken, Token } from "../../utils/auth";
 import {
+  jobUpdateFilterJobRedux,
   jobUpdateHomeJobRedux,
   jobUpdateJobByIdRedux,
   jobUpdateJobByIdWithCandidateRedux,
@@ -11,6 +12,7 @@ import {
 } from "./job-slice";
 import { message } from "antd";
 import {
+  requestJobGetFilterJob,
   requestJobGetHomeJob,
   requestJobGetJobById,
   requestJobGetJobByIdWithCandidate,
@@ -21,13 +23,11 @@ import {
 function* handleJobGetHomeJob(dataGetHomeJob: any): Generator<any> {
   try {
     yield put(jobUpdateLoadingRedux({ loadingJob: true }));
-    const token: Token = getToken();
     const response: any = yield call(
       requestJobGetHomeJob,
       dataGetHomeJob?.payload?.candidate_id,
       dataGetHomeJob?.payload?.page,
-      dataGetHomeJob?.payload?.size,
-      token?.accessToken
+      dataGetHomeJob?.payload?.size
     );
     if (response?.data?.code === 1000) {
       yield put(
@@ -44,13 +44,11 @@ function* handleJobGetHomeJob(dataGetHomeJob: any): Generator<any> {
 function* handleJobGetRelativeJob(dataGetRelativeJob: any): Generator<any> {
   try {
     yield put(jobUpdateLoadingRedux({ loadingJob: true }));
-    const token: Token = getToken();
     const response: any = yield call(
       requestJobGetRelativeJob,
       dataGetRelativeJob?.payload?.candidate_id,
       dataGetRelativeJob?.payload?.page,
-      dataGetRelativeJob?.payload?.size,
-      token?.accessToken
+      dataGetRelativeJob?.payload?.size
     );
     if (response?.data?.code === 1000) {
       yield put(
@@ -59,6 +57,38 @@ function* handleJobGetRelativeJob(dataGetRelativeJob: any): Generator<any> {
         })
       );
       // message.success("Load dữ liệu relative job thành công.");
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(jobUpdateLoadingRedux({ loadingJob: false }));
+  }
+}
+function* handleJobGetFilterJob(dataGetFilterJob: any): Generator<any> {
+  console.log("🚀 ~ function*handleJobGetFilterJob ~ dataGetFilterJob:", dataGetFilterJob)
+  try {
+    yield put(jobUpdateLoadingRedux({ loadingJob: true }));
+    const response: any = yield call(
+      requestJobGetFilterJob,
+      dataGetFilterJob?.payload?.candidate_id,
+      dataGetFilterJob?.payload?.title,
+      dataGetFilterJob?.payload?.gender,
+      dataGetFilterJob?.payload?.location,
+      dataGetFilterJob?.payload?.experience,
+      dataGetFilterJob?.payload?.jobType,
+      dataGetFilterJob?.payload?.rank,
+      dataGetFilterJob?.payload?.minPay,
+      dataGetFilterJob?.payload?.maxPay,
+      dataGetFilterJob?.payload?.page,
+      dataGetFilterJob?.payload?.size
+    );
+    if (response?.data?.code === 1000) {
+      message.success("Load dữ liệu filter thành công.");
+      yield put(
+        jobUpdateFilterJobRedux({
+          filterJobs: response?.data?.result?.content,
+        })
+      );
     }
   } catch (error: any) {
     message.error(error?.response?.data?.message);
@@ -103,12 +133,9 @@ function* handleJobGetSavedJob(dataGetSavedJob: any): Generator<any> {
 function* handleJobGetJobById(dataGetJobById: any): Generator<any> {
   try {
     yield put(jobUpdateLoadingRedux({ loadingJob: true }));
-    const token: Token = getToken();
-
     const response: any = yield call(
       requestJobGetJobById,
-      dataGetJobById?.payload?.job_id,
-      token?.accessToken
+      dataGetJobById?.payload?.job_id
     );
     if (response?.data?.code === 1000) {
       yield put(
@@ -155,4 +182,5 @@ export {
   handleJobGetJobById,
   handleJobGetJobByIdWithCandidate,
   handleJobGetRelativeJob,
+  handleJobGetFilterJob,
 };

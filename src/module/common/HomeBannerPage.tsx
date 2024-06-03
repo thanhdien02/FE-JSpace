@@ -1,6 +1,6 @@
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
 import { Input, Select } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import bannerbg from "../../assets/banner3.jpg";
 import { dataSalary } from "../../utils/dataFetch";
 import NumberCounter from "../../components/numbercount/NumberCounter";
@@ -11,20 +11,56 @@ import {
   commonGetLocation,
 } from "../../store/common/common-slice";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const HomeBannerPage: React.FC = () => {
   const { locations, experiences } = useSelector((state: any) => state.common);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const onChange = (
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [experience, setExperience] = useState("");
+  const [salary, setSalary] = useState("");
+  const handleChangeJobTitle = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    console.log(e);
+    setTitle(e.target.value);
+  };
+  const handleChangeLocation = (value: any) => {
+    setLocation(value);
+  };
+  const handleChangeExperience = (value: any) => {
+    setExperience(value);
+  };
+  const handleChangeSalary = (value: any) => {
+    setSalary(value);
   };
   useEffect(() => {
     dispatch(commonGetLocation());
     dispatch(commonGetExperience());
+    const storedData = localStorage.getItem("jspace-search");
+    if (storedData) {
+      let dataSearch = JSON.parse(storedData);
+      if (dataSearch?.title != "") setTitle(dataSearch?.title);
+      if (dataSearch?.location != "") setLocation(dataSearch?.location);
+      if (dataSearch?.experience != "") setExperience(dataSearch?.experience);
+      if (dataSearch?.salary != "") {
+        setSalary(dataSearch?.salary);
+      }
+    }
   }, []);
+  const handleSearchJob = (e: any) => {
+    e.preventDefault();
+    let search = {
+      title: title,
+      location: location,
+      experience: experience,
+      salary: salary,
+    };
+    localStorage.setItem("jspace-search", JSON.stringify(search));
+    navigate("/jobs");
+  };
   return (
     <>
       <div className="relative">
@@ -53,9 +89,10 @@ const HomeBannerPage: React.FC = () => {
                     <CloseOutlined className="text-base px-1 hover:bg-slate-100 py-1 rounded-sm transition-all" />
                   ),
                 }}
+                value={title}
                 className="w-full search-banner lg:w-[40%] py-4 text-base rounded-lg lg:rounded-none lg:rounded-s-lg"
                 size="large"
-                onChange={onChange}
+                onChange={handleChangeJobTitle}
               />
               <span className="hidden lg:flex z-10 bg-white w-[1px] items-center">
                 <span className="hidden lg:flex bg-gray-300 h-[60%] w-full "></span>
@@ -69,6 +106,7 @@ const HomeBannerPage: React.FC = () => {
                 filterOption={(input, option: any) =>
                   (option?.label ?? "").includes(input)
                 }
+                onChange={handleChangeLocation}
                 fieldNames={{ label: "province", value: "value" }}
                 options={locations}
               />
@@ -84,6 +122,8 @@ const HomeBannerPage: React.FC = () => {
                 filterOption={(input, option: any) =>
                   (option?.label ?? "").includes(input)
                 }
+                value={experience}
+                onChange={handleChangeExperience}
                 options={experiences}
                 fieldNames={{ label: "code", value: "value" }}
               />
@@ -99,16 +139,14 @@ const HomeBannerPage: React.FC = () => {
                 filterOption={(input, option: any) =>
                   (option?.label ?? "").includes(input)
                 }
-                fieldNames={{ label: "code", value: "value" }}
+                value={salary}
+                onChange={handleChangeSalary}
                 options={dataSalary}
               />
             </div>
             <button
               type="submit"
-              onClick={(e) => {
-                e.preventDefault();
-                console.log("object");
-              }}
+              onClick={handleSearchJob}
               className="w-full lg:w-auto lg:min-w-[120px] font-bold cursor-pointer h-auto px-3 lg:py-2 py-3 rounded-lg z-10 bg-primary border border-solid border-white/30 text-white hover:opacity-80 transition-all"
             >
               {t("search")}

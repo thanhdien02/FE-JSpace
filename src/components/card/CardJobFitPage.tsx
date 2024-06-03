@@ -9,16 +9,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
+import { formatToMillion } from "../../utils/common-function";
 interface PropComponent {
   className?: string;
-  titleJob?: string;
-  nameCompany?: string;
-  logo?: string;
-  salary?: string;
-  location?: string;
   onClick?: any;
+  item?: any;
 }
-const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
+const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
   const { user } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,34 +32,45 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
       >
         <div className="lg:min-w-[23%] w-[100px] max-w-full h-[110px] lg:max-h-[110px]">
           <img
-            src="https://th.bing.com/th/id/R.01cd719c50a4066e50808738e6eff177?rik=6%2fm77v2X46RLyg&pid=ImgRaw&r=0"
+            src={item?.post?.company?.logo}
             alt=""
             className="w-h-full h-full lg:object-cover object-contain"
           />
         </div>
         <div className="relative grow w-full flex flex-col lg:gap-1">
           <div className="flex justify-between">
-            <Popover
-              content={
-                <p className="w-[300px]">
-                  Font end developer for 2 years (Senior) 10 - 20tr many benifit
-                  and team building. Apply now that bench
-                </p>
-              }
-            >
+            <Popover content={<p className="w-[300px]">{item?.post?.title}</p>}>
               <h3
                 className="line-clamp-2 min-w-[70%] font-medium cursor-pointer hover:text-primary transition-all"
                 onClick={() => {
                   navigate("/jobs/1");
                 }}
               >
-                Font end developer for 2 years (Senior) 10 - 20tr many benifit
-                and team building. Apply now that bench
+                {item?.post?.title}
               </h3>
             </Popover>
-            <div className="lg:block hidden w-[33%]">
-              <span className="font-medium text-primary text-nowrap line-clamp-1 ">
-                500 - 1,500 USD{" "}
+            <div className="lg:flex hidden w-[33%]">
+              <span className="font-medium text-primary text-base ml-auto">
+                {item?.post?.minPay != "0" &&
+                item?.post?.maxPay != "0" &&
+                item?.post?.maxPay != "2147483647"
+                  ? `${formatToMillion(
+                      parseInt(item?.post?.minPay, 10),
+                      "not"
+                    )} - ${formatToMillion(parseInt(item?.post?.maxPay, 10))}`
+                  : ""}
+                {/* Lên tới */}
+                {item?.post?.minPay == "0" && item?.post?.maxPay != "0"
+                  ? `Lên tới ${formatToMillion(
+                      parseInt(item?.post?.maxPay, 10)
+                    )}`
+                  : ""}
+                {/* Trên */}
+                {item?.post?.minPay != "0" &&
+                (item?.post?.maxPay == "2147483647" ||
+                  item?.post?.maxPay == "0")
+                  ? `Trên ${formatToMillion(parseInt(item?.post?.minPay, 10))}`
+                  : ""}
               </span>
             </div>
           </div>
@@ -72,11 +80,7 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
               classIcon="lg:!w-5 lg:!h-5 !w-4 !h-4"
             ></IconBuilding>
             <h4 className="line-clamp-1 text-gray-500 lg:text-sm text-xs">
-              Công ty phần mềm FPT Lorem ipsum dolor sit, amet consectetur
-              adipisicing elit. Quibusdam nulla temporibus dolorem consectetur
-              alias dicta expedita sapiente repellat voluptate explicabo dolor
-              rerum distinctio maiores, harum impedit nisi. Perferendis, tenetur
-              odit!
+              {item?.post?.company?.name}
             </h4>
           </div>
           <div className="flex gap-1 overflow-hidden mt-2 items-center">
@@ -85,7 +89,7 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className }) => {
               classIcon="lg:!w-5 lg:!h-5 !w-4 !h-4"
             ></IconMapPin>
             <span className="line-clamp-1 lg:text-sm text-xs text-gray-500">
-              Hồ Chí Minh
+              {item?.post?.location.toString()}
             </span>
           </div>
         </div>

@@ -4,20 +4,28 @@ import CardJobClickShortPage from "../../components/card/CardJobClickShortPage";
 import JobShortDetailPage from "./JobShortDetailPage";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { jobGetRelativeJob } from "../../store/job/job-slice";
 
-const JobResultFilterPage: React.FC = () => {
-  const { filterJobs, loadingJob } = useSelector((state: any) => state.job);
+const JobDetailRelativeJobPage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
+  const { relativeJobs, loadingJob } = useSelector((state: any) => state.job);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const [filterShow, setFilterShow] = useState(1);
   const [dataJobShort, setDataJobShort] = useState<any>(null);
   const onChange = (e: RadioChangeEvent) => {
+    // console.log("radio checked", e.target.value);
     setFilterShow(e.target.value);
   };
   useEffect(() => {
-    if (filterJobs?.length > 0) {
-      setDataJobShort(filterJobs[0]);
+    dispatch(jobGetRelativeJob({ candidate_id: user?.id }));
+  }, [user]);
+  useEffect(() => {
+    if (relativeJobs?.length > 0) {
+      setDataJobShort(relativeJobs[0]);
     }
-  }, [filterJobs]);
+  }, [relativeJobs]);
 
   return (
     <>
@@ -46,8 +54,8 @@ const JobResultFilterPage: React.FC = () => {
                   <Skeleton />
                 </div>
               ) : (
-                filterJobs?.length > 0 &&
-                filterJobs?.map((item: any) => (
+                relativeJobs?.length > 0 &&
+                relativeJobs?.map((item: any) => (
                   <CardJobClickShortPage
                     key={item?.post?.id}
                     onClick={setDataJobShort}
@@ -73,4 +81,4 @@ const JobResultFilterPage: React.FC = () => {
   );
 };
 
-export default JobResultFilterPage;
+export default JobDetailRelativeJobPage;

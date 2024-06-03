@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { v4 as uuidv4 } from "uuid";
 import "swiper/css";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -19,18 +20,22 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { jobGetHomeJob } from "../../store/job/job-slice";
+import { chunkArray } from "../../utils/common-function";
 
 const HomeListJobPage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
   const { homeJobs, loadingJob } = useSelector((state: any) => state.job);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
+  const [dataJob, setDataJob] = useState<any>(null);
   useEffect(() => {
-    if (user?.id) {
-      dispatch(jobGetHomeJob({ candidate_id: user.id }));
+    dispatch(jobGetHomeJob({ candidate_id: user?.id, size: 27 }));
+  }, [user?.id]);
+  useEffect(() => {
+    if (homeJobs?.length > 0) {
+      setDataJob(chunkArray(homeJobs, 9));
     }
-  }, [user]);
+  }, [homeJobs]);
   return (
     <>
       <div className="bg-gray-100 ">
@@ -45,25 +50,17 @@ const HomeListJobPage: React.FC = () => {
               placeholder="Tìm kiếm theo"
               className="h-10"
               optionFilterProp="children"
-              filterOption={(input, option) =>
-                (option?.label ?? "").includes(input)
-              }
-              filterSort={(optionA, optionB) =>
-                (optionA?.label ?? "")
-                  .toLowerCase()
-                  .localeCompare((optionB?.label ?? "").toLowerCase())
-              }
               options={[
                 {
-                  value: "1",
+                  key: "1",
                   label: "Mức lương cao nhất",
                 },
                 {
-                  value: "2",
+                  key: "2",
                   label: "Công việc nổi bật",
                 },
                 {
-                  value: "2",
+                  key: "3",
                   label: "Theo thời gian",
                 },
               ]}
@@ -86,7 +83,21 @@ const HomeListJobPage: React.FC = () => {
               <Skeleton />
             ) : (
               <>
-                <SwiperSlide className="ease-linear">
+                {dataJob?.length > 0 &&
+                  dataJob?.map((item: any) => (
+                    <SwiperSlide className="ease-linear" key={uuidv4()}>
+                      <div className="grid gap-4 grid-cols-3 bg-gray-100">
+                        {item?.length > 0 &&
+                          item?.map((item: any) => (
+                            <CardHomeJobPage
+                              key={uuidv4()}
+                              item={item}
+                            ></CardHomeJobPage>
+                          ))}
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                {/* <SwiperSlide className="ease-linear">
                   <div className="grid gap-4 grid-cols-3 bg-gray-100">
                     {homeJobs.length > 0 &&
                       homeJobs?.map((item: any) => (
@@ -96,29 +107,7 @@ const HomeListJobPage: React.FC = () => {
                         ></CardHomeJobPage>
                       ))}
                   </div>
-                </SwiperSlide>
-                <SwiperSlide className="ease-linear">
-                  <div className="grid gap-4 grid-cols-3 bg-gray-100">
-                    {homeJobs.length > 0 &&
-                      homeJobs?.map((item: any) => (
-                        <CardHomeJobPage
-                          key={item?.post?.id}
-                          item={item}
-                        ></CardHomeJobPage>
-                      ))}
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide className="ease-linear">
-                  <div className="grid gap-4 grid-cols-3 bg-gray-100">
-                    {homeJobs.length > 0 &&
-                      homeJobs?.map((item: any) => (
-                        <CardHomeJobPage
-                          key={item?.post?.id}
-                          item={item}
-                        ></CardHomeJobPage>
-                      ))}
-                  </div>
-                </SwiperSlide>
+                </SwiperSlide> */}
               </>
             )}
           </Swiper>

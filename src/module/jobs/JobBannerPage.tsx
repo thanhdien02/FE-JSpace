@@ -20,6 +20,7 @@ import {
   commonGetRank,
   commonGetSkills,
 } from "../../store/common/common-slice";
+import { jobGetFilterJob } from "../../store/job/job-slice";
 interface Inputs {
   name?: string;
   salary?: string;
@@ -30,14 +31,19 @@ const JobBannerPage: React.FC = () => {
   const { locations, ranks, jobTypes, experiences, skills } = useSelector(
     (state: any) => state.common
   );
+  const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
   const {
     handleSubmit,
-    setValue,
+    // setValue,
     // formState: { errors },
   } = useForm<Inputs>();
   const { t } = useTranslation();
   const [searchAdvance, setSearchAdvance] = useState(false);
+  const [title, setTitle] = useState<any>(null);
+  const [location, setLocation] = useState<any>(null);
+  const [experience, setExperience] = useState<any>(null);
+  const [salary, setSalary] = useState<any>(null);
   const onSubmit: SubmitHandler<Inputs> = (dataSearchJob: Inputs) => {
     console.log("🚀 ~ dataSearchJob:", dataSearchJob);
     // dispatch(candidateUpdateCandidate(dataUpdadeCandidate));
@@ -49,6 +55,80 @@ const JobBannerPage: React.FC = () => {
     dispatch(commonGetExperience());
     dispatch(commonGetSkills());
   }, []);
+  useEffect(() => {
+    const storedData = localStorage.getItem("jspace-search");
+    let startSalary = "",
+      endSalary = "";
+    if (storedData) {
+      let dataSearch = JSON.parse(storedData);
+      if (dataSearch?.title != "") setTitle(dataSearch?.title);
+      if (dataSearch?.location != "") setLocation(dataSearch?.location);
+      if (dataSearch?.experience != "") setExperience(dataSearch?.experience);
+      if (
+        dataSearch?.salary != "" &&
+        dataSearch?.salary != undefined &&
+        dataSearch?.salary != null
+      ) {
+        setSalary(dataSearch?.salary);
+        [startSalary, endSalary] = dataSearch?.salary?.split("-");
+      }
+      dispatch(
+        jobGetFilterJob({
+          candidate_id: user?.id,
+          page: 1,
+          size: 12,
+          title: dataSearch?.title,
+          location: dataSearch?.location,
+          experience: dataSearch?.experience,
+          minPay: startSalary,
+          maxPay: endSalary,
+        })
+      );
+    }
+  }, [user?.id]);
+  const handleChangeJobTitle = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setTitle(e.target.value);
+  };
+  const handleChangeLocation = (value: any) => {
+    setLocation(value);
+  };
+  const handleChangeExperience = (value: any) => {
+    setExperience(value);
+  };
+  const handleChangeSalary = (value: any) => {
+    setSalary(value);
+  };
+
+  const handleSearchJob = (e: any) => {
+    e.preventDefault();
+    let search = {
+      title: title,
+      location: location,
+      experience: experience,
+      salary: salary,
+    };
+    localStorage.setItem("jspace-search", JSON.stringify(search));
+
+    let startSalary = "",
+      endSalary = "";
+    if (salary != "" && salary != undefined && salary != null) {
+      [startSalary, endSalary] = salary?.split("-");
+    }
+    dispatch(
+      jobGetFilterJob({
+        candidate_id: user?.id,
+        page: 1,
+        size: 20,
+        title,
+        location,
+        experience,
+        minPay: startSalary,
+        maxPay: endSalary,
+      })
+    );
+  };
   return (
     <>
       <div
@@ -73,6 +153,7 @@ const JobBannerPage: React.FC = () => {
                   prefix={
                     <SearchOutlined className="text-xl ml-1 pr-3 text-gray-600" />
                   }
+                  value={title}
                   placeholder={t("placeholdernamejob")}
                   allowClear={{
                     clearIcon: (
@@ -81,9 +162,7 @@ const JobBannerPage: React.FC = () => {
                   }}
                   className="lg:w-[40%] py-2 rounded-lg"
                   size="middle"
-                  onChange={(e) => {
-                    setValue("name", e.target.value);
-                  }}
+                  onChange={handleChangeJobTitle}
                 />
                 <Select
                   showSearch
@@ -95,10 +174,9 @@ const JobBannerPage: React.FC = () => {
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
                   }
+                  value={location}
                   options={locations}
-                  onChange={(e) => {
-                    setValue("location", e);
-                  }}
+                  onChange={handleChangeLocation}
                 />
 
                 <Select
@@ -110,9 +188,8 @@ const JobBannerPage: React.FC = () => {
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
                   }
-                  onChange={(e) => {
-                    setValue("experience", e);
-                  }}
+                  value={experience}
+                  onChange={handleChangeExperience}
                   fieldNames={{ label: "code", value: "value" }}
                   options={experiences}
                 />
@@ -125,17 +202,14 @@ const JobBannerPage: React.FC = () => {
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
                   }
-                  onChange={(e) => {
-                    setValue("salary", e);
-                  }}
+                  onChange={handleChangeSalary}
+                  value={salary}
                   options={dataSalary}
                 />
               </div>
               <button
                 type="submit"
-                // onClick={(e) => {
-                //   e.preventDefault();
-                // }}
+                onClick={handleSearchJob}
                 className="min-w-[100px] font-medium h-auto px-3 py-2 rounded-lg bg-primary text-white "
               >
                 {t("search")}
