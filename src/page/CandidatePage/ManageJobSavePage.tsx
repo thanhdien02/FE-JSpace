@@ -27,8 +27,6 @@ const ManageJobSavePage: React.FC = () => {
       dispatch(jobGetSavedJob({ candidate_id: user?.id, page: page, size: 8 }));
     }
   }, [user, page]);
-
-
   return (
     <>
       <div className="p-5">

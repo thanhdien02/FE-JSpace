@@ -1,21 +1,21 @@
-import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import React, { useState } from "react";
 import banner2 from "../../assets/banner3.jpg";
 import { Input } from "antd";
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-interface Inputs {
-  name?: string;
-  salary?: string;
-  experience?: string;
-  location?: string;
+
+interface PropComponent {
+  setCompanyname?: any;
 }
-const CompanyBannerPage: React.FC = () => {
+const CompanyBannerPage: React.FC<PropComponent> = ({ setCompanyname }) => {
   const { t } = useTranslation();
-  const { handleSubmit, setValue } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (dataSearchJob: Inputs) => {
-    console.log("🚀 ~ dataSearchJob:", dataSearchJob);
-    // dispatch(candidateUpdateCandidate(dataUpdadeCandidate));
+  const [name, setName] = useState("");
+  const handleChangeCompanyName = (e: any) => {
+    setName(e.target.value);
+  };
+  const handleSearchCompany = (e: any) => {
+    e.preventDefault();
+    setCompanyname(name);
   };
   return (
     <>
@@ -28,7 +28,6 @@ const CompanyBannerPage: React.FC = () => {
         <div className="lg:px-0 px-5 absolute flex bg-gradient-to-b from-blue-50/10 to-white/20 inset-0 h-full">
           <form
             action=""
-            onSubmit={handleSubmit(onSubmit)}
             className="w-primary m-auto rounded-lg bg-transparent"
           >
             <div className="flex gap-4 ">
@@ -44,13 +43,12 @@ const CompanyBannerPage: React.FC = () => {
                 }}
                 className="lg:w-[40%] py-2 rounded-lg"
                 size="middle"
-                onChange={(e) => {
-                  setValue("name", e.target.value);
-                }}
+                onChange={handleChangeCompanyName}
               />
               <button
                 type="submit"
-                className="min-w-[100px] font-medium h-auto px-3 py-2 rounded-lg bg-primary text-white "
+                className="min-w-[100px] font-medium h-auto px-3 py-2 rounded-lg bg-primary text-white"
+                onClick={handleSearchCompany}
               >
                 {t("search")}
               </button>

@@ -62,6 +62,8 @@ const JobResultFilterPage: React.FC = () => {
                 <div className="p-5">
                   <Skeleton />
                 </div>
+              ) : filterJobs?.length <= 0 ? (
+                <></>
               ) : (
                 <JobShortDetailPage dataJob={dataJobShort}></JobShortDetailPage>
               )}

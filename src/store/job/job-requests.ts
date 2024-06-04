@@ -110,3 +110,20 @@ export const requestJobGetSavedJob = (
     }
   );
 };
+export const requestJobGetAppliedJob = (
+  candidate_id: string,
+  page: string = "1",
+  size: string = "9",
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.get(
+    `${API}/api/v1/candidates/${candidate_id}/posts/applied?page=${page}&size=${size}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};

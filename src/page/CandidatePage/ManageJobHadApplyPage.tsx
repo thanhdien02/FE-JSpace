@@ -1,19 +1,33 @@
-import { Pagination, Radio, RadioChangeEvent } from "antd";
+import { Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 import CardManageJobHadApplyPage from "../../components/card/CardManageJobHadApplyPage";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { jobGetAppliedJob } from "../../store/job/job-slice";
 const ManageJobHadApplyPage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
+  const { appliedJobs, loadingJob, paginationAppliedJob } = useSelector(
+    (state: any) => state.job
+  );
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [value, setValue] = useState(1);
-
+  const [page, setPage] = useState(1);
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  useEffect(() => {
+    if (user?.id) {
+      dispatch(
+        jobGetAppliedJob({ candidate_id: user?.id, page: page, size: 4 })
+      );
+    }
+  }, [user, page]);
   return (
     <>
       <div className="p-5">
@@ -43,13 +57,31 @@ const ManageJobHadApplyPage: React.FC = () => {
           </Radio.Group>
         </div>
         <div className="flex flex-col gap-5 mt-7">
-          <CardManageJobHadApplyPage></CardManageJobHadApplyPage>
-          <CardManageJobHadApplyPage></CardManageJobHadApplyPage>
-          <CardManageJobHadApplyPage></CardManageJobHadApplyPage>
-          <CardManageJobHadApplyPage></CardManageJobHadApplyPage>
+          {loadingJob ? (
+            <Skeleton />
+          ) : (
+            appliedJobs?.length > 0 &&
+            appliedJobs.map((item: any) => (
+              <CardManageJobHadApplyPage
+                key={item?.id}
+                item={item}
+              ></CardManageJobHadApplyPage>
+            ))
+          )}
         </div>
+
         <div className="flex justify-end mt-5">
-          <Pagination defaultCurrent={1} total={50} />
+          {appliedJobs.length <= 0 ? (
+            <></>
+          ) : (
+            <Pagination
+              total={paginationAppliedJob?.totalElements}
+              onChange={(e) => setPage(e)}
+              className="inline-block"
+              current={page}
+              pageSize={paginationAppliedJob?.pageSize}
+            />
+          )}
         </div>
       </div>
     </>

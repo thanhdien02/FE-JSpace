@@ -1,6 +1,8 @@
 import { call, put } from "redux-saga/effects";
 import { getToken, Token } from "../../utils/auth";
 import {
+  jobUpdateAppliedJobRedux,
+  jobUpdateAppliedPaginationRedux,
   jobUpdateFilterJobRedux,
   jobUpdateHomeJobRedux,
   jobUpdateJobByIdRedux,
@@ -12,6 +14,7 @@ import {
 } from "./job-slice";
 import { message } from "antd";
 import {
+  requestJobGetAppliedJob,
   requestJobGetFilterJob,
   requestJobGetHomeJob,
   requestJobGetJobById,
@@ -65,10 +68,6 @@ function* handleJobGetRelativeJob(dataGetRelativeJob: any): Generator<any> {
   }
 }
 function* handleJobGetFilterJob(dataGetFilterJob: any): Generator<any> {
-  console.log(
-    "🚀 ~ function*handleJobGetFilterJob ~ dataGetFilterJob:",
-    dataGetFilterJob
-  );
   try {
     yield put(jobUpdateLoadingRedux({ loadingJob: true }));
     const response: any = yield call(
@@ -117,6 +116,42 @@ function* handleJobGetSavedJob(dataGetSavedJob: any): Generator<any> {
       yield put(
         jobUpdateSavedPaginationRedux({
           paginationSavedJob: {
+            pageNumber: response.data.result.pageNumber,
+            pageSize: response.data.result.pageSize,
+            totalElements: response.data.result.totalElements,
+            totalPages: response.data.result.totalPages,
+            numberOfElements: response.data.result.numberOfElements,
+          },
+        })
+      );
+      message.success("Load công việc đã lưu thành công.");
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(jobUpdateLoadingRedux({ loadingJob: false }));
+  }
+}
+function* handleJobGetAppliedJob(dataGetAppliedJob: any): Generator<any> {
+  try {
+    yield put(jobUpdateLoadingRedux({ loadingJob: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestJobGetAppliedJob,
+      dataGetAppliedJob?.payload?.candidate_id,
+      dataGetAppliedJob?.payload?.page,
+      dataGetAppliedJob?.payload?.size,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      yield put(
+        jobUpdateAppliedJobRedux({
+          appliedJobs: response?.data?.result?.content,
+        })
+      );
+      yield put(
+        jobUpdateAppliedPaginationRedux({
+          paginationAppliedJob: {
             pageNumber: response.data.result.pageNumber,
             pageSize: response.data.result.pageSize,
             totalElements: response.data.result.totalElements,
@@ -184,4 +219,5 @@ export {
   handleJobGetJobByIdWithCandidate,
   handleJobGetRelativeJob,
   handleJobGetFilterJob,
+  handleJobGetAppliedJob,
 };

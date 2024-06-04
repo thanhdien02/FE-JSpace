@@ -18,10 +18,10 @@ const HomeBannerPage: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
-  const [experience, setExperience] = useState("");
-  const [salary, setSalary] = useState("");
+  const [title, setTitle] = useState<any>(null);
+  const [location, setLocation] = useState<any>(null);
+  const [experience, setExperience] = useState<any>(null);
+  const [salary, setSalary] = useState<any>(null);
   const handleChangeJobTitle = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

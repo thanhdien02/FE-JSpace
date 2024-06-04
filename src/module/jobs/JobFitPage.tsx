@@ -21,6 +21,8 @@ const JobFitPage: React.FC = () => {
   useEffect(() => {
     if (filterJobs?.length > 0) {
       setDataJob(chunkArray(filterJobs, 2));
+    } else {
+      setDataJob(null);
     }
   }, [filterJobs]);
   return (
@@ -34,6 +36,8 @@ const JobFitPage: React.FC = () => {
             <div className="p-5">
               <Skeleton />
             </div>
+          ) : dataJob?.length <= 0 || !dataJob?.length ? (
+            <div className="py-5 text-gray-400">Không có công việc phù hợp</div>
           ) : (
             <Swiper
               modules={[Navigation, Scrollbar, A11y]}

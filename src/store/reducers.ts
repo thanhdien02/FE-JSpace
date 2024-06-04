@@ -3,6 +3,7 @@ import commonReducer from "./common/common-slice";
 import fileReducer from "./file/file-slice";
 import jobReducer from "./job/job-slice";
 import applyReducer from "./apply/apply-slice";
+import companyReducer from "./company/company-slice";
 import candidateReducer from "./candidate/candidate-slice";
 import { combineReducers } from "@reduxjs/toolkit";
 
@@ -13,4 +14,5 @@ export const reducer: any = combineReducers({
   common: commonReducer,
   job: jobReducer,
   apply: applyReducer,
+  company: companyReducer,
 });

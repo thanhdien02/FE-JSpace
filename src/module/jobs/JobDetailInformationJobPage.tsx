@@ -198,7 +198,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
               >
                 <div
                   onClick={handleSaveAndUnsaved}
-                  className="min-w-[15%] lg:px-0 px-2 max-w-full hover:opacity-80 transition-all flex items-center border border-solid border-primary text-primary font-medium justify-center py-2 gap-2 rounded-md"
+                  className="min-w-[15%] cursor-pointer lg:px-0 px-2 max-w-full hover:opacity-80 transition-all flex items-center border border-solid border-primary text-primary font-medium justify-center py-2 gap-2 rounded-md"
                 >
                   <button className="">
                     {checkSave ? `${t("unsave")}` : `${t("save")}`}
