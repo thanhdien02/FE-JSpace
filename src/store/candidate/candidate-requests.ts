@@ -120,3 +120,40 @@ export const requestCandidateDeleteBackground = (
     }
   );
 };
+
+export const requestCandidateFollowJob = (
+  candidate_id: string = "",
+  company_id: string = "",
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.post(
+    `${API}/api/v1/candidates/companies/follows`,
+    {
+      companyId: company_id,
+      candidateId: candidate_id,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+export const requestCandidateUnFollowJob = (
+  candidate_id: string,
+  company_id: string,
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.delete(
+    `${API}/api/v1/candidates/${candidate_id}/companies/unfollow?companyId=${company_id}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};

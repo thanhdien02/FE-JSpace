@@ -18,6 +18,7 @@ const applySlice: any = createSlice({
   initialState: init,
   reducers: {
     applyJobApply: () => {},
+    applyJobApplyWithUploadCV: () => {},
     applyUpdateLoadingRedux: (state: any, action: any) => ({
       ...state,
       loadingApply: action.payload.loadingApply,
@@ -37,5 +38,6 @@ export const {
   applyJobApply,
   applyUpdateLoadingRedux,
   applyUpdateMessageRedux,
+  applyJobApplyWithUploadCV,
 } = applySlice.actions;
 export default applySlice.reducer;

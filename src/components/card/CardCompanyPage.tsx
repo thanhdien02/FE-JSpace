@@ -14,15 +14,15 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className=" w-full h-[280px] bg-white shadow-md rounded-md overflow-hidden">
-        <div className="relative h-[40%]">
+      <div className=" w-full h-[300px] bg-white shadow-md rounded-md overflow-hidden">
+        <div className="relative h-[43%]">
           <img
-            src={item?.background ? item?.background : bg}
+            src={item?.company?.background ? item?.company?.background : bg}
             className="rounded-t-lg w-full h-full object-cover"
             alt=""
           />
           <img
-            src={item?.logo ? item?.logo : bg1}
+            src={item?.company?.logo ? item?.company?.logo : bg1}
             className="absolute left-6 -bottom-7 rounded-md w-[65px] h-[65px] object-cover"
             alt=""
           />
@@ -41,15 +41,15 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
           <div className="p-5 flex flex-col gap-1">
             <div className="flex gap-4">
               <Popover
-                content={<p className="w-[300px] font-medium">{item?.name}</p>}
+                content={<p className="w-[300px] font-medium">{item?.company?.name}</p>}
               >
                 <h2
                   onClick={() => {
-                    navigate(`/companys/${item?.id}`);
+                    navigate(`/companys/${item?.company?.id}`);
                   }}
                   className="w-[90%] font-medium text-base line-clamp-2 cursor-pointer hover:text-primary transition-all"
                 >
-                  {item?.name}
+                  {item?.company?.name}
                 </h2>
               </Popover>
 
@@ -58,17 +58,17 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
                 <span className="">4.6</span>
               </div>
             </div>
-            <p className="mt-1 line-clamp-1 text-sm text-gray-500">{item?.email}</p>
+            <p className="mt-1 line-clamp-1 text-sm text-gray-500">{item?.company?.email}</p>
             <p className="line-clamp-1 text-sm text-gray-500">
-              {item?.companyLink}
+              {item?.company?.companyLink}
             </p>
             <div className="flex gap-5 items-center mt-1">
               <p className="text-sm font-medium text-gray-500">
                 {" "}
-                {item?.address}
+                {item?.company?.address}
               </p>
               <p className="text-sm font-medium text-gray-500">
-                {item?.companySize} nhân viên
+                {item?.company?.companySize} nhân viên
               </p>
             </div>
           </div>

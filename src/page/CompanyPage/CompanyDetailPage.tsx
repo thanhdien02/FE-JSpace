@@ -2,11 +2,23 @@ import React, { useEffect } from "react";
 import CompanyDetailInformationCommonPage from "../../module/companys/CompanyDetailInformationCommonPage";
 import CompanyDetailMoreInformationPage from "../../module/companys/CompanyDetailMoreInformationPage";
 import CompanyDetailContentPage from "../../module/companys/CompanyDetailContentPage";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { companyGetCompanyById } from "../../store/company/company-slice";
+import { useSelector } from "react-redux";
 
 const CompanyDetailPage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
+  const { companyId } = useParams();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  useEffect(() => {
+    dispatch(
+      companyGetCompanyById({ company_id: companyId, candidate_id: user?.id })
+    );
+  }, [user?.id]);
   return (
     <>
       <div className="bg-gray-100 py-5">

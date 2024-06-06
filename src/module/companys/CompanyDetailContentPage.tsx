@@ -8,10 +8,11 @@ interface PropComponent {
 }
 
 const CompanyDetailContentPage: React.FC<PropComponent> = ({ className }) => {
+  
+
   const onChange = (key: string) => {
     console.log(key);
   };
-
   const { t } = useTranslation();
   const items: TabsProps["items"] = [
     {

@@ -4,6 +4,7 @@ import IconMap from "../../components/icons/IconMap";
 import GoogleMapReact from "google-map-react";
 import { TbMapPinFilled } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 interface PropComponent {
   className?: string;
 }
@@ -42,6 +43,7 @@ const MapTitleAddress: React.FC<IMapTitleAddress> = ({
 const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
   className,
 }) => {
+  const { companyById } = useSelector((state: any) => state.company);
   const { t } = useTranslation();
   const [coords, setCoords] = useState<any>(null);
 
@@ -75,10 +77,7 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
             <span className=""> {t("companydetail.companyaddress")}</span>
           </div>
           <p className="text-gray-500 text-sm mt-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus,
-            impedit sit? Commodi corrupti ex excepturi aut explicabo optio
-            aperiam cupiditate rem repellendus! Voluptate tempora asperiores
-            obcaecati a repellat excepturi voluptatem.
+            {companyById?.company?.address}
           </p>
           <span className="w-full h-[1px] bg-gray-300 block my-4"></span>
           <div className="flex gap-3 items-center mt-3">

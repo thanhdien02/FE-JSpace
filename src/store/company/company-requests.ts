@@ -16,14 +16,18 @@ export const requestCompanyGetCompany = (
   );
 };
 export const requestCompanyGetCompanyById = (
-  companyId: string = "",
-  accessToken: string
+  company_id: string = "",
+  candidate_id: string = ""
 ) => {
-  if (companyId == "") return;
-  return axios.get(`${API}/api/v1/companies/${companyId}`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  if (company_id == "") return;
+  return axios.get(
+    `${API}/api/v1/companies/${company_id}${
+      candidate_id && `?candidateId=${candidate_id}`
+    }`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };

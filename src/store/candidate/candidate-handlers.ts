@@ -3,7 +3,9 @@ import { getToken, Token } from "../../utils/auth";
 import {
   requestCandidateDeleteAvatar,
   requestCandidateDeleteBackground,
+  requestCandidateFollowJob,
   requestCandidateSaveJob,
+  requestCandidateUnFollowJob,
   requestCandidateUnSaveJob,
   requestCandidateUpdateAvatar,
   requestCandidateUpdateBackground,
@@ -192,6 +194,59 @@ function* handleCandidateDeleteBackgroundCandidate(
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
   }
 }
+
+function* handleCandidateFollowJob(dataCandiateFollowJob: any): Generator<any> {
+  try {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestCandidateFollowJob,
+      dataCandiateFollowJob?.payload?.candidate_id,
+      dataCandiateFollowJob?.payload?.company_id,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      message.success("Theo dõi công ty thành công.");
+      yield put(
+        candidateUpdateMessageRedux({
+          messageCandidate:
+            `followsuccess` + dataCandiateFollowJob?.payload?.company_id,
+        })
+      );
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
+  }
+}
+function* handleCandidateUnFollowJob(
+  dataCandiateFollowJob: any
+): Generator<any> {
+  try {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestCandidateUnFollowJob,
+      dataCandiateFollowJob?.payload?.candidate_id,
+      dataCandiateFollowJob?.payload?.company_id,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      message.success("Bỏ theo dõi thành công.");
+      yield put(
+        candidateUpdateMessageRedux({
+          messageCandidate:
+            `unfollowsuccess` + dataCandiateFollowJob?.payload?.company_id,
+        })
+      );
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
+  }
+}
 export {
   handleCandidateUpdateIdentification,
   handleCandidateUpdateBackground,
@@ -200,4 +255,6 @@ export {
   handleCandidateUnSaveJob,
   handleCandidateDeleteAvatarCandidate,
   handleCandidateDeleteBackgroundCandidate,
+  handleCandidateFollowJob,
+  handleCandidateUnFollowJob,
 };

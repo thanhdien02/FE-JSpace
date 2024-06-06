@@ -5,7 +5,6 @@ import IconFolder from "../../components/icons/IconFolder";
 import Dragger from "antd/es/upload/Dragger";
 import { EditOutlined, InboxOutlined } from "@ant-design/icons";
 import {
-  Button,
   Divider,
   Empty,
   message,
@@ -18,10 +17,12 @@ import { useDispatch } from "react-redux";
 import {
   fileGetAllFile,
   fileUpdateMessageRedux,
-  fileUploadFile,
 } from "../../store/file/file-slice";
 import Loading from "../../components/loading/Loading";
-import { applyJobApply } from "../../store/apply/apply-slice";
+import {
+  applyJobApply,
+  applyJobApplyWithUploadCV,
+} from "../../store/apply/apply-slice";
 // import { useParams } from "react-router-dom";
 interface PropComponent {
   className?: string;
@@ -69,20 +70,32 @@ const ApplyJobPage: React.FC<PropComponent> = ({
       return false;
     },
   };
-  const handleUpload = () => {
-    dispatch(fileUploadFile({ file, candidate_id: user?.id }));
-  };
   const handleApply = () => {
     if (user?.id) {
       if (selectedOption == "option2") {
-        console.log("🚀 ~ cvchoose:", cvchoose);
-        dispatch(
-          applyJobApply({
-            candidate_id: user?.id,
-            job_id: jobId,
-            resume_id: cvchoose?.id,
-          })
-        );
+        if (cvchoose?.id) {
+          dispatch(
+            applyJobApply({
+              candidate_id: user?.id,
+              job_id: jobId,
+              resume_id: cvchoose?.id,
+            })
+          );
+        } else {
+          message.info("Bạn chưa chọn CV để ứng tuyển");
+        }
+      } else if (selectedOption == "option3") {
+        if (file) {
+          dispatch(
+            applyJobApplyWithUploadCV({
+              file,
+              candidate_id: user?.id,
+              job_id: jobId,
+            })
+          );
+        } else {
+          message.info("Bạn chưa tải CV để ứng tuyển");
+        }
       }
     }
   };
@@ -288,19 +301,6 @@ const ApplyJobPage: React.FC<PropComponent> = ({
                               Chỉ hỗ trợ cho pdf dưới 3Mb
                             </p>
                           </Dragger>
-                          <div className="flex">
-                            <Button
-                              type="primary"
-                              onClick={handleUpload}
-                              disabled={file === undefined}
-                              loading={loadingFile}
-                              style={{ marginTop: 20 }}
-                              size="large"
-                              className="ml-auto"
-                            >
-                              {loadingFile ? "Đang lưu" : "Lưu hồ sơ xin việc"}
-                            </Button>
-                          </div>
                         </div>
                       }
                       className="border border-solid border-gray-200 rounded-md"

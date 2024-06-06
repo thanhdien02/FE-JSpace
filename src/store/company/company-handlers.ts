@@ -1,7 +1,7 @@
 import { call, put } from "redux-saga/effects";
-import { getToken, Token } from "../../utils/auth";
 import { message } from "antd";
 import {
+  companyUpdateCompanyByIdRedux,
   companyUpdateCompanyRedux,
   companyUpdateLoadingRedux,
   companyUpdatePaginationRedux,
@@ -12,14 +12,6 @@ import {
 } from "./company-requests";
 
 function* handleCompanyGetCompany(dataGetCompany: any): Generator<any> {
-  console.log(
-    "🚀 ~ function*handleCompanyGetCompany ~ dataGetCompany:",
-    dataGetCompany
-  );
-  console.log(
-    "🚀 ~ function*handleCompanyGetCompany ~  dataGetCompany?.payload?.size:",
-    dataGetCompany?.payload?.size
-  );
   try {
     yield put(companyUpdateLoadingRedux({ loadingCompany: true }));
     const response: any = yield call(
@@ -43,7 +35,6 @@ function* handleCompanyGetCompany(dataGetCompany: any): Generator<any> {
           },
         })
       );
-      message.success("Load dữ liệu công ty thành công.");
     }
   } catch (error: any) {
     message.error(error?.response?.data?.message);
@@ -54,18 +45,15 @@ function* handleCompanyGetCompany(dataGetCompany: any): Generator<any> {
 function* handleCompanyGetCompanyById(dataGetById: any): Generator<any> {
   try {
     yield put(companyUpdateLoadingRedux({ loadingCompany: true }));
-    const token: Token = getToken();
-
     const response: any = yield call(
       requestCompanyGetCompanyById,
-      dataGetById?.payload?.companyId,
-      token?.accessToken
+      dataGetById?.payload?.company_id,
+      dataGetById?.payload?.candidate_id
     );
     if (response?.data?.code === 1000) {
-      message.success("Load dữ liệu công ty thành công.");
-      yield put(companyUpdateCompanyRedux({ company: response.data.result }));
-    } else {
-      // message.error("Tạo công ty thất bại.");
+      yield put(
+        companyUpdateCompanyByIdRedux({ companyById: response.data.result })
+      );
     }
   } catch (error: any) {
     message.error(error?.response?.data?.message);

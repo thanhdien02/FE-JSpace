@@ -39,6 +39,34 @@ function* handleFileUploadFile(dataUploadFile: any): Generator<any> {
     yield put(fileUpdateLoadingRedux({ loadingFile: false }));
   }
 }
+function* handleFileApplyJobFile(dataUploadFile: any): Generator<any> {
+  try {
+    yield put(fileUpdateLoadingRedux({ loadingFile: true }));
+    const formData = new FormData();
+    formData.append("file", dataUploadFile?.payload?.file);
+    formData.append("name", dataUploadFile?.payload?.file?.name);
+    const { accessToken } = getToken();
+    const response: any = yield call(
+      requestFileUploadFile,
+      dataUploadFile?.payload?.candidate_id,
+      accessToken,
+      formData
+    );
+    if (response?.data?.code === 1000) {
+      message.success("Upload successful");
+      yield put(
+        fileUpdateMessageRedux({
+          messageFile: "success",
+        })
+      );
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(fileUpdateLoadingRedux({ loadingFile: false }));
+  }
+}
+
 function* handleFileDeleteFile(dataDeleteFile: any): Generator<any> {
   try {
     yield put(fileUpdateLoadingRedux({ loadingFile: true }));
@@ -92,4 +120,9 @@ function* handleFileGetAllFile(dataCandadate_id: any): Generator<any> {
     yield put(fileUpdateLoadingRedux({ loadingFile: false }));
   }
 }
-export { handleFileUploadFile, handleFileGetAllFile, handleFileDeleteFile };
+export {
+  handleFileUploadFile,
+  handleFileGetAllFile,
+  handleFileDeleteFile,
+  handleFileApplyJobFile,
+};
