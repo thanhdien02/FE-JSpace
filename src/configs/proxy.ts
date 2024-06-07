@@ -2,7 +2,7 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 
 export default (req: any, res: any) => {
   const proxy = createProxyMiddleware({
-    target: "http://your-http-api-endpoint",
+    target: "http://34.67.38.44:8081/jspace-service",
     changeOrigin: true,
     secure: false, // Bỏ qua kiểm tra chứng chỉ SSL nếu cần
   });
