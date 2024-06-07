@@ -11,6 +11,11 @@ const CompanyPage: React.FC = () => {
   const [page, setPage] = useState(1);
   const [companyname, setCompanyname] = useState<any>(null);
   const dispatch = useDispatch();
+
+  const handleOnchangePage = (e: any) => {
+    dispatch(companyGetCompany({ companyName: companyname, page: e, size: 9 }));
+    setPage(e);
+  };
   useEffect(() => {
     if (companyname != null) {
       dispatch(
@@ -23,7 +28,7 @@ const CompanyPage: React.FC = () => {
     dispatch(
       companyGetCompany({ companyName: companyname, page: page, size: 9 })
     );
-  }, [page]);
+  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -35,7 +40,7 @@ const CompanyPage: React.FC = () => {
         <div className="w-primary max-w-full lg:px-0 px-5 flex mx-auto mt-5">
           <Pagination
             total={paginationCompany?.totalElements}
-            onChange={(e) => setPage(e)}
+            onChange={handleOnchangePage}
             className="ml-auto font-medium"
             current={page}
             pageSize={paginationCompany?.pageSize}
