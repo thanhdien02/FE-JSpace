@@ -8,20 +8,6 @@ pipeline {
     }
 
     stages {
-        // stage('Build') {
-        //     steps {
-        //         echo 'Building..'   
-        //         sh 'npm run build'
-        //     }
-        // }
-
-        // stage('Test') {
-        //     steps {
-        //         echo 'Testing..'
-        //         // sh 'mvn test'
-        //     }
-        // }
-
         stage('Package Image') {
             steps {
                 echo 'Docker build image....'
@@ -31,7 +17,6 @@ pipeline {
                 script {
                     sh "docker build -t ${IMAGE_NAME} ."
                     sh "docker images"
-                    // sh "docker save -o ${IMAGE_NAME}.tar ${IMAGE_NAME}"
                 }
             }
         }
