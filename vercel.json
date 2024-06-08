@@ -2,8 +2,8 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/" },
     {
-      "source": "/configs/proxy/:path*",
-      "destination": "/configs/proxy"
+      "source": "/jspace-service/(.*)",
+      "destination": "http://35.197.133.113:8081/jspace-service/$1"
     }
   ]
 }

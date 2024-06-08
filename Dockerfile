@@ -1,3 +1,4 @@
+
 # Use the official Node.js 20.11 Alpine image as a base
 FROM node:20.11-alpine AS base
 
@@ -35,3 +36,4 @@ EXPOSE 3000
 
 # Start the server
 CMD ["serve", "-s", "build"]
+
