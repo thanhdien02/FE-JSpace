@@ -29,7 +29,7 @@ FROM node:20.11-alpine AS runner
 WORKDIR /app
 
 # Copy built files from the builder stage
-COPY --from=builder /app/build ./build
+COPY --from=builder /app/dist ./dist
 
 # Install serve to run the production server
 RUN npm install -g serve
@@ -37,4 +37,4 @@ RUN npm install -g serve
 EXPOSE 3000
 
 # Start the server
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "dist"]
