@@ -1,4 +1,3 @@
-
 # Use the official Node.js 20.11 Alpine image as a base
 FROM node:20.11-alpine AS base
 
@@ -19,6 +18,9 @@ WORKDIR /app
 # Copy the entire application directory
 COPY . .
 
+# Install TypeScript as a development dependency
+RUN npm install --save-dev typescript
+
 # Build the application
 RUN npm run build
 
@@ -36,4 +38,3 @@ EXPOSE 3000
 
 # Start the server
 CMD ["serve", "-s", "build"]
-
