@@ -1,6 +1,4 @@
-# build stage
-FROM node:20.11.1-alpine as build-stage
-WORKDIR /app
+
 # Build stage
 FROM node:21.11.1-alpine AS build-stage
 WORKDIR /app
@@ -17,8 +15,5 @@ USER static
 WORKDIR /home/static
 COPY --from=build-stage /app/dist .
 CMD ["busybox", "httpd", "-f", "-v", "-p", "8888"]
-# production stage
-FROM nginx:1.17-alpine as production-stage
-COPY --from=build-stage /app/build /usr/share/nginx/html
-CMD ["nginx", "-g", "daemon off;"]
+
 
