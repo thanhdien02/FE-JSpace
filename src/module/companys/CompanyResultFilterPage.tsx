@@ -53,7 +53,10 @@ const CompanyResultFilterPage: React.FC<PropComponent> = ({ className }) => {
           >
             {companys.length > 0 &&
               companys?.map((item: any) => (
-                <CardCompanyPage key={item?.id} item={item}></CardCompanyPage>
+                <CardCompanyPage
+                  key={item?.company?.id}
+                  item={item}
+                ></CardCompanyPage>
               ))}
           </div>
         )}
