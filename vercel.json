@@ -1,3 +1,9 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" },
+   {
+      "source": "/api/:path*",
+      "destination": "http://35.197.133.113:8081/jspace-service/api/v1/commons/:path*"
+    }
+  ]
 }
