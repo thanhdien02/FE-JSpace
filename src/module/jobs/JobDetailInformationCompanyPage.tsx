@@ -80,7 +80,7 @@ const JobDetailInformationCompanyPage: React.FC<PropComponent> = ({
               </Popover>
             </div>
             <NavLink
-              to="/companys/1"
+              to={`/companys/${jobByIdWithCandidate?.post?.company?.id}`}
               className="flex gap-2 mt-5 items-center justify-center text-primary font-medium"
             >
               <span>{t("jobdetail.seecompanypage")}</span>

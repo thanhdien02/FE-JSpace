@@ -3,6 +3,7 @@ import { getToken, Token } from "../../utils/auth";
 import {
   jobUpdateAppliedJobRedux,
   jobUpdateAppliedPaginationRedux,
+  jobUpdateCompanyJobRedux,
   jobUpdateFilterJobRedux,
   jobUpdateHomeJobRedux,
   jobUpdateJobByIdRedux,
@@ -15,6 +16,7 @@ import {
 import { message } from "antd";
 import {
   requestJobGetAppliedJob,
+  requestJobGetCompanyJob,
   requestJobGetFilterJob,
   requestJobGetHomeJob,
   requestJobGetJobById,
@@ -37,6 +39,29 @@ function* handleJobGetHomeJob(dataGetHomeJob: any): Generator<any> {
         jobUpdateHomeJobRedux({ homeJobs: response?.data?.result?.content })
       );
       // message.success("Load dữ liệu home job thành công.");
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(jobUpdateLoadingRedux({ loadingJob: false }));
+  }
+}
+function* handleJobGetCompanyJob(dataGetCompanyJob: any): Generator<any> {
+  try {
+    yield put(jobUpdateLoadingRedux({ loadingJob: true }));
+    const response: any = yield call(
+      requestJobGetCompanyJob,
+      dataGetCompanyJob?.payload?.companyName,
+      dataGetCompanyJob?.payload?.candidate_id,
+      dataGetCompanyJob?.payload?.page,
+      dataGetCompanyJob?.payload?.size
+    );
+    if (response?.data?.code === 1000) {
+      yield put(
+        jobUpdateCompanyJobRedux({
+          companyJobs: response?.data?.result?.content,
+        })
+      );
     }
   } catch (error: any) {
     message.error(error?.response?.data?.message);
@@ -220,4 +245,5 @@ export {
   handleJobGetRelativeJob,
   handleJobGetFilterJob,
   handleJobGetAppliedJob,
+  handleJobGetCompanyJob,
 };

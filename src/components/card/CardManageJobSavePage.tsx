@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { candidateUnSaveJob } from "../../store/candidate/candidate-slice";
 import { jobGetSavedJob } from "../../store/job/job-slice";
+import { formatToMillion } from "../../utils/common-function";
 
 interface PropComponent {
   className?: string;
@@ -46,16 +47,23 @@ const CardManageJobSavePage: React.FC<PropComponent> = ({
         <div className="absolute top-2 right-2 hidden lg:flex items-center gap-2 font-medium text-primary px-2 py-1 rounded-sm cursor-pointer">
           <IconMoney classIcon="!w-5 !h-5"></IconMoney>
           <span className="text-sm">
-            {item?.minPay != "0"
-              ? `${item?.minPay.toLocaleString("vi", {
-                  style: "currency",
-                  currency: "VND",
-                })} -`
-              : ""}{" "}
-            {item?.maxPay.toLocaleString("vi", {
-              style: "currency",
-              currency: "VND",
-            })}
+            {item?.minPay != "0" &&
+            item?.maxPay != "0" &&
+            item?.maxPay != "2147483647"
+              ? `${formatToMillion(
+                  parseInt(item?.minPay, 10),
+                  "not"
+                )} - ${formatToMillion(parseInt(item?.maxPay, 10))}`
+              : ""}
+            {/* Lên tới */}
+            {item?.minPay == "0" && item?.maxPay != "0"
+              ? `Lên tới ${formatToMillion(parseInt(item?.maxPay, 10))}`
+              : ""}
+            {/* Trên */}
+            {item?.minPay != "0" &&
+            (item?.maxPay == "2147483647" || item?.maxPay == "0")
+              ? `Trên ${formatToMillion(parseInt(item?.minPay, 10))}`
+              : ""}
           </span>
         </div>
         <div className="lg:w-[20%] md:w-[20%] w-[30%] self-start mt-2">

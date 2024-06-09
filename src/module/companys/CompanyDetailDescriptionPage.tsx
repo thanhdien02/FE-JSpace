@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 const CompanyDetailDescriptionPage: React.FC = () => {
   const { companyById } = useSelector((state: any) => state.company);
+ 
   return (
     <>
       <ContentSeeMore

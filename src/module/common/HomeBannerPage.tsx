@@ -1,7 +1,7 @@
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
 import { Input, Select } from "antd";
 import React, { useEffect, useState } from "react";
-import bannerbg from "../../assets/banner3.jpg";
+import bannerbg from "../../assets/banner-job7.jpg";
 import { dataSalary } from "../../utils/dataFetch";
 import NumberCounter from "../../components/numbercount/NumberCounter";
 import { useTranslation } from "react-i18next";
@@ -67,7 +67,7 @@ const HomeBannerPage: React.FC = () => {
         <img
           src={bannerbg}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover "
+          className="absolute inset-0 h-full w-full object-cover opacity-90"
         />
         <div className="py-5 flex flex-col w-full min-h-[150px] justify-center items-center gap-y-5">
           <h1 className="z-10 font-bold text-3xl text-white lg:line-clamp-1 py-2 mt-6 text-center lg:text-start px-4 lg:px-0">
@@ -75,8 +75,7 @@ const HomeBannerPage: React.FC = () => {
           </h1>
           <form
             className="lg:px-0 px-4 lg:m-auto flex flex-wrap gap-3 max-w-full w-primary h-auto rounded-lg shadow-lg bg-white"
-            action="
-        "
+            action=""
           >
             <div className="grow flex rounded-lg ">
               <Input
@@ -155,21 +154,21 @@ const HomeBannerPage: React.FC = () => {
           </form>
 
           <div className="px-5 z-10 flex lg:gap-5 gap-2 items-center mt-2">
-            <p className="text-center lg:text-start text-xs lg:text-sm text-gray-300">
+            <p className="text-center lg:text-start text-xs lg:text-sm text-white">
               <span className=""> {t("home.totalwork")} </span>
               <span className=" font-semibold text-base text-white">
                 <NumberCounter targetNumber={30291} />
               </span>
             </p>
             <span className="hidden lg:block w-[5px] h-[5px] rounded-full bg-gray-500"></span>
-            <p className="text-center lg:text-start text-xs lg:text-sm text-gray-300">
+            <p className="text-center lg:text-start text-xs lg:text-sm text-white">
               <span className=""> {t("home.latestjob")} </span>
               <span className=" font-semibold text-base text-white">
                 <NumberCounter targetNumber={2034} />
               </span>
             </p>
             <span className="hidden lg:block w-[5px] h-[5px] rounded-full bg-gray-500"></span>
-            <p className="text-center lg:text-start text-xs lg:text-sm text-gray-300">
+            <p className="text-center lg:text-start text-xs lg:text-sm text-white">
               <span className=""> {t("home.updatetime")} </span>
               <span className=" font-semibold text-base text-white">
                 13:41 20/04/2024

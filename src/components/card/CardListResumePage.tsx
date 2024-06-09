@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import IconShare from "../icons/IconShare";
 import IconDownload from "../icons/IconDownload";
 import IconTrash from "../icons/IconTrash";
 import { useDispatch, useSelector } from "react-redux";
@@ -42,10 +41,6 @@ const CardListResumePage: React.FC<PropComponent> = ({ className, item }) => {
           </a>
           <p className="text-base">Cập nhật lần cuối 17-04-2024 00:39 AM</p>
           <div className="flex gap-2 mt-5">
-            <div className="flex gap-1 justify-center hover:opacity-90 transition-all text-xs items-center bg-primary text-white px-3 py-[6px] rounded-2xl cursor-pointer">
-              <IconShare></IconShare>
-              <span className="font-medium">Chia sẻ</span>
-            </div>
             <div className="flex gap-1 justify-center hover:opacity-90 transition-all text-xs items-center bg-primary text-white px-3 py-[6px] rounded-2xl cursor-pointer">
               <IconDownload></IconDownload>
               <span className="font-medium">Tải xuống</span>

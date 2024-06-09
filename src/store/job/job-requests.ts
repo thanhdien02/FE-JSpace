@@ -93,6 +93,23 @@ export const requestJobGetFilterJob = (
     }
   );
 };
+export const requestJobGetCompanyJob = (
+  companyName: string = "",
+  candidate_id: string = "",
+  page: string = "1",
+  size: string = "3"
+) => {
+  if (companyName == null || companyName == undefined) companyName = "";
+  if (candidate_id == null || candidate_id == undefined) candidate_id = "";
+  return axios.get(
+    `${API}/api/v1/posts?candidateId=${candidate_id}&companyName=${companyName}&page=${page}&size=${size}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
 export const requestJobGetSavedJob = (
   candidate_id: string,
   page: string = "1",

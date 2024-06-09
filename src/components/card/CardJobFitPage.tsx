@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { message, Popover } from "antd";
 import IconMapPin from "../icons/IconMapPin";
 import IconBuilding from "../icons/IconBuilding";
-import IconTrash from "../icons/IconTrash";
 import IconHeart from "../icons/IconHeart";
 import IconHeartFill from "../icons/IconHeartFill";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +9,11 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 import { formatToMillion } from "../../utils/common-function";
+import {
+  candidateSaveJob,
+  candidateUnSaveJob,
+  candidateUpdateMessageRedux,
+} from "../../store/candidate/candidate-slice";
 interface PropComponent {
   className?: string;
   onClick?: any;
@@ -17,14 +21,48 @@ interface PropComponent {
 }
 const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
   const { user } = useSelector((state: any) => state.auth);
+  const { messageCandidate, loadingCandidate } = useSelector(
+    (state: any) => state.candidate
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [checkSave, setCheckSave] = useState(false);
   const handleSaveJob = () => {
     if (!user?.id) {
       message.info("Bạn cần đăng nhập để lưu tin.");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    } else {
+      if (!loadingCandidate) {
+        if (checkSave) {
+          dispatch(
+            candidateUnSaveJob({
+              candidate_id: user?.id,
+              post_id: item?.post?.id,
+            })
+          );
+        } else {
+          dispatch(
+            candidateSaveJob({
+              candidate_id: user?.id,
+              post_id: item?.post?.id,
+            })
+          );
+        }
+      }
     }
   };
+  useEffect(() => {
+    if (messageCandidate === `savesuccess${item?.post?.id}`) {
+      setCheckSave(true);
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    } else if (messageCandidate === `unsavesuccess${item?.post?.id}`) {
+      setCheckSave(false);
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    }
+  }, [messageCandidate]);
+  useEffect(() => {
+    setCheckSave(item?.liked);
+  }, []);
   return (
     <>
       <div
@@ -94,11 +132,7 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
           </div>
         </div>
         <div className="absolute flex gap-2 items-center bottom-2 right-2">
-          <IconTrash
-            className="p-1 rounded-sm bg-red-100 cursor-pointer text-red-600 hover:opacity-80 transition-all"
-            classIcon="w-5 h-5"
-          ></IconTrash>
-          {true ? (
+          {checkSave ? (
             <span
               onClick={handleSaveJob}
               className="p-1 rounded-sm bg-blue-100 cursor-pointer text-primary hover:opacity-80 transition-all"
@@ -110,7 +144,7 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
               onClick={handleSaveJob}
               className="p-1 rounded-sm bg-blue-100 cursor-pointer text-primary hover:opacity-80 transition-all"
             >
-              <IconHeart></IconHeart>
+              <IconHeart classIcon="!w-5 !h-5"></IconHeart>
             </span>
           )}
         </div>

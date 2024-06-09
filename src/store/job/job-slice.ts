@@ -4,6 +4,7 @@ interface IFile {
   jobById?: any;
   jobByIdWithCandidate?: any;
   filterJobs: any;
+  companyJobs: any;
   appliedJobs?: any;
   savedJobs?: any;
   relativeJobs?: any;
@@ -19,6 +20,7 @@ const init: IFile = {
   jobById: {},
   jobByIdWithCandidate: {},
   filterJobs: {},
+  companyJobs: {},
   appliedJobs: {},
   savedJobs: {},
   relativeJobs: {},
@@ -41,6 +43,7 @@ const jobSlice: any = createSlice({
     jobGetSavedJob: () => {},
     jobGetAppliedJob: () => {},
     jobGetFilterJob: () => {},
+    jobGetCompanyJob: () => {},
     jobPostJob: () => {},
     jobUpdateJobByIdRedux: (state: any, action: any) => ({
       ...state,
@@ -61,6 +64,10 @@ const jobSlice: any = createSlice({
     jobUpdateHomeJobRedux: (state: any, action: any) => ({
       ...state,
       homeJobs: action.payload.homeJobs,
+    }),
+    jobUpdateCompanyJobRedux: (state: any, action: any) => ({
+      ...state,
+      companyJobs: action.payload.companyJobs,
     }),
     jobUpdateSavedJobRedux: (state: any, action: any) => ({
       ...state,
@@ -109,5 +116,7 @@ export const {
   jobGetAppliedJob,
   jobUpdateAppliedJobRedux,
   jobUpdateAppliedPaginationRedux,
+  jobGetCompanyJob,
+  jobUpdateCompanyJobRedux,
 } = jobSlice.actions;
 export default jobSlice.reducer;

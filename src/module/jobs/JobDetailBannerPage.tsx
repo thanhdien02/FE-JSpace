@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
 import banner2 from "../../assets/banner3.jpg";
 import { Input, Select } from "antd";
 import { CloseOutlined, SearchOutlined } from "@ant-design/icons";
@@ -11,24 +10,54 @@ import {
   commonGetExperience,
   commonGetLocation,
 } from "../../store/common/common-slice";
-interface Inputs {
-  name?: string;
-  salary?: string;
-  experience?: string;
-  location?: string;
-}
+import { useNavigate } from "react-router-dom";
 const JobDetailBannerPage: React.FC = () => {
   const { locations, experiences } = useSelector((state: any) => state.common);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { handleSubmit, setValue } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (dataSearchJob: Inputs) => {
-    console.log("🚀 ~ dataSearchJob:", dataSearchJob);
-    // dispatch(candidateUpdateCandidate(dataUpdadeCandidate));
+  const navigate = useNavigate();
+  const [title, setTitle] = useState<any>(null);
+  const [location, setLocation] = useState<any>(null);
+  const [experience, setExperience] = useState<any>(null);
+  const [salary, setSalary] = useState<any>(null);
+  const handleChangeJobTitle = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setTitle(e.target.value);
+  };
+  const handleChangeLocation = (value: any) => {
+    setLocation(value);
+  };
+  const handleChangeExperience = (value: any) => {
+    setExperience(value);
+  };
+  const handleChangeSalary = (value: any) => {
+    setSalary(value);
+  };
+  const handleSearchJob = (e: any) => {
+    e.preventDefault();
+    let search = {
+      title: title,
+      location: location,
+      experience: experience,
+      salary: salary,
+    };
+    localStorage.setItem("jspace-search", JSON.stringify(search));
+    navigate("/jobs");
   };
   useEffect(() => {
     dispatch(commonGetLocation());
     dispatch(commonGetExperience());
+    const storedData = localStorage.getItem("jspace-search");
+    if (storedData) {
+      let dataSearch = JSON.parse(storedData);
+      if (dataSearch?.title != "") setTitle(dataSearch?.title);
+      if (dataSearch?.location != "") setLocation(dataSearch?.location);
+      if (dataSearch?.experience != "") setExperience(dataSearch?.experience);
+      if (dataSearch?.salary != "") {
+        setSalary(dataSearch?.salary);
+      }
+    }
   }, []);
   return (
     <>
@@ -41,7 +70,6 @@ const JobDetailBannerPage: React.FC = () => {
         <div className="absolute bg-gradient-to-b from-blue-50/10 to-white/20 inset-0 h-full pt-5">
           <form
             action=""
-            onSubmit={handleSubmit(onSubmit)}
             className="w-primary max-w-full lg:px-0 px-5 mx-auto rounded-lg bg-transparent"
           >
             <div className="flex gap-4 ">
@@ -58,9 +86,8 @@ const JobDetailBannerPage: React.FC = () => {
                   }}
                   className="lg:w-[40%] py-2 rounded-lg"
                   size="middle"
-                  onChange={(e) => {
-                    setValue("name", e.target.value);
-                  }}
+                  value={title}
+                  onChange={handleChangeJobTitle}
                 />
                 <Select
                   showSearch
@@ -73,9 +100,8 @@ const JobDetailBannerPage: React.FC = () => {
                   }
                   options={locations}
                   fieldNames={{ label: "province", value: "value" }}
-                  onChange={(e) => {
-                    setValue("location", e);
-                  }}
+                  value={location}
+                  onChange={handleChangeLocation}
                 />
 
                 <Select
@@ -87,9 +113,8 @@ const JobDetailBannerPage: React.FC = () => {
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
                   }
-                  onChange={(e) => {
-                    setValue("experience", e);
-                  }}
+                  value={experience}
+                  onChange={handleChangeExperience}
                   fieldNames={{ label: "code", value: "value" }}
                   options={experiences}
                 />
@@ -102,14 +127,14 @@ const JobDetailBannerPage: React.FC = () => {
                   filterOption={(input, option: any) =>
                     (option?.label ?? "").includes(input)
                   }
-                  onChange={(e) => {
-                    setValue("salary", e);
-                  }}
+                  value={salary}
+                  onChange={handleChangeSalary}
                   options={dataSalary}
                 />
               </div>
               <button
                 type="submit"
+                onClick={handleSearchJob}
                 className="min-w-[100px] font-medium h-auto px-3 py-2 rounded-lg bg-primary text-white "
               >
                 {t("search")}
