@@ -9,7 +9,7 @@ import IconHeart from "../../components/icons/IconHeart";
 import IconBriefCaseOutline from "../../components/icons/IconBriefCaseOutline";
 import IconWifi from "../../components/icons/IconWifi";
 import IconArrowRightLeft from "../../components/icons/IconArrowRightLeft";
-
+import IconUser from "../../components/icons/IconUser";
 const ManageMenuUsingPhonePage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
   const props: UploadProps = {
@@ -71,8 +71,15 @@ const ManageMenuUsingPhonePage: React.FC = () => {
           to="/wall"
           className="flex items-center gap-3 pb-4 cursor-pointer hover:opacity-80 transition-all"
         >
-          <IconText className="text-gray-600"></IconText>
+          <IconUser className="text-gray-600"></IconUser>
           <p>Trang cá nhân của bạn</p>
+        </NavLink>
+        <NavLink
+          to="/manage/information-account"
+          className="flex items-center gap-3 pb-4 cursor-pointer hover:opacity-80 transition-all"
+        >
+          <IconText className="text-gray-600"></IconText>
+          <p>Cập nhật thông tin cá nhân</p>
         </NavLink>
         <NavLink
           to="/list-resume"

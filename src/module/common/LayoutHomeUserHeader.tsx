@@ -382,7 +382,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
               </ul>
             </div>
           )}
-          <div className="flex gap-1 items-center">
+          <div className="flex gap-1 items-center mt-3">
             <img
               src="https://static.topcv.vn/srp/website/images/flags/vietnam.png"
               alt=""

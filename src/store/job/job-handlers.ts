@@ -6,6 +6,7 @@ import {
   jobUpdateCompanyJobRedux,
   jobUpdateCompanyPaginationRedux,
   jobUpdateFilterJobRedux,
+  jobUpdateFilterPaginationRedux,
   jobUpdateHomeJobRedux,
   jobUpdateJobByIdRedux,
   jobUpdateJobByIdWithCandidateRedux,
@@ -120,10 +121,21 @@ function* handleJobGetFilterJob(dataGetFilterJob: any): Generator<any> {
       dataGetFilterJob?.payload?.size
     );
     if (response?.data?.code === 1000) {
-      message.success("Load dữ liệu filter thành công.");
+      // message.success("Load dữ liệu filter thành công.");
       yield put(
         jobUpdateFilterJobRedux({
           filterJobs: response?.data?.result?.content,
+        })
+      );
+      yield put(
+        jobUpdateFilterPaginationRedux({
+          paginationFilterJob: {
+            pageNumber: response.data.result.pageNumber,
+            pageSize: response.data.result.pageSize,
+            totalElements: response.data.result.totalElements,
+            totalPages: response.data.result.totalPages,
+            numberOfElements: response.data.result.numberOfElements,
+          },
         })
       );
     }
@@ -159,7 +171,7 @@ function* handleJobGetSavedJob(dataGetSavedJob: any): Generator<any> {
           },
         })
       );
-      message.success("Load công việc đã lưu thành công.");
+      // message.success("Load công việc đã lưu thành công.");
     }
   } catch (error: any) {
     message.error(error?.response?.data?.message);

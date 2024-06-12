@@ -28,12 +28,14 @@ const HomeListJobPage: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [dataJob, setDataJob] = useState<any>(null);
+  const [dataJobPhone, setDataJobPhone] = useState<any>(null);
   useEffect(() => {
     dispatch(jobGetHomeJob({ candidate_id: user?.id, size: 27 }));
   }, [user?.id]);
   useEffect(() => {
     if (homeJobs?.length > 0) {
       setDataJob(chunkArray(homeJobs, 9));
+      setDataJobPhone(chunkArray(homeJobs, 3));
     }
   }, [homeJobs]);
   return (
@@ -97,17 +99,6 @@ const HomeListJobPage: React.FC = () => {
                       </div>
                     </SwiperSlide>
                   ))}
-                {/* <SwiperSlide className="ease-linear">
-                  <div className="grid gap-4 grid-cols-3 bg-gray-100">
-                    {homeJobs.length > 0 &&
-                      homeJobs?.map((item: any) => (
-                        <CardHomeJobPage
-                          key={item?.post?.id}
-                          item={item}
-                        ></CardHomeJobPage>
-                      ))}
-                  </div>
-                </SwiperSlide> */}
               </>
             )}
           </Swiper>
@@ -126,28 +117,20 @@ const HomeListJobPage: React.FC = () => {
             onSlideChange={() => console.log("slide change")}
             className="swiper-job lg:hidden block"
           >
-            <SwiperSlide className="ease-linear">
-              <div className="grid gap-4 grid-rows-3 bg-gray-100">
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-              </div>
-            </SwiperSlide>
-
-            <SwiperSlide className="ease-linear">
-              <div className="grid gap-4 grid-rows-3 bg-gray-100">
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="ease-linear">
-              <div className="grid gap-4 grid-rows-3 bg-gray-100">
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-                <CardHomeJobPage></CardHomeJobPage>
-              </div>
-            </SwiperSlide>
+            {dataJobPhone?.length > 0 &&
+              dataJobPhone?.map((item: any) => (
+                <SwiperSlide className="ease-linear" key={uuidv4()}>
+                  <div className="grid gap-4 grid-rows-3 bg-gray-100">
+                    {item?.length > 0 &&
+                      item?.map((item: any) => (
+                        <CardHomeJobPage
+                          key={uuidv4()}
+                          item={item}
+                        ></CardHomeJobPage>
+                      ))}
+                  </div>
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
       </div>

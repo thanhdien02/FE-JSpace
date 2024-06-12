@@ -12,6 +12,7 @@ interface IFile {
   fitJobs?: any;
   loadingJob?: boolean;
   messageJob?: string;
+  paginationFilterJob?: any;
   paginationSavedJob?: any;
   paginationAppliedJob?: any;
   paginationCompanyJob?: any;
@@ -29,6 +30,7 @@ const init: IFile = {
   fitJobs: {},
   loadingJob: false,
   messageJob: "",
+  paginationFilterJob: {},
   paginationSavedJob: {},
   paginationAppliedJob: {},
   paginationCompanyJob: {},
@@ -99,6 +101,10 @@ const jobSlice: any = createSlice({
       ...state,
       paginationCompanyJob: action.payload.paginationCompanyJob,
     }),
+    jobUpdateFilterPaginationRedux: (state: any, action: any) => ({
+      ...state,
+      paginationFilterJob: action.payload.paginationFilterJob,
+    }),
   },
 });
 export const {
@@ -125,5 +131,6 @@ export const {
   jobGetCompanyJob,
   jobUpdateCompanyJobRedux,
   jobUpdateCompanyPaginationRedux,
+  jobUpdateFilterPaginationRedux,
 } = jobSlice.actions;
 export default jobSlice.reducer;

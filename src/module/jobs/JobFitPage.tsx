@@ -3,7 +3,6 @@ import CardJobFitPage from "../../components/card/CardJobFitPage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Scrollbar } from "swiper/modules";
 import { Radio, RadioChangeEvent, Skeleton } from "antd";
-import { Pagination } from "antd";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
@@ -13,6 +12,7 @@ const JobFitPage: React.FC = () => {
   const { filterJobs, loadingJob } = useSelector((state: any) => state.job);
   const { t } = useTranslation();
   const [dataJob, setDataJob] = useState<any>(null);
+  const [dataJobPhone, setDataJobPhone] = useState<any>(null);
   const [filterShow, setFilterShow] = useState(1);
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
@@ -21,8 +21,10 @@ const JobFitPage: React.FC = () => {
   useEffect(() => {
     if (filterJobs?.length > 0) {
       setDataJob(chunkArray(filterJobs, 2));
+      setDataJobPhone(chunkArray(filterJobs, 1));
     } else {
       setDataJob(null);
+      setDataJobPhone(null);
     }
   }, [filterJobs]);
   return (
@@ -75,18 +77,20 @@ const JobFitPage: React.FC = () => {
             onSlideChange={() => console.log("slide change")}
             className="lg:hidden block swiper-job-fit-phone"
           >
-            <SwiperSlide className="ease-linear mt-5">
-              <CardJobFitPage></CardJobFitPage>
-            </SwiperSlide>
-            <SwiperSlide className="ease-linear mt-5">
-              <CardJobFitPage></CardJobFitPage>
-            </SwiperSlide>
-            <SwiperSlide className="ease-linear mt-5">
-              <CardJobFitPage></CardJobFitPage>
-            </SwiperSlide>
-            <SwiperSlide className="ease-linear mt-5">
-              <CardJobFitPage></CardJobFitPage>
-            </SwiperSlide>
+            {dataJobPhone?.length > 0 &&
+              dataJobPhone?.map((item: any) => (
+                <SwiperSlide className="ease-linear" key={uuidv4()}>
+                  <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5">
+                    {item?.length > 0 &&
+                      item?.map((item: any) => (
+                        <CardJobFitPage
+                          key={uuidv4()}
+                          item={item}
+                        ></CardJobFitPage>
+                      ))}
+                  </div>
+                </SwiperSlide>
+              ))}
           </Swiper>
 
           <div className="lg:hidden bg-gray-200 h-[1px] w-full my-3"></div>
@@ -109,18 +113,17 @@ const JobFitPage: React.FC = () => {
               </Radio.Group>
             </div>
             <div className="flex flex-col gap-5">
-              <CardJobFitPage></CardJobFitPage>
-              <CardJobFitPage></CardJobFitPage>
-              <CardJobFitPage></CardJobFitPage>
-              <CardJobFitPage></CardJobFitPage>
-              <CardJobFitPage></CardJobFitPage>
+              {filterJobs?.length > 0 &&
+                filterJobs?.map((item: any) => (
+                  <CardJobFitPage key={uuidv4()} item={item}></CardJobFitPage>
+                ))}
             </div>
             <div className="w-primary max-w-full lg:px-0 flex mx-auto mt-5">
-              <Pagination
+              {/* <Pagination
                 className="ml-auto font-medium"
                 defaultCurrent={1}
                 total={50}
-              />
+              /> */}
             </div>
           </div>
         </section>
