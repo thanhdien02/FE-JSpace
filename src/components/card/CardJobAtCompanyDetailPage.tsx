@@ -1,16 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/bg-login.jpg";
 import IconTrash from "../icons/IconTrash";
 import IconMoney from "../icons/IconMoney";
-import { Popover } from "antd";
+import { message, Popover } from "antd";
 import { useNavigate } from "react-router-dom";
 import IconHeart from "../icons/IconHeart";
 import { formatToMillion } from "../../utils/common-function";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { commonUpdateLoginRedux } from "../../store/common/common-slice";
+import {
+  candidateSaveJob,
+  candidateUnSaveJob,
+  candidateUpdateMessageRedux,
+} from "../../store/candidate/candidate-slice";
 interface PropComponent {
   item?: any;
 }
 const CardJobAtCompanyDetailPage: React.FC<PropComponent> = ({ item }) => {
+  const { user } = useSelector((state: any) => state.auth);
+  const { messageCandidate, loadingCandidate } = useSelector(
+    (state: any) => state.candidate
+  );
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [checkSave, setCheckSave] = useState(false);
+  const handleSaveAndUnSaveJob = () => {
+    if (!user?.id) {
+      message.info("Bạn cần đăng nhập để lưu tin.");
+      dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    } else {
+      if (!loadingCandidate) {
+        if (checkSave) {
+          dispatch(
+            candidateUnSaveJob({
+              candidate_id: user?.id,
+              post_id: item?.post?.id,
+            })
+          );
+        } else {
+          dispatch(
+            candidateSaveJob({
+              candidate_id: user?.id,
+              post_id: item?.post?.id,
+            })
+          );
+        }
+      }
+    }
+  };
+  useEffect(() => {
+    if (messageCandidate === `savesuccess${item?.post?.id}`) {
+      setCheckSave(true);
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    } else if (messageCandidate === `unsavesuccess${item?.post?.id}`) {
+      setCheckSave(false);
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    }
+  }, [messageCandidate]);
+  useEffect(() => {
+    setCheckSave(item?.liked);
+  }, []);
   return (
     <>
       <div className="relative flex gap-5 w-full items-center lg:p-5 p-3 shadow-sm min-h-[100px] border border-solid border-gray-200 rounded-md">
@@ -79,8 +129,11 @@ const CardJobAtCompanyDetailPage: React.FC<PropComponent> = ({ item }) => {
           >
             {item?.applied ? "Đã ứng tuyển" : "Ứng tuyển"}
           </span>
-          <div className="flex items-center select-none gap-1 bg-slate-200 py-1 px-2 cursor-pointer">
-            {item?.liked ? (
+          <div
+            onClick={handleSaveAndUnSaveJob}
+            className="flex items-center select-none gap-1 bg-slate-200 py-1 px-2 cursor-pointer"
+          >
+            {checkSave ? (
               <>
                 <IconTrash></IconTrash>
                 <span className="text-sm  rounded-sm">Bỏ lưu</span>

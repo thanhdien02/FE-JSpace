@@ -34,6 +34,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
   const { messageCandidate, loadingCandidate } = useSelector(
     (state: any) => state.candidate
   );
+  const { messageApply } = useSelector((state: any) => state.apply);
   const { loadingJob, jobByIdWithCandidate } = useSelector(
     (state: any) => state.job
   );
@@ -88,8 +89,14 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
     }
   }, [messageCandidate]);
   useEffect(() => {
+    if (messageApply === `success${jobByIdWithCandidate?.post?.id}`) {
+      setCheckApply(false);
+    }
+  }, [messageApply]);
+  useEffect(() => {
     setCheckSave(jobByIdWithCandidate?.liked);
   }, [jobByIdWithCandidate]);
+
   return (
     <>
       <div className={`p-6 rounded-sm ${className}`}>

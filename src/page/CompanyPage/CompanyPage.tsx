@@ -7,28 +7,46 @@ import { Pagination } from "antd";
 import { useSelector } from "react-redux";
 
 const CompanyPage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
   const { paginationCompany } = useSelector((state: any) => state.company);
   const [page, setPage] = useState(1);
   const [companyname, setCompanyname] = useState<any>(null);
   const dispatch = useDispatch();
 
   const handleOnchangePage = (e: any) => {
-    dispatch(companyGetCompany({ companyName: companyname, page: e, size: 9 }));
+    dispatch(
+      companyGetCompany({
+        candidate_id: user?.id,
+        companyName: companyname,
+        page: e,
+        size: 9,
+      })
+    );
     setPage(e);
   };
   useEffect(() => {
     if (companyname != null) {
       dispatch(
-        companyGetCompany({ companyName: companyname, page: 1, size: 9 })
+        companyGetCompany({
+          candidate_id: user?.id,
+          companyName: companyname,
+          page: 1,
+          size: 9,
+        })
       );
       setPage(1);
     }
   }, [companyname]);
   useEffect(() => {
     dispatch(
-      companyGetCompany({ companyName: companyname, page: page, size: 9 })
+      companyGetCompany({
+        candidate_id: user?.id,
+        companyName: companyname,
+        page: page,
+        size: 9,
+      })
     );
-  }, []);
+  }, [user]);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

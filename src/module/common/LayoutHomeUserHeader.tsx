@@ -12,8 +12,8 @@ import {
 } from "../../utils/dataFetch";
 import { useDispatch } from "react-redux";
 import { authLogout } from "../../store/auth/auth-slice";
-import { Button, Divider, Drawer, DrawerProps, Space } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+import { Avatar, Button, Divider, Drawer, DrawerProps, Space } from "antd";
+import { MenuOutlined, UserOutlined } from "@ant-design/icons";
 import IconChervonRight from "../../components/icons/IconChervonRight";
 import NotificationPage from "../../page/CommonPage/NotificationPage";
 import { useTranslation } from "react-i18next";
@@ -133,7 +133,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                 ) : (
                   <></>
                 )}
-                {checkNotificationShort ? (
+                {checkNotificationShort && (
                   <>
                     <div
                       className="fixed inset-0 bg-transparent z-10 cursor-pointer"
@@ -148,8 +148,6 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                       <Divider className="mt-0"></Divider>
                     </div>
                   </>
-                ) : (
-                  <></>
                 )}
               </span>
 
@@ -158,11 +156,22 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                 onMouseLeave={handleMouseLeaveCandidateMenu}
                 className="relative flex justify-center items-center gap-3 border border-solid rounded-lg py-2 px-2 border-gary-200  hover:bg-blue-100 hover:text-primary cursor-pointer transition-all"
               >
-                <img
-                  src={user?.picture}
-                  alt=""
-                  className="w-[30px] h-[30px] rounded-full"
-                />
+                {user?.picture ? (
+                  <img
+                    src={user?.picture}
+                    alt=""
+                    className="w-[30px] h-[30px] rounded-full"
+                  />
+                ) : (
+                  <div className="rounded-full bg-white ">
+                    <Avatar
+                      className="mx-auto "
+                      size={30}
+                      icon={<UserOutlined />}
+                    />
+                  </div>
+                )}
+
                 <h3 className="text-line-clamp text-sm font-semibold max-w-[150px]">
                   {user?.name}
                 </h3>
@@ -171,11 +180,22 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                 <section className="candidate-menu-manage hidden z-20 absolute w-[380px] min-h-[300px] top-10 right-0 text-black cursor-default">
                   <div className="flex flex-col bg-white gap-3 w-full h-full mt-[14px] p-5 shadow-md rounded-lg">
                     <div className="flex gap-8">
-                      <img
-                        src={user?.picture}
-                        alt=""
-                        className="w-[40px] h-[40px] rounded-lg object-cover"
-                      />
+                      {user?.picture ? (
+                        <img
+                          src={user?.picture}
+                          alt=""
+                          className="w-[40px] h-[40px] rounded-lg object-cover self-center"
+                        />
+                      ) : (
+                        <div className="rounded-full bg-white ">
+                          <Avatar
+                            className="mx-auto "
+                            size={50}
+                            icon={<UserOutlined />}
+                          />
+                        </div>
+                      )}
+
                       <div className="text-sm">
                         <h3 className="font-semibold text-line-clamp max-w-[250px]">
                           {user?.name}

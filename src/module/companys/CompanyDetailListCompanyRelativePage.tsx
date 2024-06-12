@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardCompanyRelativeAtCompanyDetailPage from "../../components/card/CardCompanyRelativeAtCompanyDetailPage";
 import { Pagination } from "antd";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { companyGetRelativeCompany } from "../../store/company/company-slice";
 
 interface PropComponent {
   className?: string;
@@ -9,7 +12,34 @@ interface PropComponent {
 const CompanyDetailListCompanyRelativePage: React.FC<PropComponent> = ({
   className,
 }) => {
+  const { user } = useSelector((state: any) => state.auth);
+  const { relativeCompanys, paginationRelativeCompany } = useSelector(
+    (state: any) => state.company
+  );
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
   const { t } = useTranslation();
+  useEffect(() => {
+    dispatch(
+      companyGetRelativeCompany({
+        candidate_id: user?.id,
+        page: page,
+        size: 2,
+        companyName: "",
+      })
+    );
+  }, [user?.id]);
+  const handleOnchangePage = (e: any) => {
+    dispatch(
+      companyGetRelativeCompany({
+        candidate_id: user?.id,
+        page: e,
+        size: 2,
+        companyName: "",
+      })
+    );
+    setPage(e);
+  };
   return (
     <>
       <div className={`${className}`}>
@@ -17,11 +47,22 @@ const CompanyDetailListCompanyRelativePage: React.FC<PropComponent> = ({
           {t("companydetail.relatedcompany")}
         </h2>
         <div className="flex flex-col gap-5 mt-5">
-          <CardCompanyRelativeAtCompanyDetailPage></CardCompanyRelativeAtCompanyDetailPage>
-          <CardCompanyRelativeAtCompanyDetailPage></CardCompanyRelativeAtCompanyDetailPage>
+          {relativeCompanys?.length > 0 &&
+            relativeCompanys.map((item: any) => (
+              <CardCompanyRelativeAtCompanyDetailPage
+                key={item?.company?.id}
+                item={item}
+              ></CardCompanyRelativeAtCompanyDetailPage>
+            ))}
         </div>
         <div className="flex justify-end mt-3">
-          <Pagination defaultCurrent={1} total={50} />
+          <Pagination
+            total={paginationRelativeCompany?.totalElements}
+            onChange={handleOnchangePage}
+            className="ml-auto font-medium"
+            current={page}
+            pageSize={paginationRelativeCompany?.pageSize}
+          />
         </div>
       </div>
     </>

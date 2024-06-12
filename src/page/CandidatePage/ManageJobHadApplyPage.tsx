@@ -1,4 +1,4 @@
-import { Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
+import { Empty, Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 import CardManageJobHadApplyPage from "../../components/card/CardManageJobHadApplyPage";
 import { useTranslation } from "react-i18next";
@@ -59,6 +59,10 @@ const ManageJobHadApplyPage: React.FC = () => {
         <div className="flex flex-col gap-5 mt-7">
           {loadingJob ? (
             <Skeleton />
+          ) : appliedJobs?.length <= 0 ? (
+            <>
+              <Empty />
+            </>
           ) : (
             appliedJobs?.length > 0 &&
             appliedJobs.map((item: any) => (

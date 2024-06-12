@@ -1,19 +1,61 @@
-import { Pagination, Radio, RadioChangeEvent } from "antd";
+import { Empty, Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 import CardCompanyFollowedPage from "../../components/card/CardCompanyFollowedPage";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { companyGetFollowedCompany } from "../../store/company/company-slice";
+import { candidateUpdateMessageRedux } from "../../store/candidate/candidate-slice";
 
 const ManageCompanyFollowedPage: React.FC = () => {
+  const { user } = useSelector((state: any) => state.auth);
+  const { followedCompanys, paginationFollowedCompany, loadingCompany } =
+    useSelector((state: any) => state.company);
+  const { messageCandidate } = useSelector((state: any) => state.candidate);
+  const dispatch = useDispatch();
+
   const { t } = useTranslation();
+  const [page, setPage] = useState(1);
   const [value, setValue] = useState(1);
   const onChange = (e: RadioChangeEvent) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  useEffect(() => {
+    if (user?.id)
+      dispatch(
+        companyGetFollowedCompany({
+          page: page,
+          size: 10,
+          candidate_id: user?.id,
+        })
+      );
+  }, [user?.id]);
+  const handleOnchangePage = (e: any) => {
+    dispatch(
+      companyGetFollowedCompany({
+        page: e,
+        size: 10,
+        candidate_id: user?.id,
+      })
+    );
+    setPage(e);
+  };
+  useEffect(() => {
+    if (messageCandidate) {
+      dispatch(
+        companyGetFollowedCompany({
+          page: page,
+          size: 10,
+          candidate_id: user?.id,
+        })
+      );
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    }
+  }, [messageCandidate]);
   return (
     <>
       <div className="p-5">
@@ -44,15 +86,31 @@ const ManageCompanyFollowedPage: React.FC = () => {
             <Radio value={3}>{t("manage.followedcompany.mostfollowers")}</Radio>
           </Radio.Group>
         </div>
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-7">
-          <CardCompanyFollowedPage></CardCompanyFollowedPage>
-          <CardCompanyFollowedPage></CardCompanyFollowedPage>
-          <CardCompanyFollowedPage></CardCompanyFollowedPage>
-          <CardCompanyFollowedPage></CardCompanyFollowedPage>
-          <CardCompanyFollowedPage></CardCompanyFollowedPage>
-        </div>
+
+        {loadingCompany ? (
+          <Skeleton />
+        ) : followedCompanys?.length <= 0 ? (
+          <Empty />
+        ) : (
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-7">
+            {followedCompanys?.length > 0 &&
+              followedCompanys.map((item: any) => (
+                <CardCompanyFollowedPage
+                  key={item?.id}
+                  item={item}
+                ></CardCompanyFollowedPage>
+              ))}
+          </div>
+        )}
+
         <div className="flex justify-end mt-5">
-          <Pagination defaultCurrent={1} total={50} />
+          <Pagination
+            total={paginationFollowedCompany?.totalElements}
+            onChange={handleOnchangePage}
+            className="inline-block"
+            current={page}
+            pageSize={paginationFollowedCompany?.pageSize}
+          />
         </div>
       </div>
     </>

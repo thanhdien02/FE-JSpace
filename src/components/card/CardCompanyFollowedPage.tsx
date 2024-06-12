@@ -1,24 +1,46 @@
 import { Popover } from "antd";
 import React from "react";
 import IconChervonRight from "../icons/IconChervonRight";
-import bg from "../../assets/banner3.jpg";
-import bg1 from "../../assets/banner-job4.jpg";
 import { useNavigate } from "react-router-dom";
 import IconStar from "../icons/IconStar";
 import IconTrash from "../icons/IconTrash";
-const CardCompanyFollowedPage: React.FC = () => {
+import { useDispatch } from "react-redux";
+import { candidateUnFollowJob } from "../../store/candidate/candidate-slice";
+import { useSelector } from "react-redux";
+interface PropComponent {
+  className?: string;
+  item?: any;
+}
+const CardCompanyFollowedPage: React.FC<PropComponent> = ({
+  className,
+  item,
+}) => {
+  const { user } = useSelector((state: any) => state.auth);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const handleUnFollow = () => {
+    if (user?.id)
+      dispatch(
+        candidateUnFollowJob({
+          candidate_id: user?.id,
+          company_id: item?.id,
+        })
+      );
+  };
   return (
     <>
-      <div className="relative w-full h-[300px] bg-white shadow-md rounded-md overflow-hidden">
+      <div
+        className={`relative w-full h-[300px] bg-white shadow-md rounded-md overflow-hidden ${className}`}
+      >
         <div className="relative h-[40%]">
           <img
-            src={bg}
+            src={item?.background}
             className="rounded-t-lg w-full h-full object-cover"
             alt=""
           />
           <img
-            src={bg1}
+            src={item?.logo}
             className="absolute left-6 -bottom-7 rounded-md w-[65px] h-[65px] object-cover"
             alt=""
           />
@@ -37,27 +59,15 @@ const CardCompanyFollowedPage: React.FC = () => {
           <div className="p-5 flex flex-col gap-2">
             <div className="flex gap-4">
               <Popover
-                content={
-                  <p className="w-[300px] font-medium">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatem pariatur architecto, voluptatibus quam
-                    dignissimos, hic magnam iste repellat illum accusamus, ullam
-                    cupiditate corporis. Ipsum nisi et excepturi dicta nam ad.
-                    CÔNG TY TNHH MTV VIỄN THÔNG QUỐC TẾ FPT
-                  </p>
-                }
+                content={<p className="w-[300px] font-medium">{item?.name}</p>}
               >
                 <h2
                   onClick={() => {
-                    navigate("/companys/1");
+                    navigate(`/companys/${item?.id}`);
                   }}
                   className="w-[90%] font-medium text-base line-clamp-2 cursor-pointer hover:text-primary transition-all"
                 >
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Voluptatem pariatur architecto, voluptatibus quam dignissimos,
-                  hic magnam iste repellat illum accusamus, ullam cupiditate
-                  corporis. Ipsum nisi et excepturi dicta nam ad. CÔNG TY TNHH
-                  MTV VIỄN THÔNG QUỐC TẾ FPT
+                  {item?.name}
                 </h2>
               </Popover>
 
@@ -66,19 +76,20 @@ const CardCompanyFollowedPage: React.FC = () => {
                 <span className="">4.6</span>
               </div>
             </div>
-            <p className="line-clamp-1 text-sm">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum,
-              illum dolore excepturi alias adipisci blanditiis sapiente natus
-              exercitationem dolores temporibus explicabo error mollitia nam
-              aliquam, unde iusto laborum, eius quae.
-            </p>
+            <p className="line-clamp-1 text-sm">{item?.email}</p>
+            <p className="line-clamp-1 text-sm">{item?.companyLink}</p>
             <div className="flex gap-5 items-center mt-5">
-              <p className="text-sm font-medium text-gray-500">Hồ Chí Minh</p>
+              <p className="text-sm font-medium text-gray-500">
+                {item?.address}
+              </p>
               <p className="text-sm font-medium text-gray-500">12 việc làm</p>
             </div>
           </div>
         </div>
-        <div className="absolute bottom-3 right-3 flex gap-2 items-center cursor-pointer bg-red-500 px-2 py-1 text-white hover:opacity-80 transition-all">
+        <div
+          onClick={handleUnFollow}
+          className="absolute bottom-3 right-3 flex gap-2 items-center cursor-pointer bg-red-500 px-2 py-1 text-white hover:opacity-80 transition-all"
+        >
           <IconTrash></IconTrash>
           <span className="select-none">Bỏ theo dõi</span>
         </div>

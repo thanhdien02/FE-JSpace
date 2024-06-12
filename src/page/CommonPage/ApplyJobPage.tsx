@@ -23,7 +23,6 @@ import {
   applyJobApply,
   applyJobApplyWithUploadCV,
 } from "../../store/apply/apply-slice";
-// import { useParams } from "react-router-dom";
 interface PropComponent {
   className?: string;
   jobId?: string;
@@ -39,7 +38,6 @@ const ApplyJobPage: React.FC<PropComponent> = ({
   const { files, loadingFile, messageFile } = useSelector(
     (state: any) => state.file
   );
-  // const { jobId } = useParams();
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState("");
   const [file, setFile] = useState<UploadFile>();
@@ -48,7 +46,6 @@ const ApplyJobPage: React.FC<PropComponent> = ({
 
   const handleOptionChange = (e: any) => {
     setSelectedOption(e.target.value);
-    console.log("🚀 ~ handleOptionChange ~ e.target.value:", e.target.value);
   };
   useEffect(() => {
     const elementBody = document.body;
@@ -177,7 +174,10 @@ const ApplyJobPage: React.FC<PropComponent> = ({
                                   Xem
                                 </a>
                                 <div
-                                  onClick={() => setSelectCV(!selectCV)}
+                                  onClick={() => {
+                                    setSelectCV(!selectCV);
+                                    setCVChoose(null);
+                                  }}
                                   className="ml-auto flex gap-2 px-4 py-2 bg-slate-200 rounded-md font-medium cursor-pointer"
                                 >
                                   <EditOutlined />

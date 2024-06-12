@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardManageJobSavePage from "../../components/card/CardManageJobSavePage";
-import { Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
+import { Empty, Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { jobGetSavedJob } from "../../store/job/job-slice";
@@ -43,6 +43,8 @@ const ManageJobSavePage: React.FC = () => {
         <div className="flex flex-col gap-5 mt-5">
           {loadingJob ? (
             <Skeleton />
+          ) : savedJobs?.length <= 0 ? (
+            <><Empty /></>
           ) : (
             savedJobs?.length > 0 &&
             savedJobs.map((item: any) => (

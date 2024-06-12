@@ -3,11 +3,15 @@ import { useSelector } from "react-redux";
 
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import LayoutHomeUserHeader from "../module/common/LayoutHomeUserHeader";
-import { message, Spin, Switch, Upload, UploadProps } from "antd";
+import { Avatar, message, Switch, Upload, UploadProps } from "antd";
 import { getToken } from "../utils/auth";
 import { useDispatch } from "react-redux";
 import { authFetchMe } from "../store/auth/auth-slice";
-import { CameraOutlined, CommentOutlined } from "@ant-design/icons";
+import {
+  CameraOutlined,
+  CommentOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import IconText from "../components/icons/IconText";
 import IconWifi from "../components/icons/IconWifi";
 import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
@@ -77,8 +81,16 @@ const LayoutManageCandidate: React.FC = () => {
                       />
                     </>
                   ) : (
-                    <div className="w-[65px] h-[65px] rounded-full flex ">
-                      <Spin className="m-auto" />
+                    <div className="w-[65px] h-[65px] rounded-full bg-white ">
+                      <Avatar
+                        className="mx-auto "
+                        size={60}
+                        icon={<UserOutlined />}
+                      />
+                      <CameraOutlined
+                        className="absolute bottom-2 right-0 bg-blue-50 p-2 rounded-full cursor-pointer"
+                        style={{ fontSize: "18px" }}
+                      />
                     </div>
                   )}
                 </Upload>

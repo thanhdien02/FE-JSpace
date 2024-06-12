@@ -4,6 +4,7 @@ import {
   jobUpdateAppliedJobRedux,
   jobUpdateAppliedPaginationRedux,
   jobUpdateCompanyJobRedux,
+  jobUpdateCompanyPaginationRedux,
   jobUpdateFilterJobRedux,
   jobUpdateHomeJobRedux,
   jobUpdateJobByIdRedux,
@@ -38,7 +39,6 @@ function* handleJobGetHomeJob(dataGetHomeJob: any): Generator<any> {
       yield put(
         jobUpdateHomeJobRedux({ homeJobs: response?.data?.result?.content })
       );
-      // message.success("Load dữ liệu home job thành công.");
     }
   } catch (error: any) {
     message.error(error?.response?.data?.message);
@@ -60,6 +60,17 @@ function* handleJobGetCompanyJob(dataGetCompanyJob: any): Generator<any> {
       yield put(
         jobUpdateCompanyJobRedux({
           companyJobs: response?.data?.result?.content,
+        })
+      );
+      yield put(
+        jobUpdateCompanyPaginationRedux({
+          paginationCompanyJob: {
+            pageNumber: response.data.result.pageNumber,
+            pageSize: response.data.result.pageSize,
+            totalElements: response.data.result.totalElements,
+            totalPages: response.data.result.totalPages,
+            numberOfElements: response.data.result.numberOfElements,
+          },
         })
       );
     }
@@ -84,7 +95,6 @@ function* handleJobGetRelativeJob(dataGetRelativeJob: any): Generator<any> {
           relativeJobs: response?.data?.result?.content,
         })
       );
-      // message.success("Load dữ liệu relative job thành công.");
     }
   } catch (error: any) {
     message.error(error?.response?.data?.message);
