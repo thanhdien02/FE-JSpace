@@ -18,7 +18,11 @@ import {
   candidateUnSaveJob,
   candidateUpdateMessageRedux,
 } from "../../store/candidate/candidate-slice";
-import { formatToMillion } from "../../utils/common-function";
+import {
+  compareDates,
+  formatToMillion,
+  getCurrentDate,
+} from "../../utils/common-function";
 interface PropComponent {
   className?: string;
   titleJob?: string;
@@ -41,12 +45,15 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
   const { user } = useSelector((state: any) => state.auth);
   const { t } = useTranslation();
   const [checkSave, setCheckSave] = useState(false);
+  const [checkExpired, setCheckExpired] = useState(false);
   const [checkApply, setCheckApply] = useState(false);
   const dispatch = useDispatch();
   const handleApplyJob = () => {
     if (!user?.id) {
       message.info("Bạn cần đăng nhập để ứng tuyển");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+    } else if (checkExpired) {
+      message.info("Thời gian ứng tuyển đã kết thúc");
     } else {
       if (!jobByIdWithCandidate?.applied) {
         setCheckApply(!checkApply);
@@ -95,6 +102,15 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
   }, [messageApply]);
   useEffect(() => {
     setCheckSave(jobByIdWithCandidate?.liked);
+
+    if (jobByIdWithCandidate?.post?.closeDate) {
+      if (
+        compareDates(jobByIdWithCandidate?.post?.closeDate, getCurrentDate()) ==
+        -1
+      ) {
+        setCheckExpired(true);
+      } else setCheckExpired(false);
+    }
   }, [jobByIdWithCandidate]);
 
   return (
@@ -182,15 +198,21 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
               <div
                 onClick={handleApplyJob}
                 className={`grow flex items-center justify-center py-2 gap-3 hover:opacity-80 transition-all cursor-pointer text-white font-medium rounded-md ${
-                  jobByIdWithCandidate?.applied ? "bg-green-500" : "bg-primary"
-                }`}
+                  checkExpired
+                    ? "bg-red-500"
+                    : jobByIdWithCandidate?.applied
+                    ? "bg-green-500"
+                    : "bg-primary"
+                } `}
               >
                 <button
                   className=""
                   type="button"
                   disabled={jobByIdWithCandidate?.applied}
                 >
-                  {jobByIdWithCandidate?.applied
+                  {checkExpired
+                    ? `${t("endapply")}`
+                    : jobByIdWithCandidate?.applied
                     ? `${t("applied")}`
                     : `${t("apply")}`}
                 </button>

@@ -88,7 +88,7 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
               </h3>
             </Popover>
             <div className="lg:flex hidden w-[33%]">
-              <span className="font-medium text-primary text-base ml-auto">
+              <span className="font-medium text-primary text-base ml-auto line-clamp-1">
                 {item?.post?.minPay != "0" &&
                 item?.post?.maxPay != "0" &&
                 item?.post?.maxPay != "2147483647"
@@ -128,6 +128,14 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
             ></IconMapPin>
             <span className="line-clamp-1 lg:text-sm text-xs text-gray-500">
               {item?.post?.location.province}
+            </span>
+          </div>
+          <div className="lg:flex gap-2 overflow-hidden mt-1 items-center hidden">
+            <span className="p-1 bg-gray-200 text-xs">
+              {item?.post?.rank?.code}
+            </span>
+            <span className="p-1 bg-gray-200 text-xs">
+              {item?.post?.jobType?.code}
             </span>
           </div>
         </div>

@@ -18,14 +18,16 @@ const CompanyDetailListCompanyRelativePage: React.FC<PropComponent> = ({
   );
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const [size] = useState(2);
+  const [companyName] = useState("");
   const { t } = useTranslation();
   useEffect(() => {
     dispatch(
       companyGetRelativeCompany({
         candidate_id: user?.id,
         page: page,
-        size: 2,
-        companyName: "",
+        size: size,
+        companyName: companyName,
       })
     );
   }, [user?.id]);
@@ -34,8 +36,8 @@ const CompanyDetailListCompanyRelativePage: React.FC<PropComponent> = ({
       companyGetRelativeCompany({
         candidate_id: user?.id,
         page: e,
-        size: 2,
-        companyName: "",
+        size: size,
+        companyName: companyName,
       })
     );
     setPage(e);
@@ -55,15 +57,17 @@ const CompanyDetailListCompanyRelativePage: React.FC<PropComponent> = ({
               ></CardCompanyRelativeAtCompanyDetailPage>
             ))}
         </div>
-        <div className="flex justify-end mt-3">
-          <Pagination
-            total={paginationRelativeCompany?.totalElements}
-            onChange={handleOnchangePage}
-            className="ml-auto font-medium"
-            current={page}
-            pageSize={paginationRelativeCompany?.pageSize}
-          />
-        </div>
+        {relativeCompanys?.length > 0 && (
+          <div className="flex justify-end mt-3">
+            <Pagination
+              total={paginationRelativeCompany?.totalElements}
+              onChange={handleOnchangePage}
+              className="ml-auto font-medium"
+              current={page}
+              pageSize={paginationRelativeCompany?.pageSize}
+            />
+          </div>
+        )}
       </div>
     </>
   );

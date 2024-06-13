@@ -102,13 +102,20 @@ const HomeBannerPage: React.FC = () => {
                 placeholder={t("placeholderaddress")}
                 className="hidden lg:block search-banner address w-[25%] py-4 text-base !rounded-none h-full bg-white"
                 optionFilterProp="children"
-                filterOption={(input, option: any) =>
-                  (option?.label ?? "").includes(input)
-                }
                 value={location}
                 onChange={handleChangeLocation}
-                fieldNames={{ label: "province", value: "value" }}
-                options={locations}
+                filterOption={(input: string, option: any) =>
+                  ((option?.label ?? "") as string)
+                    .toLowerCase()
+                    .includes((input ?? "").toLowerCase())
+                }
+                options={
+                  locations?.length > 0 &&
+                  locations.map((item: any) => ({
+                    label: item?.province,
+                    value: item?.value,
+                  }))
+                }
               />
               <span className="hidden lg:flex z-10 bg-white w-[1px] items-center">
                 <span className="bg-gray-300 h-[60%] w-full "></span>
@@ -119,13 +126,20 @@ const HomeBannerPage: React.FC = () => {
                 placeholder={t("placeholderexperience")}
                 className="hidden lg:block search-banner address w-[25%] py-4 text-base h-full bg-white"
                 optionFilterProp="children"
-                filterOption={(input, option: any) =>
-                  (option?.label ?? "").includes(input)
-                }
                 value={experience}
                 onChange={handleChangeExperience}
-                options={experiences}
-                fieldNames={{ label: "code", value: "value" }}
+                filterOption={(input: string, option: any) =>
+                  ((option?.label ?? "") as string)
+                    .toLowerCase()
+                    .includes((input ?? "").toLowerCase())
+                }
+                options={
+                  experiences?.length > 0 &&
+                  experiences.map((item: any) => ({
+                    label: item?.code,
+                    value: item?.value,
+                  }))
+                }
               />
               <span className="hidden lg:flex z-10 bg-white w-[1px]  items-center">
                 <span className="hidden lg:flex bg-gray-300 h-[60%] w-full "></span>

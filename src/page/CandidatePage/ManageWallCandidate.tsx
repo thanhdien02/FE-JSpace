@@ -82,20 +82,20 @@ const ManageWallCandidate: React.FC = () => {
             <img
               src={user?.background ? user?.background : bg_wall}
               alt=""
-              className="w-full h-[270px] object-cover "
+              className="w-full lg:h-[270px] h-[180px] object-cover "
             />
           </div>
-          <div className="relative flex w-[80%] justify-between ml-auto p-4 py-8">
+          <div className="relative flex w-[80%] justify-between ml-auto p-4 lg:py-8 py-5">
             <Upload
               {...props}
-              className="bg-white rounded-full absolute -left-[150px] -top-16 cursor-pointer"
+              className="bg-white rounded-full absolute lg:-left-[150px] -left-[70px] -top-16 cursor-pointer"
             >
               {user?.picture ? (
                 <>
                   <img
                     src={user?.picture}
                     alt=""
-                    className=" w-[130px] h-[130px] object-cover rounded-full border-solid border-4 border-transparent hover:border-gray-200 transition-all duration-300"
+                    className=" lg:w-[130px] lg:h-[130px] w-[90px] h-[90px] object-cover rounded-full border-solid border-4 border-transparent hover:border-gray-200 transition-all duration-300"
                   />
                   <span className="absolute bottom-2 right-2 p-1 bg-gray-200 rounded-full">
                     <IconCamera></IconCamera>
@@ -112,7 +112,7 @@ const ManageWallCandidate: React.FC = () => {
             </h3>
             <IconEdit className="cursor-pointer text-primary hover:opacity-80 transition-all"></IconEdit>
           </div>
-          <div className="flex gap-3 pb-10 px-5">
+          <div className="flex gap-3 lg:pb-10 pb-5 px-5">
             <Button loading={false} title="Thông tin"></Button>
             <Button loading={false} title="Tải CV"></Button>
           </div>
@@ -156,8 +156,8 @@ const ManageWallCandidate: React.FC = () => {
           <p className="text-red-500 italic py-1">
             Phần này chỉ hiển thị với riêng bạn
           </p>
-          <div className="flex justify-evenly">
-            <div className="flex mt-5 w-[30%]">
+          <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-10 gap-2">
+            <div className="flex mt-5 w-full">
               <div className="flex flex-col justify-center px-3 py-2 w-full h-[100px] border border-solid border-gray-300 rounded-md">
                 <span className="font-semibold text-3xl text-gray-700">0</span>
                 <p className="font-medium text-gray-500">
@@ -165,7 +165,7 @@ const ManageWallCandidate: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div className="flex mt-5 w-[30%]">
+            <div className="flex mt-5 w-full">
               <div className="flex flex-col justify-center px-3 py-2 w-full h-[100px] border border-solid border-gray-300 rounded-md">
                 <span className="font-semibold text-3xl text-gray-700">0</span>
                 <p className="font-medium text-gray-500">
@@ -173,7 +173,7 @@ const ManageWallCandidate: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div className="flex mt-5 w-[30%]">
+            <div className="flex mt-5 w-full">
               <div className="flex flex-col justify-center px-3 py-2 w-full h-[100px] border border-solid border-gray-300 rounded-md">
                 <span className="font-semibold text-3xl text-gray-700">0</span>
                 <p className="font-medium text-gray-500">

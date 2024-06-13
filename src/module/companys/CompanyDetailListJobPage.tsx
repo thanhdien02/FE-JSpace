@@ -14,6 +14,7 @@ const CompanyDetailListJobPage: React.FC = () => {
   const { companyById } = useSelector((state: any) => state.company);
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
+  const [size] = useState(2);
   const dispatch = useDispatch();
   const handleOnchangePage = (e: any) => {
     if (companyById?.company?.name) {
@@ -22,7 +23,7 @@ const CompanyDetailListJobPage: React.FC = () => {
           companyName: companyById?.company?.name,
           candidate_id: user?.id,
           page: e,
-          size: 3,
+          size: size,
         })
       );
     }
@@ -35,7 +36,7 @@ const CompanyDetailListJobPage: React.FC = () => {
           companyName: companyById?.company?.name,
           candidate_id: user?.id,
           page: page,
-          size: 3,
+          size: size,
         })
       );
     }
@@ -55,15 +56,17 @@ const CompanyDetailListJobPage: React.FC = () => {
               ></CardJobAtCompanyDetailPage>
             ))}
         </div>
-        <div className="flex justify-end mt-3">
-          <Pagination
-            total={paginationCompanyJob?.totalElements}
-            onChange={handleOnchangePage}
-            className="ml-auto font-medium"
-            current={page}
-            pageSize={paginationCompanyJob?.pageSize}
-          />
-        </div>
+        {companyJobs?.length > 0 && (
+          <div className="flex justify-end mt-3">
+            <Pagination
+              total={paginationCompanyJob?.totalElements}
+              onChange={handleOnchangePage}
+              className="ml-auto font-medium"
+              current={page}
+              pageSize={paginationCompanyJob?.pageSize}
+            />
+          </div>
+        )}
       </div>
     </>
   );

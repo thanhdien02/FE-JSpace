@@ -10,6 +10,7 @@ const CompanyPage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
   const { paginationCompany } = useSelector((state: any) => state.company);
   const [page, setPage] = useState(1);
+  const [size] = useState(9);
   const [companyname, setCompanyname] = useState<any>(null);
   const dispatch = useDispatch();
 
@@ -19,7 +20,7 @@ const CompanyPage: React.FC = () => {
         candidate_id: user?.id,
         companyName: companyname,
         page: e,
-        size: 9,
+        size: size,
       })
     );
     setPage(e);
@@ -31,7 +32,7 @@ const CompanyPage: React.FC = () => {
           candidate_id: user?.id,
           companyName: companyname,
           page: 1,
-          size: 9,
+          size: size,
         })
       );
       setPage(1);
@@ -43,7 +44,7 @@ const CompanyPage: React.FC = () => {
         candidate_id: user?.id,
         companyName: companyname,
         page: page,
-        size: 9,
+        size: size,
       })
     );
   }, [user]);

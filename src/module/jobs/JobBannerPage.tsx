@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 import banner2 from "../../assets/banner3.jpg";
 import { Input, Select } from "antd";
 import {
@@ -21,33 +20,24 @@ import {
   commonGetSkills,
 } from "../../store/common/common-slice";
 import { jobGetFilterJob } from "../../store/job/job-slice";
-interface Inputs {
-  name?: string;
-  salary?: string;
-  experience?: string;
-  location?: string;
-}
+
 const JobBannerPage: React.FC = () => {
   const { locations, ranks, jobTypes, experiences, skills } = useSelector(
     (state: any) => state.common
   );
   const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
-  const {
-    handleSubmit,
-    // setValue,
-    // formState: { errors },
-  } = useForm<Inputs>();
+
   const { t } = useTranslation();
   const [searchAdvance, setSearchAdvance] = useState(false);
   const [title, setTitle] = useState<any>(null);
   const [location, setLocation] = useState<any>(null);
   const [experience, setExperience] = useState<any>(null);
   const [salary, setSalary] = useState<any>(null);
-  const onSubmit: SubmitHandler<Inputs> = (dataSearchJob: Inputs) => {
-    console.log("🚀 ~ dataSearchJob:", dataSearchJob);
-    // dispatch(candidateUpdateCandidate(dataUpdadeCandidate));
-  };
+  const [rank, setRank] = useState("");
+  const [jobType, setJobType] = useState("");
+  const [page] = useState(1);
+  const [size] = useState(20);
   useEffect(() => {
     dispatch(commonGetLocation());
     dispatch(commonGetJobType());
@@ -75,8 +65,8 @@ const JobBannerPage: React.FC = () => {
       dispatch(
         jobGetFilterJob({
           candidate_id: user?.id,
-          page: 1,
-          size: 12,
+          page: page,
+          size: size,
           title: dataSearch?.title,
           location: dataSearch?.location,
           experience: dataSearch?.experience,
@@ -88,12 +78,13 @@ const JobBannerPage: React.FC = () => {
       dispatch(
         jobGetFilterJob({
           candidate_id: user?.id,
-          page: 1,
-          size: 12,
+          page: page,
+          size: size,
         })
       );
     }
   }, [user?.id]);
+
   const handleChangeJobTitle = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -107,6 +98,12 @@ const JobBannerPage: React.FC = () => {
   };
   const handleChangeSalary = (value: any) => {
     setSalary(value);
+  };
+  const handleOnchangeJobType = (value: any) => {
+    setJobType(value);
+  };
+  const handleOnchangeRank = (value: any) => {
+    setRank(value);
   };
 
   const handleSearchJob = (e: any) => {
@@ -127,13 +124,15 @@ const JobBannerPage: React.FC = () => {
     dispatch(
       jobGetFilterJob({
         candidate_id: user?.id,
-        page: 1,
-        size: 20,
+        page: page,
+        size: size,
         title,
         location,
         experience,
         minPay: startSalary,
         maxPay: endSalary,
+        rank: rank,
+        jobType: jobType,
       })
     );
   };
@@ -152,7 +151,6 @@ const JobBannerPage: React.FC = () => {
         <div className="absolute bg-gradient-to-b from-blue-50/10 to-white/20 inset-0 h-full pt-5">
           <form
             action=""
-            onSubmit={handleSubmit(onSubmit)}
             className="lg:px-0 px-5 w-primary max-w-full mx-auto rounded-lg bg-transparent"
           >
             <div className="flex gap-4">
@@ -176,30 +174,44 @@ const JobBannerPage: React.FC = () => {
                   showSearch
                   allowClear
                   placeholder={t("placeholderaddress")}
-                  fieldNames={{ label: "province", value: "value" }}
                   className="hidden lg:block address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
-                  filterOption={(input, option: any) =>
-                    (option?.label ?? "").includes(input)
-                  }
                   value={location}
-                  options={locations}
+                  filterOption={(input: string, option: any) =>
+                    ((option?.label ?? "") as string)
+                      .toLowerCase()
+                      .includes((input ?? "").toLowerCase())
+                  }
+                  options={
+                    locations?.length > 0 &&
+                    locations.map((item: any) => ({
+                      label: item?.province,
+                      value: item?.value,
+                    }))
+                  }
                   onChange={handleChangeLocation}
                 />
 
                 <Select
                   showSearch
                   allowClear
-                  placeholder={t("placeholderexperience")}
                   className="hidden lg:block address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
-                  filterOption={(input, option: any) =>
-                    (option?.label ?? "").includes(input)
-                  }
                   value={experience}
                   onChange={handleChangeExperience}
-                  fieldNames={{ label: "code", value: "value" }}
-                  options={experiences}
+                  placeholder={t("placeholderexperience")}
+                  filterOption={(input: string, option: any) =>
+                    ((option?.label ?? "") as string)
+                      .toLowerCase()
+                      .includes((input ?? "").toLowerCase())
+                  }
+                  options={
+                    experiences?.length > 0 &&
+                    experiences.map((item: any) => ({
+                      label: item?.code,
+                      value: item?.value,
+                    }))
+                  }
                 />
                 <Select
                   showSearch
@@ -258,8 +270,18 @@ const JobBannerPage: React.FC = () => {
                     tokenSeparators={[","]}
                     allowClear
                     placeholder={t("skills")}
-                    options={skills.length > 0 ? skills : []}
-                    fieldNames={{ label: "name", value: "id" }}
+                    filterOption={(input: string, option: any) =>
+                      ((option?.label ?? "") as string)
+                        .toLowerCase()
+                        .includes((input ?? "").toLowerCase())
+                    }
+                    options={
+                      skills?.length > 0 &&
+                      skills.map((item: any) => ({
+                        label: item?.name,
+                        value: item?.value,
+                      }))
+                    }
                     className={`skill address w-full text-base rounded-lg bg-white`}
                   />
                 </div>
@@ -267,26 +289,42 @@ const JobBannerPage: React.FC = () => {
                   <Select
                     showSearch
                     placeholder={t("jobtype")}
-                    fieldNames={{ label: "code", value: "value" }}
                     className={`address w-full text-base rounded-lg h-10 bg-white`}
                     optionFilterProp="children"
-                    filterOption={(input, option: any) =>
-                      (option?.label ?? "").includes(input)
+                    filterOption={(input: string, option: any) =>
+                      ((option?.label ?? "") as string)
+                        .toLowerCase()
+                        .includes((input ?? "").toLowerCase())
                     }
-                    options={jobTypes}
+                    options={
+                      jobTypes?.length > 0 &&
+                      jobTypes.map((item: any) => ({
+                        label: item?.code,
+                        value: item?.value,
+                      }))
+                    }
+                    onChange={handleOnchangeJobType}
                   />
                 </div>
                 <div className={`lg:w-[20%] w-auto`}>
                   <Select
                     showSearch
                     placeholder={t("rank")}
-                    fieldNames={{ label: "code", value: "value" }}
                     className={`address w-full text-base rounded-lg h-10 bg-white`}
                     optionFilterProp="children"
-                    filterOption={(input, option: any) =>
-                      (option?.label ?? "").includes(input)
+                    filterOption={(input: string, option: any) =>
+                      ((option?.label ?? "") as string)
+                        .toLowerCase()
+                        .includes((input ?? "").toLowerCase())
                     }
-                    options={ranks}
+                    options={
+                      ranks?.length > 0 &&
+                      ranks.map((item: any) => ({
+                        label: item?.code,
+                        value: item?.value,
+                      }))
+                    }
+                    onChange={handleOnchangeRank}
                   />
                 </div>
               </div>

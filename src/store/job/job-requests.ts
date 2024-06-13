@@ -70,7 +70,8 @@ export const requestJobGetFilterJob = (
   page: string = "1",
   size: string = "12"
 ) => {
-  console.log("🚀 ~ gender:", gender + jobType);
+  console.log("🚀 ~ gender:", gender);
+  if (jobType == null || jobType == undefined) jobType = "";
   if (candidate_id == null || candidate_id == undefined) candidate_id = "";
   if (title == null || title == undefined) title = "";
   if (location == null || location == undefined) location = "";
@@ -83,9 +84,11 @@ export const requestJobGetFilterJob = (
       candidate_id && `candidateId=${candidate_id}&`
     }page=${page}&size=${size}${title && `&title=${title}`}${
       location && `&location=${location}`
-    }${experience && `&experience=${experience}`}${rank && `&rank=${rank}`}${
-      minPay && `&minPay=${minPay}`
-    }${maxPay && `&maxPay=${maxPay}`}`,
+    }${experience && `&experience=${experience}`}${
+      jobType && `&jobType=${jobType}`
+    }${rank && `&rank=${rank}`}${minPay && `&minPay=${minPay}`}${
+      maxPay && `&maxPay=${maxPay}`
+    }`,
     {
       headers: {
         "Content-Type": "application/json",

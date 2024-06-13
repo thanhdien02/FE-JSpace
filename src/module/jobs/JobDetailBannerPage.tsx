@@ -95,28 +95,41 @@ const JobDetailBannerPage: React.FC = () => {
                   placeholder={t("placeholderaddress")}
                   className="lg:block hidden address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
-                  filterOption={(input, option: any) =>
-                    (option?.label ?? "").includes(input)
+                  filterOption={(input: string, option: any) =>
+                    ((option?.label ?? "") as string)
+                      .toLowerCase()
+                      .includes((input ?? "").toLowerCase())
                   }
-                  options={locations}
-                  fieldNames={{ label: "province", value: "value" }}
+                  options={
+                    locations?.length > 0 &&
+                    locations.map((item: any) => ({
+                      label: item?.province,
+                      value: item?.value,
+                    }))
+                  }
                   value={location}
                   onChange={handleChangeLocation}
                 />
-
                 <Select
                   showSearch
                   allowClear
                   placeholder={t("placeholderexperience")}
                   className="lg:block hidden address ml-4 w-[20%] py-2 text-base rounded-lg h-full bg-white"
                   optionFilterProp="children"
-                  filterOption={(input, option: any) =>
-                    (option?.label ?? "").includes(input)
-                  }
                   value={experience}
                   onChange={handleChangeExperience}
-                  fieldNames={{ label: "code", value: "value" }}
-                  options={experiences}
+                  filterOption={(input: string, option: any) =>
+                    ((option?.label ?? "") as string)
+                      .toLowerCase()
+                      .includes((input ?? "").toLowerCase())
+                  }
+                  options={
+                    experiences?.length > 0 &&
+                    experiences.map((item: any) => ({
+                      label: item?.code,
+                      value: item?.value,
+                    }))
+                  }
                 />
                 <Select
                   showSearch

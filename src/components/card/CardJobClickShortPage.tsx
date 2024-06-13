@@ -20,6 +20,9 @@ const CardJobClickShortPage: React.FC<PropComponent> = ({
   return (
     <>
       <div
+        onClick={() => {
+          onClick(item);
+        }}
         className={`group/item flex gap-3 border boder-solid  bg-white hover:border-primary transition-all rounded-md min-h-[100px] p-4 ${className} ${
           checkActive == item?.post?.id ? "border-primary" : "border-gray-200"
         }`}
@@ -38,12 +41,7 @@ const CardJobClickShortPage: React.FC<PropComponent> = ({
         <div className="relative grow flex flex-col gap-1">
           <div className="flex justify-between">
             <Popover content={<p className="w-[300px]">{item?.post?.title}</p>}>
-              <h3
-                className="line-clamp-1 min-w-[70%] font-medium cursor-pointer hover:text-primary transition-all"
-                onClick={() => {
-                  onClick(item);
-                }}
-              >
+              <h3 className="line-clamp-1 min-w-[70%] font-medium cursor-pointer hover:text-primary transition-all">
                 {item?.post?.title}
               </h3>
             </Popover>
