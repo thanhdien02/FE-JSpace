@@ -96,7 +96,7 @@
   height: 35px;
   border-radius: 9999px;
   background-color: #1967d2;
-  @apply lg:left-[90%] left-[75%] lg:top-[12%] top-[8%];
+  @apply lg:left-[90%] left-[75%] lg:top-[10%] top-[8%];
 }
 .swiper-job-fit .swiper-button-prev:hover {
   opacity: 80 !important;
@@ -115,7 +115,7 @@
   border-radius: 9999px;
   z-index: 100;
   background-color: #1967d2;
-  @apply lg:left-[96%] left-[90%]  lg:top-[12%] top-[8%];
+  @apply lg:left-[96%] left-[90%]  lg:top-[10%] top-[8%];
 }
 .swiper-job-fit .swiper-button-next::after {
   display: flex;

@@ -21,6 +21,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { jobGetHomeJob } from "../../store/job/job-slice";
 import { chunkArray } from "../../utils/common-function";
+import IconChervonRight from "../../components/icons/IconChervonRight";
+import { NavLink } from "react-router-dom";
 
 const HomeListJobPage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
@@ -42,10 +44,10 @@ const HomeListJobPage: React.FC = () => {
     <>
       <div className="bg-gray-100 ">
         <div className="lg:px-0 px-3 w-primary max-w-full mx-auto py-3">
-          <h3 className="font-bold text-2xl text-primary lg:my-3 my-2">
+          <h3 className="font-bold text-2xl  lg:my-3 my-2">
             {t("home.jobpupolar")}
           </h3>
-          <div className="pb-5">
+          <div className="pb-5 flex justify-between items-baseline">
             <Select
               showSearch
               style={{ width: 200 }}
@@ -67,6 +69,13 @@ const HomeListJobPage: React.FC = () => {
                 },
               ]}
             />
+            <NavLink
+              to="/jobs"
+              className="flex gap-1 cursor-pointer text-primary hover:underline items-center"
+            >
+              <span className="font-medium">Xem tất cả</span>
+              <IconChervonRight classIcon="!w-5 !h-5"></IconChervonRight>
+            </NavLink>
           </div>
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}

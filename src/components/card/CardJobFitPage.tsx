@@ -130,11 +130,11 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
               {item?.post?.location.province}
             </span>
           </div>
-          <div className="lg:flex gap-2 overflow-hidden mt-1 items-center hidden">
-            <span className="p-1 bg-gray-200 text-xs">
+          <div className="lg:flex gap-2 overflow-hidden mt-1 items-center hidden font-medium">
+            <span className="px-2 py-1 bg-gray-200 text-xs">
               {item?.post?.rank?.code}
             </span>
-            <span className="p-1 bg-gray-200 text-xs">
+            <span className="px-2 py-1 bg-gray-200 text-xs">
               {item?.post?.jobType?.code}
             </span>
           </div>

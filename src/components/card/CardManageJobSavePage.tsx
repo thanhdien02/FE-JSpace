@@ -76,7 +76,7 @@ const CardManageJobSavePage: React.FC<PropComponent> = ({
         <div className="flex flex-col w-full self-start">
           <Popover content={<p className="w-[300px]">{item?.title}</p>}>
             <h4
-              className="lg:w-[80%] cursor-pointer text-base font-medium line-clamp-1"
+              className="lg:w-[75%] cursor-pointer text-base font-medium line-clamp-1"
               onClick={() => {
                 navigate(`/jobs/${item?.id}`);
               }}

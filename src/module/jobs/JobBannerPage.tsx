@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import banner2 from "../../assets/banner3.jpg";
 import { Input, Select } from "antd";
 import {
@@ -20,8 +20,12 @@ import {
   commonGetSkills,
 } from "../../store/common/common-slice";
 import { jobGetFilterJob } from "../../store/job/job-slice";
-
-const JobBannerPage: React.FC = () => {
+interface PropComponent {
+  page?: Number;
+  size?: Number;
+  setPage?: any;
+}
+const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
   const { locations, ranks, jobTypes, experiences, skills } = useSelector(
     (state: any) => state.common
   );
@@ -29,6 +33,7 @@ const JobBannerPage: React.FC = () => {
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
+  const isFirstRender = useRef(true);
   const [searchAdvance, setSearchAdvance] = useState(false);
   const [title, setTitle] = useState<any>(null);
   const [location, setLocation] = useState<any>(null);
@@ -36,8 +41,6 @@ const JobBannerPage: React.FC = () => {
   const [salary, setSalary] = useState<any>(null);
   const [rank, setRank] = useState("");
   const [jobType, setJobType] = useState("");
-  const [page] = useState(1);
-  const [size] = useState(20);
   useEffect(() => {
     dispatch(commonGetLocation());
     dispatch(commonGetJobType());
@@ -54,6 +57,7 @@ const JobBannerPage: React.FC = () => {
       if (dataSearch?.title != "") setTitle(dataSearch?.title);
       if (dataSearch?.location != "") setLocation(dataSearch?.location);
       if (dataSearch?.experience != "") setExperience(dataSearch?.experience);
+
       if (
         dataSearch?.salary != "" &&
         dataSearch?.salary != undefined &&
@@ -135,7 +139,33 @@ const JobBannerPage: React.FC = () => {
         jobType: jobType,
       })
     );
+    setPage(1);
   };
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else {
+      let startSalary = "",
+        endSalary = "";
+      if (salary != "" && salary != undefined && salary != null) {
+        [startSalary, endSalary] = salary?.split("-");
+      }
+      dispatch(
+        jobGetFilterJob({
+          candidate_id: user?.id,
+          page: page,
+          size: size,
+          title,
+          location,
+          experience,
+          minPay: startSalary,
+          maxPay: endSalary,
+          rank: rank,
+          jobType: jobType,
+        })
+      );
+    }
+  }, [page]);
   return (
     <>
       <div

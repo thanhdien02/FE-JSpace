@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 8000,
+    port: 8080,
   },
   define: {
     "process.env.VITE_REACT_KEY_MAP": JSON.stringify(

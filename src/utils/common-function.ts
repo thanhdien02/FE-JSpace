@@ -16,7 +16,7 @@ export const formatCurrency = (value: any) => {
 
 export function formatToMillion(amount: any, dv?: string) {
   if (amount >= 1000000) {
-    return amount / 1000000 + `${dv ? "" : " triệu"}`;
+    return Math.floor(amount / 1000000) + `${dv ? "" : " triệu"}`;
   }
   return amount.toLocaleString("vi-VN");
 }

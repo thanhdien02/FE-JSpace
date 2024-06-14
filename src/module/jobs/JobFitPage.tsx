@@ -30,16 +30,16 @@ const JobFitPage: React.FC = () => {
   return (
     <>
       <div className="bg-gray-100 py-5">
-        <section className="w-primary max-w-full mx-auto bg-white shadow-sm rounded-lg p-5">
-          <h2 className="text-xl font-bold text-primary">
+        <section className=" relative w-primary max-w-full mx-auto bg-white shadow-sm rounded-lg p-5">
+          <h2 className="absolute top-5 left-5 text-xl font-bold">
             {t("findjob.suggestsuitablejob")}
           </h2>
           {loadingJob ? (
-            <div className="p-5">
+            <div className="py-5 mt-5">
               <Skeleton />
             </div>
           ) : dataJob?.length <= 0 || !dataJob?.length ? (
-            <div className="py-5 text-gray-400">Không có công việc phù hợp</div>
+            <div className="py-5 mt-5 text-gray-400">Không có công việc phù hợp</div>
           ) : (
             <Swiper
               modules={[Navigation, Scrollbar, A11y]}

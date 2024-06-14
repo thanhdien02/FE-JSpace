@@ -84,7 +84,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
         <div className="p-5 ">
           <h2 className="font-bold text-xl ">{dataJob?.post?.title}</h2>
           <div className="flex gap-3 mt-3">
-            <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
+            <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm font-medium ">
               {dataJob?.post?.minPay != "0" &&
               dataJob?.post?.maxPay != "0" &&
               dataJob?.post?.maxPay != "2147483647"
@@ -106,13 +106,13 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
                 ? `Trên ${formatToMillion(parseInt(dataJob?.post?.minPay, 10))}`
                 : ""}
             </span>
-            <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
+            <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm font-medium ">
               {dataJob?.post?.location.province}
             </span>
-            <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
+            <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm font-medium ">
               {dataJob?.post?.experience?.code}
             </span>
-            <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm ">
+            <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm font-medium ">
               {dataJob?.post?.rank?.code}
             </span>
           </div>
@@ -121,7 +121,8 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
           <div className="px-5 mb-5 flex gap-2 items-center bg-gray-200 w-fit py-2 rounded-md">
             <IconClock></IconClock>
             <span>
-              {t("jobdetail.endsudmit")}: {dataJob?.post?.closeDate}
+              {t("jobdetail.endsudmit")}:{" "}
+              <strong>{dataJob?.post?.closeDate}</strong>
             </span>
           </div>
           <div className="cursor-pointer hover:underline text-primary flex items-center ">
@@ -133,7 +134,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
         </div>
         <div className="flex gap-2 items-center px-5 pb-5">
           <button
-            className={`w-[90%] mx-auto p-2 text-white rounded-md ${
+            className={`w-[90%] mx-auto p-2 text-white rounded-md font-semibold ${
               !dataJob?.applied ? "bg-primary" : "bg-green-500"
             }`}
             type="button"
@@ -161,7 +162,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
           <span className="font-semibold"> Kỹ năng: </span>
           {dataJob?.post?.skills.length > 0 &&
             dataJob?.post?.skills.map((item: any, index: number) => (
-              <span key={index} className="p-1 bg-gray-200">
+              <span key={index} className="py-1 px-2 bg-gray-200">
                 {item?.name}
               </span>
             ))}

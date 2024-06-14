@@ -79,7 +79,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
             <HeaderItem title={t("home.name")} path="/"></HeaderItem>
             <HeaderItem title={t("findjob.name")} path="/jobs"></HeaderItem>
             <HeaderItem title={t("company.name")} path="/companys"></HeaderItem>
-            <HeaderItem title={t("blog.name")} path="/blogs"></HeaderItem>
+            {/* <HeaderItem title={t("blog.name")} path="/blogs"></HeaderItem> */}
           </ul>
         </div>
         <div className="lg:block hidden">

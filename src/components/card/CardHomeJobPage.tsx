@@ -89,10 +89,10 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
             {item?.post?.company?.name}
           </h4>
           <div className="flex gap-1 overflow-hidden mt-1">
-            <Tag className="min-w-[40px] line-clamp-1 max-w-[600px]">
+            <Tag className="min-w-[40px] line-clamp-1 max-w-[600px] font-medium">
               {item?.post?.location?.province}
             </Tag>
-            <Tag className="min-w-[40px] line-clamp-1 max-w-[115px]">
+            <Tag className="min-w-[40px] line-clamp-1 max-w-[115px] font-medium">
               {item?.post?.minPay != "0" &&
               item?.post?.maxPay != "0" &&
               item?.post?.maxPay != "2147483647"

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import HomeBannerPage from "../../module/common/HomeBannerPage";
 import HomeListJobPage from "../../module/common/HomeListJobPage";
 import HomeListCompanyPage from "../../module/common/HomeListCompanyPage";
+import HomeListProduct from "../../module/common/HomeListProduct";
 
 const HomePage: React.FC = () => {
   useEffect(() => {
@@ -13,6 +14,7 @@ const HomePage: React.FC = () => {
       <div className="min-h-[100px] ">
         <HomeBannerPage></HomeBannerPage>
         <HomeListJobPage></HomeListJobPage>
+        <HomeListProduct></HomeListProduct>
         <HomeListCompanyPage></HomeListCompanyPage>
       </div>
     </>

@@ -7,6 +7,8 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/swiper-bundle.css";
 import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
+import IconChervonRight from "../../components/icons/IconChervonRight";
 
 const newArray = [
   "https://th.bing.com/th/id/R.01cd719c50a4066e50808738e6eff177?rik=6%2fm77v2X46RLyg&pid=ImgRaw&r=0",
@@ -90,9 +92,18 @@ const HomeListCompanyPage: React.FC = () => {
     <>
       <div>
         <div className="w-primary max-w-full mx-auto py-3 ">
-          <h3 className="lg:px-0 px-5 font-bold text-2xl text-primary my-3">
-            {t("home.companypupolar")}
-          </h3>
+          <div className="flex justify-between items-baseline">
+            <h3 className="lg:px-0 px-5 font-bold text-2xl my-3">
+              {t("home.companypupolar")}
+            </h3>
+            <NavLink
+              to="/companys"
+              className="flex gap-1 cursor-pointer text-primary hover:underline items-center"
+            >
+              <span className="font-medium">Xem tất cả</span>
+              <IconChervonRight classIcon="!w-5 !h-5"></IconChervonRight>
+            </NavLink>
+          </div>
           <div className="lg:px-0 px-5 lg:grid lg:grid-cols-5 grid-cols-1 gap-5 mt-6">
             <div className="flex border border-solid border-gray-200 cursor-pointer rounded-md h-[200px] transition-all hover:shadow-md hover:shadow-blue-200">
               <img
