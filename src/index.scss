@@ -247,3 +247,9 @@
 .updateavatar .ant-upload-list-item-container {
   @apply hidden;
 }
+
+//
+.vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg); /* Nếu muốn xoay ngược lại */
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import banner2 from "../../assets/banner3.jpg";
-import { Input, Select } from "antd";
+import { Input, Select, SelectProps } from "antd";
 import {
   CloseOutlined,
   DownOutlined,
@@ -39,8 +39,9 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
   const [location, setLocation] = useState<any>(null);
   const [experience, setExperience] = useState<any>(null);
   const [salary, setSalary] = useState<any>(null);
-  const [rank, setRank] = useState("");
-  const [jobType, setJobType] = useState("");
+  const [rank, setRank] = useState<any>(null);
+  const [jobType, setJobType] = useState<any>(null);
+  // const [skill, setSkill] = useState<any>(null);
   useEffect(() => {
     dispatch(commonGetLocation());
     dispatch(commonGetJobType());
@@ -109,7 +110,9 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
   const handleOnchangeRank = (value: any) => {
     setRank(value);
   };
-
+  const handleChangeSkills = (value: string) => {
+    console.log(`selected ${value}`);
+  };
   const handleSearchJob = (e: any) => {
     e.preventDefault();
     let search = {
@@ -166,6 +169,14 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
       );
     }
   }, [page]);
+  const options: SelectProps["options"] = [];
+
+  for (let i = 10; i < 36; i++) {
+    options.push({
+      value: i.toString(36) + i,
+      label: i.toString(36) + i,
+    });
+  }
   return (
     <>
       <div
@@ -296,8 +307,7 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
                   <Select
                     mode="tags"
                     style={{ width: "100%" }}
-                    onChange={(value) => console.log(`selected ${value}`)}
-                    tokenSeparators={[","]}
+                    onChange={handleChangeSkills}
                     allowClear
                     placeholder={t("skills")}
                     filterOption={(input: string, option: any) =>
@@ -308,8 +318,8 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
                     options={
                       skills?.length > 0 &&
                       skills.map((item: any) => ({
+                        value: item?.id,
                         label: item?.name,
-                        value: item?.value,
                       }))
                     }
                     className={`skill address w-full text-base rounded-lg bg-white`}

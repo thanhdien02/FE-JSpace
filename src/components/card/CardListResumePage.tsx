@@ -4,6 +4,7 @@ import IconTrash from "../icons/IconTrash";
 import { useDispatch, useSelector } from "react-redux";
 import { fileDeleteFile } from "../../store/file/file-slice";
 import { Modal } from "antd";
+import { StarFilled } from "@ant-design/icons";
 
 interface PropComponent {
   className?: string;
@@ -30,7 +31,16 @@ const CardListResumePage: React.FC<PropComponent> = ({ className, item }) => {
   return (
     <div className={`relative h-[350px] overflow-hidden ${className}`}>
       <img src={item?.imageFilePath} alt="" className="object-cover " />
-      <div className="text-white absolute flex bg-gradient-to-t from-black/50 to-white/10  inset-0 w-full">
+
+      <div className="text-white absolute flex bg-gradient-to-t from-black/70 to-white/10  inset-0 w-full">
+        <div
+          className={`absolute top-4 right-4 flex gap-2 items-center cursor-pointer px-3 py-1 text-sm font-semibold bg-white rounded-md ${
+            true ? "text-black" : "text-black"
+          }`}
+        >
+          <StarFilled className={` ${true ? "text-yellow-500" : ""}`} />
+          <span className="">Đặt làm CV chính</span>
+        </div>
         <div className="self-end p-4 w-full">
           <a
             href={item?.path}

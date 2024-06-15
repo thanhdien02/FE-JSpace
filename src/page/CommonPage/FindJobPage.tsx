@@ -5,7 +5,7 @@ import JobResultFilterPage from "../../module/jobs/JobResultFilterPage";
 
 const FindJobPage: React.FC = () => {
   const [page, setPage] = useState(1);
-  const [size] = useState(20);
+  const [size] = useState(12);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

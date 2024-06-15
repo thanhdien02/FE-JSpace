@@ -118,6 +118,17 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
             </div>
           ) : (
             <div className="flex gap-5 justify-between items-center">
+              <div>
+                <p className="text-xs text-gray-400">Bạn là nhà tuyển dụng ?</p>
+                <a
+                  href="https://jspace-employer.vercel.app/"
+                  target="_blank"
+                  className="flex items-center cursor-pointer hover:text-primary transition-all font-semibold"
+                >
+                  <span>Đăng nhập ngay</span>
+                  <IconChervonRight></IconChervonRight>
+                </a>
+              </div>
               <span className="relative p-2 bg-blue-200 rounded-full ">
                 <IconBell
                   onClick={setCheckNotificationShort}

@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import IconKey from "../../components/icons/IconKey";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo3.png";
-import bg from "../../assets/banner-home5.jpg";
 interface PropComponent {
   className?: string;
   claseNameOverlay?: string;
@@ -28,9 +27,9 @@ const RegisterPage: React.FC<PropComponent> = ({ className = "" }) => {
 
   return (
     <>
-      <div className="">
+      {/* <div className="">
         <img src={bg} className="fixed inset-0 lg:object-contain object-top object-contain" alt="" />
-      </div>
+      </div> */}
       <div
         className={`flex fixed inset-0 transition-all z-20 bg-gray-100/20 ${className}`}
       >
@@ -40,18 +39,25 @@ const RegisterPage: React.FC<PropComponent> = ({ className = "" }) => {
             className="lg:p-10 p-4 rounded-lg my-5 min-h-[250px] max-w-[650px] border-solid"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="flex justify-center flex-col items-center gap-2 mb-5">
-              <NavLink to="/" className="block">
+            <div className="absolute top-10 left-10 ">
+              <NavLink to="/" className="block ">
                 <img src={logo} alt="" className="max-w-[50px]" />
               </NavLink>
-              <h1 className="text-center text-primary font-bold text-2xl tracking-wider">
-                JSPACE
-              </h1>
             </div>
-            <div className="mt-5 bg-white border border-solid border-gray-200 lg:p-10 p-5 rounded-lg shadow-sm">
+            <div className="absolute right-10 top-14 font-medium px-2 py-1 border border-solid border-primary rounded-sm">
+              <a
+                href="https://jspace-employer.vercel.app/"
+                target="_blank"
+                className="text-sm text-primary"
+              >
+                Đăng nhập với nhà tuyển dụng
+              </a>
+            </div>
+            <div className=" bg-white border border-solid border-gray-200 lg:p-10 p-5 rounded-lg shadow-sm">
               <div className="w-full">
                 <h4 className="mb-2 text-base font-semibold">
-                  Hãy nhập mật khẩu để đăng ký ?
+                  Hãy nhập mật khẩu để đăng ký{" "}
+                  <span className="text-primary">JSPACE</span> ?
                 </h4>
                 <div className="mt-5">
                   <label
@@ -131,9 +137,11 @@ const RegisterPage: React.FC<PropComponent> = ({ className = "" }) => {
                 </button>
               </div>
               <p className="text-sm text-gray-500 mt-5">
-                Bằng việc xác nhận, bạn đồng ý với các Điều khoản dịch vụ và
-                Chính sách quyền riêng tư của ITviec liên quan đến thông tin
-                riêng tư của bạn.
+                Bằng việc xác nhận, bạn đồng ý với các{" "}
+                <span className="text-red-500">Điều khoản</span> dịch vụ và
+                Chính sách quyền riêng tư của{" "}
+                <span className="text-red-500">JSPACE</span> liên quan đến thông
+                tin riêng tư của bạn.
               </p>
             </div>
           </form>

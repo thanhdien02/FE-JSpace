@@ -12,13 +12,19 @@ import IconHome from "../components/icons/IconHome";
 import IconBuilding from "../components/icons/IconBuilding";
 import IconUser from "../components/icons/IconUser";
 import { useDispatch } from "react-redux";
-import { commonUpdateLoginRedux } from "../store/common/common-slice";
+import {
+  commonUpdateLoginRedux,
+  commonUpdateSuggestJobRedux,
+} from "../store/common/common-slice";
 import { useTranslation } from "react-i18next";
+import SuggestJobThroughEmailPage from "../page/CommonPage/SuggestJobThroughEmailPage";
 
 const LayoutHomeUser: React.FC = () => {
   const { t } = useTranslation();
   const { user, accessToken } = useSelector((state: any) => state.auth);
-  const { loginCheck } = useSelector((state: any) => state.common);
+  const { loginCheck, suggestJobCheck } = useSelector(
+    (state: any) => state.common
+  );
   const dispatch = useDispatch();
   const [checkScrolltoTop, setCheckScrolltoTop] = useState(false);
   useEffect(() => {
@@ -75,6 +81,23 @@ const LayoutHomeUser: React.FC = () => {
           <IconChervonUp classIcon="!w-6 !h-6"></IconChervonUp>
         </div>
       </CSSTransition>
+      {/* khảo sát gợi ý việc làm */}
+
+      <div
+        onClick={() => {
+          dispatch(
+            commonUpdateSuggestJobRedux({ suggestJobCheck: !suggestJobCheck })
+          );
+        }}
+        className="fixed right-0 top-1/2 bg-primary py-3 px-1 text-white rounded-r-lg text-base cursor-pointer vertical-text"
+      >
+        Gợi ý việc làm
+      </div>
+      {suggestJobCheck && (
+        <SuggestJobThroughEmailPage></SuggestJobThroughEmailPage>
+      )}
+
+      {/* hỗ trợ qua messenger */}
       <a
         href="https://m.me/267479709792373"
         target="_blank"

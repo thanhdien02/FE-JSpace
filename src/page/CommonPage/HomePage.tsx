@@ -13,6 +13,7 @@ const HomePage: React.FC = () => {
     <>
       <div className="min-h-[100px] ">
         <HomeBannerPage></HomeBannerPage>
+        
         <HomeListJobPage></HomeListJobPage>
         <HomeListProduct></HomeListProduct>
         <HomeListCompanyPage></HomeListCompanyPage>

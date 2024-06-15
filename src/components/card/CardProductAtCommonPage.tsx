@@ -14,7 +14,7 @@ const CardProductAtCommonPage: React.FC<PropComponent> = ({
         className={`border border-gray-200 shadow-lg border-solid rounded-md ${className}`}
       >
         <div className="px-4 py-3 bg-gray-800 rounded-t-md ">
-          <h2 className="text-white font-semibold">{item?.name}</h2>
+          <h2 className="text-white font-bold uppercase">{item?.name}</h2>
         </div>
         <div className="p-5 pt-3">
           <div className="">
