@@ -1,7 +1,8 @@
-import { Select, Skeleton } from "antd";
+import { Select } from "antd";
 import React from "react";
 import CardCompanyPage from "../../components/card/CardCompanyPage";
 import { useSelector } from "react-redux";
+import CardCompanyPageSkeleton from "../../components/skeleton/CardCompanyPageSkeleton";
 interface PropComponent {
   className?: string;
 }
@@ -42,8 +43,18 @@ const CompanyResultFilterPage: React.FC<PropComponent> = ({ className }) => {
           />
         </div>
         {loadingCompany ? (
-          <div className="py-5">
-            <Skeleton />
+          <div
+            className={`lg:px-0 px-5 grid lg:grid-cols-3 grid-cols-1 lg:gap-8 gap-5 mt-5 rounded-sm ${className}`}
+          >
+            <CardCompanyPageSkeleton></CardCompanyPageSkeleton>
+            <CardCompanyPageSkeleton></CardCompanyPageSkeleton>
+            <CardCompanyPageSkeleton></CardCompanyPageSkeleton>
+            <CardCompanyPageSkeleton></CardCompanyPageSkeleton>
+            <CardCompanyPageSkeleton></CardCompanyPageSkeleton>
+            <CardCompanyPageSkeleton></CardCompanyPageSkeleton>
+            <CardCompanyPageSkeleton></CardCompanyPageSkeleton>
+            <CardCompanyPageSkeleton></CardCompanyPageSkeleton>
+            <CardCompanyPageSkeleton></CardCompanyPageSkeleton>
           </div>
         ) : companys.length <= 0 ? (
           <div className="py-5 text-gray-400">Không có công ty phù hợp</div>

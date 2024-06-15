@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import CardJobFitPage from "../../components/card/CardJobFitPage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Scrollbar } from "swiper/modules";
-import { Radio, RadioChangeEvent, Skeleton } from "antd";
+import { Radio, RadioChangeEvent } from "antd";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { chunkArray } from "../../utils/common-function";
+import CardJobFitPageSkeleton from "../../components/skeleton/CardJobFitPageSkeleton";
 
 const JobFitPage: React.FC = () => {
   const { filterJobs, loadingJob } = useSelector((state: any) => state.job);
@@ -36,10 +37,15 @@ const JobFitPage: React.FC = () => {
           </h2>
           {loadingJob ? (
             <div className="py-5 mt-5">
-              <Skeleton />
+              <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5">
+                <CardJobFitPageSkeleton></CardJobFitPageSkeleton>
+                <CardJobFitPageSkeleton></CardJobFitPageSkeleton>
+              </div>
             </div>
           ) : dataJob?.length <= 0 || !dataJob?.length ? (
-            <div className="py-5 mt-5 text-gray-400">Không có công việc phù hợp</div>
+            <div className="py-5 mt-5 text-gray-400">
+              Không có công việc phù hợp
+            </div>
           ) : (
             <Swiper
               modules={[Navigation, Scrollbar, A11y]}

@@ -14,7 +14,7 @@ import {
   Pagination,
   Scrollbar,
 } from "swiper/modules";
-import { Select, Skeleton } from "antd";
+import { Select } from "antd";
 import CardHomeJobPage from "../../components/card/CardHomeJobPage";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -23,6 +23,7 @@ import { jobGetHomeJob } from "../../store/job/job-slice";
 import { chunkArray } from "../../utils/common-function";
 import IconChervonRight from "../../components/icons/IconChervonRight";
 import { NavLink } from "react-router-dom";
+import CardHomeJobPageSkeleton from "../../components/skeleton/CardHomeJobPageSkeleton";
 
 const HomeListJobPage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
@@ -91,7 +92,17 @@ const HomeListJobPage: React.FC = () => {
             className="swiper-job hidden lg:block"
           >
             {loadingJob || !homeJobs.length ? (
-              <Skeleton />
+              <div className="grid gap-4 grid-cols-3 bg-gray-100">
+                <CardHomeJobPageSkeleton></CardHomeJobPageSkeleton>
+                <CardHomeJobPageSkeleton></CardHomeJobPageSkeleton>
+                <CardHomeJobPageSkeleton></CardHomeJobPageSkeleton>
+                <CardHomeJobPageSkeleton></CardHomeJobPageSkeleton>
+                <CardHomeJobPageSkeleton></CardHomeJobPageSkeleton>
+                <CardHomeJobPageSkeleton></CardHomeJobPageSkeleton>
+                <CardHomeJobPageSkeleton></CardHomeJobPageSkeleton>
+                <CardHomeJobPageSkeleton></CardHomeJobPageSkeleton>
+                <CardHomeJobPageSkeleton></CardHomeJobPageSkeleton>
+              </div>
             ) : (
               <>
                 {dataJob?.length > 0 &&

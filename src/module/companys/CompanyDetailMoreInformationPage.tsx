@@ -1,10 +1,13 @@
 import IconMapPin from "../../components/icons/IconMapPin";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import IconMap from "../../components/icons/IconMap";
 import GoogleMapReact from "google-map-react";
 import { TbMapPinFilled } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import IconLink from "../../components/icons/IconLink";
+import { CopyOutlined } from "@ant-design/icons";
+import { message } from "antd";
 interface PropComponent {
   className?: string;
 }
@@ -61,7 +64,15 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
       // setCoords({ lat: name?.lat, lng: name?.lng });
     }
   }, [name]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
+  const handleCopyLink = () => {
+    if (inputRef.current) {
+      inputRef.current.select();
+      document.execCommand("copy");
+      message.success("Đã sao chép");
+    }
+  };
   return (
     <>
       <div className={`px-6 py-4 ${className}`}>
@@ -79,6 +90,25 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
           <p className="text-gray-500 text-sm mt-2">
             {companyById?.company?.address}
           </p>
+          <div className="flex gap-3 items-center mt-5">
+            <IconLink className="text-primary" classIcon="!w-6 !h-6"></IconLink>
+            <span className="">{t("companydetail.companylink")}</span>
+          </div>
+
+          <div className="mt-3 flex gap-1">
+            <input
+              readOnly
+              type="text"
+              value={companyById?.company?.companyLink}
+              ref={inputRef}
+              className="px-3 py-2 border border-solid border-stone-200 w-full"
+              placeholder="Đường dẫn công ty"
+            />
+            <CopyOutlined
+              onClick={handleCopyLink}
+              className="px-3 text-lg border border-solid border-stone-200 bg-gray-200"
+            />
+          </div>
           <span className="w-full h-[1px] bg-gray-300 block my-4"></span>
           <div className="flex gap-3 items-center mt-3">
             <IconMap className="text-primary" classIcon="!w-6 !h-6"></IconMap>

@@ -70,6 +70,7 @@
     "placeholdercompany": "Company name"
   },
   "companydetail": {
+    "companylink": "Company link",
     "companysize": "Scale",
     "address": "Address",
     "follow": "Follow company",

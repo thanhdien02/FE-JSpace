@@ -12,6 +12,7 @@ import ButtonLoading from "../../components/button/ButtonLoading";
 
 const SuggestJobThroughEmailPage: React.FC = () => {
   const { suggestJobCheck, skills } = useSelector((state: any) => state.common);
+  const { user } = useSelector((state: any) => state.auth);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -51,7 +52,18 @@ const SuggestJobThroughEmailPage: React.FC = () => {
             tương lại
           </p>
           <div className="mt-5">
-            <div className={`w-full`}>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="" className="font-medium text-base">
+                Địa chỉ email
+              </label>
+              <input
+                type="text"
+                className="px-4 py-2 border border-solid border-stone-200 rounded-md outline-none"
+                readOnly
+                value={user?.email}
+              />
+            </div>
+            <div className={`w-full mt-4`}>
               <label htmlFor="" className="font-medium text-base">
                 Kỹ năng
               </label>

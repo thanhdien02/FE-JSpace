@@ -12,19 +12,19 @@
       "email": "Địa chỉ Email"
     },
     "followedcompany": {
-      "title": "Quản lí công ty đã theo dõi",
+      "title": "Công ty đã theo dõi",
       "showby": "Hiển thị theo",
       "mostrecent": "Gần đây nhất",
       "mostfollowers": "Nhiều người theo dõi nhất"
     },
     "appliedjob": {
-      "title": "Quản lí công việc đã ứng tuyển",
+      "title": "Công việc đã ứng tuyển",
       "showby": "Hiển thị theo",
       "mostrecent": "Gần đây nhất",
       "highestsalary": "Lương cao nhất"
     },
     "savedjob": {
-      "title": "Quản lí công việc đã lưu",
+      "title": "Công việc đã lưu",
       "showby": "Hiển thị theo",
       "mostrecent": "Gần đây nhất",
       "highestsalary": "Lương cao nhất"
@@ -32,11 +32,11 @@
     "welcomback": "Chào bạn trở lại"
   },
   "menu": {
-    "cv": "Quản lí CV",
-    "save": "Quản lí công việc đã lưu",
-    "apply": "Quản lí công việc đã ứng tuyển",
-    "follow": "Quản lí công ty đã theo dõi",
-    "information": "Quản lí thông tin",
+    "cv": "Hồ sơ xin việc",
+    "save": "Công việc đã lưu",
+    "apply": "Công việc đã ứng tuyển",
+    "follow": "Công ty đã theo dõi",
+    "information": " Thông tin cá nhân",
     "personinformation": "Trang cá nhân",
     "jobapplication": "Hồ sơ xin việc",
     "changepassword": "Đổi mật khẩu",
@@ -67,6 +67,7 @@
     "placeholdercompany": "Tên công ty"
   },
   "companydetail": {
+    "companylink": "Đường dẫn công ty",
     "companysize": "Quy mô",
     "address": "Địa chỉ",
     "follow": "Theo dõi công ty",

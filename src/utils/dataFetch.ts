@@ -82,11 +82,11 @@ export const dataSalary: any = [
   },
   {
     value: "6000000-10000000",
-    label: "Từ 5 - 10 triệu",
+    label: "Từ 6 - 10 triệu",
   },
   {
     value: "11000000-20000000",
-    label: "Từ 10 - 20 triệu",
+    label: "Từ 11 - 20 triệu",
   },
   {
     value: "21000000-30000000",

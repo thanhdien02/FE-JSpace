@@ -102,14 +102,18 @@ const CompanyDetailInformationCommonPage: React.FC = () => {
               <div className="flex flex-wrap lg:gap-10 gap-5 mt-3">
                 <div className="flex items-center gap-2 lg:max-w-[40%]">
                   <IconLink classIcon="!w-5 !h-5"></IconLink>
-                  <span className="text-sm line-clamp-1">
+                  <a
+                    href={companyById?.company?.companyLink}
+                    target="_blank"
+                    className="text-sm line-clamp-1 hover:underline transition-all"
+                  >
                     {companyById?.company?.companyLink}
-                  </span>
+                  </a>
                 </div>
                 <div className="flex items-center gap-2">
                   <IconBuilding classIcon="!w-5 !h-5"></IconBuilding>
                   <span className="text-sm line-clamp-1">
-                    {companyById?.company?.companySize}
+                    {companyById?.company?.companySize}{" "}
                     {t("companydetail.employee")}
                   </span>
                 </div>

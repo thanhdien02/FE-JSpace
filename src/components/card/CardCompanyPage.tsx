@@ -14,7 +14,7 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className=" w-full h-[300px] bg-white shadow-md rounded-md overflow-hidden">
+      <div className="w-full h-[300px] bg-white shadow-md rounded-md overflow-hidden">
         <div className="relative h-[43%]">
           <img
             src={item?.company?.background ? item?.company?.background : bg}
