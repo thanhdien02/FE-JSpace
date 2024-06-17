@@ -12,9 +12,13 @@ import {
 } from "../../store/common/common-slice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// import InputSearchResult from "../../components/input/InputSearchResult";
 
 const HomeBannerPage: React.FC = () => {
   const { locations, experiences } = useSelector((state: any) => state.common);
+  // const { inputSearchJobs, loadingInputSearchJob } = useSelector(
+  //   (state: any) => state.job
+  // );
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -78,6 +82,13 @@ const HomeBannerPage: React.FC = () => {
             action=""
           >
             <div className="grow flex rounded-lg ">
+              {/* {title && (
+                <InputSearchResult
+                  loading={loadingInputSearchJob ? true : false}
+                  title={title}
+                  className="absolute top-[120%] border border-solid border-gray-200 bg-white shadow-xl rounded-lg w-[55%] min-h-[80px] p-1 pr-0 pb-[30px] z-20"
+                ></InputSearchResult>
+              )} */}
               <Input
                 prefix={
                   <SearchOutlined className="text-xl ml-1 pr-3 text-gray-700" />

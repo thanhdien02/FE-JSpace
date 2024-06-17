@@ -21,8 +21,8 @@ const HeaderItem: React.FC<PropComponent> = ({
         to={path}
         className={({ isActive }) =>
           isActive
-            ? `text-primary flex items-center gap-4 pl-4 rounded-lg font-medium hover:text-primary ${classLink}`
-            : `flex items-centergap-4 pl-4 rounded-lg font-medium hover:text-primary text-black ${classLink}`
+            ? `text-primary flex items-center gap-4 pl-4 rounded-lg text-nowrap  hover:text-primary ${classLink}`
+            : `flex items-centergap-4 pl-4 rounded-lg  text-nowrap hover:text-primary text-black ${classLink}`
         }
       >
         {title}

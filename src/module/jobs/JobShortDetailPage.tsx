@@ -5,7 +5,6 @@ import IconChervonRight from "../../components/icons/IconChervonRight";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { message } from "antd";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 import { useTranslation } from "react-i18next";
 import IconClock from "../../components/icons/IconClock";
@@ -34,7 +33,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
   const [checkSave, setCheckSave] = useState(false);
   const handleSaveAndUnsaved = () => {
     if (!user?.id) {
-      message.info("Bạn cần đăng nhập để lưu tin");
+      // message.info("Bạn cần đăng nhập để lưu tin");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       if (!loadingCandidate) {
@@ -58,7 +57,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
   };
   const handleApplyJob = () => {
     if (!user?.id) {
-      message.info("Bạn cần đăng nhập để ứng tuyển");
+      // message.info("Bạn cần đăng nhập để ứng tuyển");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       if (!dataJob?.applied) {
@@ -80,7 +79,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
   }, [dataJob]);
   return (
     <>
-      <div className="w-full sticky top-0 h-fit">
+      <div className="w-full sticky top-[77px] h-fit">
         <div className="p-5 ">
           <h2 className="font-bold text-xl ">{dataJob?.post?.title}</h2>
           <div className="flex gap-3 mt-3">

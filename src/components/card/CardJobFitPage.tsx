@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { message, Popover } from "antd";
+import { Popover } from "antd";
 import IconMapPin from "../icons/IconMapPin";
 import IconBuilding from "../icons/IconBuilding";
 import IconHeart from "../icons/IconHeart";
@@ -29,7 +29,7 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
   const [checkSave, setCheckSave] = useState(false);
   const handleSaveJob = () => {
     if (!user?.id) {
-      message.info("Bạn cần đăng nhập để lưu tin.");
+      // message.info("Bạn cần đăng nhập để lưu tin.");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       if (!loadingCandidate) {

@@ -18,10 +18,14 @@ import IconChervonRight from "../../components/icons/IconChervonRight";
 import NotificationPage from "../../page/CommonPage/NotificationPage";
 import { useTranslation } from "react-i18next";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
+import IconSearch from "../../components/icons/IconSearch";
+import InputSearchResult from "../../components/input/InputSearchResult";
 
 interface PropComponent {}
 const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
+  const { loadingInputSearchJob } = useSelector((state: any) => state.job);
   const { user, accessToken } = useSelector((state: any) => state.auth);
+  const [title, setTitle] = useState("");
   const [checkNotification, setCheckNotification] = useState(false);
   const [checkNotificationShort, setCheckNotificationShort] = useState(false);
   const dispatch = useDispatch();
@@ -61,25 +65,47 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
     }
   };
   const handleCandidateMenu: any = (e: any) => {
-    console.log("🚀 ~ e:", e);
-    console.log("object");
     if (e.title === "logout") {
       dispatch(authLogout());
     }
   };
-
+  const handleChangeJobTitle = (e: any) => {
+    setTitle(e.target.value);
+  };
   return (
     <>
-      <header className="flex lg:px-10 px-5 pb-3 pt-4 justify-between items-center">
+      <header className="flex fixed left-0 top-0 right-0 shadow-md lg:px-10 px-5 pb-3 pt-4 justify-between items-center bg-white z-40 ">
         <div className="flex items-center gap-5">
           <NavLink to="/">
             <img src={logo} alt="" className="w-[45px] object-cover" />
           </NavLink>
-          <ul className="lg:flex hidden gap-2">
+          <ul className="lg:flex hidden gap-2 items-center">
             <HeaderItem title={t("home.name")} path="/"></HeaderItem>
             <HeaderItem title={t("findjob.name")} path="/jobs"></HeaderItem>
             <HeaderItem title={t("company.name")} path="/companys"></HeaderItem>
-            {/* <HeaderItem title={t("blog.name")} path="/blogs"></HeaderItem> */}
+            <div className="ml-5 relative  w-[400px] rounded-lg ">
+              <input
+                placeholder={t("home.placeholdernamejob")}
+                value={title}
+                type="text"
+                className="w-full h-full pl-14 pr-4 py-[10px] outline-none text-base rounded-lg bg-slate-100 placeholder:text-sm border border-solid border-gray-200 placeholder:text-gray-500 focus:bg-white focus:border-gray-300"
+                onChange={handleChangeJobTitle}
+              />
+              <div className="absolute h-full left-3 top-1/2 -translate-y-1/2 flex gap-3 items-center text-gray-500">
+                <IconSearch classIcon="!w-5 !h-5"></IconSearch>
+                <span className="h-[55%] w-[.9px] bg-gray-500"></span>
+              </div>
+
+              {title && (
+                <InputSearchResult
+                  loading={loadingInputSearchJob ? true : false}
+                  title={title}
+                  setTitle={setTitle}
+                  className="absolute top-[120%] border border-solid border-gray-200 bg-white shadow-xl rounded-lg w-[120%] min-h-[80px] p-1 pr-0 pb-[30px]"
+                ></InputSearchResult>
+              )}
+              {/* <span className="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 rounded-md bg-primary text-white text-sm">Tìm kiếm</span> */}
+            </div>
           </ul>
         </div>
         <div className="lg:block hidden">

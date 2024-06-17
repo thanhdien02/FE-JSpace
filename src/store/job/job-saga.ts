@@ -5,6 +5,7 @@ import {
   jobGetCompanyJob,
   jobGetFilterJob,
   jobGetHomeJob,
+  jobGetInputSearchJob,
   jobGetJobById,
   jobGetJobByIdWithCandidate,
   jobGetRelativeJob,
@@ -15,6 +16,7 @@ import {
   handleJobGetCompanyJob,
   handleJobGetFilterJob,
   handleJobGetHomeJob,
+  handleJobGetInputSearchJob,
   handleJobGetJobById,
   handleJobGetJobByIdWithCandidate,
   handleJobGetRelativeJob,
@@ -25,6 +27,7 @@ export default function* authSaga() {
   yield takeLatest(jobGetHomeJob.type, handleJobGetHomeJob);
   yield takeLatest(jobGetCompanyJob.type, handleJobGetCompanyJob);
   yield takeLatest(jobGetRelativeJob.type, handleJobGetRelativeJob);
+  yield takeLatest(jobGetInputSearchJob.type, handleJobGetInputSearchJob);
   yield takeLatest(jobGetFilterJob.type, handleJobGetFilterJob);
   yield takeLatest(jobGetSavedJob.type, handleJobGetSavedJob);
   yield takeLatest(jobGetAppliedJob.type, handleJobGetAppliedJob);

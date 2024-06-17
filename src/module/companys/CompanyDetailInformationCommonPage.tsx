@@ -4,7 +4,7 @@ import IconLink from "../../components/icons/IconLink";
 import IconBuilding from "../../components/icons/IconBuilding";
 import IconGroupUser from "../../components/icons/IconGroupUser";
 import IconPlus from "../../components/icons/IconPlus";
-import { message, Popover } from "antd";
+import { Popover } from "antd";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
@@ -27,7 +27,7 @@ const CompanyDetailInformationCommonPage: React.FC = () => {
   const dispatch = useDispatch();
   const handleFollowCompany = () => {
     if (!user?.id) {
-      message.info("Bạn cần đăng nhập để theo dõi công ty");
+      // message.info("Bạn cần đăng nhập để theo dõi công ty");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       dispatch(
@@ -40,7 +40,7 @@ const CompanyDetailInformationCommonPage: React.FC = () => {
   };
   const handleUnFollowCompany = () => {
     if (!user?.id) {
-      message.info("Bạn cần đăng nhập để theo dõi công ty");
+      // message.info("Bạn cần đăng nhập để theo dõi công ty");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       dispatch(

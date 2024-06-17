@@ -1,4 +1,4 @@
-import { message, Popover } from "antd";
+import {  Popover } from "antd";
 import React from "react";
 import logo from "../../assets/banner3.jpg";
 import IconTrash from "../icons/IconTrash";
@@ -21,7 +21,7 @@ const CardCompanyRelativeAtCompanyDetailPage: React.FC<PropComponent> = ({
   const dispatch = useDispatch();
   const handleFollowCompany = () => {
     if (!user?.id) {
-      message.info("Bạn cần đăng nhập để theo dõi công ty.");
+      // message.info("Bạn cần đăng nhập để theo dõi công ty.");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     }
   };

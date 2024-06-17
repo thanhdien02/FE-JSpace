@@ -4,6 +4,7 @@ interface IFile {
   jobById?: any;
   jobByIdWithCandidate?: any;
   filterJobs: any;
+  inputSearchJobs: any;
   companyJobs: any;
   appliedJobs?: any;
   savedJobs?: any;
@@ -11,8 +12,10 @@ interface IFile {
   homeJobs?: any;
   fitJobs?: any;
   loadingJob?: boolean;
+  loadingInputSearchJob?: boolean;
   messageJob?: string;
   paginationFilterJob?: any;
+  paginationInputSearchJob?: any;
   paginationSavedJob?: any;
   paginationAppliedJob?: any;
   paginationCompanyJob?: any;
@@ -22,6 +25,7 @@ const init: IFile = {
   jobById: {},
   jobByIdWithCandidate: {},
   filterJobs: {},
+  inputSearchJobs: {},
   companyJobs: {},
   appliedJobs: {},
   savedJobs: {},
@@ -29,8 +33,10 @@ const init: IFile = {
   homeJobs: {},
   fitJobs: {},
   loadingJob: false,
+  loadingInputSearchJob: false,
   messageJob: "",
   paginationFilterJob: {},
+  paginationInputSearchJob: {},
   paginationSavedJob: {},
   paginationAppliedJob: {},
   paginationCompanyJob: {},
@@ -47,6 +53,7 @@ const jobSlice: any = createSlice({
     jobGetSavedJob: () => {},
     jobGetAppliedJob: () => {},
     jobGetFilterJob: () => {},
+    jobGetInputSearchJob: () => {},
     jobGetCompanyJob: () => {},
     jobPostJob: () => {},
     jobUpdateJobByIdRedux: (state: any, action: any) => ({
@@ -57,6 +64,10 @@ const jobSlice: any = createSlice({
       ...state,
       filterJobs: action.payload.filterJobs,
     }),
+    jobUpdateInputSearchJobRedux: (state: any, action: any) => ({
+      ...state,
+      inputSearchJobs: action.payload.inputSearchJobs,
+    }),
     jobUpdateJobByIdWithCandidateRedux: (state: any, action: any) => ({
       ...state,
       jobByIdWithCandidate: action.payload.jobByIdWithCandidate,
@@ -64,6 +75,10 @@ const jobSlice: any = createSlice({
     jobUpdateLoadingRedux: (state: any, action: any) => ({
       ...state,
       loadingJob: action.payload.loadingJob,
+    }),
+    jobUpdateInputSearchLoadingRedux: (state: any, action: any) => ({
+      ...state,
+      loadingInputSearchJob: action.payload.loadingInputSearchJob,
     }),
     jobUpdateHomeJobRedux: (state: any, action: any) => ({
       ...state,
@@ -105,6 +120,10 @@ const jobSlice: any = createSlice({
       ...state,
       paginationFilterJob: action.payload.paginationFilterJob,
     }),
+    jobUpdateInputSearchPaginationRedux: (state: any, action: any) => ({
+      ...state,
+      paginationInputSearchJob: action.payload.paginationInputSearchJob,
+    }),
   },
 });
 export const {
@@ -132,5 +151,9 @@ export const {
   jobUpdateCompanyJobRedux,
   jobUpdateCompanyPaginationRedux,
   jobUpdateFilterPaginationRedux,
+  jobUpdateInputSearchPaginationRedux,
+  jobGetInputSearchJob,
+  jobUpdateInputSearchJobRedux,
+  jobUpdateInputSearchLoadingRedux,
 } = jobSlice.actions;
 export default jobSlice.reducer;

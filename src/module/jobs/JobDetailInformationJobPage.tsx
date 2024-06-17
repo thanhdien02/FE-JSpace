@@ -50,7 +50,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
   const dispatch = useDispatch();
   const handleApplyJob = () => {
     if (!user?.id) {
-      message.info("Bạn cần đăng nhập để ứng tuyển");
+      // message.info("Bạn cần đăng nhập để ứng tuyển");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else if (checkExpired) {
       message.info("Thời gian ứng tuyển đã kết thúc");
@@ -62,7 +62,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
   };
   const handleSaveAndUnsaved = () => {
     if (!user?.id) {
-      message.info("Bạn cần đăng nhập để lưu tin");
+      // message.info("Bạn cần đăng nhập để lưu tin");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       if (!loadingCandidate) {

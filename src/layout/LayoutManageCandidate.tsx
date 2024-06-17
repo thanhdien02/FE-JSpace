@@ -59,9 +59,9 @@ const LayoutManageCandidate: React.FC = () => {
   return (
     <>
       <LayoutHomeUserHeader></LayoutHomeUserHeader>
-      <div className="bg-gray-200 ">
+      <div className="bg-gray-200  mt-[77px]">
         <div className="w-[1200px] max-w-full mx-auto min-h-screen py-5">
-          <div className="flex flex-col xl:flex-row w-full mx-auto gap-5 bg-gray-200">
+          <div className="flex flex-col xl:flex-row w-full mx-auto gap-5 bg-gray-200 ">
             <div className="grow w-full bg-white rounded-lg h-fit">
               <Outlet></Outlet>
             </div>

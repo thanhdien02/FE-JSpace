@@ -8,6 +8,8 @@ import {
   jobUpdateFilterJobRedux,
   jobUpdateFilterPaginationRedux,
   jobUpdateHomeJobRedux,
+  jobUpdateInputSearchJobRedux,
+  jobUpdateInputSearchLoadingRedux,
   jobUpdateJobByIdRedux,
   jobUpdateJobByIdWithCandidateRedux,
   jobUpdateLoadingRedux,
@@ -21,6 +23,7 @@ import {
   requestJobGetCompanyJob,
   requestJobGetFilterJob,
   requestJobGetHomeJob,
+  requestJobGetInputSearchJob,
   requestJobGetJobById,
   requestJobGetJobByIdWithCandidate,
   requestJobGetRelativeJob,
@@ -101,6 +104,35 @@ function* handleJobGetRelativeJob(dataGetRelativeJob: any): Generator<any> {
     message.error(error?.response?.data?.message);
   } finally {
     yield put(jobUpdateLoadingRedux({ loadingJob: false }));
+  }
+}
+function* handleJobGetInputSearchJob(
+  dataGetInputSearchJob: any
+): Generator<any> {
+  try {
+    yield put(
+      jobUpdateInputSearchLoadingRedux({ loadingInputSearchJob: true })
+    );
+    const response: any = yield call(
+      requestJobGetInputSearchJob,
+      dataGetInputSearchJob?.payload?.candidate_id,
+      dataGetInputSearchJob?.payload?.title,
+      dataGetInputSearchJob?.payload?.page,
+      dataGetInputSearchJob?.payload?.size
+    );
+    if (response?.data?.code === 1000) {
+      yield put(
+        jobUpdateInputSearchJobRedux({
+          inputSearchJobs: response?.data?.result?.content,
+        })
+      );
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(
+      jobUpdateInputSearchLoadingRedux({ loadingInputSearchJob: false })
+    );
   }
 }
 function* handleJobGetFilterJob(dataGetFilterJob: any): Generator<any> {
@@ -268,4 +300,5 @@ export {
   handleJobGetFilterJob,
   handleJobGetAppliedJob,
   handleJobGetCompanyJob,
+  handleJobGetInputSearchJob,
 };

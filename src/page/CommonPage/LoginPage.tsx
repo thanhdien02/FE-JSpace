@@ -67,7 +67,7 @@ const LoginPage: React.FC<PropComponent> = ({
     console.log(`checked = ${e.target.checked}`);
   };
   return (
-    <div className={`flex fixed inset-0 z-40 ${className}`}>
+    <div className={`flex fixed inset-0 z-50 ${className}`}>
       <div
         className={`m-auto absolute inset-0 bg-black/50 cursor-pointer ${claseNameOverlay}`}
         onClick={() => {

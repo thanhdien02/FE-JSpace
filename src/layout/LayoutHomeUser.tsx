@@ -65,7 +65,7 @@ const LayoutHomeUser: React.FC = () => {
       </CSSTransition>
 
       <LayoutHomeUserHeader></LayoutHomeUserHeader>
-      <div className="bg-white">
+      <div className="bg-white mt-[73px]">
         <Outlet></Outlet>
       </div>
       <CSSTransition

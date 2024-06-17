@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { message, Popover, Tag } from "antd";
+import { Popover, Tag } from "antd";
 import { useNavigate } from "react-router-dom";
 import IconHeart from "../icons/IconHeart";
 import { useSelector } from "react-redux";
@@ -27,7 +27,7 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
   const dispatch = useDispatch();
   const handleSaveAndUnSaveJob = () => {
     if (!user?.id) {
-      message.info("Bạn cần đăng nhập để lưu tin");
+      // message.info("Bạn cần đăng nhập để lưu tin");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       if (!loadingCandidate) {

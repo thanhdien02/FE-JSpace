@@ -8,7 +8,7 @@ const FindJobPage: React.FC = () => {
   const [size] = useState(12);
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [page]);
   return (
     <>
       <JobBannerPage size={size} page={page} setPage={setPage}></JobBannerPage>

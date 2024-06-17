@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../../assets/bg-login.jpg";
 import IconTrash from "../icons/IconTrash";
 import IconMoney from "../icons/IconMoney";
-import { message, Popover } from "antd";
+import {  Popover } from "antd";
 import { useNavigate } from "react-router-dom";
 import IconHeart from "../icons/IconHeart";
 import { formatToMillion } from "../../utils/common-function";
@@ -27,7 +27,7 @@ const CardJobAtCompanyDetailPage: React.FC<PropComponent> = ({ item }) => {
   const [checkSave, setCheckSave] = useState(false);
   const handleSaveAndUnSaveJob = () => {
     if (!user?.id) {
-      message.info("Bạn cần đăng nhập để lưu tin.");
+      // message.info("Bạn cần đăng nhập để lưu tin.");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       if (!loadingCandidate) {

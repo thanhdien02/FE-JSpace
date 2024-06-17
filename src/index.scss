@@ -253,3 +253,24 @@
   writing-mode: vertical-rl;
   transform: rotate(180deg); /* Nếu muốn xoay ngược lại */
 }
+.search-title {
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 4px !important;
+    border-radius: 10%;
+  }
+  ::-webkit-scrollbar-track-piece {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    position: absolute;
+    z-index: 10000000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #f3e3e3; /* Màu của thanh cuộn */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
+  }
+}

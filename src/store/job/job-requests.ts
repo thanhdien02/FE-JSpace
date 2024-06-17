@@ -57,6 +57,25 @@ export const requestJobGetRelativeJob = (
     }
   );
 };
+export const requestJobGetInputSearchJob = (
+  candidate_id: string,
+  title: string = "",
+  page: string = "1",
+  size: string = "12"
+) => {
+  if (title == null || title == undefined) title = "";
+  if (candidate_id == null || candidate_id == undefined) candidate_id = "";
+  return axios.get(
+    `${API}/api/v1/posts?${
+      candidate_id && `candidateId=${candidate_id}&`
+    }page=${page}&size=${size}${title && `&title=${title}`}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
 export const requestJobGetFilterJob = (
   candidate_id: string,
   title: string = "",
