@@ -22,9 +22,11 @@ import IconHome from "../components/icons/IconHome";
 import IconBuilding from "../components/icons/IconBuilding";
 import IconUser from "../components/icons/IconUser";
 import { useTranslation } from "react-i18next";
+import OverlaySearchHeader from "../components/overlay/OverlaySearchHeader";
 
 const LayoutManageCandidate: React.FC = () => {
   const { user, accessToken } = useSelector((state: any) => state.auth);
+  const { inputHeaderSearchCheck } = useSelector((state: any) => state.common);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -59,10 +61,13 @@ const LayoutManageCandidate: React.FC = () => {
   return (
     <>
       <LayoutHomeUserHeader></LayoutHomeUserHeader>
-      <div className="bg-gray-200  mt-[77px]">
+      <div className="relative bg-gray-200 mt-[77px]">
+        {/* search header */}
+        {inputHeaderSearchCheck && <OverlaySearchHeader></OverlaySearchHeader>}
+        {/*  */}
         <div className="w-[1200px] max-w-full mx-auto min-h-screen py-5">
           <div className="flex flex-col xl:flex-row w-full mx-auto gap-5 bg-gray-200 ">
-            <div className="grow w-full bg-white rounded-lg h-fit">
+            <div className=" grow w-full bg-white rounded-lg h-fit">
               <Outlet></Outlet>
             </div>
             <div className="md:flex hidden flex-col min-w-[29%] h-fit p-5 gap-3 bg-white rounded-lg">

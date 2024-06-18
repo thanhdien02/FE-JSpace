@@ -41,7 +41,7 @@ const HomeListProduct: React.FC = () => {
           {loadingProduct ? (
             <Skeleton />
           ) : (
-            <div className="grid grid-cols-3 gap-10 mt-5">
+            <div className="grid lg:grid-cols-3 grid-cols-1 gap-10 mt-5">
               {products?.length > 0 &&
                 products.map((item: any) => (
                   <CardProductAtCommonPage

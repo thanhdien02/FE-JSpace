@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import logo from "../../assets/logo3.png";
 import { useSelector } from "react-redux";
 import IconChervonDown from "../../components/icons/IconChervonDown";
@@ -6,6 +6,7 @@ import IconBell from "../../components/icons/IconBell";
 import HeaderItem from "../../components/common/HeaderItem";
 import { NavLink } from "react-router-dom";
 import CandidateMenu from "../candidates/CandidateMenu";
+import { debounce } from "ts-debounce";
 import {
   dataCandidateMenu,
   dataCandidateMenuResponsive,
@@ -17,21 +18,26 @@ import { MenuOutlined, UserOutlined } from "@ant-design/icons";
 import IconChervonRight from "../../components/icons/IconChervonRight";
 import NotificationPage from "../../page/CommonPage/NotificationPage";
 import { useTranslation } from "react-i18next";
-import { commonUpdateLoginRedux } from "../../store/common/common-slice";
+import {
+  commonUpdateInputHeaderSearchCheckRedux,
+  commonUpdateLoginRedux,
+} from "../../store/common/common-slice";
 import IconSearch from "../../components/icons/IconSearch";
 import InputSearchResult from "../../components/input/InputSearchResult";
+import IconClose from "../../components/icons/IconClose";
 
 interface PropComponent {}
 const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
   const { loadingInputSearchJob } = useSelector((state: any) => state.job);
   const { user, accessToken } = useSelector((state: any) => state.auth);
+  const { inputHeaderSearchCheck } = useSelector((state: any) => state.common);
   const [title, setTitle] = useState("");
   const [checkNotification, setCheckNotification] = useState(false);
   const [checkNotificationShort, setCheckNotificationShort] = useState(false);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [size] = useState<DrawerProps["size"]>();
-
+  const inputSearch = useRef<any>(null);
   // dich
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng: string) => {
@@ -69,8 +75,23 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
       dispatch(authLogout());
     }
   };
-  const handleChangeJobTitle = (e: any) => {
+
+  const clearInputSearch = () => {
+    if (inputSearch?.current) {
+      // sử dụng useRef để xóa bởi vì sử dụng debouce nên không và value bằng state được.
+      inputSearch.current.value = "";
+
+      // cleaar state
+      setTitle("");
+    }
+  };
+  const handleChangeJobTitle = debounce((e: any) => {
     setTitle(e.target.value);
+  }, 400);
+  const handleOnFocusSearch = () => {
+    dispatch(
+      commonUpdateInputHeaderSearchCheckRedux({ inputHeaderSearchCheck: true })
+    );
   };
   return (
     <>
@@ -85,8 +106,9 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
             <HeaderItem title={t("company.name")} path="/companys"></HeaderItem>
             <div className="ml-5 relative  w-[400px] rounded-lg ">
               <input
+                ref={inputSearch}
                 placeholder={t("home.placeholdernamejob")}
-                value={title}
+                onFocus={handleOnFocusSearch}
                 type="text"
                 className="w-full h-full pl-14 pr-4 py-[10px] outline-none text-base rounded-lg bg-slate-100 placeholder:text-sm border border-solid border-gray-200 placeholder:text-gray-500 focus:bg-white focus:border-gray-300"
                 onChange={handleChangeJobTitle}
@@ -96,15 +118,22 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                 <span className="h-[55%] w-[.9px] bg-gray-500"></span>
               </div>
 
-              {title && (
+              {title && inputHeaderSearchCheck && (
                 <InputSearchResult
                   loading={loadingInputSearchJob ? true : false}
                   title={title}
-                  setTitle={setTitle}
-                  className="absolute top-[120%] border border-solid border-gray-200 bg-white shadow-xl rounded-lg w-[120%] min-h-[80px] p-1 pr-0 pb-[30px]"
+                  clearInputSearch={clearInputSearch}
+                  className="absolute top-[120%] border border-solid border-gray-200 bg-white shadow-xl rounded-lg w-[140%] min-h-[80px] p-1 pr-0 pb-[30px]"
                 ></InputSearchResult>
               )}
-              {/* <span className="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1 rounded-md bg-primary text-white text-sm">Tìm kiếm</span> */}
+              {title && (
+                <span
+                  onClick={clearInputSearch}
+                  className="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2"
+                >
+                  <IconClose classIcon="!w-5 !h-5"></IconClose>
+                </span>
+              )}
             </div>
           </ul>
         </div>

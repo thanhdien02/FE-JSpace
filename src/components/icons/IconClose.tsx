@@ -2,11 +2,13 @@ import React from "react";
 
 interface PropComponent {
   className?: string;
+  classIcon?: string;
   actionCloseLogin?: any;
 }
 const IconClose: React.FC<PropComponent> = ({
   className,
   actionCloseLogin,
+  classIcon,
 }) => {
   return (
     <span
@@ -19,7 +21,7 @@ const IconClose: React.FC<PropComponent> = ({
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className={`w-6 h-6 `}
+        className={`w-6 h-6 ${classIcon}`}
       >
         <path
           strokeLinecap="round"

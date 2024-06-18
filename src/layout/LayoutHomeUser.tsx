@@ -18,11 +18,12 @@ import {
 } from "../store/common/common-slice";
 import { useTranslation } from "react-i18next";
 import SuggestJobThroughEmailPage from "../page/CommonPage/SuggestJobThroughEmailPage";
+import OverlaySearchHeader from "../components/overlay/OverlaySearchHeader";
 
 const LayoutHomeUser: React.FC = () => {
   const { t } = useTranslation();
   const { user, accessToken } = useSelector((state: any) => state.auth);
-  const { loginCheck, suggestJobCheck } = useSelector(
+  const { loginCheck, suggestJobCheck, inputHeaderSearchCheck } = useSelector(
     (state: any) => state.common
   );
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const LayoutHomeUser: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <div className="">
       <CSSTransition
@@ -65,8 +67,9 @@ const LayoutHomeUser: React.FC = () => {
       </CSSTransition>
 
       <LayoutHomeUserHeader></LayoutHomeUserHeader>
-      <div className="bg-white mt-[73px]">
+      <div className="relative bg-white mt-[73px]">
         <Outlet></Outlet>
+        {inputHeaderSearchCheck && <OverlaySearchHeader></OverlaySearchHeader>}
       </div>
       <CSSTransition
         in={checkScrolltoTop}
@@ -89,7 +92,7 @@ const LayoutHomeUser: React.FC = () => {
             commonUpdateSuggestJobRedux({ suggestJobCheck: !suggestJobCheck })
           );
         }}
-        className="fixed right-0 top-1/2 bg-primary py-3 px-1 text-white rounded-r-lg text-base cursor-pointer vertical-text"
+        className="fixed z-10 right-0 top-1/2 bg-primary py-3 px-1 text-white rounded-r-lg text-base cursor-pointer vertical-text"
       >
         Gợi ý việc làm
       </div>
