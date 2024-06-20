@@ -79,9 +79,15 @@ const CardCompanyFollowedPage: React.FC<PropComponent> = ({
             <p className="line-clamp-1 text-sm">{item?.email}</p>
             <p className="line-clamp-1 text-sm">{item?.companyLink}</p>
             <div className="flex gap-5 items-center mt-5">
-              <p className="text-sm font-medium text-gray-500">
-                {item?.address}
-              </p>
+              <Popover
+                content={
+                  <p className="w-[300px] font-medium"> {item?.address}</p>
+                }
+              >
+                <p className="text-sm font-medium text-gray-500 w-[100px] line-clamp-1">
+                  {item?.address}
+                </p>
+              </Popover>
               <p className="text-sm font-medium text-gray-500">12 việc làm</p>
             </div>
           </div>

@@ -4,6 +4,7 @@ interface ICommon {
   infoUserOauth: any;
   loginCheck?: boolean;
   inputHeaderSearchCheck?: boolean;
+  inputBannerSearchCheck?: boolean;
   suggestJobCheck?: boolean;
   locations?: any;
   jobTypes?: any;
@@ -20,6 +21,7 @@ const init: ICommon = {
   infoUserOauth: {},
   loginCheck: false,
   inputHeaderSearchCheck: false,
+  inputBannerSearchCheck: false,
   suggestJobCheck: false,
   locations: {},
   jobTypes: {},
@@ -50,6 +52,10 @@ const commonSlice: any = createSlice({
     commonUpdateInputHeaderSearchCheckRedux: (state: any, action: any) => ({
       ...state,
       inputHeaderSearchCheck: action.payload.inputHeaderSearchCheck,
+    }),
+    commonUpdateInputBannerSearchCheckRedux: (state: any, action: any) => ({
+      ...state,
+      inputBannerSearchCheck: action.payload.inputBannerSearchCheck,
     }),
     commonUpdateLoadingRedux: (state: any, action: any) => ({
       ...state,
@@ -117,5 +123,6 @@ export const {
   commonUpdateSkillsRedux,
   commonUpdateSuggestJobRedux,
   commonUpdateInputHeaderSearchCheckRedux,
+  commonUpdateInputBannerSearchCheckRedux,
 } = commonSlice.actions;
 export default commonSlice.reducer;

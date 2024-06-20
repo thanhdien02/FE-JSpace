@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { commonUpdateInputHeaderSearchCheckRedux } from "../../store/common/common-slice";
+import { commonUpdateInputBannerSearchCheckRedux } from "../../store/common/common-slice";
 
-const OverlaySearchHeader: React.FC = () => {
+const OverlaySearchBanner: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const elementBody = document.body;
@@ -15,14 +15,14 @@ const OverlaySearchHeader: React.FC = () => {
     <div
       onClick={() =>
         dispatch(
-          commonUpdateInputHeaderSearchCheckRedux({
+          commonUpdateInputBannerSearchCheckRedux({
             inputBannerSearchCheck: false,
           })
         )
       }
-      className="absolute inset-0 bg-black/50 z-20"
+      className="absolute inset-0 bg-black/50 z-10"
     ></div>
   );
 };
 
-export default OverlaySearchHeader;
+export default OverlaySearchBanner;

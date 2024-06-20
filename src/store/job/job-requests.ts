@@ -61,7 +61,7 @@ export const requestJobGetInputSearchJob = (
   candidate_id: string,
   title: string = "",
   page: string = "1",
-  size: string = "12"
+  size: string = "6"
 ) => {
   if (title == null || title == undefined) title = "";
   if (candidate_id == null || candidate_id == undefined) candidate_id = "";

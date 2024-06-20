@@ -30,6 +30,7 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
     (state: any) => state.common
   );
   const { user } = useSelector((state: any) => state.auth);
+  const { paginationFilterJob } = useSelector((state: any) => state.job);
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
@@ -280,7 +281,10 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
             <div className={`flex justify-between mt-5 `}>
               <div className="flex lg:bg-blue-100/20 bg-gray-400/30 rounded-lg text-white">
                 <span className="m-auto px-4">
-                  <strong className="text-blue-200">0</strong> {t("result")}
+                  <strong className="text-blue-200">
+                    {paginationFilterJob?.totalElements}
+                  </strong>{" "}
+                  {t("result")}
                 </span>{" "}
               </div>
               <div
@@ -328,6 +332,7 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
                 <div className={`lg:w-[20%] w-auto`}>
                   <Select
                     showSearch
+                    allowClear
                     placeholder={t("jobtype")}
                     className={`address w-full text-base rounded-lg h-10 bg-white`}
                     optionFilterProp="children"
@@ -348,6 +353,7 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
                 </div>
                 <div className={`lg:w-[20%] w-auto`}>
                   <Select
+                    allowClear
                     showSearch
                     placeholder={t("rank")}
                     className={`address w-full text-base rounded-lg h-10 bg-white`}

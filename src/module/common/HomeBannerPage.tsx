@@ -9,19 +9,20 @@ import { useDispatch } from "react-redux";
 import {
   commonGetExperience,
   commonGetLocation,
+  commonUpdateInputBannerSearchCheckRedux,
 } from "../../store/common/common-slice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import InputSearchResult from "../../components/input/InputSearchResult";
+import InputSearchBannerResult from "../../components/input/InputSearchBannerResult";
 
 const HomeBannerPage: React.FC = () => {
-  const { locations, experiences } = useSelector((state: any) => state.common);
-  // const { inputSearchJobs, loadingInputSearchJob } = useSelector(
-  //   (state: any) => state.job
-  // );
+  const { locations, experiences, inputBannerSearchCheck } = useSelector(
+    (state: any) => state.common
+  );
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [title, setTitle] = useState<any>(null);
   const [location, setLocation] = useState<any>(null);
   const [experience, setExperience] = useState<any>(null);
@@ -40,6 +41,8 @@ const HomeBannerPage: React.FC = () => {
   const handleChangeSalary = (value: any) => {
     setSalary(value);
   };
+  // lấy lịch sử tìm kiếm lên từ localstore
+
   useEffect(() => {
     dispatch(commonGetLocation());
     dispatch(commonGetExperience());
@@ -62,8 +65,27 @@ const HomeBannerPage: React.FC = () => {
       experience: experience,
       salary: salary,
     };
+    const storedHistory = localStorage.getItem("searchHistory");
+    if (storedHistory) {
+      localStorage.setItem(
+        "searchHistory",
+        JSON.stringify([title, ...JSON.parse(storedHistory)])
+      );
+    } else {
+      localStorage.setItem("searchHistory", JSON.stringify([title]));
+    }
     localStorage.setItem("jspace-search", JSON.stringify(search));
     navigate("/jobs");
+    dispatch(
+      commonUpdateInputBannerSearchCheckRedux({
+        inputBannerSearchCheck: false,
+      })
+    );
+  };
+  const handleOnFocus = () => {
+    dispatch(
+      commonUpdateInputBannerSearchCheckRedux({ inputBannerSearchCheck: true })
+    );
   };
   return (
     <>
@@ -74,29 +96,29 @@ const HomeBannerPage: React.FC = () => {
           className="absolute inset-0 h-full w-full object-cover opacity-70"
         />
         <div className="p-5 flex flex-col w-full min-h-[150px] justify-center items-center gap-y-5 bg-blue-600">
-          <h1 className="z-10 font-bold text-3xl text-white lg:line-clamp-1 py-2 mt-6 text-center lg:text-start px-4 lg:px-0">
+          <h1 className="z-[1] font-bold text-3xl text-white lg:line-clamp-1 py-2 mt-6 text-center lg:text-start px-4 lg:px-0">
             {t("home.titlebannerhome")}
           </h1>
           <form
-            className="lg:px-0 px-4 lg:m-auto flex flex-wrap gap-3 max-w-full w-primary h-auto rounded-lg shadow-lg "
+            className="z-20 lg:px-0 px-4 lg:m-auto flex flex-wrap gap-3 max-w-full w-primary h-auto rounded-lg shadow-lg "
             action=""
           >
-            <div className="grow flex rounded-lg ">
-              {/* {title && (
-                <InputSearchResult
-                  loading={loadingInputSearchJob ? true : false}
-                  title={title}
-                  className="absolute top-[120%] border border-solid border-gray-200 bg-white shadow-xl rounded-lg w-[55%] min-h-[80px] p-1 pr-0 pb-[30px] z-20"
-                ></InputSearchResult>
-              )} */}
+            <div className="relative grow flex rounded-lg ">
+              {inputBannerSearchCheck && (
+                <InputSearchBannerResult
+                  setTitle={setTitle}
+                  className="absolute top-[110%] bg-white p-2 pr-0 rounded-md shadow w-[50%] z-20"
+                ></InputSearchBannerResult>
+              )}
               <Input
                 prefix={
                   <SearchOutlined className="text-xl ml-1 pr-3 text-gray-700" />
                 }
+                onFocus={handleOnFocus}
                 placeholder={t("home.placeholdernamejob")}
                 allowClear={{
                   clearIcon: (
-                    <CloseOutlined className="text-base px-1 hover:bg-slate-100 py-1 rounded-sm transition-all" />
+                    <CloseOutlined className="text-base px-1 hover:bg-slate-100 py-1 rounded-sm transition-all " />
                   ),
                 }}
                 value={title}
@@ -178,7 +200,7 @@ const HomeBannerPage: React.FC = () => {
             </button>
           </form>
 
-          <div className="px-5 z-10 flex lg:gap-5 gap-2 items-center mt-2">
+          <div className="px-5 z-[1] flex lg:gap-5 gap-2 items-center mt-2">
             <p className="text-center lg:text-start text-xs lg:text-sm text-gray-300">
               <span className=""> {t("home.totalwork")} </span>
               <span className=" font-semibold text-base text-white">

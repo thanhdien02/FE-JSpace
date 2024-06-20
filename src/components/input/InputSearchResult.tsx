@@ -19,7 +19,9 @@ const InputSearchResult: React.FC<PropCompent> = ({
   loading,
   clearInputSearch,
 }) => {
-  const { inputSearchJobs } = useSelector((state: any) => state.job);
+  const { inputSearchJobs, paginationInputSearchJob } = useSelector(
+    (state: any) => state.job
+  );
   const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const InputSearchResult: React.FC<PropCompent> = ({
         jobGetInputSearchJob({
           candidate_id: user?.id,
           page: 1,
-          size: 10,
+          size: 6,
           title: title,
         })
       );
@@ -138,7 +140,21 @@ const InputSearchResult: React.FC<PropCompent> = ({
                     ))}
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-white h-[30px] rounded-b-md flex cursor-pointer hover:bg-gray-200 transition-all">
-                  <span className="m-auto text-sm  rounded-full">Xem thêm</span>
+                  <span
+                    className="m-auto text-sm  rounded-full"
+                    onClick={() => {
+                      setNaviateDetailSearch(true);
+                    }}
+                  >
+                    Xem thêm{" "}
+                    {paginationInputSearchJob?.totalElements ? (
+                      <span className="font-medium">
+                        ({paginationInputSearchJob?.totalElements})
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </span>
                 </div>
               </>
             )}

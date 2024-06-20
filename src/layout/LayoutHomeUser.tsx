@@ -19,13 +19,17 @@ import {
 import { useTranslation } from "react-i18next";
 import SuggestJobThroughEmailPage from "../page/CommonPage/SuggestJobThroughEmailPage";
 import OverlaySearchHeader from "../components/overlay/OverlaySearchHeader";
+import OverlaySearchBanner from "../components/overlay/OverlaySearchBanner";
 
 const LayoutHomeUser: React.FC = () => {
   const { t } = useTranslation();
   const { user, accessToken } = useSelector((state: any) => state.auth);
-  const { loginCheck, suggestJobCheck, inputHeaderSearchCheck } = useSelector(
-    (state: any) => state.common
-  );
+  const {
+    loginCheck,
+    suggestJobCheck,
+    inputHeaderSearchCheck,
+    inputBannerSearchCheck,
+  } = useSelector((state: any) => state.common);
   const dispatch = useDispatch();
   const [checkScrolltoTop, setCheckScrolltoTop] = useState(false);
   useEffect(() => {
@@ -57,6 +61,9 @@ const LayoutHomeUser: React.FC = () => {
 
   return (
     <div className="">
+      {/* overlay search banner */}
+      {inputBannerSearchCheck && <OverlaySearchBanner></OverlaySearchBanner>}
+      {/*  */}
       <CSSTransition
         in={loginCheck}
         timeout={200}
