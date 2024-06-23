@@ -59,21 +59,27 @@ const HomeBannerPage: React.FC = () => {
   }, []);
   const handleSearchJob = (e: any) => {
     e.preventDefault();
+
+    // lưu lịch sử tìm kiếm
+    const storedHistory: any = localStorage.getItem("searchHistory");
+    if (storedHistory) {
+      if (!JSON.parse(storedHistory).includes(title))
+        localStorage.setItem(
+          "searchHistory",
+          JSON.stringify([title, ...JSON.parse(storedHistory)])
+        );
+    } else {
+      if (!JSON.parse(storedHistory).includes(title))
+        localStorage.setItem("searchHistory", JSON.stringify([title]));
+    }
+    // lưu để khi vào lại hiện lịch sử tìm kiếm mới nhất
     let search = {
       title: title,
       location: location,
       experience: experience,
       salary: salary,
     };
-    const storedHistory = localStorage.getItem("searchHistory");
-    if (storedHistory) {
-      localStorage.setItem(
-        "searchHistory",
-        JSON.stringify([title, ...JSON.parse(storedHistory)])
-      );
-    } else {
-      localStorage.setItem("searchHistory", JSON.stringify([title]));
-    }
+
     localStorage.setItem("jspace-search", JSON.stringify(search));
     navigate("/jobs");
     dispatch(
@@ -107,7 +113,7 @@ const HomeBannerPage: React.FC = () => {
               {inputBannerSearchCheck && (
                 <InputSearchBannerResult
                   setTitle={setTitle}
-                  className="absolute top-[110%] bg-white p-2 pr-0 rounded-md shadow w-[50%] z-20"
+                  className="absolute top-[110%] bg-white p-2 pr-0 rounded-md shadow lg:w-[50%] w-full z-20"
                 ></InputSearchBannerResult>
               )}
               <Input

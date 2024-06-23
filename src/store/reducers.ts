@@ -4,6 +4,7 @@ import fileReducer from "./file/file-slice";
 import jobReducer from "./job/job-slice";
 import productReducer from "./product/product-slice";
 import applyReducer from "./apply/apply-slice";
+import notificationReducer from "./notification/notification-slice";
 import companyReducer from "./company/company-slice";
 import candidateReducer from "./candidate/candidate-slice";
 import { combineReducers } from "@reduxjs/toolkit";
@@ -17,4 +18,5 @@ export const reducer: any = combineReducers({
   product: productReducer,
   apply: applyReducer,
   company: companyReducer,
+  notification: notificationReducer,
 });

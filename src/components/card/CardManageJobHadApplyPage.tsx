@@ -16,59 +16,67 @@ const CardManageJobHadApplyPage: React.FC<PropComponent> = ({ item }) => {
           <IconMoney classIcon="!w-5 !h-5"></IconMoney>
           <span className="text-sm">
             {" "}
-            {item?.minPay != "0" &&
-            item?.maxPay != "0" &&
-            item?.maxPay != "2147483647"
+            {item?.post?.minPay != "0" &&
+            item?.post?.maxPay != "0" &&
+            item?.post?.maxPay != "2147483647"
               ? `${formatToMillion(
-                  parseInt(item?.minPay, 10),
+                  parseInt(item?.post?.minPay, 10),
                   "not"
-                )} - ${formatToMillion(parseInt(item?.maxPay, 10))}`
+                )} - ${formatToMillion(parseInt(item?.post?.maxPay, 10))}`
               : ""}
             {/* Lên tới */}
-            {item?.minPay == "0" && item?.maxPay != "0"
-              ? `Lên tới ${formatToMillion(parseInt(item?.maxPay, 10))}`
+            {item?.post?.minPay == "0" && item?.post?.maxPay != "0"
+              ? `Lên tới ${formatToMillion(parseInt(item?.post?.maxPay, 10))}`
               : ""}
             {/* Trên */}
-            {item?.minPay != "0" &&
-            (item?.maxPay == "2147483647" || item?.maxPay == "0")
-              ? `Trên ${formatToMillion(parseInt(item?.minPay, 10))}`
+            {item?.post?.minPay != "0" &&
+            (item?.post?.maxPay == "2147483647" || item?.post?.maxPay == "0")
+              ? `Trên ${formatToMillion(parseInt(item?.post?.minPay, 10))}`
               : ""}
           </span>
         </div>
         <div className="lg:w-[20%] w-[30%]">
           <img
-            src={item?.company?.logo ? item?.company?.logo : logo}
+            src={item?.post?.company?.logo ? item?.post?.company?.logo : logo}
             alt=""
             className="lg:w-full min-w-[80px] object-cover lg:min-h-[100px] lg:h-full max-h-full h-[80px]"
           />
         </div>
         <div className="flex flex-col w-full self-start">
-          <Popover content={<p className="w-[300px]">{item?.title}</p>}>
+          <Popover content={<p className="w-[300px]">{item?.post?.title}</p>}>
             <h4
               className="w-[80%] cursor-pointer text-base font-medium line-clamp-1 hover:text-primary transition-all"
               onClick={() => {
-                navigate(`/jobs/${item?.id}`);
+                navigate(`/jobs/${item?.post?.id}`);
               }}
             >
-              {item?.title}
+              {item?.post?.title}
             </h4>
           </Popover>
 
           <h5 className="text-gray-500 line-clamp-1 lg:text-base text-sm mt-1">
-            {item?.company?.name}
+            {item?.post?.company?.name}
           </h5>
           <p className="text-sm text-gray-500">
             Ngày ứng tuyển: 20/04/2024 - 14:43
           </p>
           <div className="flex gap-3 items-center mt-3">
             <span className="p-1 text-xs bg-gray-200 rounded-sm">
-              {item?.location?.province}
+              {item?.post?.location?.province}
             </span>
           </div>
         </div>
         <div className="absolute bottom-3 right-3 flex items-center gap-2">
-          <span className="md:text-sm text-xs select-none bg-green-500 text-white py-1 px-3 rounded-sm cursor-pointer">
-            APPROVE
+          <span
+            className={`md:text-sm text-xs select-none bg-green-500 text-white py-1 px-3 rounded-sm cursor-pointer ${
+              item?.applyStatus?.code == "PROGRESS"
+                ? "bg-primary"
+                : item?.applyStatus?.code == "REJECT"
+                ? "bg-red-500"
+                : "bg-green-500"
+            }`}
+          >
+            {item?.applyStatus?.value}
           </span>
         </div>
       </div>

@@ -18,17 +18,24 @@ import {
   commonGetLocation,
   commonGetRank,
   commonGetSkills,
+  commonUpdateInputBannerSearchCheckRedux,
 } from "../../store/common/common-slice";
 import { jobGetFilterJob } from "../../store/job/job-slice";
+import InputSearchBannerResult from "../../components/input/InputSearchBannerResult";
 interface PropComponent {
   page?: Number;
   size?: Number;
   setPage?: any;
 }
 const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
-  const { locations, ranks, jobTypes, experiences, skills } = useSelector(
-    (state: any) => state.common
-  );
+  const {
+    locations,
+    ranks,
+    jobTypes,
+    experiences,
+    skills,
+    inputBannerSearchCheck,
+  } = useSelector((state: any) => state.common);
   const { user } = useSelector((state: any) => state.auth);
   const { paginationFilterJob } = useSelector((state: any) => state.job);
   const dispatch = useDispatch();
@@ -116,6 +123,24 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
   };
   const handleSearchJob = (e: any) => {
     e.preventDefault();
+    // lưu lịch sử tìm kiếm
+    const storedHistory: any = localStorage.getItem("searchHistory");
+    if (storedHistory) {
+      if (!JSON.parse(storedHistory).includes(title))
+        localStorage.setItem(
+          "searchHistory",
+          JSON.stringify([title, ...JSON.parse(storedHistory)])
+        );
+    } else {
+      if (!JSON.parse(storedHistory).includes(title))
+        localStorage.setItem("searchHistory", JSON.stringify([title]));
+    }
+    dispatch(
+      commonUpdateInputBannerSearchCheckRedux({
+        inputBannerSearchCheck: false,
+      })
+    );
+    //
     let search = {
       title: title,
       location: location,
@@ -178,6 +203,11 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
       label: i.toString(36) + i,
     });
   }
+  const handleOnFocus = () => {
+    dispatch(
+      commonUpdateInputBannerSearchCheckRedux({ inputBannerSearchCheck: true })
+    );
+  };
   return (
     <>
       <div
@@ -193,9 +223,15 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
         <div className="absolute bg-gradient-to-b from-blue-50/10 to-white/20 inset-0 h-full pt-5">
           <form
             action=""
-            className="lg:px-0 px-5 w-primary max-w-full mx-auto rounded-lg bg-transparent"
+            className=" lg:px-0 px-5 w-primary max-w-full mx-auto rounded-lg bg-transparent"
           >
-            <div className="flex gap-4">
+            <div className="relative z-20 flex gap-4">
+              {inputBannerSearchCheck && (
+                <InputSearchBannerResult
+                  setTitle={setTitle}
+                  className="absolute top-[110%] bg-white p-2 pr-0 rounded-md shadow lg:w-[50%] w-full z-20"
+                ></InputSearchBannerResult>
+              )}
               <div className="flex grow rounded-s-lg bg-transparent ">
                 <Input
                   prefix={
@@ -208,6 +244,7 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
                       <CloseOutlined className="text-base px-1 hover:bg-slate-100 py-1 rounded-sm transition-all" />
                     ),
                   }}
+                  onFocus={handleOnFocus}
                   className="lg:w-[40%] py-2 rounded-lg"
                   size="middle"
                   onChange={handleChangeJobTitle}

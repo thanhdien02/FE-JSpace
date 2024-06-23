@@ -13,7 +13,7 @@ import {
 } from "../../utils/dataFetch";
 import { useDispatch } from "react-redux";
 import { authLogout } from "../../store/auth/auth-slice";
-import { Avatar, Button, Divider, Drawer, DrawerProps, Space } from "antd";
+import { Avatar, Button, Drawer, DrawerProps, Space } from "antd";
 import { MenuOutlined, UserOutlined } from "@ant-design/icons";
 import IconChervonRight from "../../components/icons/IconChervonRight";
 import NotificationPage from "../../page/CommonPage/NotificationPage";
@@ -25,6 +25,7 @@ import {
 import IconSearch from "../../components/icons/IconSearch";
 import InputSearchResult from "../../components/input/InputSearchResult";
 import IconClose from "../../components/icons/IconClose";
+import HeaderNotificationPage from "../candidates/HeaderNotificationPage";
 
 interface PropComponent {}
 const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
@@ -80,7 +81,6 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
     if (inputSearch?.current) {
       // sử dụng useRef để xóa bởi vì sử dụng debouce nên không và value bằng state được.
       inputSearch.current.value = "";
-
       // cleaar state
       setTitle("");
     }
@@ -93,6 +93,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
       commonUpdateInputHeaderSearchCheckRedux({ inputHeaderSearchCheck: true })
     );
   };
+
   return (
     <>
       <header className="flex fixed left-0 top-0 right-0 shadow-md lg:px-10 px-5 pb-3 pt-4 justify-between items-center bg-white z-40 ">
@@ -194,7 +195,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                   <span className="absolute -top-2 -right-2 flex ">
                     <span className="m-auto w-6 h-6 text-center rounded-full bg-red-500 text-white  font-medium">
                       2
-                    </span>{" "}
+                    </span>
                   </span>
                 ) : (
                   <></>
@@ -202,17 +203,12 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                 {checkNotificationShort && (
                   <>
                     <div
-                      className="fixed inset-0 bg-transparent z-10 cursor-pointer"
+                      className="fixed inset-0 bg-transparent z-10 cursor-pointer "
                       onClick={() =>
                         setCheckNotificationShort(!checkNotificationShort)
                       }
                     ></div>
-                    <div className="absolute top-[155%] bg-white shadow-md min-w-[300px] min-h-[200px] z-20 right-0">
-                      <div className="p-4">
-                        <h3>{t("notification")}</h3>
-                      </div>
-                      <Divider className="mt-0"></Divider>
-                    </div>
+                    <HeaderNotificationPage></HeaderNotificationPage>
                   </>
                 )}
               </span>
