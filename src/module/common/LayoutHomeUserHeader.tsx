@@ -96,7 +96,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
 
   return (
     <>
-      <header className="flex fixed left-0 top-0 right-0 shadow-md lg:px-10 px-5 pb-3 pt-4 justify-between items-center bg-white z-40 ">
+      <header className="flex fixed left-0 top-0 right-0 shadow-md lg:px-10 px-5 pb-3 pt-4 justify-between items-center bg-white z-30 ">
         <div className="flex items-center gap-5">
           <NavLink to="/">
             <img src={logo} alt="" className="w-[45px] object-cover" />
@@ -105,7 +105,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
             <HeaderItem title={t("home.name")} path="/"></HeaderItem>
             <HeaderItem title={t("findjob.name")} path="/jobs"></HeaderItem>
             <HeaderItem title={t("company.name")} path="/companys"></HeaderItem>
-            <div className="ml-5 relative  w-[400px] rounded-lg ">
+            <div className="ml-5 relative z-40 w-[400px] rounded-lg ">
               <input
                 ref={inputSearch}
                 placeholder={t("home.placeholdernamejob")}
@@ -162,26 +162,26 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                   src="https://static.topcv.vn/srp/website/images/flags/vietnam.png"
                   alt=""
                   onClick={() => changeLanguage("vi")}
-                  className="w-6 h-6 cursor-pointer object-contain"
+                  className="w-6 h-4 cursor-pointer object-cover"
                 />
                 <img
                   src="https://static.topcv.vn/srp/website/images/flags/uk.jpeg"
                   alt=""
                   onClick={() => changeLanguage("en")}
-                  className="w-6 h-6 cursor-pointer object-contain"
+                  className="w-6 h-4 cursor-pointer object-cover"
                 />
               </div>
             </div>
           ) : (
             <div className="flex gap-5 justify-between items-center">
               <div>
-                <p className="text-xs text-gray-400">Bạn là nhà tuyển dụng ?</p>
+                <p className="text-xs text-gray-400"> {t("areyouemployer")}</p>
                 <a
                   href="https://jspace-employer.vercel.app/"
                   target="_blank"
                   className="flex items-center cursor-pointer hover:text-primary transition-all font-semibold"
                 >
-                  <span>Đăng nhập ngay</span>
+                  <span>{t("loginnow")}</span>
                   <IconChervonRight></IconChervonRight>
                 </a>
               </div>

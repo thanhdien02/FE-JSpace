@@ -17,7 +17,7 @@ const HeaderNotificationPage: React.FC = () => {
     dispatch(notificationGetNotification({ userId: user?.id }));
   }, [user?.id]);
   return (
-    <div className="absolute top-[155%]  bg-white shadow-md min-w-[300px] min-h-[200px] z-20 right-0">
+    <div className="absolute top-[155%] bg-white shadow-md min-w-[300px] min-h-[200px] z-50 right-0">
       <div className="p-4">
         <h3 className="font-semibold">{t("notification")}</h3>
       </div>
@@ -26,6 +26,8 @@ const HeaderNotificationPage: React.FC = () => {
         <div className="py-2 px-4">
           <Skeleton />
         </div>
+      ) : notifications?.length <= 0 ? (
+        <div className="py-2 px-4">Không có thông báo.</div>
       ) : (
         <div className="py-2 flex flex-col gap-2 max-h-[350px] overflow-auto">
           {notifications?.length > 0 &&

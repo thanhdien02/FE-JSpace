@@ -72,7 +72,6 @@ const LayoutHomeUser: React.FC = () => {
       >
         <LoginPage claseNameOverlay="opacity-40"></LoginPage>
       </CSSTransition>
-
       <LayoutHomeUserHeader></LayoutHomeUserHeader>
       <div className="relative bg-white mt-[73px]">
         <Outlet></Outlet>
@@ -101,7 +100,7 @@ const LayoutHomeUser: React.FC = () => {
         }}
         className="fixed z-10 right-0 top-1/2 bg-primary py-3 px-1 text-white rounded-r-lg text-base cursor-pointer vertical-text"
       >
-        Gợi ý việc làm
+        {t("jobsuggestion")}
       </div>
       {suggestJobCheck && (
         <SuggestJobThroughEmailPage></SuggestJobThroughEmailPage>

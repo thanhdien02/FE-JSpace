@@ -88,7 +88,7 @@ function App() {
             ></Route>
           </Route>
           <Route
-            path="/register"
+            path="/register/:registerMail"
             element={<RegisterPage></RegisterPage>}
           ></Route>
           <Route element={<LayoutManageCandidate></LayoutManageCandidate>}>

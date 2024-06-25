@@ -3,20 +3,21 @@ import IconChervonDown from "../../components/icons/IconChervonDown";
 import CardCommentCompanyPage from "../../components/card/CardCommentCompanyPage";
 import IconChervonUp from "../../components/icons/IconChervonUp";
 import { useSelector } from "react-redux";
-import { message } from "antd";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const CompanyReviewPage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
   const [comment, setComment] = useState(false);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   useEffect(() => {}, []);
   const WriteReview = () => {
     if (user?.id) {
       setComment(!comment);
     } else {
-      message.info("Bạn cần đăng nhập để bình luận");
+      // message.info("Bạn cần đăng nhập để bình luận");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     }
   };
@@ -24,17 +25,21 @@ const CompanyReviewPage: React.FC = () => {
     <>
       <div className="">
         <h2 className="text-xl text-primary font-medium">
-          Hãy chia sẻ ý kiến của bạn về công ty này.
+          {t("companydetail.shareoptionaboutcompany")}
         </h2>
         <div className="w-full h-[1px] bg-gray-100 my-5"></div>
         <div className="mt-5">
           <div className="flex justify-between">
-            <h3 className="text-base font-medium">Bình luận (10)</h3>
+            <h3 className="text-base font-medium">
+              {t("companydetail.comment")} (10)
+            </h3>
             <div
               onClick={WriteReview}
               className="flex transition-all gap-2 items-center px-3 py-1 rounded-sm bg-primary text-white cursor-pointer"
             >
-              <span className="select-none">Viết bình luận</span>
+              <span className="select-none">
+                {t("companydetail.writecomment")}
+              </span>
               {comment ? (
                 <IconChervonUp></IconChervonUp>
               ) : (

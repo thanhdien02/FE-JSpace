@@ -62,15 +62,17 @@ const HomeBannerPage: React.FC = () => {
 
     // lưu lịch sử tìm kiếm
     const storedHistory: any = localStorage.getItem("searchHistory");
-    if (storedHistory) {
-      if (!JSON.parse(storedHistory).includes(title))
-        localStorage.setItem(
-          "searchHistory",
-          JSON.stringify([title, ...JSON.parse(storedHistory)])
-        );
-    } else {
-      if (!JSON.parse(storedHistory).includes(title))
-        localStorage.setItem("searchHistory", JSON.stringify([title]));
+    if (title) {
+      if (storedHistory) {
+        if (!JSON.parse(storedHistory).includes(title))
+          localStorage.setItem(
+            "searchHistory",
+            JSON.stringify([title, ...JSON.parse(storedHistory)])
+          );
+      } else {
+        if (!JSON.parse(storedHistory).includes(title))
+          localStorage.setItem("searchHistory", JSON.stringify([title]));
+      }
     }
     // lưu để khi vào lại hiện lịch sử tìm kiếm mới nhất
     let search = {
@@ -106,7 +108,9 @@ const HomeBannerPage: React.FC = () => {
             {t("home.titlebannerhome")}
           </h1>
           <form
-            className="z-20 lg:px-0 px-4 lg:m-auto flex flex-wrap gap-3 max-w-full w-primary h-auto rounded-lg shadow-lg "
+            className={`lg:px-0 px-4 lg:m-auto flex flex-wrap gap-3 max-w-full w-primary h-auto rounded-lg shadow-lg ${
+              inputBannerSearchCheck ? "z-40" : "z-20"
+            }`}
             action=""
           >
             <div className="relative grow flex rounded-lg ">

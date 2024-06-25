@@ -2,14 +2,16 @@
   "manage": {
     "cv": {
       "title": "Job application has been uploaded.",
-      "uploadcv": "Upload CV"
+      "uploadcv": "Upload CV",
+      "maincv": "Set as main CV"
     },
     "information": {
       "title": "Update account information",
       "selectbackground": "Select background",
       "username": "Username",
       "phone": "Phone number",
-      "email": "Email address"
+      "email": "Email address",
+      "changebackground": "Change background"
     },
     "followedcompany": {
       "title": "Manage followed company",
@@ -29,7 +31,13 @@
       "mostrecent": "Most recent",
       "highestsalary": "Highest salary"
     },
-    "welcomback": "Welcom back"
+    "welcomback": "Welcom back",
+    "changepassword": {
+      "title": "Change password",
+      "enteroldpassword": "Old password",
+      "enternewpassword": "New password",
+      "confirmnewpassword": "Confirm new password"
+    }
   },
   "menu": {
     "cv": "Manage CV",
@@ -51,7 +59,8 @@
     "jobpupolar": "Popular jobs",
     "companypupolar": "Popular companys",
     "titlebannerhome": "Find jobs quickly 24 hours, latest jobs nationwide",
-    "placeholdernamejob": "The job you are looking for ?"
+    "placeholdernamejob": "The job you are looking for ?",
+    "serviceforemployer": "Services for employers"
   },
   "findjob": {
     "name": "Jobs",
@@ -82,7 +91,10 @@
     "companyaddress": "Company address",
     "map": "Map",
     "companywork": "Company's work",
-    "relatedcompany": "Related company"
+    "relatedcompany": "Related company",
+    "comment": "Comment",
+    "shareoptionaboutcompany": "Please share your opinion about this company",
+    "writecomment": "Write comment"
   },
   "candidate": {
     "name": ""
@@ -110,7 +122,7 @@
   "placeholderexperience": "Experience",
   "placeholdersalary": "Salary",
   "placeholdercompany": "Enter company name",
-  "result": "result",
+  "result": "results",
   "skills": "Skills",
   "jobtype": "Job Type",
   "rank": "Rank",
@@ -125,7 +137,17 @@
   "unsave": "Unsave",
   "seemore": "See more",
   "seeless": "See less",
+  "seeall": "See all",
   "information": "Information",
   "notification": "Notification",
-  "buttonsave": "Save information"
+  "buttonsave": "Save information",
+  "areyouemployer": "Are you an employer ?",
+  "loginnow": "Login now",
+  "download": "Download",
+  "jobsuggestion": "Job suggestions",
+  "fullname": "Full name",
+  "confirm": "Confirm",
+  "showpassword": "Show password",
+  "enterinformationforegister": "Please enter your information to register",
+  "informationterm": "By confirming, you agree to JSPACE's Terms of Service and Privacy Policy regarding your private information."
 }

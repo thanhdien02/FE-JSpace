@@ -2,14 +2,16 @@
   "manage": {
     "cv": {
       "title": "Hồ sơ xin việc đã được tải lên.",
-      "uploadcv": "Tải CV lên"
+      "uploadcv": "Tải CV lên",
+      "maincv": "Đặt làm CV chính"
     },
     "information": {
       "title": "Cập nhật thông tin tài khoản",
       "selectbackground": "Chọn ảnh bìa",
       "username": "Họ và Tên",
       "phone": "Số điện thoại",
-      "email": "Địa chỉ Email"
+      "email": "Địa chỉ Email",
+      "changebackground": "Đổi ảnh bìa"
     },
     "followedcompany": {
       "title": "Công ty đã theo dõi",
@@ -29,7 +31,13 @@
       "mostrecent": "Gần đây nhất",
       "highestsalary": "Lương cao nhất"
     },
-    "welcomback": "Chào bạn trở lại"
+    "welcomback": "Chào bạn trở lại",
+    "changepassword": {
+      "title": "Đổi mật khẩu",
+      "enteroldpassword": "Mật khẩu cũ",
+      "enternewpassword": "Mật khẩu mới",
+      "confirmnewpassword": "Xác nhận mật khẩu mới"
+    }
   },
   "menu": {
     "cv": "Hồ sơ xin việc",
@@ -51,7 +59,8 @@
     "updatetime": "Thời gian cập nhật",
     "companypupolar": "Các công ty phổ biến",
     "jobpupolar": "Các công việc phổ biến",
-    "placeholdernamejob": "Công việc bạn đang tìm kiếm ?"
+    "placeholdernamejob": "Công việc bạn đang tìm kiếm ?",
+    "serviceforemployer": "Các dịch vụ cho nhà tuyển dụng"
   },
   "findjob": {
     "name": "Tìm việc",
@@ -79,7 +88,10 @@
     "companyaddress": "Địa chỉ công ty",
     "map": "Bản đồ",
     "companywork": "Công việc của công ty",
-    "relatedcompany": "Công ty liên quan"
+    "relatedcompany": "Công ty liên quan",
+    "comment": "Bình luận",
+    "shareoptionaboutcompany": "Hãy chia sẽ ý kiến của bạn về công ty này",
+    "writecomment": "Viết bình luận"
   },
   "blog": {
     "name": "Bài viết"
@@ -122,7 +134,17 @@
   "unsave": "Đã lưu",
   "seemore": "Xem thêm",
   "seeless": "Rút ngắn",
+  "seeall": "Xem tất cả",
   "information": "Thông tin",
   "notification": "Thông báo",
-  "buttonsave": "Lưu thông tin"
+  "buttonsave": "Lưu thông tin",
+  "areyouemployer": "Bạn là nhà tuyển dụng ?",
+  "loginnow": "Đăng nhập ngay",
+  "download": "Tải xuống",
+  "jobsuggestion": "Gợi ý việc làm",
+  "fullname": "Họ và tên",
+  "confirm": "Xác nhận",
+  "showpassword": "Hiện mật khẩu",
+  "enterinformationforegister": "Hãy nhập thông tin để đăng ký",
+  "informationterm": "Bằng việc xác nhận, bạn đồng ý với các Điều khoản dịch vụ và Chính sách quyền riêng tư của JSPACE liên quan đến thông tin riêng tư của bạn."
 }

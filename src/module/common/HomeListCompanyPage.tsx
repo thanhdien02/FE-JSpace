@@ -100,7 +100,7 @@ const HomeListCompanyPage: React.FC = () => {
               to="/companys"
               className="flex gap-1 cursor-pointer text-primary hover:underline items-center"
             >
-              <span className="font-medium">Xem tất cả</span>
+              <span className="font-medium">{t("seeall")}</span>
               <IconChervonRight classIcon="!w-5 !h-5"></IconChervonRight>
             </NavLink>
           </div>

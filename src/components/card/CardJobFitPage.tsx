@@ -29,7 +29,6 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
   const [checkSave, setCheckSave] = useState(false);
   const handleSaveJob = () => {
     if (!user?.id) {
-      // message.info("Bạn cần đăng nhập để lưu tin.");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       if (!loadingCandidate) {
@@ -87,8 +86,8 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
                 {item?.post?.title}
               </h3>
             </Popover>
-            <div className="lg:flex hidden w-[33%]">
-              <span className="font-medium text-primary text-base ml-auto line-clamp-1">
+            <div className="lg:flex hidden ">
+              <p className="font-medium max-w-[200px] text-primary text-base ml-auto text-nowrap line-clamp-1 overflow-hidden">
                 {item?.post?.minPay != "0" &&
                 item?.post?.maxPay != "0" &&
                 item?.post?.maxPay != "2147483647"
@@ -109,7 +108,7 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
                   item?.post?.maxPay == "0")
                   ? `Trên ${formatToMillion(parseInt(item?.post?.minPay, 10))}`
                   : ""}
-              </span>
+              </p>
             </div>
           </div>
           <div className="flex gap-1 items-center mt-2">

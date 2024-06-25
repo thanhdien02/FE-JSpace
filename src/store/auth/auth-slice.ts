@@ -38,6 +38,9 @@ const authSlice: any = createSlice({
     authRegister: (state: any) => ({
       ...state,
     }),
+    authLoginWithEmailPassword: (state: any) => ({
+      ...state,
+    }),
     authRefreshToken: () => {},
     authUpdateLoadingRedux: (state: any, action: any) => ({
       ...state,
@@ -76,5 +79,6 @@ export const {
   authUpdateFetchRedux,
   authUpdateMessageRedux,
   authRefreshToken,
+  authLoginWithEmailPassword,
 } = authSlice.actions;
 export default authSlice.reducer;

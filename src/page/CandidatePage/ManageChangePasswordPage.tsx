@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { KeyOutlined } from "@ant-design/icons";
 import IconKey from "../../components/icons/IconKey";
 import ButtonLoading from "../../components/button/ButtonLoading";
+import { useTranslation } from "react-i18next";
 interface Inputs {
   name: string;
   passwordold: string;
@@ -11,6 +12,7 @@ interface Inputs {
 }
 const ManageChangePasswordPage: React.FC = () => {
   // const dispatch = useDispatch();
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -26,8 +28,10 @@ const ManageChangePasswordPage: React.FC = () => {
   return (
     <>
       <div className="lg:mx-10 mx-5 my-5">
-        <h2 className="font-semibold text-xl">Thay đổi mật khẩu</h2>
-        <div className="">
+        <h2 className="font-semibold text-xl">
+          {t("manage.changepassword.title")}
+        </h2>
+        <div className="lg:mt-4">
           <form action="" onSubmit={handleSubmit(onSubmit)} className="py-3">
             <div className="flex gap-10">
               <div className="w-full">
@@ -35,13 +39,13 @@ const ManageChangePasswordPage: React.FC = () => {
                   htmlFor="passwordold"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Nhập lại mật khẩu
+                  {t("manage.changepassword.enteroldpassword")}
                 </label>
                 <div className="mt-2 relative">
                   <IconKey className="absolute top-0 left-0 translate-x-[50%] translate-y-[45%] text-gray-400"></IconKey>
                   <input
                     {...register("passwordold", {})}
-                    placeholder="Mật khẩu cũ"
+                    placeholder={t("manage.changepassword.enteroldpassword")}
                     type="password"
                     id="passwordold"
                     autoComplete="off"
@@ -56,7 +60,7 @@ const ManageChangePasswordPage: React.FC = () => {
                   htmlFor="passwordnew"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Mật khẩu mới
+                  {t("manage.changepassword.enternewpassword")}
                 </label>
                 <div className="mt-2 relative">
                   <KeyOutlined
@@ -73,7 +77,7 @@ const ManageChangePasswordPage: React.FC = () => {
                     {...register("passwordnew", {
                       required: true,
                     })}
-                    placeholder="Mật khẩu mới"
+                    placeholder={t("manage.changepassword.enternewpassword")}
                     type="password"
                     autoComplete="off"
                     id="passwordnew"
@@ -92,7 +96,7 @@ const ManageChangePasswordPage: React.FC = () => {
                   htmlFor="passwordnewconfirm"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Xác nhận mật khẩu mới
+                  {t("manage.changepassword.confirmnewpassword")}
                 </label>
                 <div className="mt-2 relative">
                   <KeyOutlined
@@ -109,7 +113,7 @@ const ManageChangePasswordPage: React.FC = () => {
                     {...register("passwordnewconfirm", {
                       required: true,
                     })}
-                    placeholder="Xác nhận mật khẩu mới"
+                    placeholder={t("manage.changepassword.confirmnewpassword")}
                     type="password"
                     autoComplete="off"
                     id="passwordnewconfirm"
@@ -121,7 +125,7 @@ const ManageChangePasswordPage: React.FC = () => {
 
             <div className="flex justify-end mt-5">
               <ButtonLoading
-                title="Lưu thông tin"
+                title={t("buttonsave")}
                 loading={false}
               ></ButtonLoading>
             </div>

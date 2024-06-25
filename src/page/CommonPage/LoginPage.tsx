@@ -1,13 +1,23 @@
 import axios from "axios";
 import { useGoogleLogin } from "@react-oauth/google";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { authLogin, authUpdateLoadingRedux } from "../../store/auth/auth-slice";
-import { Checkbox, CheckboxProps } from "antd";
-import { GoogleOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  authLogin,
+  authLoginWithEmailPassword,
+  authUpdateLoadingRedux,
+  authUpdateMessageRedux,
+} from "../../store/auth/auth-slice";
+import { Checkbox, CheckboxProps, Spin } from "antd";
+import {
+  EyeOutlined,
+  GoogleOutlined,
+  LoadingOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import logo from "../../assets/logo3.png";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import IconClose from "../../components/icons/IconClose";
 import { SubmitHandler, useForm } from "react-hook-form";
 import IconKey from "../../components/icons/IconKey";
@@ -35,10 +45,20 @@ const LoginPage: React.FC<PropComponent> = ({
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (dataLogin: Inputs) => {
     console.log("🚀 ~ dataUpdadeCandidate:", dataLogin);
+    if (dataLogin?.email && dataLogin?.password)
+      dispatch(
+        authLoginWithEmailPassword({
+          email: dataLogin?.email,
+          password: dataLogin?.password,
+        })
+      );
   };
-  const { loading } = useSelector((state: any) => state.auth);
+  const { loading, messageAuth } = useSelector((state: any) => state.auth);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState(null);
+  const [showpassword, setShowPassword] = useState(false);
   const login: any = useGoogleLogin({
     onSuccess: async (response: any) => {
       try {
@@ -52,6 +72,7 @@ const LoginPage: React.FC<PropComponent> = ({
           }
         );
         dispatch(authLogin(dataEmail.data));
+        setEmail(dataEmail?.data?.email);
       } catch (error) {}
     },
   });
@@ -63,9 +84,16 @@ const LoginPage: React.FC<PropComponent> = ({
       elementBody.style.overflow = "visible";
     };
   }, []);
+  useEffect(() => {
+    if (messageAuth == "register") {
+      navigate(`/register/${email}`);
+      dispatch(authUpdateMessageRedux({ messageAuth: "" }));
+    }
+  }, [messageAuth]);
   const onChange: CheckboxProps["onChange"] = (e) => {
     console.log(`checked = ${e.target.checked}`);
   };
+
   return (
     <div className={`flex fixed inset-0 z-50 ${className}`}>
       <div
@@ -160,6 +188,12 @@ const LoginPage: React.FC<PropComponent> = ({
               </label>
               <div className="mt-2 relative">
                 <IconKey className="absolute top-0 left-0 translate-x-[50%] text-gray-400 translate-y-[50%] !w-5 !h-5"></IconKey>
+                <div
+                  onClick={() => setShowPassword(!showpassword)}
+                  className="absolute top-1/2 right-1 -translate-y-[50%] cursor-pointer flex  h-full text-center px-2 text-sm rounded-r-md"
+                >
+                  <EyeOutlined className="hover:text-primary transition-all text-base" />
+                </div>
                 <input
                   {...register("password", {
                     required: true,
@@ -169,21 +203,21 @@ const LoginPage: React.FC<PropComponent> = ({
                   placeholder="*************"
                   id="password"
                   name="password"
-                  type="password"
+                  type={showpassword ? "text" : "password"}
                   autoComplete="password"
                   className="h-full focus:border-solid  focus:border-stone-400/70 transition-all outline-none pr-4 pl-10 py-2 border border-stone-200 border-solid w-full rounded-md"
                 />
-                <p className="text-red-600 text-sm py-2">
-                  {" "}
-                  {errors?.password?.type === "required"
-                    ? "*Bạn chưa điền mật khẩu."
-                    : errors?.password?.type === "maxLength"
-                    ? "*Mật khẩu không được quá 40 ký tự"
-                    : errors?.password?.type === "minLength"
-                    ? "*Mật khẩu không được ít hơn 8 ký tự"
-                    : ""}
-                </p>
               </div>
+              <p className="text-red-600 text-sm py-2">
+                {" "}
+                {errors?.password?.type === "required"
+                  ? "*Bạn chưa điền mật khẩu."
+                  : errors?.password?.type === "maxLength"
+                  ? "*Mật khẩu không được quá 40 ký tự"
+                  : errors?.password?.type === "minLength"
+                  ? "*Mật khẩu không được ít hơn 8 ký tự"
+                  : ""}
+              </p>
             </div>
             <div className="w-full">
               <Checkbox
@@ -199,9 +233,19 @@ const LoginPage: React.FC<PropComponent> = ({
             <button
               disabled={loading}
               type="submit"
-              className="bg-primary text-white px-4 py-2 w-full !hover:bg-primary rounded-lg flex gap-3 justify-center items-center hover:opacity-80 !transition-all"
+              className={`bg-primary text-white px-4 py-2 w-full !hover:bg-primary rounded-lg flex gap-3 justify-center items-center hover:opacity-80 !transition-all ${
+                loading ? "opacity-70 cursor-wait" : ""
+              }`}
             >
-              {t("login")}
+              {false ? (
+                <Spin
+                  indicator={
+                    <LoadingOutlined style={{ color: "white" }} spin />
+                  }
+                />
+              ) : (
+                t("login")
+              )}
             </button>
           </div>
           <div className="flex py-1">
@@ -211,10 +255,12 @@ const LoginPage: React.FC<PropComponent> = ({
             <button
               disabled={loading}
               type="button"
-              className={`bg-red-500 h-10 text-white px-4 py-2 w-full !hover:bg-red-500 rounded-lg flex gap-3 justify-center items-center hover:opacity-80 !transition-all`}
+              className={`bg-red-500 h-10 text-white px-4 py-2 w-full !hover:bg-red-500 rounded-lg flex gap-3 justify-center items-center hover:opacity-80 !transition-all ${
+                loading ? "opacity-70 cursor-wait" : ""
+              }`}
               onClick={() => login()}
             >
-              {loading ? (
+              {false ? (
                 <>
                   <div className="w-full flex">
                     <span className="border-[3px] rounded-full m-auto border-l-transparent border-solid border-gray-100 w-[25px] h-[25px] animate-spin"></span>

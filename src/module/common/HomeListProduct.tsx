@@ -5,11 +5,13 @@ import { productGetProduct } from "../../store/product/product-slice";
 import CardProductAtCommonPage from "../../components/card/CardProductAtCommonPage";
 import { Skeleton } from "antd";
 import IconChervonRight from "../../components/icons/IconChervonRight";
+import { useTranslation } from "react-i18next";
 
 const HomeListProduct: React.FC = () => {
   const { products, loadingProduct } = useSelector(
     (state: any) => state.product
   );
+  const { t } = useTranslation();
   const [size] = useState(6);
   const [page] = useState(1);
   const dispatch = useDispatch();
@@ -27,14 +29,14 @@ const HomeListProduct: React.FC = () => {
         <div className="lg:px-0 px-3 w-primary max-w-full mx-auto py-3">
           <div className="flex justify-between items-baseline">
             <h3 className="font-bold text-2xl lg:my-3 my-2">
-              Các dịch vụ dành cho nhà tuyển dụng
+              {t("home.serviceforemployer")}
             </h3>
             <a
               href="https://jspace-employer.vercel.app/products"
               target="_blank"
               className="flex gap-1 cursor-pointer text-primary hover:underline items-center"
             >
-              <span className="font-medium">Xem tất cả</span>
+              <span className="font-medium">{t("seeall")}</span>
               <IconChervonRight classIcon="!w-5 !h-5"></IconChervonRight>
             </a>
           </div>

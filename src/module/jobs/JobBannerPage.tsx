@@ -125,15 +125,17 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
     e.preventDefault();
     // lưu lịch sử tìm kiếm
     const storedHistory: any = localStorage.getItem("searchHistory");
-    if (storedHistory) {
-      if (!JSON.parse(storedHistory).includes(title))
-        localStorage.setItem(
-          "searchHistory",
-          JSON.stringify([title, ...JSON.parse(storedHistory)])
-        );
-    } else {
-      if (!JSON.parse(storedHistory).includes(title))
-        localStorage.setItem("searchHistory", JSON.stringify([title]));
+    if (title) {
+      if (storedHistory) {
+        if (!JSON.parse(storedHistory).includes(title))
+          localStorage.setItem(
+            "searchHistory",
+            JSON.stringify([title, ...JSON.parse(storedHistory)])
+          );
+      } else {
+        if (!JSON.parse(storedHistory).includes(title))
+          localStorage.setItem("searchHistory", JSON.stringify([title]));
+      }
     }
     dispatch(
       commonUpdateInputBannerSearchCheckRedux({
@@ -204,9 +206,12 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
     });
   }
   const handleOnFocus = () => {
-    dispatch(
-      commonUpdateInputBannerSearchCheckRedux({ inputBannerSearchCheck: true })
-    );
+    if (!searchAdvance)
+      dispatch(
+        commonUpdateInputBannerSearchCheckRedux({
+          inputBannerSearchCheck: true,
+        })
+      );
   };
   return (
     <>
@@ -225,11 +230,15 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
             action=""
             className=" lg:px-0 px-5 w-primary max-w-full mx-auto rounded-lg bg-transparent"
           >
-            <div className="relative z-20 flex gap-4">
+            <div
+              className={`relative flex gap-4  ${
+                inputBannerSearchCheck ? "z-50" : "z-20"
+              }`}
+            >
               {inputBannerSearchCheck && (
                 <InputSearchBannerResult
                   setTitle={setTitle}
-                  className="absolute top-[110%] bg-white p-2 pr-0 rounded-md shadow lg:w-[50%] w-full z-20"
+                  className="absolute top-[110%] bg-white p-2 pr-0 rounded-md shadow lg:w-[50%] w-full"
                 ></InputSearchBannerResult>
               )}
               <div className="flex grow rounded-s-lg bg-transparent ">
@@ -325,8 +334,17 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
                 </span>{" "}
               </div>
               <div
-                onClick={() => setSearchAdvance(!searchAdvance)}
-                className="flex select-none gap-2 py-2 px-4 cursor-pointer items-center font-medium bg-primary rounded-lg text-white"
+                onClick={() => {
+                  setSearchAdvance(!searchAdvance);
+                  dispatch(
+                    commonUpdateInputBannerSearchCheckRedux({
+                      inputBannerSearchCheck: false,
+                    })
+                  );
+                }}
+                className={`relative flex select-none gap-2 py-2 px-4 cursor-pointer items-center font-medium bg-primary rounded-lg text-white ${
+                  inputBannerSearchCheck ? "z-40" : "z-20"
+                }`}
               >
                 <FilterOutlined />
                 <span>{t("findjob.filteradvance")}</span>

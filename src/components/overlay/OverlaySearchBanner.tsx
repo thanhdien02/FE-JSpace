@@ -20,7 +20,7 @@ const OverlaySearchBanner: React.FC = () => {
           })
         )
       }
-      className="absolute inset-0 bg-black/50 z-10"
+      className="absolute inset-0 bg-black/50 z-40"
     ></div>
   );
 };

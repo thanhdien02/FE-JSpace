@@ -2,6 +2,7 @@ import { takeLatest } from "redux-saga/effects";
 import {
   authFetchMe,
   authLogin,
+  authLoginWithEmailPassword,
   authLogout,
   authRefreshToken,
   authRegister,
@@ -9,6 +10,7 @@ import {
 import {
   handleAuthFetchMe,
   handleAuthLogin,
+  handleAuthLoginWithEmailPassword,
   handleAuthLogout,
   handleAuthRefrestToken,
   handleAuthRegister,
@@ -16,6 +18,10 @@ import {
 
 export default function* authSaga() {
   yield takeLatest(authLogin.type, handleAuthLogin);
+  yield takeLatest(
+    authLoginWithEmailPassword.type,
+    handleAuthLoginWithEmailPassword
+  );
   yield takeLatest(authRegister.type, handleAuthRegister);
   yield takeLatest(authFetchMe.type, handleAuthFetchMe);
   yield takeLatest(authLogout.type, handleAuthLogout);

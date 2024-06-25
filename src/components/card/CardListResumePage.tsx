@@ -5,16 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { fileDeleteFile } from "../../store/file/file-slice";
 import { Modal } from "antd";
 import { StarFilled } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 interface PropComponent {
   className?: string;
+  checkMainCV?: boolean;
   item: any;
 }
-const CardListResumePage: React.FC<PropComponent> = ({ className, item }) => {
+const CardListResumePage: React.FC<PropComponent> = ({
+  className,
+  item,
+  checkMainCV,
+}) => {
   const { user } = useSelector((state: any) => state.auth);
   const dispath = useDispatch();
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -38,8 +44,8 @@ const CardListResumePage: React.FC<PropComponent> = ({ className, item }) => {
             true ? "text-black" : "text-black"
           }`}
         >
-          <StarFilled className={` ${true ? "text-yellow-500" : ""}`} />
-          <span className="">Đặt làm CV chính</span>
+          <StarFilled className={` ${checkMainCV ? "text-yellow-500" : ""}`} />
+          <span className="">{t("manage.cv.maincv")}</span>
         </div>
         <div className="self-end p-4 w-full">
           <a
@@ -53,7 +59,7 @@ const CardListResumePage: React.FC<PropComponent> = ({ className, item }) => {
           <div className="flex gap-2 mt-5">
             <div className="flex gap-1 justify-center hover:opacity-90 transition-all text-xs items-center bg-primary text-white px-3 py-[6px] rounded-2xl cursor-pointer">
               <IconDownload></IconDownload>
-              <span className="font-medium">Tải xuống</span>
+              <span className="font-medium">{t("download")}</span>
             </div>
             <div className="ml-auto self-center" onClick={showModal}>
               <IconTrash

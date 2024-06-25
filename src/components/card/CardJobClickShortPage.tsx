@@ -3,6 +3,7 @@ import React from "react";
 import IconMapPin from "../icons/IconMapPin";
 import IconBuilding from "../icons/IconBuilding";
 import { Popover } from "antd";
+import IconBriefCaseOutline from "../icons/IconBriefCaseOutline";
 interface PropComponent {
   onClick?: any;
   onClickCheckActive?: any;
@@ -52,11 +53,25 @@ const CardJobClickShortPage: React.FC<PropComponent> = ({
               {item?.post?.company?.name}
             </h4>
           </div>
-          <div className="flex gap-1 overflow-hidden mt-2 items-center">
-            <IconMapPin className="text-gray-500"></IconMapPin>
-            <span className="line-clamp-1 text-sm text-gray-500">
-              {item?.post?.location?.province}
-            </span>
+          <div className="flex gap-2 mt-2 items-center">
+            <div className="flex gap-1 overflow-hidden items-center border border-solid border-gray-200 px-1 py-1">
+              <IconMapPin
+                className="text-gray-500"
+                classIcon="!w-4 !h-4"
+              ></IconMapPin>
+              <span className="line-clamp-1 text-xs text-gray-500">
+                {item?.post?.location?.province}
+              </span>
+            </div>
+            <div className="flex gap-1 overflow-hidden items-center border border-solid border-gray-200 px-1 py-1">
+              <IconBriefCaseOutline
+                className="text-gray-500"
+                classIcon="!w-4 !h-4"
+              ></IconBriefCaseOutline>
+              <span className="line-clamp-1 text-xs text-gray-500">
+                {item?.post?.rank?.code}
+              </span>
+            </div>
           </div>
         </div>
       </div>

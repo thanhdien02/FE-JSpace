@@ -2,8 +2,10 @@ import { call, put } from "redux-saga/effects";
 import {
   requestAuthFetchMe,
   requestAuthLogin,
+  requestAuthLoginWithEmailAndPassword,
   requestAuthRefresh,
-  requestAuthRegister,
+  // requestAuthRegister,
+  requestAuthRegisterV2,
 } from "./auth-requests";
 import {
   authUpdateFetchRedux,
@@ -16,10 +18,10 @@ import { message } from "antd";
 function* handleAuthLogin(dataLogin: any): Generator<any> {
   try {
     const response: any = yield call(requestAuthLogin, dataLogin.payload);
-
     yield put(authUpdateLoadingRedux({ loading: true }));
     if (response?.data?.result?.accessToken === "") {
-      yield call(handleAuthRegister, { ...dataLogin.payload });
+      // yield call(handleAuthRegister, { ...dataLogin.payload });
+      yield put(authUpdateMessageRedux({ messageAuth: "register" }));
     } else {
       saveToken(
         response?.data?.result?.accessToken,
@@ -71,15 +73,36 @@ function* handleAuthLogout(): Generator<any> {
   } finally {
   }
 }
+function* handleAuthLoginWithEmailPassword(dataLogin: any): Generator<any> {
+  try {
+    const response: any = yield call(
+      requestAuthLoginWithEmailAndPassword,
+      dataLogin.payload
+    );
+
+    yield put(authUpdateLoadingRedux({ loading: true }));
+    if (response?.data?.result?.accessToken === "") {
+    } else {
+      saveToken(
+        response?.data?.result?.accessToken,
+        response?.data?.result?.refreshToken
+      );
+      yield call(handleAuthFetchMe);
+    }
+  } catch (error: any) {
+    logOut();
+    message.error("Tên tài khoản hoặc mật khẩu không chính xác");
+  } finally {
+    yield put(authUpdateLoadingRedux({ loading: false }));
+  }
+}
 function* handleAuthRegister(dataRegister: any): Generator<any> {
   try {
     yield put(authUpdateLoadingRedux({ loading: true }));
     const response: any = yield call(
-      requestAuthRegister,
-      "CANDIDATE",
-      dataRegister
+      requestAuthRegisterV2,
+      dataRegister?.payload
     );
-    console.log(response?.result?.accessToken);
     if (response?.result?.accessToken != "") {
       saveToken(
         response?.data?.result?.accessToken,
@@ -93,6 +116,28 @@ function* handleAuthRegister(dataRegister: any): Generator<any> {
     yield put(authUpdateLoadingRedux({ loading: false }));
   }
 }
+// function* handleAuthRegister(dataRegister: any): Generator<any> {
+//   try {
+//     yield put(authUpdateLoadingRedux({ loading: true }));
+//     const response: any = yield call(
+//       requestAuthRegister,
+//       "CANDIDATE",
+//       dataRegister
+//     );
+//     console.log(response?.result?.accessToken);
+//     if (response?.result?.accessToken != "") {
+//       saveToken(
+//         response?.data?.result?.accessToken,
+//         response?.data?.result?.refreshToken
+//       );
+//       yield call(handleAuthFetchMe);
+//     }
+//   } catch (error: any) {
+//     message.error(error?.response?.data?.message);
+//   } finally {
+//     yield put(authUpdateLoadingRedux({ loading: false }));
+//   }
+// }
 function* handleAuthRefrestToken(): Generator<any> {
   try {
     const { refreshToken } = getToken();
@@ -115,4 +160,5 @@ export {
   handleAuthRegister,
   handleAuthLogout,
   handleAuthRefrestToken,
+  handleAuthLoginWithEmailPassword,
 };

@@ -73,7 +73,9 @@ const ManageUpdateInformationCandidatePage: React.FC = () => {
                 onClick={() => setCheckChangeBackground(!checkChangeBackground)}
                 className="absolute top-2 cursor-pointer left-2 px-2 py-1 rounded-md bg-slate-100 hover:opacity-90 hover:text-primary transition-all"
               >
-                <span className="">Đổi ảnh bìa</span>
+                <span className="">
+                  {t("manage.information.changebackground")}
+                </span>
               </div>
 
               {loadingCandidate ? (
