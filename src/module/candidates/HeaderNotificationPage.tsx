@@ -1,27 +1,21 @@
 import { Divider, Skeleton } from "antd";
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import CardNotificationAtHeaderPage from "../../components/card/CardNotificationAtHeaderPage";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { notificationGetNotification } from "../../store/notification/notification-slice";
 
 const HeaderNotificationPage: React.FC = () => {
-  const { user } = useSelector((state: any) => state.auth);
   const { notifications, loadingNotification } = useSelector(
     (state: any) => state.notification
   );
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(notificationGetNotification({ userId: user?.id }));
-  }, [user?.id]);
+
   return (
     <div className="absolute top-[155%] bg-white shadow-md min-w-[300px] min-h-[200px] z-50 right-0">
-      <div className="p-4">
-        <h3 className="font-semibold">{t("notification")}</h3>
+      <div className="py-3 px-4">
+        <h3 className="font-semibold text-lg">{t("notification")}</h3>
       </div>
-      <Divider className="my-1"></Divider>
+      <Divider className="mb-1 mt-0"></Divider>
       {loadingNotification ? (
         <div className="py-2 px-4">
           <Skeleton />

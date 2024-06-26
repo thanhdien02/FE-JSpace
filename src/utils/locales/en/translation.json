@@ -144,7 +144,12 @@
   "areyouemployer": "Are you an employer ?",
   "loginnow": "Login now",
   "download": "Download",
-  "jobsuggestion": "Job suggestions",
+  "jobsuggestion": {
+    "header": "Job suggestions",
+    "email": "Email address",
+    "title": "Survey job suggestions via Email",
+    "content": "Survey job suggestions via email, we will email you suitable jobs in the future"
+  },
   "fullname": "Full name",
   "confirm": "Confirm",
   "showpassword": "Show password",

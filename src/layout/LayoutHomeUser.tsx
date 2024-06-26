@@ -100,7 +100,7 @@ const LayoutHomeUser: React.FC = () => {
         }}
         className="fixed z-10 right-0 top-1/2 bg-primary py-3 px-1 text-white rounded-r-lg text-base cursor-pointer vertical-text"
       >
-        {t("jobsuggestion")}
+        {t("jobsuggestion.header")}
       </div>
       {suggestJobCheck && (
         <SuggestJobThroughEmailPage></SuggestJobThroughEmailPage>

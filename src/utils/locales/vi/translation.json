@@ -141,7 +141,12 @@
   "areyouemployer": "Bạn là nhà tuyển dụng ?",
   "loginnow": "Đăng nhập ngay",
   "download": "Tải xuống",
-  "jobsuggestion": "Gợi ý việc làm",
+  "jobsuggestion": {
+    "email": "Địa chỉ email",
+    "header": "Gợi ý việc làm",
+    "title": "Khảo sát gợi ý công việc qua Email",
+    "content": "Khảo sát gợi ý công việc qua email, chúng tôi sẽ gửi email đến bạn những công việc phù hợp với bạn trong tương lai"
+  },
   "fullname": "Họ và tên",
   "confirm": "Xác nhận",
   "showpassword": "Hiện mật khẩu",

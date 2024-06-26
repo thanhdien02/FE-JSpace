@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../../assets/logo3.png";
 import { useSelector } from "react-redux";
 import IconChervonDown from "../../components/icons/IconChervonDown";
@@ -26,12 +26,15 @@ import IconSearch from "../../components/icons/IconSearch";
 import InputSearchResult from "../../components/input/InputSearchResult";
 import IconClose from "../../components/icons/IconClose";
 import HeaderNotificationPage from "../candidates/HeaderNotificationPage";
+import { notificationGetNotification } from "../../store/notification/notification-slice";
 
 interface PropComponent {}
 const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
   const { loadingInputSearchJob } = useSelector((state: any) => state.job);
+  const { notifications } = useSelector((state: any) => state.notification);
   const { user, accessToken } = useSelector((state: any) => state.auth);
   const { inputHeaderSearchCheck } = useSelector((state: any) => state.common);
+  const [numberRead, setNumberRead] = useState(0);
   const [title, setTitle] = useState("");
   const [checkNotification, setCheckNotification] = useState(false);
   const [checkNotificationShort, setCheckNotificationShort] = useState(false);
@@ -93,6 +96,17 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
       commonUpdateInputHeaderSearchCheckRedux({ inputHeaderSearchCheck: true })
     );
   };
+  useEffect(() => {
+    dispatch(notificationGetNotification({ userId: user?.id }));
+  }, [user?.id]);
+  useEffect(() => {
+    if (notifications?.length > 0) {
+      const countRead = notifications.filter(
+        (notification: any) => notification.read
+      ).length;
+      setNumberRead(countRead);
+    }
+  }, [notifications]);
 
   return (
     <>
@@ -191,14 +205,12 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                   checkNotification={checkNotificationShort}
                   className="text-primary cursor-pointer hover:opacity-80 transition-all"
                 ></IconBell>
-                {!true ? (
-                  <span className="absolute -top-2 -right-2 flex ">
-                    <span className="m-auto w-6 h-6 text-center rounded-full bg-red-500 text-white  font-medium">
-                      2
+                {numberRead > 0 && (
+                  <span className="absolute -top-2 -right-2 flex">
+                    <span className="m-auto w-6 h-6 text-center rounded-full bg-red-500 text-white font-medium">
+                      {numberRead}
                     </span>
                   </span>
-                ) : (
-                  <></>
                 )}
                 {checkNotificationShort && (
                   <>

@@ -26,14 +26,18 @@ const CardNotificationAtHeaderPage: React.FC<PropComponent> = ({
   return (
     <>
       <div className={`py-1 px-4 pb-2 ${classname}`}>
-        <h4 className="font-medium text-base cursor-pointer hover:text-primary transition-all">
-          Thông tin ứng tuyển công việc
+        <h4 className="font-medium text-[15px] cursor-pointer hover:text-primary transition-all line-clamp-2">
+          Thông tin ứng tuyển công việc Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Recusandae, inventore! Molestiae nesciunt non
+          aperiam pariatur eos nihil deleniti maiores? Quam, optio explicabo
+          veritatis nobis placeat necessitatibus porro reprehenderit eveniet
+          labore.
         </h4>
         <p className="text-[15px] line-clamp-3">
           {item?.notification?.content}
         </p>
         <div className="mt-1 flex justify-between items-center">
-          <p className="text-sm font-medium ">14/06/2024</p>
+          <p className="text-sm ">14/06/2024</p>
           <Popover
             content={
               <p>{!item?.read ? "Đánh dấu đã đọc" : "Đánh dấu chưa đọc"}</p>

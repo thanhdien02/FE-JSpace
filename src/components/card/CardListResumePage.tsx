@@ -50,7 +50,7 @@ const CardListResumePage: React.FC<PropComponent> = ({
         <div className="self-end p-4 w-full">
           <a
             href={item?.path}
-            className="text-lg break-words text-wrap line-clamp-1 top-1 left-1 font-bold"
+            className="text-lg break-words text-wrap line-clamp-1 top-1 left-1 font-bold hover:text-gray-300 transition-all"
             target="_blank"
           >
             {item?.name}

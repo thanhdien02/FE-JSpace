@@ -44,17 +44,12 @@ const SuggestJobThroughEmailPage: React.FC = () => {
           >
             <IconClose></IconClose>
           </span>
-          <h2 className="font-bold text-xl">
-            Khảo sát gợi ý công việc qua Email.
-          </h2>
-          <p className="mt-2 text-gray-500">
-            Chúng tôi sẽ gửi email đến bạn những công việc phù hợp với bạn trong
-            tương lại
-          </p>
+          <h2 className="font-bold text-xl">{t("jobsuggestion.title")}</h2>
+          <p className="mt-2 text-gray-500">{t("jobsuggestion.content")}</p>
           <div className="mt-5">
             <div className="flex flex-col gap-2">
               <label htmlFor="" className="font-medium text-base">
-                Địa chỉ email
+                {t("jobsuggestion.email")}
               </label>
               <input
                 type="text"
@@ -65,7 +60,7 @@ const SuggestJobThroughEmailPage: React.FC = () => {
             </div>
             <div className={`w-full mt-4`}>
               <label htmlFor="" className="font-medium text-base">
-                Kỹ năng
+                {t("skills")}
               </label>
               <Select
                 mode="tags"
@@ -91,7 +86,7 @@ const SuggestJobThroughEmailPage: React.FC = () => {
 
             <ButtonLoading
               classButton="mt-5"
-              title="Lưu gợi ý"
+              title={t("buttonsave")}
               loading={false}
             ></ButtonLoading>
           </div>

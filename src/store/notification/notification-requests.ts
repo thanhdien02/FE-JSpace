@@ -4,7 +4,7 @@ import { API } from "../../configs/configAPI";
 export const requestNotificationGetNotification = (
   userId: string = "1",
   page: string = "1",
-  size: string = "20",
+  size: string = "100",
   accessToken: string
 ) => {
   return axios.get(

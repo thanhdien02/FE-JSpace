@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { KeyOutlined } from "@ant-design/icons";
 import IconKey from "../../components/icons/IconKey";
 import ButtonLoading from "../../components/button/ButtonLoading";
 import { useTranslation } from "react-i18next";
+import { Checkbox } from "antd";
 interface Inputs {
   name: string;
   passwordold: string;
@@ -13,6 +14,7 @@ interface Inputs {
 const ManageChangePasswordPage: React.FC = () => {
   // const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [showpassword, setShowpassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -46,10 +48,10 @@ const ManageChangePasswordPage: React.FC = () => {
                   <input
                     {...register("passwordold", {})}
                     placeholder={t("manage.changepassword.enteroldpassword")}
-                    type="password"
+                    type={showpassword ? "text" : "password"}
                     id="passwordold"
                     autoComplete="off"
-                    className="h-full focus:border-solid focus:border-stone-400/70 transition-all outline-none pr-4 pl-12 py-3 border border-stone-200 border-solid w-full rounded-md"
+                    className="h-full focus:border-solid focus:border-stone-400/70 transition-all outline-none pr-4 pl-12 py-3 border border-stone-200 border-solid w-full rounded-md placeholder:text-sm"
                   />
                 </div>
               </div>
@@ -78,7 +80,7 @@ const ManageChangePasswordPage: React.FC = () => {
                       required: true,
                     })}
                     placeholder={t("manage.changepassword.enternewpassword")}
-                    type="password"
+                    type={showpassword ? "text" : "password"}
                     autoComplete="off"
                     id="passwordnew"
                     className="h-full pl-12 pr-4 focus:border-solid focus:border-stone-400/70 transition-all outline-none py-3 border border-stone-200 border-solid w-full rounded-md"
@@ -114,7 +116,7 @@ const ManageChangePasswordPage: React.FC = () => {
                       required: true,
                     })}
                     placeholder={t("manage.changepassword.confirmnewpassword")}
-                    type="password"
+                    type={showpassword ? "text" : "password"}
                     autoComplete="off"
                     id="passwordnewconfirm"
                     className="h-full focus:border-solid focus:border-stone-400/70 transition-all outline-none pl-12 pr-4 py-3 border border-stone-200 border-solid w-full rounded-md"
@@ -122,6 +124,13 @@ const ManageChangePasswordPage: React.FC = () => {
                 </div>
               </div>
             </div>
+            <Checkbox
+              onChange={() => {
+                setShowpassword(!showpassword);
+              }}
+            >
+              {t("showpassword")}
+            </Checkbox>
 
             <div className="flex justify-end mt-5">
               <ButtonLoading
