@@ -103,7 +103,7 @@ const ManageCompanyFollowedPage: React.FC = () => {
           </div>
         )}
 
-        <div className="flex justify-end mt-5">
+        <div className="flex justify-end mt-5 mb-10">
           <Pagination
             total={paginationFollowedCompany?.totalElements}
             onChange={handleOnchangePage}

@@ -194,7 +194,11 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
                 {jobByIdWithCandidate?.post?.closeDate}
               </span>
             </div>
-            <div className="flex gap-5 mt-5">
+            <div
+              className={`flex mt-5 ${
+                checkExpired ? "gap-2 md:gap-5 text-sm md:text-base" : "gap-5"
+              }`}
+            >
               <div
                 onClick={handleApplyJob}
                 className={`grow flex items-center justify-center py-2 gap-3 hover:opacity-80 transition-all cursor-pointer text-white font-medium rounded-md ${

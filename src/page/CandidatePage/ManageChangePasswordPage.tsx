@@ -131,7 +131,6 @@ const ManageChangePasswordPage: React.FC = () => {
             >
               {t("showpassword")}
             </Checkbox>
-
             <div className="flex justify-end mt-5">
               <ButtonLoading
                 title={t("buttonsave")}

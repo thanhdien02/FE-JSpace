@@ -4,13 +4,10 @@ import { useSelector } from "react-redux";
 import IconChervonDown from "../../components/icons/IconChervonDown";
 import IconBell from "../../components/icons/IconBell";
 import HeaderItem from "../../components/common/HeaderItem";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CandidateMenu from "../candidates/CandidateMenu";
 import { debounce } from "ts-debounce";
-import {
-  dataCandidateMenu,
-  dataCandidateMenuResponsive,
-} from "../../utils/dataFetch";
+import { dataCandidateMenu } from "../../utils/dataFetch";
 import { useDispatch } from "react-redux";
 import { authLogout } from "../../store/auth/auth-slice";
 import { Avatar, Button, Drawer, DrawerProps, Space } from "antd";
@@ -39,6 +36,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
   const [checkNotification, setCheckNotification] = useState(false);
   const [checkNotificationShort, setCheckNotificationShort] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [size] = useState<DrawerProps["size"]>();
   const inputSearch = useRef<any>(null);
@@ -102,7 +100,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
   useEffect(() => {
     if (notifications?.length > 0) {
       const countRead = notifications.filter(
-        (notification: any) => notification.read
+        (notification: any) => !notification.read
       ).length;
       setNumberRead(countRead);
     }
@@ -327,16 +325,23 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
             <Space>
               {user?.id ? (
                 <>
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      // dispatch(authLogout());
-                      setOpen(false);
-                      setCheckNotification(true);
-                    }}
-                  >
-                    {t("notification")}
-                  </Button>
+                  <div className="relative">
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        // dispatch(authLogout());
+                        setOpen(false);
+                        setCheckNotification(true);
+                      }}
+                    >
+                      {t("notification")}
+                    </Button>
+                    {numberRead != 0 && (
+                      <span className="absolute -top-2 -right-1 rounded-full w-6 h-6 bg-red-500 text-white flex justify-center items-center">
+                        {numberRead}
+                      </span>
+                    )}
+                  </div>
                   <Button
                     type="primary"
                     onClick={() => {
@@ -362,12 +367,31 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
           }
         >
           {user?.id && (
-            <div className="flex gap-3">
-              <img
-                src={user?.picture}
-                className="w-[50px] h-[50px] rounded-full"
-                alt=""
-              />
+            <div
+              className="flex gap-3"
+              onClick={() => {
+                navigate("/common");
+                setOpen(false);
+              }}
+            >
+              {user?.picture ? (
+                <img
+                  src={user?.picture}
+                  className="w-[50px] h-[50px] rounded-full"
+                  alt=""
+                />
+              ) : (
+                <div className="w-[50px] h-[50px] rounded-full flex">
+                  <div className="bg-white rounded-full">
+                    <Avatar
+                      className="mx-auto "
+                      size={50}
+                      icon={<UserOutlined />}
+                    />
+                  </div>
+                </div>
+              )}
+
               <div className="">
                 <h3 className="font-medium line-clamp-1">{user?.name}</h3>
                 <h4 className="line-clamp-1 text-gray-500 break-all">
@@ -417,22 +441,9 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                 ></IconChervonRight>
               </HeaderItem>{" "}
             </div>
-            <div onClick={onClose}>
-              <HeaderItem
-                className="text-[14px] "
-                classLink="!pl-0"
-                title={t("blog.name")}
-                path="/blogs"
-              >
-                <IconChervonRight
-                  classIcon="!w-[18px] !h-[18px]"
-                  className="ml-auto"
-                ></IconChervonRight>
-              </HeaderItem>{" "}
-            </div>
           </ul>
-          <div className="w-full h-[1px] bg-gray-200 my-3"></div>
-          {user?.id && (
+          <div className="w-full h-[1px] bg-gray-200 my-4"></div>
+          {/* {user?.id && (
             <div className="">
               <ul className="flex flex-col gap-5">
                 {user?.id &&
@@ -455,19 +466,19 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                   ))}
               </ul>
             </div>
-          )}
-          <div className="flex gap-1 items-center mt-3">
+          )} */}
+          <div className="flex gap-2 items-center mt-3">
             <img
               src="https://static.topcv.vn/srp/website/images/flags/vietnam.png"
               alt=""
               onClick={() => changeLanguage("vi")}
-              className="w-6 h-4 cursor-pointer object-cover"
+              className="w-8 h-6 cursor-pointer object-cover"
             />
             <img
               src="https://static.topcv.vn/srp/website/images/flags/uk.jpeg"
               alt=""
               onClick={() => changeLanguage("en")}
-              className="w-6 h-4 cursor-pointer object-cover"
+              className="w-8 h-6 cursor-pointer object-cover"
             />
           </div>
         </Drawer>

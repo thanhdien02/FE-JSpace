@@ -228,7 +228,7 @@ const HomeBannerPage: React.FC = () => {
             <p className="text-center lg:text-start text-xs lg:text-sm text-gray-300">
               <span className=""> {t("home.updatetime")} </span>
               <span className=" font-semibold text-base text-white">
-                13:41 20/04/2024
+                20/04/2024
               </span>
             </p>
           </div>

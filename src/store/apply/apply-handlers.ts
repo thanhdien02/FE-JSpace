@@ -50,7 +50,6 @@ function* handleApplyJobApplyWithUploadCV(
       formData
     );
     if (responseFile?.data?.code === 1000) {
-      message.success("Upload successful 11");
       const response: any = yield call(
         requestApplyJobApply,
         dataApplyJobWithCV?.payload?.candidate_id,

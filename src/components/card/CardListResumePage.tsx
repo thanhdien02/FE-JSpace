@@ -38,7 +38,7 @@ const CardListResumePage: React.FC<PropComponent> = ({
     <div className={`relative h-[350px] overflow-hidden ${className}`}>
       <img src={item?.imageFilePath} alt="" className="object-cover " />
 
-      <div className="text-white absolute flex bg-gradient-to-t from-black/70 to-white/10  inset-0 w-full">
+      <div className="text-white absolute flex bg-gradient-to-t from-black/70 to-white/10 inset-0 w-full">
         <div
           className={`absolute top-4 right-4 flex gap-2 items-center cursor-pointer px-3 py-1 text-sm font-semibold bg-white rounded-md ${
             true ? "text-black" : "text-black"

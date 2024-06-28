@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+  import React, { useEffect } from "react";
 import IconClose from "../../components/icons/IconClose";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -30,7 +30,7 @@ const SuggestJobThroughEmailPage: React.FC = () => {
       <div className="fixed inset-0 bg-black/50 flex z-40">
         <form
           action=""
-          className="relative m-auto w-[600px] bg-white rounded-sm p-7"
+          className="relative m-auto md:w-[600px] w-[90%] bg-white rounded-sm p-7"
         >
           <span
             className="absolute top-2 right-2 cursor-pointer"
@@ -45,7 +45,7 @@ const SuggestJobThroughEmailPage: React.FC = () => {
             <IconClose></IconClose>
           </span>
           <h2 className="font-bold text-xl">{t("jobsuggestion.title")}</h2>
-          <p className="mt-2 text-gray-500">{t("jobsuggestion.content")}</p>
+          <p className="mt-2 text-gray-500 md:text-base text-sm">{t("jobsuggestion.content")}</p>
           <div className="mt-5">
             <div className="flex flex-col gap-2">
               <label htmlFor="" className="font-medium text-base">
