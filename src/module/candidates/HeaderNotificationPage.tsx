@@ -21,7 +21,7 @@ const HeaderNotificationPage: React.FC = () => {
           <Skeleton />
         </div>
       ) : notifications?.length <= 0 ? (
-        <div className="py-2 px-4">Không có thông báo.</div>
+        <div className="py-2 px-4"> {t("notnotification")}</div>
       ) : (
         <div className="py-2 flex flex-col gap-2 max-h-[350px] overflow-auto">
           {notifications?.length > 0 &&

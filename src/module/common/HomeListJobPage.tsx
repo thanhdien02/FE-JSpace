@@ -30,6 +30,7 @@ const HomeListJobPage: React.FC = () => {
   const { homeJobs, loadingJob } = useSelector((state: any) => state.job);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [selectfilter, setSelectfilter] = useState<any>(null);
   const [dataJob, setDataJob] = useState<any>(null);
   const [dataJobPhone, setDataJobPhone] = useState<any>(null);
   useEffect(() => {
@@ -41,6 +42,18 @@ const HomeListJobPage: React.FC = () => {
       setDataJobPhone(chunkArray(homeJobs, 3));
     }
   }, [homeJobs]);
+  const handleChangeFilter = (value: any) => {
+    setSelectfilter(value);
+    let selectBy = "";
+    if (value == "2") {
+      selectBy = "asc";
+    } else if (value == "3") {
+      selectBy = "desc";
+    }
+    dispatch(
+      jobGetHomeJob({ candidate_id: user?.id, size: 27, closeDate: selectBy })
+    );
+  };
   return (
     <>
       <div className="bg-gray-100 ">
@@ -51,24 +64,32 @@ const HomeListJobPage: React.FC = () => {
           <div className="pb-5 flex justify-between items-baseline">
             <Select
               showSearch
+              filterOption={(input: string, option: any) =>
+                ((option?.label ?? "") as string)
+                  .toLowerCase()
+                  .includes((input ?? "").toLowerCase())
+              }
+              value={selectfilter}
+              allowClear
               style={{ width: 200 }}
               placeholder="Tìm kiếm theo"
               className="h-10"
               optionFilterProp="children"
               options={[
                 {
-                  key: "1",
+                  value: "1",
                   label: "Mức lương cao nhất",
                 },
                 {
-                  key: "2",
-                  label: "Công việc nổi bật",
+                  value: "2",
+                  label: "Tăng dần theo thời gian",
                 },
                 {
-                  key: "3",
-                  label: "Theo thời gian",
+                  value: "3",
+                  label: "Giảm dần theo thời gian",
                 },
               ]}
+              onChange={handleChangeFilter}
             />
             <NavLink
               to="/jobs"
@@ -129,10 +150,6 @@ const HomeListJobPage: React.FC = () => {
             spaceBetween={50}
             slidesPerView={1}
             navigation
-            // autoplay={{ delay: 4000, disableOnInteraction: false }}
-            // loop
-            // pagination={{ clickable: true }}
-            // scrollbar={{ draggable: true }}
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log("slide change")}
             className="swiper-job lg:hidden block"

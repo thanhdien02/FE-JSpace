@@ -25,13 +25,14 @@ export const requestJobGetJobByIdWithCandidate = (
 
 export const requestJobGetHomeJob = (
   candidate_id: string = "",
+  closeDate: string = "desc",
   page: string = "1",
   size: string = "9"
 ) => {
   if (candidate_id == null || candidate_id == undefined) candidate_id = "";
   return axios.get(
     `${API}/api/v1/posts?${
-      candidate_id && `candidateId=${candidate_id}&`
+      candidate_id && `candidateId=${candidate_id}&sort=closeDate,${closeDate}&`
     }page=${page}&size=${size}`,
     {
       headers: {
@@ -86,6 +87,7 @@ export const requestJobGetFilterJob = (
   rank: string = "",
   minPay: string = "",
   maxPay: string = "",
+  closeDate: string = "",
   page: string = "1",
   size: string = "12"
 ) => {
@@ -100,7 +102,7 @@ export const requestJobGetFilterJob = (
   if (maxPay == null || maxPay == undefined) maxPay = "";
   return axios.get(
     `${API}/api/v1/posts?${
-      candidate_id && `candidateId=${candidate_id}&`
+      candidate_id && `candidateId=${candidate_id}&sort=closeDate,${closeDate}&`
     }page=${page}&size=${size}${title && `&title=${title}`}${
       location && `&location=${location}`
     }${experience && `&experience=${experience}`}${

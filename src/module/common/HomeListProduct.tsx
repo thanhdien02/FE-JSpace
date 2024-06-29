@@ -36,7 +36,7 @@ const HomeListProduct: React.FC = () => {
               target="_blank"
               className="flex gap-1 cursor-pointer text-primary hover:underline items-center"
             >
-              <span className="font-medium lg:text-sm text-nowrap">{t("seeall")}</span>
+              <span className="font-medium lg:text-base text-nowrap">{t("seeall")}</span>
               <IconChervonRight classIcon="!w-5 !h-5"></IconChervonRight>
             </a>
           </div>

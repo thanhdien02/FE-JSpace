@@ -78,8 +78,6 @@ function* handleNotificationUpdateReadNotification(
       yield call(handleNotificationGetNotification, {
         payload: {
           userId: dataUpdateNotification?.payload?.userId,
-          page: 1,
-          size: 10,
         },
       });
       message.success("Cập nhật thành công");

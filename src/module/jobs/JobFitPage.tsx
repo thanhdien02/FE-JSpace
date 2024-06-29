@@ -2,15 +2,20 @@ import React, { useEffect, useState } from "react";
 import CardJobFitPage from "../../components/card/CardJobFitPage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Scrollbar } from "swiper/modules";
-import { Radio, RadioChangeEvent } from "antd";
+import { Pagination, Radio, RadioChangeEvent } from "antd";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { chunkArray } from "../../utils/common-function";
 import CardJobFitPageSkeleton from "../../components/skeleton/CardJobFitPageSkeleton";
-
-const JobFitPage: React.FC = () => {
-  const { filterJobs, loadingJob } = useSelector((state: any) => state.job);
+interface PropComponent {
+  setPage?: any;
+  page?: any;
+}
+const JobFitPage: React.FC<PropComponent> = ({ setPage, page }) => {
+  const { filterJobs, loadingJob, paginationFilterJob } = useSelector(
+    (state: any) => state.job
+  );
   const { t } = useTranslation();
   const [dataJob, setDataJob] = useState<any>(null);
   const [dataJobPhone, setDataJobPhone] = useState<any>(null);
@@ -124,12 +129,14 @@ const JobFitPage: React.FC = () => {
                   <CardJobFitPage key={uuidv4()} item={item}></CardJobFitPage>
                 ))}
             </div>
-            <div className="w-primary max-w-full lg:px-0 flex mx-auto mt-5">
-              {/* <Pagination
+            <div className="flex justify-end my-5">
+              <Pagination
+                total={paginationFilterJob?.totalElements}
+                onChange={(e) => setPage(e)}
                 className="ml-auto font-medium"
-                defaultCurrent={1}
-                total={50}
-              /> */}
+                current={page}
+                pageSize={paginationFilterJob?.pageSize}
+              />
             </div>
           </div>
         </section>

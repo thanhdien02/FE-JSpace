@@ -37,6 +37,7 @@ function* handleJobGetHomeJob(dataGetHomeJob: any): Generator<any> {
     const response: any = yield call(
       requestJobGetHomeJob,
       dataGetHomeJob?.payload?.candidate_id,
+      dataGetHomeJob?.payload?.closeDate,
       dataGetHomeJob?.payload?.page,
       dataGetHomeJob?.payload?.size
     );
@@ -161,6 +162,7 @@ function* handleJobGetFilterJob(dataGetFilterJob: any): Generator<any> {
       dataGetFilterJob?.payload?.rank,
       dataGetFilterJob?.payload?.minPay,
       dataGetFilterJob?.payload?.maxPay,
+      dataGetFilterJob?.payload?.closeDate,
       dataGetFilterJob?.payload?.page,
       dataGetFilterJob?.payload?.size
     );

@@ -25,9 +25,15 @@ import InputSearchBannerResult from "../../components/input/InputSearchBannerRes
 interface PropComponent {
   page?: Number;
   size?: Number;
+  closeDate?: string;
   setPage?: any;
 }
-const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
+const JobBannerPage: React.FC<PropComponent> = ({
+  page,
+  size,
+  setPage,
+  closeDate,
+}) => {
   const {
     locations,
     ranks,
@@ -66,7 +72,6 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
       if (dataSearch?.title != "") setTitle(dataSearch?.title);
       if (dataSearch?.location != "") setLocation(dataSearch?.location);
       if (dataSearch?.experience != "") setExperience(dataSearch?.experience);
-
       if (
         dataSearch?.salary != "" &&
         dataSearch?.salary != undefined &&
@@ -172,6 +177,7 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
     );
     setPage(1);
   };
+  // change page
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
@@ -193,10 +199,12 @@ const JobBannerPage: React.FC<PropComponent> = ({ page, size, setPage }) => {
           maxPay: endSalary,
           rank: rank,
           jobType: jobType,
+          closeDate: closeDate,
         })
       );
     }
-  }, [page]);
+  }, [page, closeDate]);
+
   const options: SelectProps["options"] = [];
 
   for (let i = 10; i < 36; i++) {
