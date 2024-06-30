@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import LayoutHomeUserHeader from "../module/common/LayoutHomeUserHeader";
-import { Avatar, message, Switch, Upload, UploadProps } from "antd";
+import { Avatar, Switch } from "antd";
 import { getToken } from "../utils/auth";
 import { useDispatch } from "react-redux";
 import { authFetchMe } from "../store/auth/auth-slice";
@@ -23,9 +23,12 @@ import IconBuilding from "../components/icons/IconBuilding";
 import IconUser from "../components/icons/IconUser";
 import { useTranslation } from "react-i18next";
 import OverlaySearchHeader from "../components/overlay/OverlaySearchHeader";
+import { candidateUpdatePublicResume } from "../store/candidate/candidate-slice";
 
 const LayoutManageCandidate: React.FC = () => {
-  const { user, accessToken } = useSelector((state: any) => state.auth);
+  const { user, accessToken, publicProfile } = useSelector(
+    (state: any) => state.auth
+  );
   const { inputHeaderSearchCheck } = useSelector((state: any) => state.common);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -33,18 +36,6 @@ const LayoutManageCandidate: React.FC = () => {
   // const date = new Date(user?.createdAt);
   // const formattedDate = date.toLocaleDateString("en-GB");
 
-  const props: UploadProps = {
-    beforeUpload: (file) => {
-      const isPNG = file.type === "image/png";
-      if (!isPNG) {
-        message.error(`${file.name} is not a png file`);
-      }
-      return isPNG || Upload.LIST_IGNORE;
-    },
-    onChange: (info) => {
-      console.log(info.fileList);
-    },
-  };
   useEffect(() => {
     if (accessToken == "") {
       const token = getToken();
@@ -58,6 +49,14 @@ const LayoutManageCandidate: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const handleChangePublicResume = () => {
+    dispatch(
+      candidateUpdatePublicResume({
+        candidate_id: user?.id,
+        publicProfile: !publicProfile,
+      })
+    );
+  };
   return (
     <>
       <LayoutHomeUserHeader></LayoutHomeUserHeader>
@@ -72,7 +71,10 @@ const LayoutManageCandidate: React.FC = () => {
             </div>
             <div className="md:flex hidden flex-col min-w-[29%] h-fit p-5 gap-3 bg-white rounded-lg">
               <div className="flex gap-5 p-2">
-                <Upload {...props} className="relative w-[65px]">
+                <div
+                  onClick={() => navigate("/manage/information-account")}
+                  className="relative w-[65px]"
+                >
                   {user?.picture ? (
                     <>
                       <img
@@ -98,7 +100,7 @@ const LayoutManageCandidate: React.FC = () => {
                       />
                     </div>
                   )}
-                </Upload>
+                </div>
                 <div className="grow">
                   <p className="text-xs text-gray-400 ">
                     {t("manage.welcomback")}
@@ -114,7 +116,10 @@ const LayoutManageCandidate: React.FC = () => {
               <span className="h-[1px] bg-gray-200 w-full"></span>
 
               <div className="flex items-center gap-4 pb-3 mt-2">
-                <Switch></Switch>
+                <Switch
+                  value={publicProfile}
+                  onChange={handleChangePublicResume}
+                ></Switch>
                 <span className="font-medium line-clamp-1">
                   {t("menu.allowrecruitor")}
                 </span>

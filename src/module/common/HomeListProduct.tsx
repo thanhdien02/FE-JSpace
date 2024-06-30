@@ -34,7 +34,7 @@ const HomeListProduct: React.FC = () => {
             <a
               href="https://jspace-employer.vercel.app/products"
               target="_blank"
-              className="flex gap-1 cursor-pointer text-primary hover:underline items-center"
+              className="flex gap-1 cursor-pointer hover:underline items-center"
             >
               <span className="font-medium lg:text-base text-nowrap">{t("seeall")}</span>
               <IconChervonRight classIcon="!w-5 !h-5"></IconChervonRight>

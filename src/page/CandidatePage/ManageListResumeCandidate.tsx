@@ -10,7 +10,7 @@ import CardListResumePage from "../../components/card/CardListResumePage";
 
 const ManageListResumeCandidate: React.FC = () => {
   const { files, loadingFile } = useSelector((state: any) => state.file);
-  const { user } = useSelector((state: any) => state.auth);
+  const { user, defaultResume } = useSelector((state: any) => state.auth);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,7 +23,7 @@ const ManageListResumeCandidate: React.FC = () => {
           <h3 className="font-semibold text-xl">{t("manage.cv.title")}</h3>
           <NavLink
             to="/upload-resume"
-            className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg font-medium hover:opacity-80 transition-all"
+            className="flex items-center gap-2 bg-white text-primary px-4 py-2 rounded-lg font-medium border border-solid border-primary hover:opacity-80 transition-all"
           >
             <IconUpload className="font-medium"></IconUpload>
             <span className="text-nowrap"> {t("manage.cv.uploadcv")}</span>
@@ -45,6 +45,7 @@ const ManageListResumeCandidate: React.FC = () => {
                 <CardListResumePage
                   key={item?.file?.id}
                   item={item?.file}
+                  checkMainCV={item?.file?.id == defaultResume?.id}
                 ></CardListResumePage>
               ))}
           </div>

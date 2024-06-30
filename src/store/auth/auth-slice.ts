@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 interface IAuth {
   user: any;
   accessToken: string;
+  publicProfile: boolean;
+  defaultResume: any;
   roles: IRole[];
   loading?: boolean;
   messageAuth?: string;
@@ -17,6 +19,8 @@ interface IRole {
 const init: IAuth = {
   user: {},
   accessToken: "",
+  publicProfile: false,
+  defaultResume: {},
   roles: [],
   loading: false,
   messageAuth: "",
@@ -25,23 +29,21 @@ const authSlice: any = createSlice({
   name: "auth",
   initialState: init,
   reducers: {
-    authChange: (state: any, action: any) => ({
-      ...state,
-      user: action.payload,
-    }),
-    authLogin: (state: any) => ({
-      ...state,
-    }),
-    authLogout: (state: any) => ({
-      ...state,
-    }),
-    authRegister: (state: any) => ({
-      ...state,
-    }),
-    authLoginWithEmailPassword: (state: any) => ({
-      ...state,
-    }),
+    authLogin: () => {},
+    authLogout: () => {},
+    authRegister: () => {},
+    authLoginWithEmailPassword: () => {},
     authRefreshToken: () => {},
+    authFetchMe: () => {},
+    authGetRoles: () => {},
+    authUpdatePublicProfileRedux: (state: any, action: any) => ({
+      ...state,
+      publicProfile: action.payload.publicProfile,
+    }),
+    authUpdateDefaultResumeRedux: (state: any, action: any) => ({
+      ...state,
+      defaultResume: action.payload.defaultResume,
+    }),
     authUpdateLoadingRedux: (state: any, action: any) => ({
       ...state,
       loading: action.payload.loading,
@@ -49,12 +51,6 @@ const authSlice: any = createSlice({
     authUpdateMessageRedux: (state: any, action: any) => ({
       ...state,
       messageAuth: action.payload.messageAuth,
-    }),
-    authFetchMe: (state: any) => ({
-      ...state,
-    }),
-    authGetRoles: (state: any) => ({
-      ...state,
     }),
     authUpdateRolesRedux: (state: any, action: any) => ({
       ...state,
@@ -64,6 +60,17 @@ const authSlice: any = createSlice({
       ...state,
       accessToken: action.payload.accessToken,
       user: action.payload.user,
+      defaultResume: action.payload.defaultResume,
+      publicProfile: action.payload.publicProfile,
+    }),
+    authUpdateSetDefaultResumeRedux: (state: any, action: any) => ({
+      ...state,
+      defaultResume: action.payload.defaultResume,
+      publicProfile: action.payload.publicProfile,
+    }),
+    authChange: (state: any, action: any) => ({
+      ...state,
+      user: action.payload,
     }),
   },
 });
@@ -80,5 +87,8 @@ export const {
   authUpdateMessageRedux,
   authRefreshToken,
   authLoginWithEmailPassword,
+  authUpdatePublicProfileRedux,
+  authUpdateDefaultResumeRedux,
+  authUpdateSetDefaultResumeRedux,
 } = authSlice.actions;
 export default authSlice.reducer;

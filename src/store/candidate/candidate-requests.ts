@@ -157,3 +157,37 @@ export const requestCandidateUnFollowJob = (
     }
   );
 };
+export const requestCandidateSetDefaultResume = (
+  candidate_id: string,
+  resume_id: string,
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.put(
+    `${API}/api/v1/candidates/${candidate_id}/resumes/default-resume?resumeId=${resume_id}`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+export const requestCandidateUpdatePublicResume = (
+  candidate_id: string,
+  publicProfile: boolean,
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.put(
+    `${API}/api/v1/candidates/${candidate_id}/profiles?publicProfile=${publicProfile}`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};

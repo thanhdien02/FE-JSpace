@@ -4,22 +4,26 @@ import {
   candidateDeleteBackgroundCandidate,
   candidateFollowJob,
   candidateSaveJob,
+  candidateSetDefaultResume,
   candidateUnFollowJob,
   candidateUnSaveJob,
   candidateUpdateAvatar,
   candidateUpdateBackground,
   candidateUpdateCandidate,
+  candidateUpdatePublicResume,
 } from "./candidate-slice";
 import {
   handleCandidateDeleteAvatarCandidate,
   handleCandidateDeleteBackgroundCandidate,
   handleCandidateFollowJob,
   handleCandidateSaveJob,
+  handleCandidateSetDefaultResume,
   handleCandidateUnFollowJob,
   handleCandidateUnSaveJob,
   handleCandidateUpdateAvatar,
   handleCandidateUpdateBackground,
   handleCandidateUpdateIdentification,
+  handleCandidateUpdatePublicResume,
 } from "./candidate-handlers";
 
 export default function* authSaga() {
@@ -44,4 +48,12 @@ export default function* authSaga() {
   );
   yield takeLatest(candidateFollowJob.type, handleCandidateFollowJob);
   yield takeLatest(candidateUnFollowJob.type, handleCandidateUnFollowJob);
+  yield takeLatest(
+    candidateSetDefaultResume.type,
+    handleCandidateSetDefaultResume
+  );
+  yield takeLatest(
+    candidateUpdatePublicResume.type,
+    handleCandidateUpdatePublicResume
+  );
 }

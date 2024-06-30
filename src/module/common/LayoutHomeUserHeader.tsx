@@ -95,7 +95,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
     );
   };
   useEffect(() => {
-    dispatch(notificationGetNotification({ userId: user?.id }));
+    if (user?.id) dispatch(notificationGetNotification({ userId: user?.id }));
   }, [user?.id]);
   useEffect(() => {
     if (notifications?.length > 0) {

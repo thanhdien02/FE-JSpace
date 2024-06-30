@@ -39,12 +39,13 @@ function* handleAuthFetchMe(): Generator<any> {
   try {
     const { accessToken } = getToken();
     const response: any = yield call(requestAuthFetchMe, accessToken);
-
     if (response?.data?.result?.user?.role?.code == "CANDIDATE") {
       yield put(
         authUpdateFetchRedux({
           accessToken: accessToken,
           user: response.data.result.user,
+          defaultResume: response.data.result.defaultResume,
+          publicProfile: response.data.result.publicProfile,
         })
       );
     } else if (response?.data?.result?.role?.code == "Employee") {

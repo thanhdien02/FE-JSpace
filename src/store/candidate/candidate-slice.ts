@@ -15,6 +15,16 @@ const candidateSlice: any = createSlice({
   name: "candidate",
   initialState: init,
   reducers: {
+    candidateUpdateBackground: () => {},
+    candidateUpdateAvatar: () => {},
+    candidateSaveJob: () => {},
+    candidateUnSaveJob: () => {},
+    candidateFollowJob: () => {},
+    candidateUnFollowJob: () => {},
+    candidateDeleteBackgroundCandidate: () => {},
+    candidateDeleteAvatarCandidate: () => {},
+    candidateSetDefaultResume: () => {},
+    candidateUpdatePublicResume: () => {},
     candidateUpdateCandidate: (state: any) => ({
       ...state,
     }),
@@ -26,14 +36,6 @@ const candidateSlice: any = createSlice({
       ...state,
       messageCandidate: action.payload.messageCandidate,
     }),
-    candidateUpdateBackground: () => {},
-    candidateUpdateAvatar: () => {},
-    candidateSaveJob: () => {},
-    candidateUnSaveJob: () => {},
-    candidateFollowJob: () => {},
-    candidateUnFollowJob: () => {},
-    candidateDeleteBackgroundCandidate: () => {},
-    candidateDeleteAvatarCandidate: () => {},
   },
 });
 export const {
@@ -48,5 +50,7 @@ export const {
   candidateDeleteAvatarCandidate,
   candidateFollowJob,
   candidateUnFollowJob,
+  candidateSetDefaultResume,
+  candidateUpdatePublicResume,
 } = candidateSlice.actions;
 export default candidateSlice.reducer;

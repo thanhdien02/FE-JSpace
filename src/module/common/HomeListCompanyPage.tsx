@@ -98,7 +98,7 @@ const HomeListCompanyPage: React.FC = () => {
             </h3>
             <NavLink
               to="/companys"
-              className="flex gap-1 cursor-pointer text-primary hover:underline items-center"
+              className="flex gap-1 cursor-pointer hover:underline items-center"
             >
               <span className="font-medium">{t("seeall")}</span>
               <IconChervonRight classIcon="!w-5 !h-5"></IconChervonRight>

@@ -11,7 +11,7 @@ const CardProductAtCommonPage: React.FC<PropComponent> = ({
   return (
     <>
       <div
-        className={`border border-gray-200 shadow-lg border-solid rounded-md ${className}`}
+        className={`border border-gray-200 shadow-lg border-solid rounded-md hover:shadow-xl transition-all ${className}`}
       >
         <div className="px-4 py-3 bg-gray-800 rounded-t-md ">
           <h2 className="text-white font-bold uppercase">{item?.name}</h2>

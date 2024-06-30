@@ -5,11 +5,13 @@ import {
   requestCandidateDeleteBackground,
   requestCandidateFollowJob,
   requestCandidateSaveJob,
+  requestCandidateSetDefaultResume,
   requestCandidateUnFollowJob,
   requestCandidateUnSaveJob,
   requestCandidateUpdateAvatar,
   requestCandidateUpdateBackground,
   requestCandidateUpdateIdentification,
+  requestCandidateUpdatePublicResume,
 } from "./candidate-requests";
 import {
   candidateUpdateLoadingRedux,
@@ -17,6 +19,7 @@ import {
 } from "./candidate-slice";
 import { handleAuthFetchMe } from "../auth/auth-handlers";
 import { message } from "antd";
+import { authUpdateSetDefaultResumeRedux } from "../auth/auth-slice";
 
 function* handleCandidateUpdateIdentification(
   dataCandidatUpdate: any
@@ -247,6 +250,60 @@ function* handleCandidateUnFollowJob(
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
   }
 }
+function* handleCandidateSetDefaultResume(
+  dataCandiateSetDefaultResume: any
+): Generator<any> {
+  try {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestCandidateSetDefaultResume,
+      dataCandiateSetDefaultResume?.payload?.candidate_id,
+      dataCandiateSetDefaultResume?.payload?.resume_id,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      message.success("Đặt CV chính thành công.");
+      yield put(
+        authUpdateSetDefaultResumeRedux({
+          defaultResume: response.data.result.defaultResume,
+          publicProfile: response.data.result.publicProfile,
+        })
+      );
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
+  }
+}
+function* handleCandidateUpdatePublicResume(
+  dataCandiateSetDefaultResume: any
+): Generator<any> {
+  try {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestCandidateUpdatePublicResume,
+      dataCandiateSetDefaultResume?.payload?.candidate_id,
+      dataCandiateSetDefaultResume?.payload?.publicProfile,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      message.success("Cập nhật hiển thị CV thành công.");
+      yield put(
+        authUpdateSetDefaultResumeRedux({
+          defaultResume: response.data.result.defaultResume,
+          publicProfile: response.data.result.publicProfile,
+        })
+      );
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
+  }
+}
 export {
   handleCandidateUpdateIdentification,
   handleCandidateUpdateBackground,
@@ -257,4 +314,6 @@ export {
   handleCandidateDeleteBackgroundCandidate,
   handleCandidateFollowJob,
   handleCandidateUnFollowJob,
+  handleCandidateSetDefaultResume,
+  handleCandidateUpdatePublicResume,
 };

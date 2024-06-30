@@ -3,9 +3,10 @@ import IconDownload from "../icons/IconDownload";
 import IconTrash from "../icons/IconTrash";
 import { useDispatch, useSelector } from "react-redux";
 import { fileDeleteFile } from "../../store/file/file-slice";
-import { Modal } from "antd";
+import { message, Modal } from "antd";
 import { StarFilled } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
+import { candidateSetDefaultResume } from "../../store/candidate/candidate-slice";
 
 interface PropComponent {
   className?: string;
@@ -33,16 +34,22 @@ const CardListResumePage: React.FC<PropComponent> = ({
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  const handleSetDefaultResume = () => {
+    dispath(
+      candidateSetDefaultResume({
+        candidate_id: user?.id,
+        resume_id: item?.id,
+      })
+    );
+  };
   return (
     <div className={`relative h-[350px] overflow-hidden ${className}`}>
       <img src={item?.imageFilePath} alt="" className="object-cover " />
 
       <div className="text-white absolute flex bg-gradient-to-t from-black/70 to-white/10 inset-0 w-full">
         <div
-          className={`absolute top-4 right-4 flex gap-2 items-center cursor-pointer px-3 py-1 text-sm font-semibold bg-white rounded-md ${
-            true ? "text-black" : "text-black"
-          }`}
+          onClick={handleSetDefaultResume}
+          className={`absolute top-4 right-4 flex gap-2 items-center cursor-pointer px-3 py-1 text-sm font-semibold bg-white rounded-md text-black`}
         >
           <StarFilled className={` ${checkMainCV ? "text-yellow-500" : ""}`} />
           <span className="">{t("manage.cv.maincv")}</span>
@@ -57,7 +64,12 @@ const CardListResumePage: React.FC<PropComponent> = ({
           </a>
           <p className="text-base">Cập nhật lần cuối 17-04-2024 00:39 AM</p>
           <div className="flex gap-2 mt-5">
-            <div className="flex gap-1 justify-center hover:opacity-90 transition-all text-xs items-center bg-primary text-white px-3 py-[6px] rounded-2xl cursor-pointer">
+            <div
+              onClick={() => {
+                downloadFile(item?.path, item?.name);
+              }}
+              className="flex gap-1 justify-center hover:opacity-90 transition-all text-xs items-center bg-primary text-white px-3 py-[6px] rounded-2xl cursor-pointer"
+            >
               <IconDownload></IconDownload>
               <span className="font-medium">{t("download")}</span>
             </div>
@@ -85,3 +97,31 @@ const CardListResumePage: React.FC<PropComponent> = ({
 };
 
 export default CardListResumePage;
+
+async function downloadFile(url: string, nameFile: string) {
+  try {
+    // Fetch the file
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    // Get the filename from the URL
+    const fileHandle: FileSystemFileHandle = await (
+      window as any
+    ).showSaveFilePicker({
+      suggestedName: nameFile,
+      types: [
+        {
+          description: "File",
+          accept: { "*/*": [".pdf", ".txt", ".jpg", ".png"] },
+        },
+      ],
+    });
+    const writable = await fileHandle.createWritable();
+    await writable.write(blob);
+    await writable.close();
+
+    message.success("Tải xuống thành công !");
+  } catch (error) {
+    console.error("Error downloading file:", error);
+  }
+}
