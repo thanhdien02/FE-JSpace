@@ -138,20 +138,6 @@ const ApplyJobPage: React.FC<PropComponent> = ({
                 <div className="mt-5">
                   <div className="flex flex-col md:gap-5 gap-3">
                     <RadioButton
-                      label="
-                      CV ứng tuyển gần nhất"
-                      name="options"
-                      value="option1"
-                      checked={selectedOption === "option1"}
-                      onChange={handleOptionChange}
-                      children={
-                        <div className="px-3 pb-3">
-                          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-                        </div>
-                      }
-                      className="border border-solid border-gray-200 rounded-md"
-                    />
-                    <RadioButton
                       label="Chọn CV khác trong thư viện CV của tôi"
                       name="options"
                       value="option2"
@@ -162,8 +148,10 @@ const ApplyJobPage: React.FC<PropComponent> = ({
                           {selectCV ? (
                             <div className="">
                               <div className="flex items-center gap-3">
-                                <h3>CV đã tải lên:</h3>
-                                <p className="font-medium w-[50%] line-clamp-1">
+                                <h3 className="lg:text-sm text-xs lg:block hidden">
+                                  CV đã tải lên:
+                                </h3>
+                                <p className="font-medium lg:w-[50%] w-[150px] line-clamp-1">
                                   {cvchoose?.name}
                                 </p>
                                 <a
@@ -181,7 +169,9 @@ const ApplyJobPage: React.FC<PropComponent> = ({
                                   className="ml-auto flex gap-2 px-4 py-2 bg-slate-200 rounded-md font-medium cursor-pointer"
                                 >
                                   <EditOutlined />
-                                  <span>Thay đổi</span>
+                                  <span className="lg:text-base text-sm text-nowrap">
+                                    Thay đổi
+                                  </span>
                                 </div>
                               </div>
                               <Divider orientation="right" className="">
@@ -245,14 +235,14 @@ const ApplyJobPage: React.FC<PropComponent> = ({
                                   files?.content?.map((item: any) => (
                                     <div
                                       key={item?.id}
-                                      className="group/item flex items-center px-4 py-2 w-full hover:border-primary transition-all border border-solid border-gray-200 rounded-md cursor-pointer"
+                                      className="group/item flex items-center justify-between px-4 py-2 w-full hover:border-primary transition-all border border-solid border-gray-200 rounded-md cursor-pointer"
                                     >
-                                      <span className="w-[70%] line-clamp-1">
+                                      <p className="md:w-[70%] w-[140px] line-clamp-1">
                                         {item?.name}
-                                      </span>
+                                      </p>
                                       <a
                                         target="_blank"
-                                        className="font-medium invisible group-hover/item:visible text-primary"
+                                        className="font-medium md:invisible group-hover/item:visible text-primary"
                                         href={item?.file?.path}
                                       >
                                         Xem
@@ -263,7 +253,7 @@ const ApplyJobPage: React.FC<PropComponent> = ({
                                           setSelectCV(!selectCV);
                                           setCVChoose(item);
                                         }}
-                                        className="invisible group-hover/item:visible ml-auto px-2 py-1 hover:opacity-80 rounded-sm bg-primary text-sm font-semibold text-white"
+                                        className="md:invisible group-hover/item:visible px-2 py-1 md:ml-auto hover:opacity-80 rounded-sm bg-primary text-sm font-semibold text-white"
                                       >
                                         Chọn CV
                                       </button>

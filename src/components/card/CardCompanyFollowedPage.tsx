@@ -94,9 +94,9 @@ const CardCompanyFollowedPage: React.FC<PropComponent> = ({
         </div>
         <div
           onClick={handleUnFollow}
-          className="absolute bottom-3 right-3 flex gap-2 items-center cursor-pointer bg-red-500 px-2 py-1 text-white hover:opacity-80 transition-all"
+          className="absolute bottom-3 right-3 flex gap-2 items-center cursor-pointer bg-red-500 px-2 py-1 text-white hover:opacity-80 transition-all rounded"
         >
-          <IconTrash></IconTrash>
+          <IconTrash classIcon="!w-[18px] !h-[18px]"></IconTrash>
           <span className="select-none">Bỏ theo dõi</span>
         </div>
       </div>

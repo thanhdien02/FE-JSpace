@@ -1,4 +1,4 @@
-import {  Popover } from "antd";
+import { Popover } from "antd";
 import React from "react";
 import logo from "../../assets/banner3.jpg";
 import IconTrash from "../icons/IconTrash";
@@ -50,9 +50,16 @@ const CardCompanyRelativeAtCompanyDetailPage: React.FC<PropComponent> = ({
           </Popover>
 
           <h5 className="text-gray-500 line-clamp-1 lg:text-sm mt-1">
-            Quy mô: {item?.company?.companySize} nhân viên
+            Quy mô:{" "}
+            <span className="font-medium">
+              {item?.company?.companySize} nhân viên
+            </span>
           </h5>
-          <p className="text-sm text-gray-500">Có 300 người theo dõi</p>
+          <p className="text-sm text-gray-500">
+            {item?.company?.followerNumber == "0"
+              ? "Không có người theo dõi"
+              : `Có ${item?.company?.followerNumber} người theo dõi`}
+          </p>
           <div className="flex gap-3 items-center mt-3">
             <span className="p-1 text-xs bg-gray-200 rounded-sm">
               {item?.company?.address}
@@ -66,16 +73,21 @@ const CardCompanyRelativeAtCompanyDetailPage: React.FC<PropComponent> = ({
           onClick={handleFollowCompany}
           className="absolute bottom-3 right-3 lg:flex hidden items-center gap-2"
         >
-          <div className="flex items-center select-none gap-2 bg-primary text-white py-1 px-2 cursor-pointer">
+          <div
+            onClick={() => {
+              navigate(`/companys/${item?.company?.id}`);
+            }}
+            className="flex items-center select-none gap-[6px] bg-blue-200/30 rounded shadow font-medium text-primary py-1 px-2 cursor-pointer hover:opacity-80 transition-all border border-solid border-primary"
+          >
             {item?.followed ? (
               <>
                 <IconTrash></IconTrash>
-                <span className="text-sm  rounded-sm">Bỏ theo dõi</span>
+                <span className="text-sm rounded-sm">Bỏ theo dõi</span>
               </>
             ) : (
               <>
                 <IconPlus classIcon="!w-5 !h-5"></IconPlus>
-                <span className="text-sm  rounded-sm">Theo dõi</span>
+                <span className="text-sm rounded-sm">Theo dõi</span>
               </>
             )}
           </div>

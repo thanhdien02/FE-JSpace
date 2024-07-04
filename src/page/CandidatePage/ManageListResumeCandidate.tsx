@@ -23,7 +23,7 @@ const ManageListResumeCandidate: React.FC = () => {
           <h3 className="font-semibold text-xl">{t("manage.cv.title")}</h3>
           <NavLink
             to="/upload-resume"
-            className="flex items-center gap-2 bg-white text-primary px-4 py-2 rounded-lg font-medium border border-solid border-primary hover:opacity-80 transition-all"
+            className="flex items-center gap-2 bg-white text-primary px-4 py-2 rounded font-medium border border-solid border-primary hover:opacity-80 transition-all"
           >
             <IconUpload className="font-medium"></IconUpload>
             <span className="text-nowrap"> {t("manage.cv.uploadcv")}</span>

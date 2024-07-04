@@ -14,18 +14,13 @@ const CompanyDetailDescriptionPage: React.FC = () => {
     <>
       {loadingCompany ? (
         <div className="mt-5">
-          {" "}
           <Skeleton />
         </div>
       ) : (
         <ContentSeeMore
           content={`${companyById?.company?.description}`}
-          // line="10"
         ></ContentSeeMore>
       )}
-      {/* <ContentSeeMore
-        content={`${companyById?.company?.description}`}
-      ></ContentSeeMore> */}
       <span className="w-full block my-4 h-[1px] bg-gray-200/80"></span>
       <CompanyDetailListJobPage></CompanyDetailListJobPage>
       <CompanyDetailListCompanyRelativePage className="mt-5"></CompanyDetailListCompanyRelativePage>

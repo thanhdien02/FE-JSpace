@@ -98,20 +98,14 @@ const CardManageJobSavePage: React.FC<PropComponent> = ({
           </div>
         </div>
         <div className="absolute lg:bottom-3 bottom-2 lg:right-3 right-2 flex items-center gap-2">
-          {/* <span
-            onClick={() => {
-              navigate(`/jobs/${item?.post?.id}`);
-            }}
-            className="md:text-sm text-xs select-none bg-primary text-white py-1 px-2 rounded-sm cursor-pointer"
-          >
-            {item?.applied ? "Đã ứng tuyển" : "Ứng tuyển"}
-          </span> */}
           <div
             onClick={handleUnSavedJob}
-            className="flex items-center select-none gap-1 bg-slate-200 py-1 px-2 cursor-pointer"
+            className="flex items-center select-none gap-1 bg-slate-200 py-[6px] px-3 cursor-pointer hover:opacity-80 transtion-all shadow-sm"
           >
             <IconTrash></IconTrash>
-            <span className="md:text-sm text-xs rounded-sm">Bỏ lưu</span>
+            <span className="md:text-sm text-xs rounded-sm font-medium">
+              Bỏ lưu
+            </span>
           </div>
         </div>
       </div>

@@ -69,7 +69,7 @@ const ManageCompanyFollowedPage: React.FC = () => {
               onChange={(e) => {
                 console.log("🚀 ~ e:", e.target.value);
               }}
-              className="bg-gray-200 text-gray-700 hover:bg-gray-200 outline-none px-4 py-2 rounded-lg"
+              className="bg-gray-200 text-gray-700 hover:bg-gray-200 outline-none px-4 py-2 rounded-lg placeholder:text-sm"
             />
             <button
               type="button"
@@ -78,12 +78,12 @@ const ManageCompanyFollowedPage: React.FC = () => {
               {t("search")}
             </button>
           </div>
-          <h3 className="text-base text-gray-500 ">
+          <h3 className="text-sm text-gray-500 ">
             {t("manage.followedcompany.showby")}:
           </h3>
           <Radio.Group onChange={onChange} value={value}>
-            <Radio value={1}>{t("manage.followedcompany.mostrecent")}</Radio>
-            <Radio value={3}>{t("manage.followedcompany.mostfollowers")}</Radio>
+            <Radio className="font-medium" value={1}>{t("manage.followedcompany.mostrecent")}</Radio>
+            <Radio className="font-medium" value={3}>{t("manage.followedcompany.mostfollowers")}</Radio>
           </Radio.Group>
         </div>
 

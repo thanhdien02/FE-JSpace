@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../../assets/bg-login.jpg";
 import IconTrash from "../icons/IconTrash";
 import IconMoney from "../icons/IconMoney";
-import {  Popover } from "antd";
+import { Popover } from "antd";
 import { useNavigate } from "react-router-dom";
 import IconHeart from "../icons/IconHeart";
 import { formatToMillion } from "../../utils/common-function";
@@ -27,7 +27,6 @@ const CardJobAtCompanyDetailPage: React.FC<PropComponent> = ({ item }) => {
   const [checkSave, setCheckSave] = useState(false);
   const handleSaveAndUnSaveJob = () => {
     if (!user?.id) {
-      // message.info("Bạn cần đăng nhập để lưu tin.");
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       if (!loadingCandidate) {
@@ -96,7 +95,7 @@ const CardJobAtCompanyDetailPage: React.FC<PropComponent> = ({ item }) => {
         <div className="flex flex-col w-full self-start">
           <Popover content={<p className="w-[300px]">{item?.post?.title}</p>}>
             <h4
-              className="lg:w-[80%] cursor-pointer text-base font-medium line-clamp-1"
+              className="lg:w-[75%] cursor-pointer text-base font-medium line-clamp-1"
               onClick={() => {
                 navigate(`/jobs/${item?.post?.id}`);
               }}
@@ -125,23 +124,25 @@ const CardJobAtCompanyDetailPage: React.FC<PropComponent> = ({ item }) => {
             onClick={() => {
               navigate(`/jobs/${item?.post?.id}`);
             }}
-            className="text-sm select-none bg-primary text-white py-1 px-2 rounded-sm cursor-pointer"
+            className="text-sm select-none bg-primary text-white py-1 px-3 cursor-pointer rounded border border-solid border-transparent"
           >
             {item?.applied ? "Đã ứng tuyển" : "Ứng tuyển"}
           </span>
           <div
             onClick={handleSaveAndUnSaveJob}
-            className="flex items-center select-none gap-1 bg-slate-200 py-1 px-2 cursor-pointer"
+            className={`flex items-center select-none gap-1  py-1 px-3 cursor-pointer rounded border border-solid ${
+              checkSave ? "text-primary  border-primary bg-white" : "border-transparent bg-slate-200"
+            }`}
           >
             {checkSave ? (
               <>
                 <IconTrash></IconTrash>
-                <span className="text-sm  rounded-sm">Bỏ lưu</span>
+                <span className="text-sm">Bỏ lưu</span>
               </>
             ) : (
               <>
                 <IconHeart classIcon="!w-5 !h-5"></IconHeart>
-                <span className="text-sm  rounded-sm">Lưu</span>
+                <span className="text-sm">Lưu</span>
               </>
             )}
           </div>

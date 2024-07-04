@@ -3,15 +3,22 @@ import React from "react";
 import { useSelector } from "react-redux";
 import CardNotificationAtHeaderPage from "../../components/card/CardNotificationAtHeaderPage";
 import { useTranslation } from "react-i18next";
-
-const HeaderNotificationPage: React.FC = () => {
+interface PropComponent {
+  className?: string;
+  onSeeMore?: any;
+}
+const HeaderNotificationPage: React.FC<PropComponent> = ({
+  className,
+  onSeeMore,
+}) => {
   const { notifications, loadingNotification } = useSelector(
     (state: any) => state.notification
   );
   const { t } = useTranslation();
-
   return (
-    <div className="absolute top-[155%] bg-white shadow-md min-w-[300px] min-h-[200px] z-50 right-0">
+    <div
+      className={`absolute top-[155%] bg-white shadow-md min-w-[300px] min-h-[200px] z-50 right-0 rounded-b ${className}`}
+    >
       <div className="py-3 px-4">
         <h3 className="font-semibold text-lg">{t("notification")}</h3>
       </div>
@@ -34,6 +41,14 @@ const HeaderNotificationPage: React.FC = () => {
             ))}
         </div>
       )}
+      <div
+        onClick={() => {
+          onSeeMore();
+        }}
+        className="h-[20px] bg-white hover:bg-gray-200 transition-all w-full flex justify-center items-center cursor-pointer rounded-b"
+      >
+        <span className="text-sm">{t("seemore")}</span>
+      </div>
     </div>
   );
 };

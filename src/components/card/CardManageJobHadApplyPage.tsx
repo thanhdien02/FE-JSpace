@@ -68,7 +68,7 @@ const CardManageJobHadApplyPage: React.FC<PropComponent> = ({ item }) => {
         </div>
         <div className="absolute bottom-3 right-3 flex items-center gap-2">
           <span
-            className={`md:text-sm text-xs select-none bg-green-500 text-white py-1 px-3 rounded-sm cursor-pointer ${
+            className={`md:text-base text-xs select-none bg-green-500 text-white py-[6px] px-4 rounded-sm cursor-pointer font-medium ${
               item?.applyStatus?.code == "PROGRESS"
                 ? "bg-primary"
                 : item?.applyStatus?.code == "REJECT"

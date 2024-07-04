@@ -44,7 +44,9 @@ const ManageJobSavePage: React.FC = () => {
           {loadingJob ? (
             <Skeleton />
           ) : savedJobs?.length <= 0 ? (
-            <><Empty /></>
+            <>
+              <Empty />
+            </>
           ) : (
             savedJobs?.length > 0 &&
             savedJobs.map((item: any) => (
@@ -57,9 +59,7 @@ const ManageJobSavePage: React.FC = () => {
         </div>
 
         <div className="flex justify-end mt-5 mb-10">
-          {savedJobs.length <= 0 ? (
-            <></>
-          ) : (
+          {savedJobs.length > 0 && (
             <Pagination
               total={paginationSavedJob?.totalElements}
               onChange={(e) => setPage(e)}

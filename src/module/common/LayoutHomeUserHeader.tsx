@@ -28,7 +28,9 @@ import { notificationGetNotification } from "../../store/notification/notificati
 interface PropComponent {}
 const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
   const { loadingInputSearchJob } = useSelector((state: any) => state.job);
-  const { notifications } = useSelector((state: any) => state.notification);
+  const { notifications, paginationNotification } = useSelector(
+    (state: any) => state.notification
+  );
   const { user, accessToken } = useSelector((state: any) => state.auth);
   const { inputHeaderSearchCheck } = useSelector((state: any) => state.common);
   const [numberRead, setNumberRead] = useState(0);
@@ -38,6 +40,8 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [pageNotification, setPageNotificaiton] = useState<number>(1);
+  const [sizeNotification, setSizeNotification] = useState(5);
   const [size] = useState<DrawerProps["size"]>();
   const inputSearch = useRef<any>(null);
   // dich
@@ -80,9 +84,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
 
   const clearInputSearch = () => {
     if (inputSearch?.current) {
-      // sử dụng useRef để xóa bởi vì sử dụng debouce nên không và value bằng state được.
       inputSearch.current.value = "";
-      // cleaar state
       setTitle("");
     }
   };
@@ -95,7 +97,14 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
     );
   };
   useEffect(() => {
-    if (user?.id) dispatch(notificationGetNotification({ userId: user?.id }));
+    if (user?.id)
+      dispatch(
+        notificationGetNotification({
+          userId: user?.id,
+          page: pageNotification,
+          size: 100,
+        })
+      );
   }, [user?.id]);
   useEffect(() => {
     if (notifications?.length > 0) {
@@ -105,6 +114,20 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
       setNumberRead(countRead);
     }
   }, [notifications]);
+  const handleSeeMoreNotifications = () => {
+    if (pageNotification < paginationNotification?.totalPages) {
+      dispatch(
+        notificationGetNotification({
+          userId: user?.id,
+          page: pageNotification,
+          size: sizeNotification + 5,
+        })
+      );
+      setPageNotificaiton(pageNotification);
+      setSizeNotification(sizeNotification + 5);
+    }
+    console.log("object");
+  };
 
   return (
     <>
@@ -204,11 +227,9 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                   className="text-primary cursor-pointer hover:opacity-80 transition-all"
                 ></IconBell>
                 {numberRead > 0 && (
-                  <span className="absolute -top-2 -right-2 flex">
-                    <span className="m-auto w-6 h-6 text-center rounded-full bg-red-500 text-white font-medium">
-                      {numberRead}
-                    </span>
-                  </span>
+                  <div className="absolute -top-2 -right-2 flex w-6 h-6 bg-red-500 text-white font-medium justify-center items-center rounded-full">
+                    {numberRead}
+                  </div>
                 )}
                 {checkNotificationShort && (
                   <>
@@ -218,7 +239,9 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                         setCheckNotificationShort(!checkNotificationShort)
                       }
                     ></div>
-                    <HeaderNotificationPage></HeaderNotificationPage>
+                    <HeaderNotificationPage
+                      onSeeMore={handleSeeMoreNotifications}
+                    ></HeaderNotificationPage>
                   </>
                 )}
               </span>
@@ -317,7 +340,6 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
           title={<h1 className="text-primary text-xl font-bold">JSPACE</h1>}
           placement="right"
           size={size}
-          // closable={false}
           onClose={onClose}
           className="ease-linear duration-500"
           open={open}
@@ -329,7 +351,6 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                     <Button
                       type="primary"
                       onClick={() => {
-                        // dispatch(authLogout());
                         setOpen(false);
                         setCheckNotification(true);
                       }}

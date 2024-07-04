@@ -5,7 +5,6 @@ import IconHeart from "../../components/icons/IconHeart";
 import IconHeartFill from "../../components/icons/IconHeartFill";
 import { message, Popover, Skeleton } from "antd";
 import IconMapPin from "../../components/icons/IconMapPin";
-import IconBriefCase from "../../components/icons/IconBriefCase";
 import IconClock from "../../components/icons/IconClock";
 import { useSelector } from "react-redux";
 import ApplyJobPage from "../../page/CommonPage/ApplyJobPage";
@@ -23,6 +22,7 @@ import {
   formatToMillion,
   getCurrentDate,
 } from "../../utils/common-function";
+import IconBriefCaseOutline from "../../components/icons/IconBriefCaseOutline";
 interface PropComponent {
   className?: string;
   titleJob?: string;
@@ -127,7 +127,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
           <>
             <div className="flex flex-wrap gap-6 lg:gap-14 mt-5 ">
               <div className="flex gap-4 items-center">
-                <IconMoney className="p-3 bg-primary rounded-full text-white"></IconMoney>
+                <IconMoney className="p-3 bg-white rounded-full text-primary border border-solid border-primary"></IconMoney>
                 <div className="flex flex-col">
                   <span className="text-sm text-gray-500 line-clamp-1">
                     {t("placeholdersalary")}
@@ -164,7 +164,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
               <div className="flex gap-4 items-center">
                 <IconMapPin
                   classIcon="w-6 h-6"
-                  className="p-3 bg-primary rounded-full text-white"
+                  className="p-3 bg-white rounded-full text-primary border border-solid border-primary"
                 ></IconMapPin>
                 <div className="flex flex-col">
                   <span className="text-sm text-gray-500 line-clamp-1">
@@ -176,7 +176,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
                 </div>
               </div>
               <div className="flex gap-4 items-center">
-                <IconBriefCase className="p-3 bg-primary rounded-full text-white"></IconBriefCase>
+                <IconBriefCaseOutline className="p-3 bg-white rounded-full text-primary border border-solid border-primary"></IconBriefCaseOutline>
                 <div className="flex flex-col">
                   <span className="text-sm text-gray-500 line-clamp-1">
                     {t("placeholderexperience")}

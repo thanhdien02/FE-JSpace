@@ -11,14 +11,24 @@ import IconWifi from "../../components/icons/IconWifi";
 import IconArrowRightLeft from "../../components/icons/IconArrowRightLeft";
 import IconUser from "../../components/icons/IconUser";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { candidateUpdatePublicResume } from "../../store/candidate/candidate-slice";
 const ManageMenuUsingPhonePage: React.FC = () => {
-  const { user } = useSelector((state: any) => state.auth);
+  const { user, publicProfile } = useSelector((state: any) => state.auth);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  const handleChangePublicResume = () => {
+    dispatch(
+      candidateUpdatePublicResume({
+        candidate_id: user?.id,
+        publicProfile: !publicProfile,
+      })
+    );
+  };
   return (
     <div className="border-t-[1px] border-solid border-gray-200">
       <div className="flex flex-col w-full h-fit p-5 gap-3 bg-white rounded-lg">
@@ -68,7 +78,10 @@ const ManageMenuUsingPhonePage: React.FC = () => {
         <span className="h-[1px] bg-gray-200 w-full"></span>
 
         <div className="flex gap-5 p-1  pb-4">
-          <Switch></Switch>
+          <Switch
+            value={publicProfile}
+            onChange={handleChangePublicResume}
+          ></Switch>
           <span className="">{t("menu.allowrecruitor")}</span>
         </div>
         <NavLink

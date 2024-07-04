@@ -6,6 +6,7 @@ import { jobGetInputSearchJob } from "../../store/job/job-slice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { commonUpdateInputHeaderSearchCheckRedux } from "../../store/common/common-slice";
+import { useTranslation } from "react-i18next";
 
 interface PropCompent {
   className?: string;
@@ -23,6 +24,7 @@ const InputSearchResult: React.FC<PropCompent> = ({
     (state: any) => state.job
   );
   const { user } = useSelector((state: any) => state.auth);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -146,7 +148,7 @@ const InputSearchResult: React.FC<PropCompent> = ({
                       setNaviateDetailSearch(true);
                     }}
                   >
-                    Xem thêm{" "}
+                    {t("seemore")}{" "}
                     {paginationInputSearchJob?.totalElements ? (
                       <span className="font-medium">
                         ({paginationInputSearchJob?.totalElements})

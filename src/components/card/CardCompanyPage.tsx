@@ -1,6 +1,5 @@
 import React from "react";
-import bg from "../../assets/banner3.jpg";
-import bg1 from "../../assets/banner-job4.jpg";
+import avatar from "../../assets/logo3.png";
 import IconStar from "../icons/IconStar";
 import IconChervonRight from "../icons/IconChervonRight";
 import { Popover } from "antd";
@@ -17,13 +16,19 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
       <div className="w-full h-[300px] bg-white shadow-md rounded-md overflow-hidden">
         <div className="relative h-[43%]">
           <img
-            src={item?.company?.background ? item?.company?.background : bg}
-            className="rounded-t-lg w-full h-full object-cover"
+            src={
+              item?.company?.background
+                ? item?.company?.background
+                : "https://biz.prlog.org/jspace/logo.png"
+            }
+            className={`rounded-t-lg w-full h-full  ${
+              item?.company?.background ? "object-cover" : "object-contain"
+            } `}
             alt=""
           />
           <img
-            src={item?.company?.logo ? item?.company?.logo : bg1}
-            className="absolute left-6 -bottom-7 rounded-md w-[65px] h-[65px] object-cover"
+            src={item?.company?.logo ? item?.company?.logo : avatar}
+            className="absolute left-6 -bottom-7 rounded-md w-[70px] h-[70px] object-cover"
             alt=""
           />
           <div className="absolute text-primary hover:underline cursor-pointer transition-all right-2 -bottom-7 flex items-center gap-5">
@@ -41,7 +46,9 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
           <div className="p-5 flex flex-col gap-1">
             <div className="flex gap-4">
               <Popover
-                content={<p className="w-[300px] font-medium">{item?.company?.name}</p>}
+                content={
+                  <p className="w-[300px] font-medium">{item?.company?.name}</p>
+                }
               >
                 <h2
                   onClick={() => {
@@ -58,7 +65,9 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
                 <span className="">4.6</span>
               </div>
             </div>
-            <p className="mt-1 line-clamp-1 text-sm text-gray-500">{item?.company?.email}</p>
+            <p className="mt-1 line-clamp-1 text-sm text-gray-500">
+              {item?.company?.email}
+            </p>
             <p className="line-clamp-1 text-sm text-gray-500">
               {item?.company?.companyLink}
             </p>

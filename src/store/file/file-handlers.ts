@@ -26,7 +26,7 @@ function* handleFileUploadFile(dataUploadFile: any): Generator<any> {
       formData
     );
     if (response?.data?.code === 1000) {
-      message.success("Upload successful");
+      message.success("Tải CV lên thành công !");
       yield put(
         fileUpdateMessageRedux({
           messageFile: "success",
@@ -53,7 +53,7 @@ function* handleFileApplyJobFile(dataUploadFile: any): Generator<any> {
       formData
     );
     if (response?.data?.code === 1000) {
-      message.success("Upload successful");
+      message.success("Tải CV lên thành công !");
       yield put(
         fileUpdateMessageRedux({
           messageFile: "success",
