@@ -53,7 +53,7 @@ function* handleAuthFetchMe(): Generator<any> {
       message.error("Đây là tài khoản Employee.");
     }
   } catch (error: any) {
-    message.error(error?.response?.data?.message);
+    // message.error(error?.response?.data?.message);
     if (error?.response?.data?.message == "unauthenticated") {
       yield put(
         authUpdateMessageRedux({ messageAuth: error?.response?.data?.message })
@@ -151,7 +151,6 @@ function* handleAuthRefrestToken(): Generator<any> {
     }
   } catch (error) {
     logOut();
-  } finally {
   }
 }
 
