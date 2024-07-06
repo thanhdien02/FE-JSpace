@@ -11,6 +11,7 @@ import BlogsPage from "./page/CommonPage/BlogsPage";
 import FindJobPage from "./page/CommonPage/FindJobPage";
 import ManageChangePasswordPage from "./page/CandidatePage/ManageChangePasswordPage";
 import ManageMenuUsingPhonePage from "./page/CandidatePage/ManageMenuUsingPhonePage";
+import SupportPage from "./page/CommonPage/SupportPage";
 // const HomePage = lazy(() => import("./page/CommonPage/HomePage"));
 const LayoutHomeUser = lazy(() => import("./layout/LayoutHomeUser"));
 // const CompanyPage = lazy(() => import("./page/CompanyPage/CompanyPage"));
@@ -85,6 +86,10 @@ function App() {
             <Route
               path="/common"
               element={<ManageMenuUsingPhonePage></ManageMenuUsingPhonePage>}
+            ></Route>
+            <Route
+              path="/supports"
+              element={<SupportPage></SupportPage>}
             ></Route>
           </Route>
           <Route

@@ -101,9 +101,9 @@ const HomeBannerPage: React.FC = () => {
         <img
           src={bannerbg}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-70"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="p-5 flex flex-col w-full min-h-[150px] justify-center items-center gap-y-5 bg-blue-600">
+        <div className="p-5 flex flex-col w-full min-h-[150px] justify-center items-center gap-y-5">
           <h1 className="z-[1] font-bold text-3xl text-white lg:line-clamp-1 py-2 mt-6 text-center lg:text-start px-4 lg:px-0">
             {t("home.titlebannerhome")}
           </h1>
