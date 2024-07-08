@@ -15,7 +15,7 @@ import {
   LoadingOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import logo from "../../assets/logo3.png";
+import logo from "../../assets/logo1.svg";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import IconClose from "../../components/icons/IconClose";
@@ -116,18 +116,13 @@ const LoginPage: React.FC<PropComponent> = ({
           }}
           className="absolute top-2 right-2 hover:bg-gray-200 transition-all rounded-md cursor-pointer"
         >
-          <IconClose
-          // actionCloseLogin={!loading ? actionLogin : () => {}}
-          ></IconClose>
+          <IconClose></IconClose>
         </span>
 
         <div className="flex justify-center flex-col items-center gap-2 mb-5">
           <NavLink to="/" className="block">
-            <img src={logo} alt="" className="max-w-[50px]" />
+            <img src={logo} alt="" className="w-[130px]" />
           </NavLink>
-          <h1 className="text-center text-primary font-bold text-2xl tracking-wider">
-            JSPACE
-          </h1>
         </div>
         <div className="">
           <div className="w-full">

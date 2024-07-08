@@ -1,7 +1,9 @@
 import React from "react";
 import logo from "../../assets/logo3.png";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const LayoutHomeUserFooter: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <>
       <footer className="w-primary max-w-full mx-auto pt-10">
@@ -42,68 +44,67 @@ const LayoutHomeUserFooter: React.FC = () => {
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <h3 className="font-medium">DANH MỤC</h3>
+            <h3 className="font-medium"> {t("footer.category")}</h3>
             <div className="flex flex-col gap-1">
               <NavLink
                 to="/"
                 className="hover:underline transition-all text-sm text-[#6A6E78]"
               >
-                Trang chủ
+                {t("home.name")}
               </NavLink>
               <NavLink
                 to="/jobs"
                 className="hover:underline transition-all text-sm text-[#6A6E78]"
               >
-                Tìm việc
+                {t("findjob.name")}
               </NavLink>
               <NavLink
                 to="/companys"
                 className="hover:underline transition-all text-sm text-[#6A6E78]"
               >
-                Công ty
+                {t("company.name")}
               </NavLink>
               <NavLink
                 to="/"
                 className="hover:underline transition-all text-sm text-[#6A6E78]"
               >
-                Hỗ trợ
+                {t("support")}
               </NavLink>
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <h3 className="font-medium">SẢN PHẨM</h3>
+            <h3 className="font-medium"> {t("footer.product")}</h3>
             <ul className="flex flex-col gap-1">
               <NavLink
                 to="/"
                 className="hover:underline transition-all text-sm text-[#6A6E78]"
               >
-                Gói tuyển dụng
+                {t("footer.recruitmentpackage")}
               </NavLink>
               <NavLink
                 to="/"
                 className="hover:underline transition-all text-sm text-[#6A6E78]"
               >
-                Tìm ứng viên
+                {t("footer.fincandidate")}
               </NavLink>
               <NavLink
                 to="/"
                 className="hover:underline transition-all text-sm text-[#6A6E78]"
               >
-                Đăng tin
+                {t("footer.postjob")}
               </NavLink>
               <NavLink
                 to="/"
                 className="hover:underline transition-all text-sm text-[#6A6E78]"
               >
-                Dịch vụ
+                {t("footer.service")}
               </NavLink>
             </ul>
           </div>
           <div className="lg:w-[30%]">
-            <h2 className="font-semibold uppercase">Thông tin liên hệ</h2>
+            <h2 className="font-semibold uppercase">{t("footer.contact")}</h2>
             <p className="mt-5 text-sm text-[#6A6E78]">
-              Nhập email của bạn để chúng tôi có thể thông báo những thông tin
-              mới nhất.
+              {t("footer.descriptcontact")}
             </p>
             <div className="mt-4 flex gap-3">
               <input
@@ -116,7 +117,7 @@ const LayoutHomeUserFooter: React.FC = () => {
                 className="px-6 py-2 rounded bg-primary text-white font-medium hover:opacity-80 transition-all"
                 type="button"
               >
-                Gửi
+                {t("footer.send")}
               </button>
             </div>
           </div>
@@ -129,7 +130,7 @@ const LayoutHomeUserFooter: React.FC = () => {
         </div>
         <div className="">
           <a href="#" className="hover:underline transition-all">
-            Điều khoản & chính sách
+            {t("footer.policy")}
           </a>
         </div>
       </div>

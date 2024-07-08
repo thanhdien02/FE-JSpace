@@ -115,13 +115,13 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
         </div>
 
         <div
-          className="absolute bottom-2 right-2 cursor-pointer text-primary"
+          className="absolute bottom-2 right-2 cursor-pointer "
           onClick={handleSaveAndUnSaveJob}
         >
           {checkSave ? (
-            <IconHeartFill className="" classIcon="!w-5 !h-5"></IconHeartFill>
+            <IconHeartFill className="" classIcon="!w-5 !h-5 text-red-500"></IconHeartFill>
           ) : (
-            <IconHeart className="" classIcon="!w-5 !h-5"></IconHeart>
+            <IconHeart className="" classIcon="!w-5 !h-5 text-primary"></IconHeart>
           )}
         </div>
       </div>

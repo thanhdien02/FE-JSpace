@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import IconKey from "../../components/icons/IconKey";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import logo from "../../assets/logo3.png";
+import logo from "../../assets/logo1.svg";
 import { Checkbox, CheckboxProps, message, Spin } from "antd";
 import { authRegister } from "../../store/auth/auth-slice";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -69,7 +69,7 @@ const RegisterPage: React.FC<PropComponent> = ({ className = "" }) => {
           >
             <div className="absolute top-10 left-10 ">
               <NavLink to="/" className="block ">
-                <img src={logo} alt="" className="max-w-[50px]" />
+                <img src={logo} alt="" className="w-[130px]" />
               </NavLink>
             </div>
             <div className="absolute right-10 top-14 font-medium px-2 py-1 border border-solid border-primary rounded-sm">

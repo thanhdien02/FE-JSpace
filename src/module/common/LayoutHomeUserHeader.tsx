@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import logo from "../../assets/logo3.png";
+import logo from "../../assets/logo1.svg";
 import { useSelector } from "react-redux";
 import IconChervonDown from "../../components/icons/IconChervonDown";
 import IconBell from "../../components/icons/IconBell";
@@ -31,12 +31,14 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
   const { notifications, paginationNotification } = useSelector(
     (state: any) => state.notification
   );
+
   const { user, accessToken } = useSelector((state: any) => state.auth);
   const { inputHeaderSearchCheck } = useSelector((state: any) => state.common);
   const [numberRead, setNumberRead] = useState(0);
   const [title, setTitle] = useState("");
   const [checkNotification, setCheckNotification] = useState(false);
   const [checkNotificationShort, setCheckNotificationShort] = useState(false);
+  const [language, setLanguage] = useState("vi");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -134,7 +136,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
       <header className="flex fixed left-0 top-0 right-0 shadow-md lg:px-10 px-5 pb-3 pt-4 justify-between items-center bg-white z-30 ">
         <div className="flex items-center gap-5">
           <NavLink to="/">
-            <img src={logo} alt="" className="w-[45px] object-cover" />
+            <img src={logo} alt="" className="w-[120px] object-cover" />
           </NavLink>
           <ul className="lg:flex hidden gap-2 items-center">
             <HeaderItem title={t("home.name")} path="/"></HeaderItem>
@@ -194,7 +196,24 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                 {t("postjob")}
               </a>
               <div className="flex gap-1 items-center">
-                <img
+                <select
+                  name=""
+                  id=""
+                  className="border border-solid border-gray-200 px-2 py-1 rounded outline-none"
+                  onChange={(e) => {
+                    console.log(e?.target?.value);
+                    if (e?.target?.value == "Vie") changeLanguage("vi");
+                    else changeLanguage("en");
+                  }}
+                >
+                  <option value="Vie" className="!hover:bg-primary">
+                    Vietnamese
+                  </option>
+                  <option value="Eng" className="!hover:bg-primary">
+                    English
+                  </option>
+                </select>
+                {/* <img
                   src="https://static.topcv.vn/srp/website/images/flags/vietnam.png"
                   alt=""
                   onClick={() => changeLanguage("vi")}
@@ -205,7 +224,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                   alt=""
                   onClick={() => changeLanguage("en")}
                   className="w-6 h-4 cursor-pointer object-cover"
-                />
+                /> */}
               </div>
             </div>
           ) : (
@@ -314,7 +333,24 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                 </section>
               </div>
               <div className="flex gap-1 items-center">
-                <img
+                {/* <select
+                  name=""
+                  id=""
+                  className=" px-2 py-1 rounded outline-none "
+                  onChange={(e) => {
+                    console.log(e?.target?.value);
+                    if (e?.target?.value == "Vie") changeLanguage("vi");
+                    else changeLanguage("en");
+                  }}
+                >
+                  <option value="Vie" className="!hover:bg-primary">
+                    VI
+                  </option>
+                  <option value="Eng" className="!hover:bg-primary">
+                    EN
+                  </option>
+                </select> */}
+                {/* <img
                   src="https://static.topcv.vn/srp/website/images/flags/vietnam.png"
                   alt=""
                   onClick={() => changeLanguage("vi")}
@@ -325,7 +361,32 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                   alt=""
                   onClick={() => changeLanguage("en")}
                   className="w-6 h-4 cursor-pointer object-cover"
-                />
+                /> */}
+                <div className="flex gap-2 items-center">
+                  <span
+                    onClick={() => {
+                      changeLanguage("vi");
+                      setLanguage("vi");
+                    }}
+                    className={`cursor-pointer ${
+                      language == "en" ? "text-gray-400" : "text-black"
+                    }`}
+                  >
+                    VI
+                  </span>
+                  <span className="bg-gray-400 h-[17px] w-[2px]"></span>
+                  <span
+                    onClick={() => {
+                      changeLanguage("en");
+                      setLanguage("en");
+                    }}
+                    className={`cursor-pointer ${
+                      language == "vi" ? "text-gray-400" : "text-black"
+                    }`}
+                  >
+                    EN
+                  </span>
+                </div>
               </div>
             </div>
           )}

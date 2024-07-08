@@ -80,7 +80,7 @@
     "companysize": "Quy mô",
     "address": "Địa chỉ",
     "follow": "Theo dõi công ty",
-    "unfollow": "Bỏ theo dõi",
+    "unfollow": "Đã theo dõi",
     "employee": "nhân viên",
     "follower": "người theo dõi",
     "informationcompany": "Thông tin công ty",
@@ -103,6 +103,18 @@
     "description": "Thông tin chi tiết công việc",
     "companysize": "Quy mô",
     "address": "Địa chỉ"
+  },
+  "footer": {
+    "category": "DANH MỤC",
+    "product": "SẢN PHẨM",
+    "contact": "THÔNG TIN LIÊN HỆ",
+    "descriptcontact": "Nhập email của bạn để chúng tôi có thể thông báo những thông tin mới nhất.",
+    "fincandidate": "Tìm ứng viên",
+    "recruitmentpackage": "Gói tuyển dụng",
+    "postjob": "Đăng tin",
+    "service": "Dịch vụ",
+    "policy": "Điều khoản & chính sách",
+    "send": "Gửi"
   },
   "login": "Đăng nhập",
   "loginwithgoogle": "Đăng nhập với Google",
@@ -152,6 +164,7 @@
   },
   "fullname": "Họ và tên",
   "confirm": "Xác nhận",
+
   "showpassword": "Hiện mật khẩu",
   "enterinformationforegister": "Hãy nhập thông tin để đăng ký",
   "informationterm": "Bằng việc xác nhận, bạn đồng ý với các Điều khoản dịch vụ và Chính sách quyền riêng tư của JSPACE liên quan đến thông tin riêng tư của bạn."

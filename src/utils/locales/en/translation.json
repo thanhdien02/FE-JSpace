@@ -107,6 +107,18 @@
     "companysize": "Size",
     "address": "Address"
   },
+  "footer": {
+    "category": "CATEGORY",
+    "product": "PRODUCT",
+    "contact": "CONTACT INFORMATION",
+    "descriptcontact": "Enter your email so we can notify you of the latest information.",
+    "fincandidate": "Find candidates",
+    "recruitmentpackage": "Recruitment package",
+    "postjob": "Post job",
+    "service": "Service",
+    "policy": "Terms & policies",
+    "send": "Send"
+  },
   "login": "Login",
   "loginwithgoogle": "Login with Google",
   "term": "By creating an account or logging in, you understand and agree to the Terms.",

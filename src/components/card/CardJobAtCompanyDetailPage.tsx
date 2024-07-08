@@ -124,14 +124,16 @@ const CardJobAtCompanyDetailPage: React.FC<PropComponent> = ({ item }) => {
             onClick={() => {
               navigate(`/jobs/${item?.post?.id}`);
             }}
-            className="text-sm select-none bg-primary text-white py-1 px-3 cursor-pointer rounded border border-solid border-transparent"
+            className={`text-sm select-none text-white py-1 px-3 cursor-pointer rounded border border-solid border-transparent font-medium ${item?.applied ? "bg-green-500" : "bg-primary"}`}
           >
             {item?.applied ? "Đã ứng tuyển" : "Ứng tuyển"}
           </span>
           <div
             onClick={handleSaveAndUnSaveJob}
             className={`flex items-center select-none gap-1  py-1 px-3 cursor-pointer rounded border border-solid ${
-              checkSave ? "text-primary  border-primary bg-white" : "border-transparent bg-slate-200"
+              checkSave
+                ? "text-primary  border-primary bg-white"
+                : "border-transparent bg-slate-200"
             }`}
           >
             {checkSave ? (
