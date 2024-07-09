@@ -1,8 +1,8 @@
 import IconMapPin from "../../components/icons/IconMapPin";
 import React, { useEffect, useRef, useState } from "react";
 import IconMap from "../../components/icons/IconMap";
-import GoogleMapReact from "google-map-react";
-import { TbMapPinFilled } from "react-icons/tb";
+// import GoogleMapReact from "google-map-react";
+// import { TbMapPinFilled } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import IconLink from "../../components/icons/IconLink";
@@ -11,16 +11,16 @@ import { message } from "antd";
 interface PropComponent {
   className?: string;
 }
-interface PropComponentChild {
-  children?: any;
-  lat?: any;
-  lng?: any;
-}
-const AnyReactComponent: React.FC<PropComponentChild> = ({ children }) => (
-  <>
-    <div>{children}</div>
-  </>
-);
+// interface PropComponentChild {
+//   children?: any;
+//   lat?: any;
+//   lng?: any;
+// }
+// const AnyReactComponent: React.FC<PropComponentChild> = ({ children }) => (
+//   <>
+//     <div>{children}</div>
+//   </>
+// );
 interface IMapTitleAddress {
   googleMapsLink?: string;
   address?: string;
@@ -48,19 +48,19 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
 }) => {
   const { companyById } = useSelector((state: any) => state.company);
   const { t } = useTranslation();
-  const [coords, setCoords] = useState<any>(null);
+  // const [coords, setCoords] = useState<any>(null);
 
   const [name, setName] = useState<any>("Đồng Tháp Cao Lãnh, Đồng Tháp");
   const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     name
   )}`;
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude, longitude } }) => {
-        setCoords({ lat: latitude, lng: longitude });
-      }
-    );
-  }, [name]);
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(
+  //     ({ coords: { latitude, longitude } }) => {
+  //       setCoords({ lat: latitude, lng: longitude });
+  //     }
+  //   );
+  // }, [name]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCopyLink = () => {
@@ -121,7 +121,19 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
               address={name}
               googleMapsLink={googleMapsLink}
             ></MapTitleAddress>
-            <GoogleMapReact
+
+            <div className="">
+              <iframe
+                title="Vị trí của chúng tôi"
+                className="w-full h-[250px]"
+                src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20S%C6%B0%20Ph%E1%BA%A1m%20K%E1%BB%B9%20Thu%E1%BA%ADt%20TPHCM,%20V%C3%B5%20V%C4%83n%20Ng%C3%A2n,%20Linh%20Chi%E1%BB%83u,%20Th%E1%BB%A7%20%C4%90%E1%BB%A9c,%20Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh+(%C4%90%E1%BA%A1i%20H%E1%BB%8Dc%20S%C6%B0%20Ph%E1%BA%A1m%20K%E1%BB%B9%20Thu%E1%BA%ADt)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+              >
+                <a href="https://www.maps.ie/population/">
+                  Population calculator map
+                </a>
+              </iframe>
+            </div>
+            {/* <GoogleMapReact
               bootstrapURLKeys={{
                 key: "AIzaSyDcwGyRxRbcNGWOFQVT87A1mkxEOfm8t0w",
               }}
@@ -134,7 +146,7 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
                 lng={coords?.lng}
                 children={<TbMapPinFilled className="text-3xl text-red-600" />}
               />
-            </GoogleMapReact>
+            </GoogleMapReact> */}
           </div>
         </div>
       </div>
