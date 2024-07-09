@@ -50,7 +50,7 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
   const { t } = useTranslation();
   const [coords, setCoords] = useState<any>(null);
 
-  const [name] = useState<any>("Đồng Tháp Cao Lãnh, Đồng Tháp");
+  const [name, setName] = useState<any>("Đồng Tháp Cao Lãnh, Đồng Tháp");
   const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     name
   )}`;
@@ -60,9 +60,6 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
         setCoords({ lat: latitude, lng: longitude });
       }
     );
-    if (name) {
-      // setCoords({ lat: name?.lat, lng: name?.lng });
-    }
   }, [name]);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -73,6 +70,9 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
       message.success("Đã sao chép");
     }
   };
+  useEffect(() => {
+    if (companyById?.company?.address) setName(companyById?.company?.address);
+  }, [companyById]);
   return (
     <>
       <div className={`px-6 py-4 ${className}`}>

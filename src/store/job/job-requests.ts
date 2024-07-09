@@ -100,6 +100,8 @@ export const requestJobGetFilterJob = (
   if (rank == null || rank == undefined) rank = "";
   if (minPay == null || minPay == undefined) minPay = "";
   if (maxPay == null || maxPay == undefined) maxPay = "";
+  if (minPay == "0") minPay = "";
+  if (maxPay == "999000000") maxPay = "";
   return axios.get(
     `${API}/api/v1/posts?${
       candidate_id && `candidateId=${candidate_id}&sort=closeDate,${closeDate}&`

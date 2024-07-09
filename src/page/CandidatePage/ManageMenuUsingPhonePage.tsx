@@ -8,7 +8,6 @@ import IconDocumentArrowUp from "../../components/icons/IconDocumentArrowUp";
 import IconHeart from "../../components/icons/IconHeart";
 import IconBriefCaseOutline from "../../components/icons/IconBriefCaseOutline";
 import IconWifi from "../../components/icons/IconWifi";
-import IconArrowRightLeft from "../../components/icons/IconArrowRightLeft";
 import IconUser from "../../components/icons/IconUser";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -129,13 +128,13 @@ const ManageMenuUsingPhonePage: React.FC = () => {
           <IconWifi className="text-gray-600"></IconWifi>
           <p>{t("menu.follow")}</p>
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/manage/change-password"
           className="flex items-center gap-3 pb-4 cursor-pointer hover:opacity-80 transition-all"
         >
           <IconArrowRightLeft className="text-gray-600"></IconArrowRightLeft>
           <p>{t("menu.changepassword")}</p>
-        </NavLink>
+        </NavLink> */}
       </div>
     </div>
   );

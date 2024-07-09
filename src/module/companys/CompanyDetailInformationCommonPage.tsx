@@ -80,7 +80,7 @@ const CompanyDetailInformationCommonPage: React.FC = () => {
           />
           <img
             src={companyById?.company?.logo ? companyById?.company?.logo : bg}
-            className="absolute -bottom-12 left-20 w-[100px] h-[100px] rounded-md object-cover"
+            className="absolute -bottom-12 left-20 w-[100px] h-[100px] rounded-md object-contain border border-solid border-slate-200 bg-white"
             alt=""
           />
         </div>

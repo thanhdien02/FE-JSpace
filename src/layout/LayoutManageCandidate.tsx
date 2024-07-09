@@ -17,7 +17,6 @@ import IconWifi from "../components/icons/IconWifi";
 import IconBriefCaseOutline from "../components/icons/IconBriefCaseOutline";
 import IconHeart from "../components/icons/IconHeart";
 import IconDocumentArrowUp from "../components/icons/IconDocumentArrowUp";
-import IconArrowRightLeft from "../components/icons/IconArrowRightLeft";
 import IconHome from "../components/icons/IconHome";
 import IconBuilding from "../components/icons/IconBuilding";
 import IconUser from "../components/icons/IconUser";
@@ -166,13 +165,13 @@ const LayoutManageCandidate: React.FC = () => {
                 <IconWifi classIcon="!w-5 !h-5"></IconWifi>
                 <p className="font-secondary">{t("menu.follow")}</p>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 to="/manage/change-password"
                 className="flex items-center gap-3 pb-3 cursor-pointer hover:opacity-80 transition-all"
               >
                 <IconArrowRightLeft classIcon="!w-5 !h-5"></IconArrowRightLeft>
                 <p className="font-secondary">{t("menu.changepassword")}</p>
-              </NavLink>
+              </NavLink> */}
             </div>
           </div>
         </div>

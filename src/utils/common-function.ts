@@ -35,3 +35,6 @@ export const getCurrentDate = () => {
   const currDate = `${year}-${month}-${day}`;
   return currDate;
 };
+export const convertDollarToVN = (moneyDollar: number, currency: number) => {
+  return moneyDollar * currency;
+};

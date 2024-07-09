@@ -142,7 +142,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
             <HeaderItem title={t("home.name")} path="/"></HeaderItem>
             <HeaderItem title={t("findjob.name")} path="/jobs"></HeaderItem>
             <HeaderItem title={t("company.name")} path="/companys"></HeaderItem>
-            <HeaderItem title={t("support")} path="/supports"></HeaderItem>
+            <HeaderItem title={t("support.name")} path="/supports"></HeaderItem>
             <div className="ml-5 relative z-40 w-[400px] rounded-lg ">
               <input
                 ref={inputSearch}
@@ -275,7 +275,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
                   <img
                     src={user?.picture}
                     alt=""
-                    className="w-[30px] h-[30px] rounded-full"
+                    className="w-[30px] h-[30px] rounded-full object-cover"
                   />
                 ) : (
                   <div className="rounded-full bg-white ">

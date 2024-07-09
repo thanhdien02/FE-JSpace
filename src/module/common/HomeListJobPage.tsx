@@ -77,10 +77,6 @@ const HomeListJobPage: React.FC = () => {
               optionFilterProp="children"
               options={[
                 {
-                  value: "1",
-                  label: "Mức lương cao nhất",
-                },
-                {
                   value: "2",
                   label: "Tăng dần theo thời gian",
                 },
@@ -104,10 +100,6 @@ const HomeListJobPage: React.FC = () => {
             spaceBetween={50}
             slidesPerView={1}
             navigation
-            // autoplay={{ delay: 4000, disableOnInteraction: false }}
-            // loop
-            // pagination={{ clickable: true }}
-            // scrollbar={{ draggable: true }}
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log("slide change")}
             className="swiper-job hidden lg:block"

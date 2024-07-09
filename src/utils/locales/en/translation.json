@@ -74,6 +74,17 @@
   "blog": {
     "name": "Blogs"
   },
+  "support": {
+    "name": "Support",
+    "title": "Contact us",
+    "leaveinformation": "Leave us your information.",
+    "content": "You can ask any questions, or give feedback about your experience using our recruitment site.",
+    "fullname": "Full name",
+    "description": "Description",
+    "contactinformation": "Contact information",
+    "numberphone": "Number phone",
+    "send": "Send"
+  },
   "company": {
     "name": "Companys",
     "placeholdercompany": "Company name"
@@ -146,7 +157,7 @@
   "applied": "Applied",
   "endapply": "Application period ends",
   "save": "Save",
-  "support": "Support",
+
   "unsave": "Unsave",
   "seemore": "See more",
   "seeless": "See less",

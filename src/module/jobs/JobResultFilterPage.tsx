@@ -45,9 +45,6 @@ const JobResultFilterPage: React.FC<PropComponent> = ({
               {t("findjob.suggestsuitablejob")}:
             </h3>
             <Radio.Group onChange={onChangeFilter} value={filterShow}>
-              <Radio className="font-medium text-base" value={1}>
-                {t("findjob.relateto")}
-              </Radio>
               <Radio className="font-medium text-base" value={2}>
                 {t("findjob.salary")}
               </Radio>

@@ -45,7 +45,7 @@ const HeaderNotificationPage: React.FC<PropComponent> = ({
         onClick={() => {
           onSeeMore();
         }}
-        className="h-[20px] bg-white hover:bg-gray-200 transition-all w-full flex justify-center items-center cursor-pointer rounded-b"
+        className="hidden h-[20px] bg-white hover:bg-gray-200 transition-all w-full justify-center items-center cursor-pointer rounded-b"
       >
         <span className="text-sm">{t("seemore")}</span>
       </div>

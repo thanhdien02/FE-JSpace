@@ -101,7 +101,7 @@ export const dataSalary: any = [
     label: "Từ 41 - 50 triệu",
   },
   {
-    value: "51000000-999000000",
+    value: "50000000-999000000",
     label: "Trên 50 triệu",
   },
 ];

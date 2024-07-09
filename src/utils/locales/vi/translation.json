@@ -96,6 +96,17 @@
   "blog": {
     "name": "Bài viết"
   },
+  "support": {
+    "name": "Hỗ trợ",
+    "title": "Liên hệ với chúng tôi",
+    "leaveinformation": "Để lại thông tin cho chúng tôi.",
+    "content": "Bạn có thể hỏi bất cứ câu hỏi gì, hoặc phản hồi về trải nghiệm bạn bạn khi sử dụng trang tuyển dụng của chúng tôi.",
+    "fullname": "Họ và tên",
+    "description": "Mô tả",
+    "contactinformation": "Thông tin liên hệ",
+    "numberphone": "Số điện thoại",
+    "send": "Gửi"
+  },
   "jobdetail": {
     "informationcommon": "Thông tin chung",
     "seecompanypage": "Xem trang công ty",
@@ -143,7 +154,7 @@
   "applied": "Đã ứng tuyển",
   "endapply": "Đã hết thời gian ứng tuyển",
   "save": "Lưu tin",
-  "support": "Hỗ trợ",
+
   "unsave": "Đã lưu",
   "seemore": "Xem thêm",
   "seeless": "Rút ngắn",

@@ -126,7 +126,15 @@ const LoginPage: React.FC<PropComponent> = ({
         </div>
         <div className="">
           <div className="w-full">
-            <h4 className="mb-2 text-base font-semibold">{t("welcomlogin")}</h4>
+            <div className="mb-2 flex justify-between">
+              <h4 className=" text-base font-semibold">{t("welcomlogin")}</h4>
+              <h4
+                className="text-base font-semibold cursor-pointer hover:opacity-80"
+                onClick={() => login()}
+              >
+                {t("register")}
+              </h4>
+            </div>
             <div className="">
               <label
                 htmlFor="email"

@@ -7,7 +7,6 @@ const FindJobPage: React.FC = () => {
   const [page, setPage] = useState(1);
   const [size] = useState(12);
   const [closeDate, setCloseDate] = useState("");
-  console.log("🚀 ~ closeDate:", closeDate);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [page]);

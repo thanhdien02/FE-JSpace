@@ -31,7 +31,7 @@ const CardCompanyFollowedPage: React.FC<PropComponent> = ({
   return (
     <>
       <div
-        className={`relative w-full h-[300px] bg-white shadow-md rounded-md overflow-hidden ${className}`}
+        className={`relative w-full h-[300px] bg-white shadow-md hover:shadow-lg rounded-md overflow-hidden ${className}`}
       >
         <div className="relative h-[40%]">
           <img
@@ -65,7 +65,7 @@ const CardCompanyFollowedPage: React.FC<PropComponent> = ({
                   onClick={() => {
                     navigate(`/companys/${item?.id}`);
                   }}
-                  className="w-[90%] font-medium text-base line-clamp-2 cursor-pointer hover:text-primary transition-all"
+                  className="w-[90%] font-medium text-base line-clamp-1 cursor-pointer hover:text-primary transition-all"
                 >
                   {item?.name}
                 </h2>
