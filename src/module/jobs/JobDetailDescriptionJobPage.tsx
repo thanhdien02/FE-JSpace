@@ -18,19 +18,18 @@ const JobDetailDescriptionJobPage: React.FC<PropComponent> = ({
     <>
       <div className={`${className}`}>
         <div>
-          <h2 className="text-primary font-bold text-xl">
-            {t("jobdetail.description")}
-          </h2>
+          <h2 className="font-bold text-xl">{t("jobdetail.description")}</h2>
           {loadingJob ? (
-            <div className="mt-5">
+            <div className="mt-7">
               {" "}
               <Skeleton />
             </div>
           ) : (
-            <ContentSeeMore
-              content={`${jobByIdWithCandidate?.post?.description}`}
-              // line="10"
-            ></ContentSeeMore>
+            <div className="mt-3">
+              <ContentSeeMore
+                content={`${jobByIdWithCandidate?.post?.description}`}
+              ></ContentSeeMore>
+            </div>
           )}
         </div>
       </div>

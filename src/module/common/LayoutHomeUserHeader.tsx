@@ -114,7 +114,7 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
         (notification: any) => !notification.read
       ).length;
       setNumberRead(countRead);
-    }
+    } else setNumberRead(0);
   }, [notifications]);
   const handleSeeMoreNotifications = () => {
     if (pageNotification < paginationNotification?.totalPages) {
@@ -128,7 +128,6 @@ const LayoutHomeUserHeader: React.FC<PropComponent> = () => {
       setPageNotificaiton(pageNotification);
       setSizeNotification(sizeNotification + 5);
     }
-    console.log("object");
   };
 
   return (
