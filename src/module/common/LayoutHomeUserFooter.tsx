@@ -6,9 +6,9 @@ const LayoutHomeUserFooter: React.FC = () => {
   const { t } = useTranslation();
   return (
     <>
-      <footer className="w-primary max-w-full mx-auto pt-10">
+      <footer className="w-primary max-w-full mx-auto pt-10 py-3">
         <div className="flex lg:gap-10 gap-3 justify-between flex-wrap md:px-20 lg:px-0 px-5">
-          <div className="flex flex-col lg:w-[34%] gap-2">
+          <div className="flex flex-col lg:w-[30%] gap-2">
             <div className="flex items-center gap-3">
               <img
                 src={logo}
@@ -28,7 +28,7 @@ const LayoutHomeUserFooter: React.FC = () => {
               >
                 280 An Dương Vương, Phường 4, Quận 5, Thành Phố Hồ Chí Minh
               </a>
-              <a
+              {/* <a
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                   "222 Lê Văn Sỹ, Phường 14, Quận 3, Thành phố Hồ Chí Minh"
                 )}`}
@@ -37,13 +37,13 @@ const LayoutHomeUserFooter: React.FC = () => {
                 rel="noopener noreferrer"
               >
                 222 Lê Văn Sỹ, Phường 14, Quận 3, Thành phố Hồ Chí Minh
-              </a>
+              </a> */}
               <p className="text-black">
                 Điện thoại: (+84) - (28) - 38352020 Fax: (+84) - (28) - 38398946
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-5">
+          <div className=" flex flex-col gap-5">
             <h3 className="font-medium"> {t("footer.category")}</h3>
             <div className="flex flex-col gap-1">
               <NavLink
@@ -68,7 +68,7 @@ const LayoutHomeUserFooter: React.FC = () => {
                 to="/"
                 className="hover:underline transition-all text-sm text-[#6A6E78]"
               >
-                {t("support")}
+                {t("support.name")}
               </NavLink>
             </div>
           </div>
@@ -101,7 +101,7 @@ const LayoutHomeUserFooter: React.FC = () => {
               </NavLink>
             </ul>
           </div>
-          <div className="lg:w-[30%]">
+          <div className="lg:w-[27%]">
             <h2 className="font-semibold uppercase">{t("footer.contact")}</h2>
             <p className="mt-5 text-sm text-[#6A6E78]">
               {t("footer.descriptcontact")}
