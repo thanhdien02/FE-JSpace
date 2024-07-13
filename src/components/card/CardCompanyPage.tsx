@@ -11,7 +11,7 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="w-full h-[300px] bg-white shadow-md rounded-md overflow-hidden">
+      <div className="w-full h-[310px] bg-white shadow-md rounded-md overflow-hidden">
         <div className="relative h-[43%]">
           <img
             src={
@@ -45,7 +45,7 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
             <div className="flex gap-4">
               <Popover
                 content={
-                  <p className="w-[300px] font-medium">{item?.company?.name}</p>
+                  <p className="w-[310px] font-medium">{item?.company?.name}</p>
                 }
               >
                 <h2
@@ -70,11 +70,11 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
               {item?.company?.companyLink}
             </p>
             <div className="flex gap-5 items-center mt-1">
-              <p className="text-sm font-medium text-gray-500">
+              <p className="text-sm font-medium text-gray-500 line-clamp-2">
                 {" "}
                 {item?.company?.address}
               </p>
-              <p className="text-sm font-medium text-gray-500">
+              <p className="text-sm font-medium text-gray-500 line-clamp-2">
                 {item?.company?.companySize} nhân viên
               </p>
             </div>
