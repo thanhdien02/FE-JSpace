@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/logo3.png";
+import logo from "../../assets/logo1.svg";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 const LayoutHomeUserFooter: React.FC = () => {
@@ -10,12 +10,7 @@ const LayoutHomeUserFooter: React.FC = () => {
         <div className="flex lg:gap-10 gap-3 justify-between flex-wrap md:px-20 lg:px-0 px-5">
           <div className="flex flex-col lg:w-[30%] gap-2">
             <div className="flex items-center gap-3">
-              <img
-                src={logo}
-                alt=""
-                className="w-[37px] h-[37px] object-cover rounded-full"
-              />
-              <strong className="text-xl font-bold">JSPACE</strong>
+              <img src={logo} alt="" className="w-[100px]" />
             </div>
             <div className="text-sm text-black flex flex-col gap-1 mt-1">
               <a
@@ -28,16 +23,6 @@ const LayoutHomeUserFooter: React.FC = () => {
               >
                 280 An Dương Vương, Phường 4, Quận 5, Thành Phố Hồ Chí Minh
               </a>
-              {/* <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                  "222 Lê Văn Sỹ, Phường 14, Quận 3, Thành phố Hồ Chí Minh"
-                )}`}
-                className="hover:underline transition-all"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                222 Lê Văn Sỹ, Phường 14, Quận 3, Thành phố Hồ Chí Minh
-              </a> */}
               <p className="text-black">
                 Điện thoại: (+84) - (28) - 38352020 Fax: (+84) - (28) - 38398946
               </p>

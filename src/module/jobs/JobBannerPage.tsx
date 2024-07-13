@@ -55,7 +55,7 @@ const JobBannerPage: React.FC<PropComponent> = ({
   const [salary, setSalary] = useState<any>(null);
   const [rank, setRank] = useState<any>(null);
   const [jobType, setJobType] = useState<any>(null);
-  // const [skill, setSkill] = useState<any>(null);
+  const [skill, setSkill] = useState<any>(null);
   useEffect(() => {
     dispatch(commonGetLocation());
     dispatch(commonGetJobType());
@@ -124,7 +124,8 @@ const JobBannerPage: React.FC<PropComponent> = ({
     setRank(value);
   };
   const handleChangeSkills = (value: string) => {
-    console.log(`selected ${value}`);
+    console.log("🚀 ~ handleChangeSkills ~ value:", value)
+    setSkill(value);
   };
   const handleSearchJob = (e: any) => {
     e.preventDefault();
@@ -173,6 +174,7 @@ const JobBannerPage: React.FC<PropComponent> = ({
         maxPay: endSalary,
         rank: rank,
         jobType: jobType,
+        skills: skill,
       })
     );
     setPage(1);

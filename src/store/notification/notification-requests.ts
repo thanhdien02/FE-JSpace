@@ -8,7 +8,7 @@ export const requestNotificationGetNotification = (
   accessToken: string
 ) => {
   return axios.get(
-    `${API}/api/v1/users/notifications?userId=${userId}&page=${page}&size=${size}`,
+    `${API}/api/v1/users/notifications?userId=${userId}&page=${page}&size=${size}&sort=createdAt,desc`,
     {
       headers: {
         "Content-Type": "application/json",

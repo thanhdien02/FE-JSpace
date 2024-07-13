@@ -5,6 +5,8 @@ import { BsTelephone } from "react-icons/bs";
 import { CiMail } from "react-icons/ci";
 import InputLabel from "../../components/input/InputLabel";
 import { useTranslation } from "react-i18next";
+import Lottie from "lottie-react";
+import animationData from "../../assets/name.json";
 const SupportPage: React.FC = () => {
   const { t } = useTranslation();
   return (
@@ -84,6 +86,13 @@ const SupportPage: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <Lottie
+            animationData={animationData}
+            // style={{ width: 300, height: 300 }}
+            className="w-[40%] mx-auto"
+          />
         </div>
       </section>
     </>

@@ -1,4 +1,4 @@
-  import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import IconClose from "../../components/icons/IconClose";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -9,12 +9,38 @@ import {
 import { Select } from "antd";
 import { useTranslation } from "react-i18next";
 import ButtonLoading from "../../components/button/ButtonLoading";
-
+import { SubmitHandler, useForm } from "react-hook-form";
+import {
+  candidateGetSkillSuggestJob,
+  candidatePickSkillSuggestJob,
+} from "../../store/candidate/candidate-slice";
+interface Inputs {
+  skills: any;
+}
 const SuggestJobThroughEmailPage: React.FC = () => {
   const { suggestJobCheck, skills } = useSelector((state: any) => state.common);
   const { user } = useSelector((state: any) => state.auth);
-  const { t } = useTranslation();
+  const { skillCandidatePickSuggest } = useSelector(
+    (state: any) => state.candidate
+  );
+  const {
+    handleSubmit,
+    setValue,
+    formState: {},
+  } = useForm<Inputs>();
   const dispatch = useDispatch();
+  const [skill, setSkill] = useState<any>(null);
+
+  const onSubmit: SubmitHandler<Inputs> = (dataPickSkillSuggestion: Inputs) => {
+    console.log("🚀 ~ dataPickSkillSuggestion:", dataPickSkillSuggestion);
+    dispatch(
+      candidatePickSkillSuggestJob({
+        candidate_id: user?.id,
+        skills: skill,
+      })
+    );
+  };
+  const { t } = useTranslation();
   useEffect(() => {
     const elementBody = document.body;
     elementBody.style.overflow = "hidden";
@@ -24,12 +50,26 @@ const SuggestJobThroughEmailPage: React.FC = () => {
   }, []);
   useEffect(() => {
     dispatch(commonGetSkills());
+    if (user?.id) {
+      dispatch(candidateGetSkillSuggestJob({ candidate_id: user.id }));
+    }
   }, []);
+  useEffect(() => {
+    if (skillCandidatePickSuggest?.length > 0) {
+      setSkill(skillCandidatePickSuggest?.map((item: any) => item?.id));
+    }
+  }, [skillCandidatePickSuggest]);
+
+  const handleChangeSkills = (value: any) => {
+    setSkill(value);
+    setValue("skills", value);
+  };
   return (
     <>
       <div className="fixed inset-0 bg-black/50 flex z-40">
         <form
           action=""
+          onSubmit={handleSubmit(onSubmit)}
           className="relative m-auto md:w-[600px] w-[90%] bg-white rounded-sm p-7"
         >
           <span
@@ -45,7 +85,9 @@ const SuggestJobThroughEmailPage: React.FC = () => {
             <IconClose></IconClose>
           </span>
           <h2 className="font-bold text-xl">{t("jobsuggestion.title")}</h2>
-          <p className="mt-2 text-gray-500 md:text-base text-sm">{t("jobsuggestion.content")}</p>
+          <p className="mt-2 text-gray-500 md:text-base text-sm">
+            {t("jobsuggestion.content")}
+          </p>
           <div className="mt-5">
             <div className="flex flex-col gap-2">
               <label htmlFor="" className="font-medium text-base">
@@ -65,8 +107,9 @@ const SuggestJobThroughEmailPage: React.FC = () => {
               <Select
                 mode="tags"
                 style={{ width: "100%" }}
-                // onChange={handleChangeSkills}
+                onChange={handleChangeSkills}
                 allowClear
+                value={skill}
                 placeholder={t("skills")}
                 filterOption={(input: string, option: any) =>
                   ((option?.label ?? "") as string)

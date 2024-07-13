@@ -88,6 +88,7 @@ export const requestJobGetFilterJob = (
   minPay: string = "",
   maxPay: string = "",
   closeDate: string = "",
+  skills: any = "",
   page: string = "1",
   size: string = "12"
 ) => {
@@ -102,6 +103,12 @@ export const requestJobGetFilterJob = (
   if (maxPay == null || maxPay == undefined) maxPay = "";
   if (minPay == "0") minPay = "";
   if (maxPay == "999000000") maxPay = "";
+  let lsskill = "";
+  if (skills?.length > 0)
+    skills?.forEach((element: any) => {
+      lsskill += `&skills=${element}`;
+    });
+  console.log("🚀 ~ lsskill:", lsskill);
   return axios.get(
     `${API}/api/v1/posts?${
       candidate_id && `candidateId=${candidate_id}&sort=closeDate,${closeDate}&`
@@ -111,7 +118,7 @@ export const requestJobGetFilterJob = (
       jobType && `&jobType=${jobType}`
     }${rank && `&rank=${rank}`}${minPay && `&minPay=${minPay}`}${
       maxPay && `&maxPay=${maxPay}`
-    }`,
+    }${skills?.length > 0 && lsskill}`,
     {
       headers: {
         "Content-Type": "application/json",

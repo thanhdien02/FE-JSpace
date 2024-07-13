@@ -54,7 +54,7 @@ const CompanyPage: React.FC = () => {
   return (
     <>
       <CompanyBannerPage setCompanyname={setCompanyname}></CompanyBannerPage>
-      <div className="bg-gray-100 py-5">
+      <div className="bg-stone-100  py-5">
         <CompanyResultFilterPage className=""></CompanyResultFilterPage>
         <div className="w-primary max-w-full lg:px-0 px-5 flex mx-auto mt-5">
           <Pagination

@@ -3,6 +3,8 @@ import {
   candidateDeleteAvatarCandidate,
   candidateDeleteBackgroundCandidate,
   candidateFollowJob,
+  candidateGetSkillSuggestJob,
+  candidatePickSkillSuggestJob,
   candidateSaveJob,
   candidateSetDefaultResume,
   candidateUnFollowJob,
@@ -16,6 +18,8 @@ import {
   handleCandidateDeleteAvatarCandidate,
   handleCandidateDeleteBackgroundCandidate,
   handleCandidateFollowJob,
+  handleCandidateGetSkillSuggestJob,
+  handleCandidatePickSkillSuggestJob,
   handleCandidateSaveJob,
   handleCandidateSetDefaultResume,
   handleCandidateUnFollowJob,
@@ -55,5 +59,13 @@ export default function* authSaga() {
   yield takeLatest(
     candidateUpdatePublicResume.type,
     handleCandidateUpdatePublicResume
+  );
+  yield takeLatest(
+    candidatePickSkillSuggestJob.type,
+    handleCandidatePickSkillSuggestJob
+  );
+  yield takeLatest(
+    candidateGetSkillSuggestJob.type,
+    handleCandidateGetSkillSuggestJob
   );
 }

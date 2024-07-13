@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import IconHeart from "../../components/icons/IconHeart";
 import IconHeartFill from "../../components/icons/IconHeartFill";
 import IconChervonRight from "../../components/icons/IconChervonRight";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { commonUpdateLoginRedux } from "../../store/common/common-slice";
@@ -29,6 +29,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
   const { user } = useSelector((state: any) => state.auth);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [checkApply, setCheckApply] = useState(false);
   const [checkSave, setCheckSave] = useState(false);
   const handleSaveAndUnsaved = () => {
@@ -61,7 +62,8 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
       dispatch(commonUpdateLoginRedux({ loginCheck: true }));
     } else {
       if (!dataJob?.applied) {
-        setCheckApply(!checkApply);
+        // setCheckApply(!checkApply);
+        navigate(`/jobs/${dataJob?.post?.id}`);
       }
     }
   };

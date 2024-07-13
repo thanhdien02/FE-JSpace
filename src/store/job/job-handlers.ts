@@ -163,11 +163,11 @@ function* handleJobGetFilterJob(dataGetFilterJob: any): Generator<any> {
       dataGetFilterJob?.payload?.minPay,
       dataGetFilterJob?.payload?.maxPay,
       dataGetFilterJob?.payload?.closeDate,
+      dataGetFilterJob?.payload?.skills,
       dataGetFilterJob?.payload?.page,
       dataGetFilterJob?.payload?.size
     );
     if (response?.data?.code === 1000) {
-      // message.success("Load dữ liệu filter thành công.");
       yield put(
         jobUpdateFilterJobRedux({
           filterJobs: response?.data?.result?.content,

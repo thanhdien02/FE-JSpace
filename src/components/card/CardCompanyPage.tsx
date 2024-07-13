@@ -1,7 +1,5 @@
 import React from "react";
 import avatar from "../../assets/logo3.png";
-import IconStar from "../icons/IconStar";
-import IconChervonRight from "../icons/IconChervonRight";
 import { Popover } from "antd";
 import { useNavigate } from "react-router-dom";
 
@@ -31,7 +29,7 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
             className="absolute left-6 -bottom-7 rounded-md w-[70px] h-[70px] object-cover"
             alt=""
           />
-          <div className="absolute text-primary hover:underline cursor-pointer transition-all right-2 -bottom-7 flex items-center gap-5">
+          {/* <div className="absolute text-primary hover:underline cursor-pointer transition-all right-2 -bottom-7 flex items-center gap-5">
             <div className="flex items-center gap-2 text-sm">
               <span className=" ">18 đánh giá</span>
               <IconChervonRight
@@ -39,7 +37,7 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
                 classIcon="!w-4 !h-4"
               ></IconChervonRight>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-4 h-full ">
@@ -60,10 +58,10 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
                 </h2>
               </Popover>
 
-              <div className="flex ml-auto self-start items-center gap-2 text-sm">
+              {/* <div className="flex ml-auto self-start items-center gap-2 text-sm">
                 <IconStar className="" classIcon="!w-5 !h-5"></IconStar>
                 <span className="">4.6</span>
-              </div>
+              </div> */}
             </div>
             <p className="mt-1 line-clamp-1 text-sm text-gray-500">
               {item?.company?.email}

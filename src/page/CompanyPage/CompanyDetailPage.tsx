@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { companyGetCompanyById } from "../../store/company/company-slice";
 import { useSelector } from "react-redux";
-
 const CompanyDetailPage: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
 

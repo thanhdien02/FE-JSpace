@@ -191,3 +191,36 @@ export const requestCandidateUpdatePublicResume = (
     }
   );
 };
+export const requestCandidatePickSkillSuggestJob = (
+  candidate_id: string,
+  skills: any,
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.put(
+    `${API}/api/v1/candidates/${candidate_id}/pick-skills`,
+    skills,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
+export const requestCandidateGetSkillPickSuggest = (
+  candidate_id: string,
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.put(
+    `${API}/api/v1/candidates/${candidate_id}/skills`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
