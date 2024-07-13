@@ -118,7 +118,7 @@ export const requestJobGetFilterJob = (
       jobType && `&jobType=${jobType}`
     }${rank && `&rank=${rank}`}${minPay && `&minPay=${minPay}`}${
       maxPay && `&maxPay=${maxPay}`
-    }${skills?.length > 0 && lsskill}`,
+    }${skills?.length > 0 ? lsskill : ""}`,
     {
       headers: {
         "Content-Type": "application/json",
