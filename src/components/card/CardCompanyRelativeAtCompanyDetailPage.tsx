@@ -61,7 +61,7 @@ const CardCompanyRelativeAtCompanyDetailPage: React.FC<PropComponent> = ({
               : `Có ${item?.company?.followerNumber} người theo dõi`}
           </p>
           <div className="flex gap-3 items-center mt-3">
-            <span className="p-1 text-xs bg-gray-200 rounded-sm">
+            <span className="p-1 text-xs bg-gray-200 rounded-sm w-[200px] line-clamp-1">
               {item?.company?.address}
             </span>
             <span className="p-1 text-xs bg-gray-200 rounded-sm line-clamp-1 w-[120px]">

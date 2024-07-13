@@ -26,7 +26,7 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
           />
           <img
             src={item?.company?.logo ? item?.company?.logo : avatar}
-            className="absolute left-6 -bottom-7 rounded-md w-[70px] h-[70px] object-cover"
+            className="absolute left-6 -bottom-7 rounded-md w-[70px] h-[70px] object-cover bg-white"
             alt=""
           />
           {/* <div className="absolute text-primary hover:underline cursor-pointer transition-all right-2 -bottom-7 flex items-center gap-5">
@@ -52,7 +52,7 @@ const CardCompanyPage: React.FC<PropComponent> = ({ item }) => {
                   onClick={() => {
                     navigate(`/companys/${item?.company?.id}`);
                   }}
-                  className="w-[90%] font-medium text-base line-clamp-2 cursor-pointer hover:text-primary transition-all"
+                  className="w-[90%] font-medium text-base line-clamp-1 cursor-pointer hover:text-primary transition-all"
                 >
                   {item?.company?.name}
                 </h2>
