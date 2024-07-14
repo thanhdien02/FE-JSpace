@@ -94,9 +94,13 @@ const LayoutHomeUser: React.FC = () => {
 
       <div
         onClick={() => {
-          dispatch(
-            commonUpdateSuggestJobRedux({ suggestJobCheck: !suggestJobCheck })
-          );
+          if (!user?.id) {
+            dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+          } else {
+            dispatch(
+              commonUpdateSuggestJobRedux({ suggestJobCheck: !suggestJobCheck })
+            );
+          }
         }}
         className="fixed z-10 right-0 top-1/2 bg-primary py-3 px-1 text-white rounded-r-lg text-base cursor-pointer vertical-text"
       >
