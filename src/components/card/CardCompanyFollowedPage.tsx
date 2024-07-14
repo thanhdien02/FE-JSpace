@@ -41,7 +41,7 @@ const CardCompanyFollowedPage: React.FC<PropComponent> = ({
           />
           <img
             src={item?.logo}
-            className="absolute left-6 -bottom-7 rounded-md w-[65px] h-[65px] object-cover"
+            className="absolute left-6 -bottom-7 rounded-md w-[65px] h-[65px] object-contain bg-white"
             alt=""
           />
           <div className="absolute text-primary hover:underline cursor-pointer transition-all right-2 -bottom-7 flex items-center gap-5">

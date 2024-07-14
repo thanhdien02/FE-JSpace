@@ -89,7 +89,7 @@ const CardJobAtCompanyDetailPage: React.FC<PropComponent> = ({ item }) => {
           <img
             src={item?.post?.company?.logo ? item?.post?.company?.logo : logo}
             alt=""
-            className="lg:w-[100px] h-[70px] max-h-full object-cover lg:h-[100px]"
+            className="lg:w-[100px] h-[70px] max-h-full object-contain lg:h-[100px]"
           />
         </div>
         <div className="flex flex-col w-full self-start">
@@ -124,7 +124,9 @@ const CardJobAtCompanyDetailPage: React.FC<PropComponent> = ({ item }) => {
             onClick={() => {
               navigate(`/jobs/${item?.post?.id}`);
             }}
-            className={`text-sm select-none text-white py-1 px-3 cursor-pointer rounded border border-solid border-transparent font-medium ${item?.applied ? "bg-green-500" : "bg-primary"}`}
+            className={`text-sm select-none text-white py-1 px-3 cursor-pointer rounded border border-solid border-transparent font-medium ${
+              item?.applied ? "bg-green-500" : "bg-primary"
+            }`}
           >
             {item?.applied ? "Đã ứng tuyển" : "Ứng tuyển"}
           </span>

@@ -70,7 +70,7 @@ const CardManageJobSavePage: React.FC<PropComponent> = ({
           <img
             src={item?.company?.logo ? item?.company?.logo : logo}
             alt=""
-            className="w-full max-w-full object-cover md:h-[110px] h-[70px]"
+            className="w-full max-w-full object-contain md:h-[110px] h-[70px]"
           />
         </div>
         <div className="flex flex-col w-full self-start">

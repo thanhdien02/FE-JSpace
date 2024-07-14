@@ -70,7 +70,7 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
           <img
             src={item?.post?.company?.logo}
             alt=""
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         </div>
         <div className="grow flex flex-col gap-1 overflow-hidden">
@@ -119,9 +119,15 @@ const CardHomeJobPage: React.FC<PropComponent> = ({ className, item }) => {
           onClick={handleSaveAndUnSaveJob}
         >
           {checkSave ? (
-            <IconHeartFill className="" classIcon="!w-5 !h-5 text-red-500"></IconHeartFill>
+            <IconHeartFill
+              className=""
+              classIcon="!w-5 !h-5 text-red-500"
+            ></IconHeartFill>
           ) : (
-            <IconHeart className="" classIcon="!w-5 !h-5 text-primary"></IconHeart>
+            <IconHeart
+              className=""
+              classIcon="!w-5 !h-5 text-primary"
+            ></IconHeart>
           )}
         </div>
       </div>

@@ -36,7 +36,7 @@ const CardJobClickShortPage: React.FC<PropComponent> = ({
                 : "https://cdn.pixabay.com/photo/2023/08/11/16/29/tourist-8183867_640.png"
             }
             alt=""
-            className="w-h-full h-full object-cover"
+            className="w-h-full h-full object-contain"
           />
         </div>
         <div className="relative grow flex flex-col gap-1">

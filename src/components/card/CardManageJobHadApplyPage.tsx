@@ -39,7 +39,7 @@ const CardManageJobHadApplyPage: React.FC<PropComponent> = ({ item }) => {
           <img
             src={item?.post?.company?.logo ? item?.post?.company?.logo : logo}
             alt=""
-            className="lg:w-full min-w-[80px] object-cover lg:min-h-[100px] lg:h-full max-h-full h-[80px]"
+            className="lg:w-full min-w-[80px] object-contain lg:min-h-[100px] lg:h-full max-h-full h-[80px]"
           />
         </div>
         <div className="flex flex-col w-full self-start">

@@ -71,7 +71,7 @@ const CardJobFitPage: React.FC<PropComponent> = ({ className, item }) => {
           <img
             src={item?.post?.company?.logo}
             alt=""
-            className="w-h-full h-full lg:object-cover object-contain"
+            className="w-h-full h-full object-contain"
           />
         </div>
         <div className="relative grow w-full flex flex-col lg:gap-1">

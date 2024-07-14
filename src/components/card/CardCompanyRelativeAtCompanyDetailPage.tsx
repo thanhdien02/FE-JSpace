@@ -34,7 +34,7 @@ const CardCompanyRelativeAtCompanyDetailPage: React.FC<PropComponent> = ({
           <img
             src={item?.company?.logo ? item?.company?.logo : logo}
             alt=""
-            className="lg:w-[100px] min-w-[70px] object-cover lg:h-[100px] h-[70px]"
+            className="lg:w-[100px] min-w-[70px] object-contain lg:h-[100px] h-[70px]"
           />
         </div>
         <div className="grow flex flex-col w-full self-start">
