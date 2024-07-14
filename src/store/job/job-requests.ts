@@ -32,7 +32,8 @@ export const requestJobGetHomeJob = (
   if (candidate_id == null || candidate_id == undefined) candidate_id = "";
   return axios.get(
     `${API}/api/v1/posts?${
-      candidate_id && `candidateId=${candidate_id}&sort=closeDate,${closeDate}&`
+      candidate_id &&
+      `candidateId=${candidate_id}&id.post.closeDate,${closeDate}&`
     }page=${page}&size=${size}`,
     {
       headers: {
@@ -111,7 +112,8 @@ export const requestJobGetFilterJob = (
   console.log("🚀 ~ lsskill:", lsskill);
   return axios.get(
     `${API}/api/v1/posts?${
-      candidate_id && `candidateId=${candidate_id}&sort=closeDate,${closeDate}&`
+      candidate_id &&
+      `candidateId=${candidate_id}&id.post.closeDate,${closeDate}&`
     }page=${page}&size=${size}${title && `&title=${title}`}${
       location && `&location=${location}`
     }${experience && `&experience=${experience}`}${

@@ -19,10 +19,11 @@ const HomeBannerPage: React.FC = () => {
   const { locations, experiences, inputBannerSearchCheck } = useSelector(
     (state: any) => state.common
   );
+  const { paginationSavedJob } = useSelector((state: any) => state.job);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [newdate] = useState(new Date());
   const [title, setTitle] = useState<any>(null);
   const [location, setLocation] = useState<any>(null);
   const [experience, setExperience] = useState<any>(null);
@@ -214,21 +215,23 @@ const HomeBannerPage: React.FC = () => {
             <p className="text-center lg:text-start text-xs lg:text-sm text-gray-300">
               <span className=""> {t("home.totalwork")} </span>
               <span className=" font-semibold text-base text-white">
-                <NumberCounter targetNumber={30291} />
+                <NumberCounter
+                  targetNumber={paginationSavedJob?.totalElements}
+                />
               </span>
             </p>
-            <span className="hidden lg:block w-[5px] h-[5px] rounded-full bg-gray-500"></span>
+            {/* <span className="hidden lg:block w-[5px] h-[5px] rounded-full bg-gray-500"></span>
             <p className="text-center lg:text-start text-xs lg:text-sm text-gray-300">
               <span className=""> {t("home.latestjob")} </span>
               <span className=" font-semibold text-base text-white">
                 <NumberCounter targetNumber={2034} />
               </span>
-            </p>
+            </p> */}
             <span className="hidden lg:block w-[5px] h-[5px] rounded-full bg-gray-500"></span>
             <p className="text-center lg:text-start text-xs lg:text-sm text-gray-300">
               <span className=""> {t("home.updatetime")} </span>
               <span className=" font-semibold text-base text-white">
-                20/04/2024
+                {newdate.toDateString()}
               </span>
             </p>
           </div>

@@ -45,6 +45,17 @@ function* handleJobGetHomeJob(dataGetHomeJob: any): Generator<any> {
       yield put(
         jobUpdateHomeJobRedux({ homeJobs: response?.data?.result?.content })
       );
+      yield put(
+        jobUpdateSavedPaginationRedux({
+          paginationSavedJob: {
+            pageNumber: response.data.result.pageNumber,
+            pageSize: response.data.result.pageSize,
+            totalElements: response.data.result.totalElements,
+            totalPages: response.data.result.totalPages,
+            numberOfElements: response.data.result.numberOfElements,
+          },
+        })
+      );
     }
   } catch (error: any) {
     message.error(error?.response?.data?.message);
