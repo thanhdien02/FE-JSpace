@@ -45,7 +45,7 @@ const CardNotificationAtHeaderPage: React.FC<PropComponent> = ({
           </h4>
         )}
 
-        <p className="text-[15px] line-clamp-3">
+        <p className="text-[15px] line-clamp-5">
           {item?.notification?.content}
         </p>
         <div className="mt-1 flex justify-between items-center">

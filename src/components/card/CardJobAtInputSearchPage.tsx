@@ -34,7 +34,7 @@ const CardJobAtInputSearchPage: React.FC<PropComponent> = ({
           <img
             src={item?.post?.company?.logo}
             alt=""
-            className="h-full object-cover"
+            className="h-full object-contain bg-white"
           />
         </div>
         <div className="w-full">
