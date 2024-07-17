@@ -4,19 +4,20 @@ import {
   requestCandidateDeleteAvatar,
   requestCandidateDeleteBackground,
   requestCandidateFollowJob,
-  requestCandidateGetSkillPickSuggest,
-  requestCandidatePickSkillSuggestJob,
+  requestCandidateGetSurvey,
   requestCandidateSaveJob,
   requestCandidateSetDefaultResume,
+  requestCandidateSurvey,
   requestCandidateUnFollowJob,
   requestCandidateUnSaveJob,
   requestCandidateUpdateAvatar,
   requestCandidateUpdateBackground,
   requestCandidateUpdateIdentification,
   requestCandidateUpdatePublicResume,
+  requestCandidateUpdateStudy,
 } from "./candidate-requests";
 import {
-  candidateUpdateGetSkillCandidatePickSuggestRedux,
+  candidateUpdateInformationSurveyRedux,
   candidateUpdateLoadingRedux,
   candidateUpdateMessageRedux,
 } from "./candidate-slice";
@@ -307,20 +308,18 @@ function* handleCandidateUpdatePublicResume(
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
   }
 }
-function* handleCandidatePickSkillSuggestJob(
-  dataCandiatePickSkill: any
-): Generator<any> {
+function* handleCandidateUpdateStudy(dataCandiateStudy: any): Generator<any> {
   try {
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
     const token: Token = getToken();
     const response: any = yield call(
-      requestCandidatePickSkillSuggestJob,
-      dataCandiatePickSkill?.payload?.candidate_id,
-      dataCandiatePickSkill?.payload?.skills,
+      requestCandidateUpdateStudy,
+      dataCandiateStudy?.payload?.candidateId,
+      dataCandiateStudy?.payload?.dataUpdateStudy,
       token?.accessToken
     );
     if (response?.data?.code === 1000) {
-      message.success("Khảo sát thông tin gợi ý công việc thành công.");
+      message.success("Cập nhật học vấn thành công.");
     }
   } catch (error: any) {
     message.error(error?.response?.data?.message);
@@ -328,22 +327,37 @@ function* handleCandidatePickSkillSuggestJob(
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
   }
 }
-function* handleCandidateGetSkillSuggestJob(
-  dataCandidateGetSkillPick: any
-): Generator<any> {
+function* handleCandidateSurvey(dataCandiateSurvey: any): Generator<any> {
   try {
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
     const token: Token = getToken();
     const response: any = yield call(
-      requestCandidateGetSkillPickSuggest,
-      dataCandidateGetSkillPick?.payload?.candidate_id,
+      requestCandidateSurvey,
+      dataCandiateSurvey?.payload,
       token?.accessToken
     );
-    console.log("🚀 ~ response:", response);
+    if (response?.data?.code === 1000) {
+      message.success("Khảo sát thông tin thành công.");
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
+  }
+}
+function* handleCandidateGetSurvey(dataCandidateSurvey: any): Generator<any> {
+  try {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestCandidateGetSurvey,
+      dataCandidateSurvey?.payload?.candidate_id,
+      token?.accessToken
+    );
     if (response?.data?.code === 1000) {
       yield put(
-        candidateUpdateGetSkillCandidatePickSuggestRedux({
-          skillCandidatePickSuggest: response.data.result,
+        candidateUpdateInformationSurveyRedux({
+          informationSurvey: response.data.result,
         })
       );
     }
@@ -365,6 +379,7 @@ export {
   handleCandidateUnFollowJob,
   handleCandidateSetDefaultResume,
   handleCandidateUpdatePublicResume,
-  handleCandidatePickSkillSuggestJob,
-  handleCandidateGetSkillSuggestJob,
+  handleCandidateSurvey,
+  handleCandidateGetSurvey,
+  handleCandidateUpdateStudy,
 };

@@ -46,6 +46,7 @@ function* handleAuthFetchMe(): Generator<any> {
           user: response.data.result.user,
           defaultResume: response.data.result.defaultResume,
           publicProfile: response.data.result.publicProfile,
+          surveyed: response.data.result.surveyed,
         })
       );
     } else if (response?.data?.result?.role?.code == "Employee") {

@@ -175,6 +175,8 @@
     "rank": "Cấp bậc hiện tại",
     "address": "Địa chỉ hiện tại ?",
     "salary": "Mức lương bạn mong muốn ?",
+    "gender": "Giới tính ?",
+    "placeholdergender": "Giới tính",
     "content": "Khảo sát này nhằm mục đích dùng để thông báo cho bạn các công việc phù hợp với các tiêu chí bạn lựa chọn mỗi khi có công việc liên quan."
   },
   "fullname": "Họ và tên",

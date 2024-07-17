@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IFile {
+  jobDetailStatus?: any;
   jobById?: any;
   jobByIdWithCandidate?: any;
   filterJobs: any;
@@ -22,6 +23,7 @@ interface IFile {
 }
 
 const init: IFile = {
+  jobDetailStatus: {},
   jobById: {},
   jobByIdWithCandidate: {},
   filterJobs: {},
@@ -45,6 +47,7 @@ const jobSlice: any = createSlice({
   name: "job",
   initialState: init,
   reducers: {
+    jobGetDetailStatus: () => {},
     jobGetJobById: () => {},
     jobGetJobByIdWithCandidate: () => {},
     jobUpdateJob: () => {},
@@ -56,6 +59,10 @@ const jobSlice: any = createSlice({
     jobGetInputSearchJob: () => {},
     jobGetCompanyJob: () => {},
     jobPostJob: () => {},
+    jobUpdateJobDetailStatusRedux: (state: any, action: any) => ({
+      ...state,
+      jobDetailStatus: action.payload.jobDetailStatus,
+    }),
     jobUpdateJobByIdRedux: (state: any, action: any) => ({
       ...state,
       jobById: action.payload.jobById,
@@ -155,5 +162,7 @@ export const {
   jobGetInputSearchJob,
   jobUpdateInputSearchJobRedux,
   jobUpdateInputSearchLoadingRedux,
+  jobGetDetailStatus,
+  jobUpdateJobDetailStatusRedux
 } = jobSlice.actions;
 export default jobSlice.reducer;

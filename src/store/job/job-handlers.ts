@@ -13,6 +13,7 @@ import {
   jobUpdateInputSearchPaginationRedux,
   jobUpdateJobByIdRedux,
   jobUpdateJobByIdWithCandidateRedux,
+  jobUpdateJobDetailStatusRedux,
   jobUpdateLoadingRedux,
   jobUpdateRelativeJobRedux,
   jobUpdateSavedJobRedux,
@@ -22,6 +23,7 @@ import { message } from "antd";
 import {
   requestJobGetAppliedJob,
   requestJobGetCompanyJob,
+  requestJobGetDetailStatus,
   requestJobGetFilterJob,
   requestJobGetHomeJob,
   requestJobGetInputSearchJob,
@@ -316,6 +318,26 @@ function* handleJobGetJobByIdWithCandidate(
     yield put(jobUpdateLoadingRedux({ loadingJob: false }));
   }
 }
+function* handleJobGetDetailStatus(dataGetDetailStatus: any): Generator<any> {
+  try {
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestJobGetDetailStatus,
+      dataGetDetailStatus?.payload?.candidate_id,
+      dataGetDetailStatus?.payload?.job_id,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      yield put(
+        jobUpdateJobDetailStatusRedux({
+          jobDetailStatus: response.data.result,
+        })
+      );
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  }
+}
 export {
   handleJobGetHomeJob,
   handleJobGetSavedJob,
@@ -326,4 +348,5 @@ export {
   handleJobGetAppliedJob,
   handleJobGetCompanyJob,
   handleJobGetInputSearchJob,
+  handleJobGetDetailStatus,
 };

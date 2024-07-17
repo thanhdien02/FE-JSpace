@@ -3,31 +3,33 @@ import {
   candidateDeleteAvatarCandidate,
   candidateDeleteBackgroundCandidate,
   candidateFollowJob,
-  candidateGetSkillSuggestJob,
-  candidatePickSkillSuggestJob,
+  candidateGetSurvey,
   candidateSaveJob,
   candidateSetDefaultResume,
+  candidateSurvey,
   candidateUnFollowJob,
   candidateUnSaveJob,
   candidateUpdateAvatar,
   candidateUpdateBackground,
   candidateUpdateCandidate,
   candidateUpdatePublicResume,
+  candidateUpdateStudy,
 } from "./candidate-slice";
 import {
   handleCandidateDeleteAvatarCandidate,
   handleCandidateDeleteBackgroundCandidate,
   handleCandidateFollowJob,
-  handleCandidateGetSkillSuggestJob,
-  handleCandidatePickSkillSuggestJob,
+  handleCandidateGetSurvey,
   handleCandidateSaveJob,
   handleCandidateSetDefaultResume,
+  handleCandidateSurvey,
   handleCandidateUnFollowJob,
   handleCandidateUnSaveJob,
   handleCandidateUpdateAvatar,
   handleCandidateUpdateBackground,
   handleCandidateUpdateIdentification,
   handleCandidateUpdatePublicResume,
+  handleCandidateUpdateStudy,
 } from "./candidate-handlers";
 
 export default function* authSaga() {
@@ -60,12 +62,7 @@ export default function* authSaga() {
     candidateUpdatePublicResume.type,
     handleCandidateUpdatePublicResume
   );
-  yield takeLatest(
-    candidatePickSkillSuggestJob.type,
-    handleCandidatePickSkillSuggestJob
-  );
-  yield takeLatest(
-    candidateGetSkillSuggestJob.type,
-    handleCandidateGetSkillSuggestJob
-  );
+  yield takeLatest(candidateSurvey.type, handleCandidateSurvey);
+  yield takeLatest(candidateGetSurvey.type, handleCandidateGetSurvey);
+  yield takeLatest(candidateUpdateStudy.type, handleCandidateUpdateStudy);
 }

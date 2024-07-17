@@ -23,7 +23,9 @@ import OverlaySearchBanner from "../components/overlay/OverlaySearchBanner";
 
 const LayoutHomeUser: React.FC = () => {
   const { t } = useTranslation();
-  const { user, accessToken } = useSelector((state: any) => state.auth);
+  const { user, accessToken, surveyed } = useSelector(
+    (state: any) => state.auth
+  );
   const {
     loginCheck,
     suggestJobCheck,
@@ -59,7 +61,7 @@ const LayoutHomeUser: React.FC = () => {
   }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (user?.id && !user?.check) {
+      if (user?.id && !surveyed) {
         dispatch(
           commonUpdateSuggestJobRedux({
             suggestJobCheck: !suggestJobCheck,

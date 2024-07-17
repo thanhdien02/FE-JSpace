@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ICandidate {
-  skillCandidatePickSuggest: any;
+  informationSurvey: any;
   candidate: any;
   loadingCandidate?: boolean;
   messageCandidate?: string;
 }
 
 const init: ICandidate = {
-  skillCandidatePickSuggest: {},
+  informationSurvey: {},
   candidate: {},
   loadingCandidate: false,
   messageCandidate: "",
@@ -19,8 +19,10 @@ const candidateSlice: any = createSlice({
   reducers: {
     candidateUpdateBackground: () => {},
     candidateUpdateAvatar: () => {},
-    candidatePickSkillSuggestJob: () => {},
-    candidateGetSkillSuggestJob: () => {},
+    candidateUpdateStudy: () => {},
+    candidateUpdateExperience: () => {},
+    candidateSurvey: () => {},
+    candidateGetSurvey: () => {},
     candidateSaveJob: () => {},
     candidateUnSaveJob: () => {},
     candidateFollowJob: () => {},
@@ -32,12 +34,9 @@ const candidateSlice: any = createSlice({
     candidateUpdateCandidate: (state: any) => ({
       ...state,
     }),
-    candidateUpdateGetSkillCandidatePickSuggestRedux: (
-      state: any,
-      action: any
-    ) => ({
+    candidateUpdateInformationSurveyRedux: (state: any, action: any) => ({
       ...state,
-      skillCandidatePickSuggest: action.payload.skillCandidatePickSuggest,
+      informationSurvey: action.payload.informationSurvey,
     }),
     candidateUpdateLoadingRedux: (state: any, action: any) => ({
       ...state,
@@ -63,8 +62,10 @@ export const {
   candidateUnFollowJob,
   candidateSetDefaultResume,
   candidateUpdatePublicResume,
-  candidatePickSkillSuggestJob,
-  candidateGetSkillSuggestJob,
-  candidateUpdateGetSkillCandidatePickSuggestRedux,
+  candidateSurvey,
+  candidateGetSurvey,
+  candidateUpdateInformationSurveyRedux,
+  candidateUpdateStudy,
+  candidateUpdateExperience,
 } = candidateSlice.actions;
 export default candidateSlice.reducer;

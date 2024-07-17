@@ -179,6 +179,8 @@
     "rank": "Current rank ?",
     "address": "Current address ?",
     "salary": "Your expected salary ?",
+    "gender": "Your gender ?",
+    "placeholdergender": "Gender",
     "content": "This survey is intended to be used to inform you of jobs that match your selected criteria whenever a relevant job becomes available."
   },
   "fullname": "Full name",

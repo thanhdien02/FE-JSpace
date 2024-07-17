@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
   commonGetExperience,
+  commonGetGender,
   commonGetLocation,
   commonGetRank,
   commonGetSkills,
@@ -13,25 +14,25 @@ import { Select } from "antd";
 import { useTranslation } from "react-i18next";
 import ButtonLoading from "../../components/button/ButtonLoading";
 import { SubmitHandler, useForm } from "react-hook-form";
-import {
-  candidateGetSkillSuggestJob,
-  // candidatePickSkillSuggestJob,
-} from "../../store/candidate/candidate-slice";
 import { dataSalary } from "../../utils/dataFetch";
+import {
+  candidateGetSurvey,
+  candidateSurvey,
+} from "../../store/candidate/candidate-slice";
 interface Inputs {
   skills: any;
   experience: string;
   salary: string;
   rank: string;
   location: string;
+  detailAddress: string;
+  gender: string;
 }
 const SuggestJobThroughEmailPage: React.FC = () => {
-  const { suggestJobCheck, locations, ranks, experiences, skills } =
+  const { suggestJobCheck, locations, ranks, experiences, skills, genders } =
     useSelector((state: any) => state.common);
   const { user } = useSelector((state: any) => state.auth);
-  const { skillCandidatePickSuggest } = useSelector(
-    (state: any) => state.candidate
-  );
+  const { informationSurvey } = useSelector((state: any) => state.candidate);
   const {
     handleSubmit,
     setValue,
@@ -42,13 +43,20 @@ const SuggestJobThroughEmailPage: React.FC = () => {
   } = useForm<Inputs>();
   const dispatch = useDispatch();
   const onSubmit: SubmitHandler<Inputs> = (dataPickSkillSuggestion: Inputs) => {
-    console.log("🚀 ~ dataPickSkillSuggestion:", dataPickSkillSuggestion);
-    // dispatch(
-    //   candidatePickSkillSuggestJob({
-    //     candidate_id: user?.id,
-    //     skills: skill,
-    //   })
-    // );
+    let [minSalary, maxSalary] = dataPickSkillSuggestion?.salary?.split("-");
+    dispatch(
+      candidateSurvey({
+        candidateId: user?.id,
+        gender: dataPickSkillSuggestion?.gender,
+        minSalary: minSalary,
+        maxSalary: maxSalary,
+        experience: dataPickSkillSuggestion?.experience,
+        location: dataPickSkillSuggestion?.location,
+        rank: dataPickSkillSuggestion?.rank,
+        skills: dataPickSkillSuggestion?.skills,
+        detailAddress: dataPickSkillSuggestion?.detailAddress,
+      })
+    );
   };
   const { t } = useTranslation();
   useEffect(() => {
@@ -63,15 +71,28 @@ const SuggestJobThroughEmailPage: React.FC = () => {
     dispatch(commonGetRank());
     dispatch(commonGetExperience());
     dispatch(commonGetSkills());
+    dispatch(commonGetGender());
     if (user?.id) {
-      dispatch(candidateGetSkillSuggestJob({ candidate_id: user.id }));
+      dispatch(candidateGetSurvey({ candidate_id: user.id }));
     }
   }, []);
   useEffect(() => {
-    if (skillCandidatePickSuggest?.length > 0) {
-      // setSkill(skillCandidatePickSuggest?.map((item: any) => item?.id));
+    if (informationSurvey?.skills) {
+      setValue(
+        "skills",
+        informationSurvey?.skills?.map((item: any) => item?.id)
+      );
+      setValue("experience", informationSurvey?.experience?.value);
+      setValue("rank", informationSurvey?.rank?.value);
+      setValue("gender", informationSurvey?.gender?.value);
+      setValue("location", informationSurvey?.location?.value);
+      setValue("detailAddress", informationSurvey?.detailAddress);
+      setValue(
+        "salary",
+        `${informationSurvey?.minSalary}-${informationSurvey?.maxSalary}`
+      );
     }
-  }, [skillCandidatePickSuggest]);
+  }, [informationSurvey]);
   const handleChangeSkills = (value: any) => {
     setValue("skills", value);
     clearErrors("skills");
@@ -91,6 +112,10 @@ const SuggestJobThroughEmailPage: React.FC = () => {
   const handleOnchangeRank = (value: any) => {
     setValue("rank", value);
     clearErrors("rank");
+  };
+  const handleOnchangeGender = (value: any) => {
+    setValue("gender", value);
+    clearErrors("gender");
   };
   return (
     <>
@@ -226,6 +251,42 @@ const SuggestJobThroughEmailPage: React.FC = () => {
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="" className="font-medium text-base">
+                  {t("jobsuggestion.gender")}
+                </label>
+                <Select
+                  {...register("gender", {
+                    required: true,
+                  })}
+                  showSearch
+                  allowClear
+                  placeholder={t("jobsuggestion.placeholdergender")}
+                  className="address border border-solid border-gray-200 py-2 text-base rounded-lg h-10 bg-white"
+                  optionFilterProp="children"
+                  value={getValues("gender")}
+                  filterOption={(input: string, option: any) =>
+                    ((option?.label ?? "") as string)
+                      .toLowerCase()
+                      .includes((input ?? "").toLowerCase())
+                  }
+                  options={
+                    genders?.length > 0 &&
+                    genders.map((item: any) => ({
+                      label: item?.language?.vi,
+                      value: item?.value,
+                    }))
+                  }
+                  onChange={handleOnchangeGender}
+                />
+                {errors?.location?.type == "required" && (
+                  <p className="text-red-500 mt-1 text-sm">
+                    *Bạn chưa điền giới tính
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="mt-5 grid grid-cols-2 gap-8">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="" className="font-medium text-base">
                   {t("jobsuggestion.address")}
                 </label>
                 <Select
@@ -258,15 +319,27 @@ const SuggestJobThroughEmailPage: React.FC = () => {
                   </p>
                 )}
               </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="name" className="font-medium">
+                  Chi tiết địa chỉ
+                </label>
+                <input
+                  {...register("detailAddress", {
+                    required: true,
+                  })}
+                  type="text"
+                  id="detailAddress"
+                  className="px-4 py-2 outline-none border border-solid border-gray-200 rounded-lg placeholder:text-sm"
+                  placeholder="Địa chỉ chi tiết"
+                />
+              </div>
             </div>
             <div className={`w-full mt-5 flex flex-col gap-2`}>
               <label htmlFor="" className="font-medium text-base">
                 {t("skills")}
               </label>
               <Select
-                {...register("skills", {
-                  required: true,
-                })}
+                {...register("skills", {})}
                 mode="tags"
                 style={{ width: "100%" }}
                 onChange={handleChangeSkills}

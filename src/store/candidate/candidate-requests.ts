@@ -191,15 +191,15 @@ export const requestCandidateUpdatePublicResume = (
     }
   );
 };
-export const requestCandidatePickSkillSuggestJob = (
-  candidate_id: string,
-  skills: any,
+export const requestCandidateUpdateStudy = (
+  candidateId: any,
+  dataUpdateStudy: any,
   accessToken: string
 ) => {
   if (!accessToken) return;
   return axios.put(
-    `${API}/api/v1/candidates/${candidate_id}/pick-skills`,
-    skills,
+    `${API}/api/v1/candidates/${candidateId}/profiles/education-info`,
+    dataUpdateStudy,
     {
       headers: {
         "Content-Type": "application/json",
@@ -208,14 +208,25 @@ export const requestCandidatePickSkillSuggestJob = (
     }
   );
 };
-export const requestCandidateGetSkillPickSuggest = (
+export const requestCandidateSurvey = (
+  dataSurvey: any,
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.post(`${API}/api/v1/candidates/survey`, dataSurvey, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+export const requestCandidateGetSurvey = (
   candidate_id: string,
   accessToken: string
 ) => {
   if (!accessToken) return;
-  return axios.put(
-    `${API}/api/v1/candidates/${candidate_id}/skills`,
-    {},
+  return axios.get(
+    `${API}/api/v1/candidates/${candidate_id}/profiles/details`,
     {
       headers: {
         "Content-Type": "application/json",

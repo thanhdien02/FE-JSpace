@@ -4,6 +4,7 @@ interface IAuth {
   user: any;
   accessToken: string;
   publicProfile: boolean;
+  surveyed: boolean;
   defaultResume: any;
   roles: IRole[];
   loading?: boolean;
@@ -20,6 +21,7 @@ const init: IAuth = {
   user: {},
   accessToken: "",
   publicProfile: false,
+  surveyed: false,
   defaultResume: {},
   roles: [],
   loading: false,
@@ -62,6 +64,7 @@ const authSlice: any = createSlice({
       user: action.payload.user,
       defaultResume: action.payload.defaultResume,
       publicProfile: action.payload.publicProfile,
+      surveyed: action.payload.surveyed,
     }),
     authUpdateSetDefaultResumeRedux: (state: any, action: any) => ({
       ...state,

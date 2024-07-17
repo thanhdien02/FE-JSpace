@@ -81,10 +81,10 @@ const JobStatusDetailPage: React.FC<PropComponent> = ({
                   {item?.custom?.post?.rank?.code}
                 </span>
                 <span className="px-2 py-1 bg-gray-200">
-                  {item?.custom?.post?.experience?.code}
+                  {item?.custom?.post?.experience?.language?.vi}
                 </span>
                 <span className="px-2 py-1 bg-gray-200">
-                  {item?.custom?.post?.jobType?.language?.vi}
+                  {item?.custom?.post?.jobType?.code}
                 </span>
               </div>
             </div>

@@ -91,7 +91,7 @@ const CardManageJobHadApplyPage: React.FC<PropComponent> = ({ item }) => {
       {/*  */}
       {statusPoperCheck && (
         <JobInformationStatusAtManagePage
-          item={item?.post}
+          jobId={item?.post?.id}
           setClosePopover={setStatusPoperCheck}
         ></JobInformationStatusAtManagePage>
       )}

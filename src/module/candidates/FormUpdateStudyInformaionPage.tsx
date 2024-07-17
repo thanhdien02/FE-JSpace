@@ -10,10 +10,11 @@ interface PropComponent {
   setClosePopover?: any;
 }
 interface Inputs {
-  name: any;
+  schoolName: any;
   major: string;
   startYear?: string;
   endYear?: string;
+  description?: string;
 }
 const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
   setClosePopover,
@@ -48,7 +49,7 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
         ></div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="m-auto absolute inset-0 px-6 py-8 bg-white w-[650px] min-h-[400px] max-h-[500px] h-fit"
+          className="m-auto absolute inset-0 px-6 py-8 bg-white w-[650px] min-h-[400px] max-h-[600px] h-fit"
         >
           <span
             className="absolute top-2 right-2 cursor-pointer"
@@ -63,19 +64,19 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
             <h3 className="font-bold text-xl text-center">Thông tin học vấn</h3>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="font-medium">
+              <label htmlFor="schoolName" className="font-medium">
                 Trường <span className="text-red-500">*</span>
               </label>
               <input
-                {...register("name", {
+                {...register("schoolName", {
                   required: true,
                 })}
                 type="text"
-                id="name"
+                id="schoolName"
                 className="px-4 py-2 outline-none border border-solid border-gray-300 rounded placeholder:text-sm"
                 placeholder="Tên trường"
               />
-              {errors?.name?.type == "required" && (
+              {errors?.schoolName?.type == "required" && (
                 <p className="text-red-500 mt-1 text-sm">
                   *Bạn chưa nhập tên trường
                 </p>
@@ -89,7 +90,6 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
                 {...register("major", {
                   required: true,
                 })}
-                type="text"
                 id="major"
                 className="px-4 py-2 outline-none border border-solid border-gray-300 rounded placeholder:text-sm"
                 placeholder="Chuyên ngành"
@@ -110,7 +110,7 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
                   setValue("endYear", value[1]);
                   console.log(e);
                 }}
-                picker="year"
+                picker="month"
                 id={{
                   start: "startInput",
                   end: "endInput",
@@ -123,7 +123,18 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
                 }}
               />
             </div>
-
+            <div className="mt-5">
+              <label htmlFor="description" className="font-medium">
+                Mô tả
+              </label>
+              <textarea
+                {...register("description", {})}
+                name="description"
+                className="mt-3 outline-none p-4 placeholder:text-sm border border-solid border-gray-300 rounded-lg w-full min-h-[100px]"
+                placeholder="Mô tả"
+                id="description"
+              ></textarea>
+            </div>
             <ButtonLoading
               classButton="mt-8"
               title={t("buttonsave")}

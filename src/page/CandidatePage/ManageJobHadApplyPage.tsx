@@ -66,7 +66,7 @@ const ManageJobHadApplyPage: React.FC = () => {
             appliedJobs?.length > 0 &&
             appliedJobs.map((item: any) => (
               <CardManageJobHadApplyPage
-                key={item?.id}
+                key={item?.post?.id}
                 item={item}
               ></CardManageJobHadApplyPage>
             ))

@@ -179,3 +179,19 @@ export const requestJobGetAppliedJob = (
     }
   );
 };
+export const requestJobGetDetailStatus = (
+  candidate_id: string,
+  job_id: string,
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.get(
+    `${API}/api/v1/candidates/${candidate_id}/post/${job_id}/detail`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
