@@ -38,7 +38,7 @@ const JobDetailInformationCommonPage: React.FC<PropComponent> = ({
                   {t("experience")}
                 </span>
                 <span className="font-medium line-clamp-1">
-                  {jobByIdWithCandidate?.post?.experience?.code}
+                  {jobByIdWithCandidate?.post?.experience?.language?.vi}
                 </span>
               </div>
             </div>
@@ -82,7 +82,7 @@ const JobDetailInformationCommonPage: React.FC<PropComponent> = ({
                   {t("gender")}
                 </span>
                 <span className="font-medium line-clamp-1">
-                  {jobByIdWithCandidate?.post?.gender?.code}
+                  {jobByIdWithCandidate?.post?.gender?.language?.vi}
                 </span>
               </div>
             </div>

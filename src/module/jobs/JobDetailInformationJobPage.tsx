@@ -182,7 +182,7 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
                     {t("placeholderexperience")}
                   </span>
                   <span className="font-medium line-clamp-1">
-                    {jobByIdWithCandidate?.post?.experience?.code}
+                    {jobByIdWithCandidate?.post?.experience?.language?.vi}
                   </span>
                 </div>
               </div>

@@ -1,9 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import IconClose from "../../components/icons/IconClose";
 import { DatePicker } from "antd";
 import ButtonLoading from "../../components/button/ButtonLoading";
 import { useTranslation } from "react-i18next";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import {
+  candidateGetSurvey,
+  candidateUpdateStudy,
+} from "../../store/candidate/candidate-slice";
+import { useSelector } from "react-redux";
+import dayjs from "dayjs";
 
 const { RangePicker } = DatePicker;
 interface PropComponent {
@@ -25,6 +32,13 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
     register,
     formState: { errors },
   } = useForm<Inputs>();
+  const { user } = useSelector((state: any) => state.auth);
+  const { informationSurvey } = useSelector((state: any) => state.candidate);
+  const [year, setYear] = useState<any>({
+    startYear: null,
+    endYear: null,
+  });
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   useEffect(() => {
     const elementBody = document.body;
@@ -33,10 +47,61 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
       elementBody.style.overflow = "visible";
     };
   }, []);
+  useEffect(() => {
+    if (user?.id) {
+      dispatch(candidateGetSurvey({ candidate_id: user.id }));
+    }
+  }, []);
+  useEffect(() => {
+    if (informationSurvey?.educationInfo) {
+      setValue("schoolName", informationSurvey.educationInfo?.schoolName);
+      setValue("major", informationSurvey.educationInfo?.major);
+      setValue("description", informationSurvey.educationInfo?.description);
+      let start =
+        informationSurvey.educationInfo?.startYear +
+        "-" +
+        `${
+          informationSurvey.educationInfo?.startMonth?.toString().length == 1
+            ? `0${informationSurvey.educationInfo?.startMonth}`
+            : informationSurvey.educationInfo?.startMonth
+        }`;
+      setValue("startYear", start);
+      let end =
+        informationSurvey.educationInfo?.endYear +
+        "-" +
+        `${
+          informationSurvey.educationInfo?.endMonth?.toString().length == 1
+            ? `0${informationSurvey.educationInfo?.endMonth}`
+            : informationSurvey.educationInfo?.endMonth
+        }`;
+
+      setValue("endYear", end);
+      setYear({
+        startYear: start,
+        endYear: end,
+      });
+    }
+  }, [informationSurvey]);
   const onSubmit: SubmitHandler<Inputs> = (
     dataUpdateInformationStudy: Inputs
   ) => {
-    console.log("🚀 ~ dataUpdateInformationStudy:", dataUpdateInformationStudy);
+    const start: any = dataUpdateInformationStudy?.startYear?.split("-");
+    const end: any = dataUpdateInformationStudy?.endYear?.split("-");
+    dispatch(
+      candidateUpdateStudy({
+        candidateId: user?.id,
+        dataUpdateStudy: {
+          schoolName: dataUpdateInformationStudy?.schoolName,
+          major: dataUpdateInformationStudy?.major,
+          startMonth: start[1],
+          startYear: start[0],
+          endMonth: end[1],
+          endYear: end[0],
+          description: dataUpdateInformationStudy?.description,
+          graduated: true,
+        },
+      })
+    );
   };
   return (
     <>
@@ -49,7 +114,7 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
         ></div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="m-auto absolute inset-0 px-6 py-8 bg-white w-[650px] min-h-[400px] max-h-[600px] h-fit"
+          className="m-auto absolute inset-0 px-6 py-8 bg-white w-[650px] min-h-[400px] max-h-[700px] h-fit"
         >
           <span
             className="absolute top-2 right-2 cursor-pointer"
@@ -105,21 +170,23 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
                 Thời gian
               </label>
               <RangePicker
+                value={[
+                  dayjs(year?.startYear, "YYYY-MM"),
+                  dayjs(year?.endYear, "YYYY-MM"),
+                ]}
                 onChange={(e, value) => {
                   setValue("startYear", value[0]);
                   setValue("endYear", value[1]);
+                  setYear({
+                    startYear: value[0],
+                    endYear: value[1],
+                  });
                   console.log(e);
                 }}
                 picker="month"
                 id={{
-                  start: "startInput",
-                  end: "endInput",
-                }}
-                onFocus={(_, info) => {
-                  console.log("Focus:", info.range);
-                }}
-                onBlur={(_, info) => {
-                  console.log("Blur:", info.range);
+                  start: "startYear",
+                  end: "endYear",
                 }}
               />
             </div>
@@ -130,7 +197,7 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
               <textarea
                 {...register("description", {})}
                 name="description"
-                className="mt-3 outline-none p-4 placeholder:text-sm border border-solid border-gray-300 rounded-lg w-full min-h-[100px]"
+                className="mt-3 outline-none px-4 py-2 placeholder:text-sm border border-solid border-gray-300 rounded-lg w-full min-h-[100px] max-h-[200px]"
                 placeholder="Mô tả"
                 id="description"
               ></textarea>
