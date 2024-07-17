@@ -23,12 +23,16 @@ import IconUser from "../components/icons/IconUser";
 import { useTranslation } from "react-i18next";
 import OverlaySearchHeader from "../components/overlay/OverlaySearchHeader";
 import { candidateUpdatePublicResume } from "../store/candidate/candidate-slice";
+import { CSSTransition } from "react-transition-group";
+import SuggestJobThroughEmailPage from "../page/CommonPage/SuggestJobThroughEmailPage";
 
 const LayoutManageCandidate: React.FC = () => {
   const { user, accessToken, publicProfile } = useSelector(
     (state: any) => state.auth
   );
-  const { inputHeaderSearchCheck } = useSelector((state: any) => state.common);
+  const { inputHeaderSearchCheck, suggestJobCheck } = useSelector(
+    (state: any) => state.common
+  );
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -176,7 +180,14 @@ const LayoutManageCandidate: React.FC = () => {
           </div>
         </div>
       </div>
-
+      <CSSTransition
+        in={suggestJobCheck}
+        timeout={200}
+        classNames="fade"
+        unmountOnExit
+      >
+        <SuggestJobThroughEmailPage></SuggestJobThroughEmailPage>
+      </CSSTransition>
       {/*  */}
       <a
         href="https://m.me/267479709792373"

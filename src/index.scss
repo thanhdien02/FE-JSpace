@@ -282,3 +282,9 @@ option:hover {
 .bg-gradient {
   background: linear-gradient(to top, white, #0E8DE1);
 }
+// datepicker
+.ant-picker.ant-picker-range
+{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

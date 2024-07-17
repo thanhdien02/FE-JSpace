@@ -89,7 +89,6 @@ const SuggestJobThroughEmailPage: React.FC = () => {
     clearErrors("salary");
   };
   const handleOnchangeRank = (value: any) => {
-    console.log("🚀 ~ handleOnchangeRank ~ value:", value);
     setValue("rank", value);
     clearErrors("rank");
   };

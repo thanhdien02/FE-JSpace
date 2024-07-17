@@ -121,9 +121,17 @@ const LayoutHomeUser: React.FC = () => {
         </div>
       )}
 
-      {suggestJobCheck && (
+      <CSSTransition
+        in={suggestJobCheck}
+        timeout={200}
+        classNames="fade"
+        unmountOnExit
+      >
         <SuggestJobThroughEmailPage></SuggestJobThroughEmailPage>
-      )}
+      </CSSTransition>
+      {/* {suggestJobCheck && (
+        <SuggestJobThroughEmailPage></SuggestJobThroughEmailPage>
+      )} */}
       {/* hỗ trợ qua messenger */}
       <a
         href="https://m.me/267479709792373"
