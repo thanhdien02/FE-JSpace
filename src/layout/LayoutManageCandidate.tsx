@@ -176,6 +176,8 @@ const LayoutManageCandidate: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/*  */}
       <a
         href="https://m.me/267479709792373"
         target="_blank"

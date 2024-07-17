@@ -66,7 +66,7 @@
     "name": "Jobs",
     "filteradvance": "Advanced filtering",
     "display": "Priority displayed according to: ",
-    "suggestsuitablejob": "Suggest suitable jobs",
+    "suggestsuitablejob": "Search results",
     "relateto": "Relate to",
     "salary": "Highest salary",
     "bythetime": "By the time"
@@ -116,7 +116,8 @@
     "endsudmit": "The deadline for submission",
     "description": "Job details",
     "companysize": "Size",
-    "address": "Address"
+    "address": "Address",
+    "jobrelative": "Other jobs"
   },
   "footer": {
     "category": "CATEGORY",
@@ -171,10 +172,14 @@
   "loginnow": "Login now",
   "download": "Download",
   "jobsuggestion": {
-    "header": "Job suggestions",
+    "header": "Survey",
     "email": "Email address",
-    "title": "Survey job suggestions via Email",
-    "content": "Survey job suggestions via email, we will email you suitable jobs in the future"
+    "title": "Information survey",
+    "experience": "Your experience ?",
+    "rank": "Current rank ?",
+    "address": "Current address ?",
+    "salary": "Your expected salary ?",
+    "content": "This survey is intended to be used to inform you of jobs that match your selected criteria whenever a relevant job becomes available."
   },
   "fullname": "Full name",
   "confirm": "Confirm",

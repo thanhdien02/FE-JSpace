@@ -191,7 +191,10 @@ const JobDetailInformationJobPage: React.FC<PropComponent> = ({
               <IconClock></IconClock>
               <span>
                 {t("jobdetail.endsudmit")}:{" "}
-                {jobByIdWithCandidate?.post?.closeDate}
+                <span className="font-bold">
+                  {" "}
+                  {jobByIdWithCandidate?.post?.closeDate}
+                </span>
               </span>
             </div>
             <div

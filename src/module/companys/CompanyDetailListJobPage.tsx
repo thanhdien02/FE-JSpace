@@ -45,7 +45,8 @@ const CompanyDetailListJobPage: React.FC = () => {
     <>
       <div className="">
         <h2 className="font-medium text-lg">
-          {t("companydetail.companywork")}
+          {t("companydetail.companywork")}{" "}
+          {`(${paginationCompanyJob?.totalElements})`}
         </h2>
         <div className="flex flex-col gap-5 mt-5">
           {companyJobs?.length > 0 &&

@@ -1,4 +1,4 @@
-import { Radio, RadioChangeEvent, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 import CardJobClickShortPage from "../../components/card/CardJobClickShortPage";
 import JobShortDetailPage from "./JobShortDetailPage";
@@ -12,12 +12,7 @@ const JobDetailRelativeJobPage: React.FC = () => {
   const { relativeJobs, loadingJob } = useSelector((state: any) => state.job);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [filterShow, setFilterShow] = useState(1);
   const [dataJobShort, setDataJobShort] = useState<any>(null);
-  const onChange = (e: RadioChangeEvent) => {
-    // console.log("radio checked", e.target.value);
-    setFilterShow(e.target.value);
-  };
   useEffect(() => {
     dispatch(jobGetRelativeJob({ candidate_id: user?.id }));
   }, [user]);
@@ -32,20 +27,9 @@ const JobDetailRelativeJobPage: React.FC = () => {
       <section className="hidden lg:block bg-gray-100">
         <div className="w-primary mx-auto py-5">
           <div className="flex items-center gap-4">
-            <h3 className="font-medium text-primary text-lg">
-              {t("findjob.suggestsuitablejob")}:
+            <h3 className="font-medium text-xl">
+              {t("jobdetail.jobrelative")}
             </h3>
-            <Radio.Group onChange={onChange} value={filterShow}>
-              <Radio className="font-medium text-base" value={1}>
-                {t("findjob.relateto")}
-              </Radio>
-              <Radio className="font-medium text-base" value={2}>
-                {t("findjob.salary")}
-              </Radio>
-              <Radio className="font-medium text-base" value={3}>
-                {t("findjob.bythetime")}
-              </Radio>
-            </Radio.Group>
           </div>
           <div className="flex mt-5 gap-5 w-full">
             <div className={`min-w-[38%] w-full flex flex-col gap-3`}>

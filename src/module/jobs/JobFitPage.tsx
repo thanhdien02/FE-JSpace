@@ -3,7 +3,7 @@ import CardJobFitPage from "../../components/card/CardJobFitPage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Scrollbar } from "swiper/modules";
 import { Pagination, Radio, RadioChangeEvent } from "antd";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { chunkArray } from "../../utils/common-function";
@@ -16,7 +16,7 @@ const JobFitPage: React.FC<PropComponent> = ({ setPage, page }) => {
   const { filterJobs, loadingJob, paginationFilterJob } = useSelector(
     (state: any) => state.job
   );
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const [dataJob, setDataJob] = useState<any>(null);
   const [dataJobPhone, setDataJobPhone] = useState<any>(null);
   const [filterShow, setFilterShow] = useState(1);
@@ -37,9 +37,9 @@ const JobFitPage: React.FC<PropComponent> = ({ setPage, page }) => {
     <>
       <div className="bg-gray-100 py-5">
         <section className=" relative w-primary max-w-full mx-auto bg-white shadow-sm rounded-lg p-5">
-          <h2 className="absolute top-5 left-5 text-xl font-bold">
+          {/* <h2 className="absolute top-5 left-5 text-xl font-bold">
             {t("findjob.suggestsuitablejob")}
-          </h2>
+          </h2> */}
           {loadingJob ? (
             <div className="py-5 mt-5">
               <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5">

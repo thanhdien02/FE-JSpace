@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface ICommon {
   infoUserOauth: any;
+  jobStatusCheck?: boolean;
   loginCheck?: boolean;
   inputHeaderSearchCheck?: boolean;
   inputBannerSearchCheck?: boolean;
@@ -19,6 +20,7 @@ interface ICommon {
 
 const init: ICommon = {
   infoUserOauth: {},
+  jobStatusCheck: false,
   loginCheck: false,
   inputHeaderSearchCheck: false,
   inputBannerSearchCheck: false,
@@ -40,6 +42,10 @@ const commonSlice: any = createSlice({
     commonUpdateOAuthRedux: (state: any, action: any) => ({
       ...state,
       infoUserOauth: action.payload.infoUserOauth,
+    }),
+    commonUpdateJobStatusDetailCheckRedux: (state: any, action: any) => ({
+      ...state,
+      jobStatusCheck: action.payload.jobStatusCheck,
     }),
     commonUpdateLoginRedux: (state: any, action: any) => ({
       ...state,
@@ -124,5 +130,6 @@ export const {
   commonUpdateSuggestJobRedux,
   commonUpdateInputHeaderSearchCheckRedux,
   commonUpdateInputBannerSearchCheckRedux,
+  commonUpdateJobStatusDetailCheckRedux,
 } = commonSlice.actions;
 export default commonSlice.reducer;

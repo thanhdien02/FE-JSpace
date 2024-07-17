@@ -34,7 +34,7 @@ const JobDetailInformationCompanyPage: React.FC<PropComponent> = ({
                     : logo
                 }
                 alt=""
-                className="w-[80px] h-[80px] rounded-sm object-cover"
+                className="w-[80px] h-[80px] rounded-sm object-contain"
               />
               <div>
                 <Popover
@@ -63,7 +63,7 @@ const JobDetailInformationCompanyPage: React.FC<PropComponent> = ({
               </p>
             </div>
             <div className="flex items-start gap-1 mt-5">
-              <div className="flex min-w-[40%] min-w-[30%] text-gray-500 gap-2 items-center">
+              <div className="flex min-w-[40%] text-gray-500 gap-2 items-center">
                 <IconMapPin classIcon="w-5 h-5" className=""></IconMapPin>
                 <span>{t("jobdetail.address")}:</span>
               </div>

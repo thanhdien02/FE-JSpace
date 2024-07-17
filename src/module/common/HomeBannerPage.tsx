@@ -180,7 +180,7 @@ const HomeBannerPage: React.FC = () => {
                 options={
                   experiences?.length > 0 &&
                   experiences.map((item: any) => ({
-                    label: item?.code,
+                    label: item?.language?.vi,
                     value: item?.value,
                   }))
                 }

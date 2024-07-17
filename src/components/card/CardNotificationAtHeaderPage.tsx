@@ -1,11 +1,11 @@
 import { CheckOutlined } from "@ant-design/icons";
 import { Popover } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { notificationUpdateReadNotification } from "../../store/notification/notification-slice";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import JobStatusDetailPage from "../../module/jobs/JobStatusDetailPage";
 interface PropComponent {
   classname?: string;
   item?: any;
@@ -15,8 +15,9 @@ const CardNotificationAtHeaderPage: React.FC<PropComponent> = ({
   item,
 }) => {
   const { user } = useSelector((state: any) => state.auth);
+  const [checkContentNotification, setCheckContentNotification] =
+    useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const handleUpdateReadNotification = () => {
     dispatch(
       notificationUpdateReadNotification({
@@ -32,8 +33,8 @@ const CardNotificationAtHeaderPage: React.FC<PropComponent> = ({
         {item?.notification?.type == "EMPLOYEE_UPDATE_STATUS_APPLIED" ? (
           <div
             onClick={() => {
-              if (!item?.read) handleUpdateReadNotification();
-              navigate("/manage/job-apply");
+              console.log("object");
+              setCheckContentNotification(true);
             }}
             className="block font-semibold text-base cursor-pointer hover:text-primary transition-all line-clamp-2"
           >
@@ -64,6 +65,13 @@ const CardNotificationAtHeaderPage: React.FC<PropComponent> = ({
           </Popover>
         </div>
       </div>
+      {/*  */}
+      {checkContentNotification && (
+        <JobStatusDetailPage
+          item={item?.notification}
+          setClosePopover={setCheckContentNotification}
+        ></JobStatusDetailPage>
+      )}
     </>
   );
 };

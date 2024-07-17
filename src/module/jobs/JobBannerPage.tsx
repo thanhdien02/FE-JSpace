@@ -102,7 +102,6 @@ const JobBannerPage: React.FC<PropComponent> = ({
       );
     }
   }, [user?.id]);
-
   const handleChangeJobTitle = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -124,7 +123,6 @@ const JobBannerPage: React.FC<PropComponent> = ({
     setRank(value);
   };
   const handleChangeSkills = (value: string) => {
-    console.log("🚀 ~ handleChangeSkills ~ value:", value)
     setSkill(value);
   };
   const handleSearchJob = (e: any) => {
@@ -306,7 +304,7 @@ const JobBannerPage: React.FC<PropComponent> = ({
                   options={
                     experiences?.length > 0 &&
                     experiences.map((item: any) => ({
-                      label: item?.code,
+                      label: item?.language?.vi,
                       value: item?.value,
                     }))
                   }
@@ -409,7 +407,7 @@ const JobBannerPage: React.FC<PropComponent> = ({
                     options={
                       jobTypes?.length > 0 &&
                       jobTypes.map((item: any) => ({
-                        label: item?.code,
+                        label: item?.language?.en,
                         value: item?.value,
                       }))
                     }
@@ -431,7 +429,7 @@ const JobBannerPage: React.FC<PropComponent> = ({
                     options={
                       ranks?.length > 0 &&
                       ranks.map((item: any) => ({
-                        label: item?.code,
+                        label: item?.language?.vi,
                         value: item?.value,
                       }))
                     }

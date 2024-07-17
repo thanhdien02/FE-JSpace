@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Popover } from "antd";
 import IconMoney from "../icons/IconMoney";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/banner3.jpg";
 import { formatToMillion } from "../../utils/common-function";
+import JobStatusDetailPage from "../../module/jobs/JobStatusDetailPage";
 interface PropComponent {
   item?: any;
 }
 const CardManageJobHadApplyPage: React.FC<PropComponent> = ({ item }) => {
   const navigate = useNavigate();
+  const [checkContentNotification, setCheckContentNotification] =
+    useState(false);
   return (
     <>
       <div className="relative flex gap-5 w-full items-center lg:p-5 p-2 shadow-sm lg:h-[150px] border border-solid border-gray-200 rounded-md hover:shadow-md transition-all">
@@ -66,7 +69,17 @@ const CardManageJobHadApplyPage: React.FC<PropComponent> = ({ item }) => {
             </span>
           </div>
         </div>
-        <div className="absolute bottom-3 right-3 flex items-center gap-2">
+        <div
+          className="absolute bottom-3 right-3 flex items-center gap-2"
+          onClick={() => {
+            // dispatch(
+            //   commonUpdateJobStatusDetailCheckRedux({
+            //     jobStatusCheck: !jobStatusCheck,
+            //   })
+            // );
+            // setCheckContentNotification(true);
+          }}
+        >
           <span
             className={`md:text-base text-xs select-none bg-green-500 text-white py-[6px] px-4 rounded-sm cursor-pointer font-medium ${
               item?.applyStatus?.code == "PROGRESS"
@@ -80,6 +93,14 @@ const CardManageJobHadApplyPage: React.FC<PropComponent> = ({ item }) => {
           </span>
         </div>
       </div>
+
+      {/*  */}
+      {checkContentNotification && (
+        <JobStatusDetailPage
+          item={item?.post}
+          setClosePopover={setCheckContentNotification}
+        ></JobStatusDetailPage>
+      )}
     </>
   );
 };

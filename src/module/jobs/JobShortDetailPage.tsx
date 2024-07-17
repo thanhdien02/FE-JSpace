@@ -111,7 +111,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
               {dataJob?.post?.location.province}
             </span>
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm font-medium ">
-              {dataJob?.post?.experience?.code}
+              {dataJob?.post?.experience?.language?.vi}
             </span>
             <span className="px-2 py-1 rounded-sm bg-gray-200 text-sm font-medium ">
               {dataJob?.post?.rank?.code}

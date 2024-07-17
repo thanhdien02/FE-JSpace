@@ -60,7 +60,6 @@ const ManageWallCandidate: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  // const description = "You can hover on the dot.";
   return (
     <>
       <div className="bg-gray-200">

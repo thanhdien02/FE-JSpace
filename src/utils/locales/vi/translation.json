@@ -66,7 +66,7 @@
     "name": "Tìm việc",
     "filteradvance": "Lọc nâng cao",
     "display": "Ưu tiên hiển thị theo:",
-    "suggestsuitablejob": "Gợi ý việc làm phù hợp",
+    "suggestsuitablejob": "Kết quả tìm kiếm",
     "relateto": "Liên quan",
     "salary": "Lương cao nhất",
     "bythetime": "Theo thời gian"
@@ -100,7 +100,7 @@
     "name": "Hỗ trợ",
     "title": "Liên hệ với chúng tôi",
     "leaveinformation": "Để lại thông tin cho chúng tôi.",
-    "content": "Bạn có thể hỏi bất cứ câu hỏi gì, hoặc phản hồi về trải nghiệm bạn bạn khi sử dụng trang tuyển dụng của chúng tôi.",
+    "content": "Bạn có thể hỏi bất cứ câu hỏi hoặc phản hồi về trải nghiệm của bạn khi sử dụng trang tuyển dụng của chúng tôi.",
     "fullname": "Họ và tên",
     "description": "Mô tả",
     "contactinformation": "Thông tin liên hệ",
@@ -113,7 +113,8 @@
     "endsudmit": "Hạn nộp hồ sơ",
     "description": "Thông tin chi tiết công việc",
     "companysize": "Quy mô",
-    "address": "Địa chỉ"
+    "address": "Địa chỉ",
+    "jobrelative": "Các công việc khác"
   },
   "footer": {
     "category": "DANH MỤC",
@@ -143,9 +144,9 @@
   "placeholdersalary": "Mức lương",
   "placeholdercompany": "Nhập tên công ty",
   "result": "kết quả",
-  "skills": "Kỹ năng",
+  "skills": "Kỹ năng của bạn ?",
   "jobtype": "Loại công việc",
-  "rank": "Cập bậc",
+  "rank": "Cấp bậc",
   "experience": "Kinh nghiệm",
   "gender": "Giới tính",
   "quantity": "Số lượng tuyển",
@@ -154,7 +155,6 @@
   "applied": "Đã ứng tuyển",
   "endapply": "Đã hết thời gian ứng tuyển",
   "save": "Lưu tin",
-
   "unsave": "Đã lưu",
   "seemore": "Xem thêm",
   "seeless": "Rút ngắn",
@@ -169,9 +169,13 @@
   "download": "Tải xuống",
   "jobsuggestion": {
     "email": "Địa chỉ email",
-    "header": "Gợi ý việc làm",
-    "title": "Khảo sát gợi ý công việc qua Email",
-    "content": "Khảo sát gợi ý công việc qua email, chúng tôi sẽ gửi email đến bạn những công việc phù hợp với bạn trong tương lai"
+    "header": "Khảo sát",
+    "title": "Khảo sát thông tin",
+    "experience": "Kinh nghiệm của bạn ?",
+    "rank": "Cấp bậc hiện tại",
+    "address": "Địa chỉ hiện tại ?",
+    "salary": "Mức lương bạn mong muốn ?",
+    "content": "Khảo sát này nhằm mục đích dùng để thông báo cho bạn các công việc phù hợp với các tiêu chí bạn lựa chọn mỗi khi có công việc liên quan."
   },
   "fullname": "Họ và tên",
   "confirm": "Xác nhận",

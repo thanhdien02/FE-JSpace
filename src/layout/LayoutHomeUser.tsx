@@ -53,12 +53,22 @@ const LayoutHomeUser: React.FC = () => {
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (user?.id && !user?.check) {
+        dispatch(
+          commonUpdateSuggestJobRedux({
+            suggestJobCheck: !suggestJobCheck,
+          })
+        );
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [user?.id]);
   return (
     <div className="">
       {/* overlay search banner */}
@@ -92,24 +102,28 @@ const LayoutHomeUser: React.FC = () => {
       </CSSTransition>
       {/* khảo sát gợi ý việc làm */}
 
-      <div
-        onClick={() => {
-          if (!user?.id) {
-            dispatch(commonUpdateLoginRedux({ loginCheck: true }));
-          } else {
-            dispatch(
-              commonUpdateSuggestJobRedux({ suggestJobCheck: !suggestJobCheck })
-            );
-          }
-        }}
-        className="fixed z-10 right-0 top-1/2 bg-primary py-3 px-1 text-white rounded-r-lg text-base cursor-pointer vertical-text"
-      >
-        {t("jobsuggestion.header")}
-      </div>
+      {user?.id && (
+        <div
+          onClick={() => {
+            if (!user?.id) {
+              dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+            } else {
+              dispatch(
+                commonUpdateSuggestJobRedux({
+                  suggestJobCheck: !suggestJobCheck,
+                })
+              );
+            }
+          }}
+          className="fixed z-10 right-0 top-1/2 bg-primary py-3 px-1 text-white rounded-r-lg text-base cursor-pointer vertical-text"
+        >
+          {t("jobsuggestion.header")}
+        </div>
+      )}
+
       {suggestJobCheck && (
         <SuggestJobThroughEmailPage></SuggestJobThroughEmailPage>
       )}
-
       {/* hỗ trợ qua messenger */}
       <a
         href="https://m.me/267479709792373"
