@@ -102,7 +102,7 @@ const CompanyDetailMoreInformationPage: React.FC<PropComponent> = ({
               value={companyById?.company?.companyLink}
               ref={inputRef}
               className="px-3 py-2 border border-solid border-stone-200 w-full"
-              placeholder="Đường dẫn công ty"
+              placeholder="Website công ty"
             />
             <CopyOutlined
               onClick={handleCopyLink}
