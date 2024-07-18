@@ -12,6 +12,7 @@ import {
   requestCandidateUnSaveJob,
   requestCandidateUpdateAvatar,
   requestCandidateUpdateBackground,
+  requestCandidateUpdateExperience,
   requestCandidateUpdateIdentification,
   requestCandidateUpdatePublicResume,
   requestCandidateUpdateStudy,
@@ -330,6 +331,30 @@ function* handleCandidateUpdateStudy(dataCandiateStudy: any): Generator<any> {
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
   }
 }
+function* handleCandidateUpdateExperience(
+  dataCandiateExperience: any
+): Generator<any> {
+  try {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
+    const token: Token = getToken();
+    const response: any = yield call(
+      requestCandidateUpdateExperience,
+      dataCandiateExperience?.payload?.candidateId,
+      dataCandiateExperience?.payload?.dataUpdateExperience,
+      token?.accessToken
+    );
+    if (response?.data?.code === 1000) {
+      yield put(
+        candidateUpdateMessageRedux({ messageCandidate: "experiencesuccess" })
+      );
+      message.success("Cập nhật kinh nghiệm thành công.");
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(candidateUpdateLoadingRedux({ loadingCandidate: false }));
+  }
+}
 function* handleCandidateSurvey(dataCandiateSurvey: any): Generator<any> {
   try {
     yield put(candidateUpdateLoadingRedux({ loadingCandidate: true }));
@@ -389,4 +414,5 @@ export {
   handleCandidateSurvey,
   handleCandidateGetSurvey,
   handleCandidateUpdateStudy,
+  handleCandidateUpdateExperience,
 };

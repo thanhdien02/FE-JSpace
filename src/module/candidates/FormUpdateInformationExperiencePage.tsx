@@ -1,15 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import IconClose from "../../components/icons/IconClose";
 import { DatePicker } from "antd";
 import ButtonLoading from "../../components/button/ButtonLoading";
 import { useTranslation } from "react-i18next";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  candidateGetSurvey,
+  candidateUpdateExperience,
+  candidateUpdateMessageRedux,
+} from "../../store/candidate/candidate-slice";
 const { RangePicker } = DatePicker;
+import dayjs from "dayjs";
 interface PropComponent {
   setClosePopover?: any;
 }
 interface Inputs {
-  name: any;
+  companyName: any;
   position: string;
   startYear?: string;
   endYear?: string;
@@ -17,6 +25,10 @@ interface Inputs {
 const FormUpdateInformationExperiencePage: React.FC<PropComponent> = ({
   setClosePopover,
 }) => {
+  const { user } = useSelector((state: any) => state.auth);
+  const { informationSurvey, messageCandidate } = useSelector(
+    (state: any) => state.candidate
+  );
   const {
     handleSubmit,
     setValue,
@@ -24,6 +36,11 @@ const FormUpdateInformationExperiencePage: React.FC<PropComponent> = ({
     formState: { errors },
   } = useForm<Inputs>();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const [year, setYear] = useState<any>({
+    startYear: null,
+    endYear: null,
+  });
   useEffect(() => {
     const elementBody = document.body;
     elementBody.style.overflow = "hidden";
@@ -31,11 +48,66 @@ const FormUpdateInformationExperiencePage: React.FC<PropComponent> = ({
       elementBody.style.overflow = "visible";
     };
   }, []);
-  const onSubmit: SubmitHandler<Inputs> = (
-    dataUpdateInformationStudy: Inputs
-  ) => {
-    console.log("🚀 ~ dataUpdateInformationStudy:", dataUpdateInformationStudy);
+  const onSubmit: SubmitHandler<Inputs> = (dataUpdateExperience: Inputs) => {
+    const start: any = dataUpdateExperience?.startYear?.split("-");
+    const end: any = dataUpdateExperience?.endYear?.split("-");
+    dispatch(
+      candidateUpdateExperience({
+        candidateId: user?.id,
+        dataUpdateExperience: {
+          companyName: dataUpdateExperience?.companyName,
+          position: dataUpdateExperience?.position,
+          startMonth: start[1],
+          startYear: start[0],
+          endMonth: end[1],
+          endYear: end[0],
+          workingYesNo: true,
+        },
+      })
+    );
   };
+  useEffect(() => {
+    if (user?.id) {
+      dispatch(candidateGetSurvey({ candidate_id: user.id }));
+    }
+  }, []);
+  useEffect(() => {
+    if (informationSurvey?.experienceInfo) {
+      setValue("companyName", informationSurvey?.experienceInfo?.companyName);
+      setValue("position", informationSurvey?.experienceInfo?.position);
+      let start =
+        informationSurvey.experienceInfo?.startYear +
+        "-" +
+        `${
+          informationSurvey.experienceInfo?.startMonth?.toString().length == 1
+            ? `0${informationSurvey.experienceInfo?.startMonth}`
+            : informationSurvey.experienceInfo?.startMonth
+        }`;
+      setValue("startYear", start);
+      let end =
+        informationSurvey.experienceInfo?.endYear +
+        "-" +
+        `${
+          informationSurvey.experienceInfo?.endMonth?.toString().length == 1
+            ? `0${informationSurvey.experienceInfo?.endMonth}`
+            : informationSurvey.experienceInfo?.endMonth
+        }`;
+
+      setValue("endYear", end);
+      if (start.length > 5) {
+        setYear({
+          startYear: start,
+          endYear: end,
+        });
+      }
+    }
+  }, [informationSurvey]);
+  useEffect(() => {
+    if (messageCandidate == "experiencesuccess") {
+      setClosePopover(false);
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    }
+  }, [messageCandidate]);
   return (
     <>
       <div className="fixed inset-0 z-40 flex">
@@ -66,15 +138,15 @@ const FormUpdateInformationExperiencePage: React.FC<PropComponent> = ({
                 Công ty <span className="text-red-500">*</span>
               </label>
               <input
-                {...register("name", {
+                {...register("companyName", {
                   required: true,
                 })}
                 type="text"
-                id="name"
+                id="companyName"
                 className="px-4 py-2 outline-none border border-solid border-gray-300 rounded placeholder:text-sm"
-                placeholder="Tên trường"
+                placeholder="Tên công ty"
               />
-              {errors?.name?.type == "required" && (
+              {errors?.companyName?.type == "required" && (
                 <p className="text-red-500 mt-1 text-sm">
                   *Bạn chưa nhập tên công ty
                 </p>
@@ -91,7 +163,7 @@ const FormUpdateInformationExperiencePage: React.FC<PropComponent> = ({
                 type="text"
                 id="position"
                 className="px-4 py-2 outline-none border border-solid border-gray-300 rounded placeholder:text-sm"
-                placeholder="Chuyên ngành"
+                placeholder="Vị trí"
               />
               {errors?.position?.type == "required" && (
                 <p className="text-red-500 mt-1 text-sm">
@@ -104,10 +176,21 @@ const FormUpdateInformationExperiencePage: React.FC<PropComponent> = ({
                 Thời gian làm việc
               </label>
               <RangePicker
-                // value={[dayjs("2024"), dayjs("2025")]}
+                value={
+                  year?.startYear != null
+                    ? [
+                        dayjs(year?.startYear, "YYYY-MM"),
+                        dayjs(year?.endYear, "YYYY-MM"),
+                      ]
+                    : [null, null]
+                }
                 onChange={(e, value) => {
                   setValue("startYear", value[0]);
                   setValue("endYear", value[1]);
+                  setYear({
+                    startYear: value[0],
+                    endYear: value[1],
+                  });
                   console.log(e);
                 }}
                 picker="month"

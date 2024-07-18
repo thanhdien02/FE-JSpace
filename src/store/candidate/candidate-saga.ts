@@ -12,6 +12,7 @@ import {
   candidateUpdateAvatar,
   candidateUpdateBackground,
   candidateUpdateCandidate,
+  candidateUpdateExperience,
   candidateUpdatePublicResume,
   candidateUpdateStudy,
 } from "./candidate-slice";
@@ -27,6 +28,7 @@ import {
   handleCandidateUnSaveJob,
   handleCandidateUpdateAvatar,
   handleCandidateUpdateBackground,
+  handleCandidateUpdateExperience,
   handleCandidateUpdateIdentification,
   handleCandidateUpdatePublicResume,
   handleCandidateUpdateStudy,
@@ -65,4 +67,8 @@ export default function* authSaga() {
   yield takeLatest(candidateSurvey.type, handleCandidateSurvey);
   yield takeLatest(candidateGetSurvey.type, handleCandidateGetSurvey);
   yield takeLatest(candidateUpdateStudy.type, handleCandidateUpdateStudy);
+  yield takeLatest(
+    candidateUpdateExperience.type,
+    handleCandidateUpdateExperience
+  );
 }

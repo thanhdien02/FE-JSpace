@@ -208,6 +208,23 @@ export const requestCandidateUpdateStudy = (
     }
   );
 };
+export const requestCandidateUpdateExperience = (
+  candidateId: any,
+  dataUpdateExperience: any,
+  accessToken: string
+) => {
+  if (!accessToken) return;
+  return axios.put(
+    `${API}/api/v1/candidates/${candidateId}/profiles/experience-info`,
+    dataUpdateExperience,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+};
 export const requestCandidateSurvey = (
   dataSurvey: any,
   accessToken: string
