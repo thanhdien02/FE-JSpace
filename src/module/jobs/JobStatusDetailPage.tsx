@@ -4,10 +4,12 @@ import { formatToMillion } from "../../utils/common-function";
 
 interface PropComponent {
   item?: any;
+  time?: string;
   setClosePopover?: any;
 }
 const JobStatusDetailPage: React.FC<PropComponent> = ({
   item,
+  time,
   setClosePopover,
 }) => {
   useEffect(() => {
@@ -26,7 +28,7 @@ const JobStatusDetailPage: React.FC<PropComponent> = ({
             setClosePopover(false);
           }}
         ></div>
-        <div className="m-auto absolute inset-0 px-6 py-8 bg-white w-[650px] min-h-[300px] max-h-[500px] h-fit">
+        <div className="m-auto absolute inset-0 px-6 py-8 bg-white w-[650px] min-h-[300px] max-h-[700px] h-fit">
           <span
             className="absolute top-2 right-2 cursor-pointer"
             onClick={() => {
@@ -103,6 +105,7 @@ const JobStatusDetailPage: React.FC<PropComponent> = ({
                 >
                   {item?.custom?.appliedStatus?.value}
                 </span>
+                <p>Thời gian: {time}</p>
               </div>
               <p className="mt-4 max-h-[100px] overflow-auto">
                 {item?.content}

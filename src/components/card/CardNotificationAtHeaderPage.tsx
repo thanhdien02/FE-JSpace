@@ -6,6 +6,7 @@ import { notificationUpdateReadNotification } from "../../store/notification/not
 import { useSelector } from "react-redux";
 import moment from "moment";
 import JobStatusDetailPage from "../../module/jobs/JobStatusDetailPage";
+import { useNavigate } from "react-router-dom";
 interface PropComponent {
   classname?: string;
   item?: any;
@@ -18,6 +19,7 @@ const CardNotificationAtHeaderPage: React.FC<PropComponent> = ({
   const [checkContentNotification, setCheckContentNotification] =
     useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleUpdateReadNotification = () => {
     dispatch(
       notificationUpdateReadNotification({
@@ -33,7 +35,6 @@ const CardNotificationAtHeaderPage: React.FC<PropComponent> = ({
         {item?.notification?.type == "EMPLOYEE_UPDATE_STATUS_APPLIED" ? (
           <div
             onClick={() => {
-              console.log("object");
               setCheckContentNotification(true);
             }}
             className="block font-semibold text-base cursor-pointer hover:text-primary transition-all line-clamp-2"
@@ -41,7 +42,17 @@ const CardNotificationAtHeaderPage: React.FC<PropComponent> = ({
             {item?.notification?.title}
           </div>
         ) : (
-          <h4 className="font-semibold text-base cursor-pointer hover:text-primary transition-all line-clamp-2">
+          <h4
+            onClick={() => {
+              if (
+                item?.notification?.type == "COMPANY_IS_FOLLOWING_HAS_NEW_POST"
+              ) {
+                if (!item?.read) handleUpdateReadNotification();
+                navigate(`/jobs/${item?.notification?.custom?.id}`);
+              }
+            }}
+            className="font-semibold text-base cursor-pointer hover:text-primary transition-all line-clamp-2"
+          >
             {item?.notification?.title}
           </h4>
         )}
@@ -69,6 +80,7 @@ const CardNotificationAtHeaderPage: React.FC<PropComponent> = ({
       {checkContentNotification && (
         <JobStatusDetailPage
           item={item?.notification}
+          time={moment(item?.notificationTime).format("HH:mm:ss DD-MM-YYYY")}
           setClosePopover={setCheckContentNotification}
         ></JobStatusDetailPage>
       )}

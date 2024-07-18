@@ -18,6 +18,7 @@ import { dataSalary } from "../../utils/dataFetch";
 import {
   candidateGetSurvey,
   candidateSurvey,
+  candidateUpdateMessageRedux,
 } from "../../store/candidate/candidate-slice";
 interface Inputs {
   skills: any;
@@ -32,7 +33,9 @@ const SuggestJobThroughEmailPage: React.FC = () => {
   const { suggestJobCheck, locations, ranks, experiences, skills, genders } =
     useSelector((state: any) => state.common);
   const { user } = useSelector((state: any) => state.auth);
-  const { informationSurvey } = useSelector((state: any) => state.candidate);
+  const { informationSurvey, messageCandidate } = useSelector(
+    (state: any) => state.candidate
+  );
   const {
     handleSubmit,
     setValue,
@@ -76,6 +79,16 @@ const SuggestJobThroughEmailPage: React.FC = () => {
       dispatch(candidateGetSurvey({ candidate_id: user.id }));
     }
   }, []);
+  useEffect(() => {
+    if (messageCandidate == "surveysuccess") {
+      dispatch(
+        commonUpdateSuggestJobRedux({
+          suggestJobCheck: false,
+        })
+      );
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    }
+  }, [messageCandidate]);
   useEffect(() => {
     if (informationSurvey?.skills) {
       setValue(
@@ -324,14 +337,17 @@ const SuggestJobThroughEmailPage: React.FC = () => {
                   Chi tiết địa chỉ
                 </label>
                 <input
-                  {...register("detailAddress", {
-                    required: true,
-                  })}
+                  {...register("detailAddress", { required: true })}
                   type="text"
                   id="detailAddress"
                   className="px-4 py-2 outline-none border border-solid border-gray-200 rounded-lg placeholder:text-sm"
                   placeholder="Địa chỉ chi tiết"
                 />
+                {errors?.detailAddress?.type == "required" && (
+                  <p className="text-red-500 mt-1 text-sm">
+                    *Bạn chưa nhập chi tiết địa chỉ
+                  </p>
+                )}
               </div>
             </div>
             <div className={`w-full mt-5 flex flex-col gap-2`}>

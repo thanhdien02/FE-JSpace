@@ -132,7 +132,7 @@ const RegisterPage: React.FC<PropComponent> = ({ className = "" }) => {
                       {...register("password", {
                         required: true,
                         maxLength: 50,
-                        minLength: 6,
+                        minLength: 8,
                       })}
                       type={showPassword ? "password" : "text"}
                       placeholder="*************"
@@ -146,7 +146,7 @@ const RegisterPage: React.FC<PropComponent> = ({ className = "" }) => {
                         : errors?.password?.type === "maxLength"
                         ? "*Mật khẩu không được quá 50 ký tự"
                         : errors?.password?.type === "minLength"
-                        ? "*Mật khẩu không được ít hơn 6 ký tự"
+                        ? "*Mật khẩu không được ít hơn 8 ký tự"
                         : ""}
                     </p>
                   </div>
@@ -164,7 +164,7 @@ const RegisterPage: React.FC<PropComponent> = ({ className = "" }) => {
                       {...register("confirmpassword", {
                         required: true,
                         maxLength: 40,
-                        minLength: 6,
+                        minLength: 8,
                       })}
                       placeholder="*************"
                       id="confirmpassword"
@@ -180,7 +180,7 @@ const RegisterPage: React.FC<PropComponent> = ({ className = "" }) => {
                         : errors?.confirmpassword?.type === "maxLength"
                         ? "*Mật khẩu không được quá 40 ký tự"
                         : errors?.confirmpassword?.type === "minLength"
-                        ? "*Mật khẩu không được ít hơn 6 ký tự"
+                        ? "*Mật khẩu không được ít hơn 8 ký tự"
                         : ""}
                     </p>
                   </div>

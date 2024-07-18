@@ -1,4 +1,4 @@
-import { Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
+import { Pagination, Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 import CardJobClickShortPage from "../../components/card/CardJobClickShortPage";
 import JobShortDetailPage from "./JobShortDetailPage";
@@ -13,29 +13,28 @@ interface PropComponent {
 const JobResultFilterPage: React.FC<PropComponent> = ({
   setPage,
   page,
-  setCloseDate,
+  // setCloseDate,
 }) => {
   const { filterJobs, loadingJob, paginationFilterJob } = useSelector(
     (state: any) => state.job
   );
   const { t } = useTranslation();
-  const [filterShow, setFilterShow] = useState(1);
+  // const [ setFilterShow] = useState(1);
   const [dataJobShort, setDataJobShort] = useState<any>(null);
-  const onChangeFilter = (e: RadioChangeEvent) => {
-    setFilterShow(e.target.value);
-    if (e.target.value == "3") {
-      setCloseDate("desc");
-    } else {
-      setCloseDate("asc");
-    }
-    setPage(1);
-  };
+  // const onChangeFilter = (e: RadioChangeEvent) => {
+  //   setFilterShow(e.target.value);
+  //   if (e.target.value == "3") {
+  //     setCloseDate("desc");
+  //   } else {
+  //     setCloseDate("asc");
+  //   }
+  //   setPage(1);
+  // };
   useEffect(() => {
     if (filterJobs?.length > 0) {
       setDataJobShort(filterJobs[0]);
     }
   }, [filterJobs]);
-
   return (
     <>
       <section className="hidden lg:block bg-gray-100">
@@ -44,14 +43,14 @@ const JobResultFilterPage: React.FC<PropComponent> = ({
             <h3 className="font-medium text-lg">
               {t("findjob.suggestsuitablejob")}:
             </h3>
-            <Radio.Group onChange={onChangeFilter} value={filterShow}>
+            {/* <Radio.Group onChange={onChangeFilter} value={filterShow}>
               <Radio className="font-medium text-base" value={2}>
                 {t("findjob.salary")}
               </Radio>
               <Radio className="font-medium text-base" value={3}>
                 {t("findjob.bythetime")}
               </Radio>
-            </Radio.Group>
+            </Radio.Group> */}
           </div>
           <div className="flex mt-5 gap-5 w-full">
             <div className="min-w-[38%] w-full">

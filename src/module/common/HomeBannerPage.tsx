@@ -65,13 +65,13 @@ const HomeBannerPage: React.FC = () => {
     const storedHistory: any = localStorage.getItem("searchHistory");
     if (title) {
       if (storedHistory) {
-        if (!JSON.parse(storedHistory).includes(title))
+        if (!JSON.parse(storedHistory)?.includes(title))
           localStorage.setItem(
             "searchHistory",
             JSON.stringify([title, ...JSON.parse(storedHistory)])
           );
       } else {
-        if (!JSON.parse(storedHistory).includes(title))
+        if (!JSON.parse(storedHistory)?.includes(title))
           localStorage.setItem("searchHistory", JSON.stringify([title]));
       }
     }

@@ -76,10 +76,12 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
         }`;
 
       setValue("endYear", end);
-      setYear({
-        startYear: start,
-        endYear: end,
-      });
+      if (start.length > 5) {
+        setYear({
+          startYear: start,
+          endYear: end,
+        });
+      }
     }
   }, [informationSurvey]);
   const onSubmit: SubmitHandler<Inputs> = (
@@ -170,10 +172,14 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
                 Thời gian
               </label>
               <RangePicker
-                value={[
-                  dayjs(year?.startYear, "YYYY-MM"),
-                  dayjs(year?.endYear, "YYYY-MM"),
-                ]}
+                value={
+                  year?.startYear != null
+                    ? [
+                        dayjs(year?.startYear, "YYYY-MM"),
+                        dayjs(year?.endYear, "YYYY-MM"),
+                      ]
+                    : [null, null]
+                }
                 onChange={(e, value) => {
                   setValue("startYear", value[0]);
                   setValue("endYear", value[1]);

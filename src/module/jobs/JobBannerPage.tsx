@@ -131,13 +131,13 @@ const JobBannerPage: React.FC<PropComponent> = ({
     const storedHistory: any = localStorage.getItem("searchHistory");
     if (title) {
       if (storedHistory) {
-        if (!JSON.parse(storedHistory).includes(title))
+        if (!JSON.parse(storedHistory)?.includes(title))
           localStorage.setItem(
             "searchHistory",
             JSON.stringify([title, ...JSON.parse(storedHistory)])
           );
       } else {
-        if (!JSON.parse(storedHistory).includes(title))
+        if (!JSON.parse(storedHistory)?.includes(title))
           localStorage.setItem("searchHistory", JSON.stringify([title]));
       }
     }
@@ -206,7 +206,6 @@ const JobBannerPage: React.FC<PropComponent> = ({
   }, [page, closeDate]);
 
   const options: SelectProps["options"] = [];
-
   for (let i = 10; i < 36; i++) {
     options.push({
       value: i.toString(36) + i,
