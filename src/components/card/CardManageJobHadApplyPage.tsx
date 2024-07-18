@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../assets/banner3.jpg";
 import { formatToMillion } from "../../utils/common-function";
 import JobInformationStatusAtManagePage from "../../module/jobs/JobInformationStatusAtManagePage";
+import moment from "moment";
 interface PropComponent {
   item?: any;
 }
@@ -60,7 +61,8 @@ const CardManageJobHadApplyPage: React.FC<PropComponent> = ({ item }) => {
             {item?.post?.company?.name}
           </h5>
           <p className="text-sm text-gray-500">
-            Ngày ứng tuyển: 20/04/2024 - 14:43
+            Ngày ứng tuyển:{" "}
+            {moment(item?.appliedDate).format("HH:mm:ss DD-MM-YYYY")}
           </p>
           <div className="flex gap-3 items-center mt-3">
             <span className="p-1 text-xs bg-gray-200 rounded-sm">

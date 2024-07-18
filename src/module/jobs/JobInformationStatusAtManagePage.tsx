@@ -5,6 +5,7 @@ import { Skeleton } from "antd";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { jobGetDetailStatus } from "../../store/job/job-slice";
+import moment from "moment";
 interface PropComponent {
   jobId: string;
   setClosePopover?: any;
@@ -122,6 +123,12 @@ const JobInformationStatusAtManagePage: React.FC<PropComponent> = ({
                     >
                       {jobDetailStatus?.applyStatus?.value}
                     </span>
+                    <p>
+                      Thời gian:{" "}
+                      {moment(jobDetailStatus?.updatedTime).format(
+                        "HH:mm:ss DD-MM-YYYY"
+                      )}
+                    </p>
                   </div>
                   <p className="mt-4 max-h-[100px] overflow-auto">
                     {jobDetailStatus?.note}
