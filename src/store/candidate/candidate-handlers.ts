@@ -319,6 +319,9 @@ function* handleCandidateUpdateStudy(dataCandiateStudy: any): Generator<any> {
       token?.accessToken
     );
     if (response?.data?.code === 1000) {
+      yield put(
+        candidateUpdateMessageRedux({ messageCandidate: "studysuccess" })
+      );
       message.success("Cập nhật học vấn thành công.");
     }
   } catch (error: any) {
@@ -338,9 +341,10 @@ function* handleCandidateSurvey(dataCandiateSurvey: any): Generator<any> {
     );
     if (response?.data?.code === 1000) {
       yield call(handleAuthFetchMe);
-      yield put(candidateUpdateMessageRedux({messageCandidate: "surveysuccess"}))
+      yield put(
+        candidateUpdateMessageRedux({ messageCandidate: "surveysuccess" })
+      );
       message.success("Khảo sát thông tin thành công.");
-      
     }
   } catch (error: any) {
     message.error(error?.response?.data?.message);

@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import {
   candidateGetSurvey,
+  candidateUpdateMessageRedux,
   candidateUpdateStudy,
 } from "../../store/candidate/candidate-slice";
 import { useSelector } from "react-redux";
@@ -33,7 +34,9 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
     formState: { errors },
   } = useForm<Inputs>();
   const { user } = useSelector((state: any) => state.auth);
-  const { informationSurvey } = useSelector((state: any) => state.candidate);
+  const { informationSurvey, messageCandidate } = useSelector(
+    (state: any) => state.candidate
+  );
   const [year, setYear] = useState<any>({
     startYear: null,
     endYear: null,
@@ -105,6 +108,12 @@ const FormUpdateStudyInformaionPage: React.FC<PropComponent> = ({
       })
     );
   };
+  useEffect(() => {
+    if (messageCandidate == "studysuccess") {
+      setClosePopover(false);
+      dispatch(candidateUpdateMessageRedux({ messageCandidate: "" }));
+    }
+  }, [messageCandidate]);
   return (
     <>
       <div className="fixed inset-0 z-40 flex">

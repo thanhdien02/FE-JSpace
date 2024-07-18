@@ -184,6 +184,7 @@ const ApplyJobPage: React.FC<PropComponent> = ({
                                 </label>
                                 <input
                                   id="name"
+                                  readOnly
                                   type="text"
                                   value={user?.name ? user?.name : ""}
                                   onChange={() => {}}
@@ -198,6 +199,7 @@ const ApplyJobPage: React.FC<PropComponent> = ({
                                     <span className="text-red-500">*</span>
                                   </label>
                                   <input
+                                    readOnly
                                     id="email"
                                     type="email"
                                     value={user?.email}
@@ -212,6 +214,7 @@ const ApplyJobPage: React.FC<PropComponent> = ({
                                     <span className="text-red-500">*</span>
                                   </label>
                                   <input
+                                    readOnly
                                     id="phone"
                                     type="number"
                                     value={user?.phone}

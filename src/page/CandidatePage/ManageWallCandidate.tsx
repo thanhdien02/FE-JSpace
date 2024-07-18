@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import bg_wall from "../../assets/bg-login.jpg";
 import Button from "../../components/input";
 import { useSelector } from "react-redux";
-import { Spin } from "antd";
+import { Avatar } from "antd";
 import IconCamera from "../../components/icons/IconCamera";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -10,6 +10,7 @@ import { commonUpdateSuggestJobRedux } from "../../store/common/common-slice";
 import FormUpdateStudyInformaionPage from "../../module/candidates/FormUpdateStudyInformaionPage";
 import { CSSTransition } from "react-transition-group";
 import FormUpdateInformationExperiencePage from "../../module/candidates/FormUpdateInformationExperiencePage";
+import { CameraOutlined, UserOutlined } from "@ant-design/icons";
 const ManageWallCandidate: React.FC = () => {
   const { user } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
@@ -74,7 +75,7 @@ const ManageWallCandidate: React.FC = () => {
               onClick={() => {
                 navigate("/manage/information-account");
               }}
-              className="bg-white rounded-full absolute lg:-left-[150px] -left-[70px] -top-16 cursor-pointer"
+              className=" bg-white rounded-full absolute lg:-left-[150px] -left-[70px] -top-16 cursor-pointer"
             >
               {user?.picture ? (
                 <>
@@ -88,8 +89,16 @@ const ManageWallCandidate: React.FC = () => {
                   </span>
                 </>
               ) : (
-                <div className="flex w-[130px] h-[130px] bg-gray-200 rounded-full">
-                  <Spin className="m-auto"></Spin>
+                <div className="lg:w-[130px] lg:h-[130px] bg-white rounded-full">
+                  <Avatar
+                    className="mx-auto "
+                    size={130}
+                    icon={<UserOutlined />}
+                  />
+                  <CameraOutlined
+                    className="absolute bottom-2 right-0 bg-blue-50 p-2 rounded-full cursor-pointer"
+                    style={{ fontSize: "26px" }}
+                  />
                 </div>
               )}
             </div>
