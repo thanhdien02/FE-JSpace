@@ -8,7 +8,7 @@ import {
   authUpdateLoadingRedux,
   authUpdateMessageRedux,
 } from "../../store/auth/auth-slice";
-import { Checkbox, CheckboxProps, Spin } from "antd";
+import { Spin } from "antd";
 import {
   EyeOutlined,
   GoogleOutlined,
@@ -90,9 +90,9 @@ const LoginPage: React.FC<PropComponent> = ({
       dispatch(authUpdateMessageRedux({ messageAuth: "" }));
     }
   }, [messageAuth]);
-  const onChange: CheckboxProps["onChange"] = (e) => {
-    console.log(`checked = ${e.target.checked}`);
-  };
+  // const onChange: CheckboxProps["onChange"] = (e) => {
+  //   console.log(`checked = ${e.target.checked}`);
+  // };
 
   return (
     <div className={`flex fixed inset-0 z-50 ${className}`}>
@@ -222,14 +222,14 @@ const LoginPage: React.FC<PropComponent> = ({
                   : ""}
               </p>
             </div>
-            <div className="w-full">
+            {/* <div className="w-full">
               <Checkbox
                 onChange={onChange}
                 className="font-normal text-xs text-slate-500 gap-2"
               >
                 {t("term")}
               </Checkbox>
-            </div>
+            </div> */}
           </div>
 
           <div className="flex w-full mt-5">

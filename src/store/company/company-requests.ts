@@ -49,6 +49,13 @@ export const requestCompanyGetFollowedCompany = (
     }
   );
 };
+export const requestCompanyGetListLogo = () => {
+  return axios.get(`${API}/api/v1/companies/logos`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
 export const requestCompanyGetCompanyById = (
   company_id: string = "",
   candidate_id: string = ""

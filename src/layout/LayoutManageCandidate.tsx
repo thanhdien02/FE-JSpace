@@ -72,7 +72,7 @@ const LayoutManageCandidate: React.FC = () => {
         );
       }
     } else {
-      message.info("Bạn cần xác định CV chính trước.");
+      message.info("Bạn cần chọn CV chính trước.");
     }
   };
   return (

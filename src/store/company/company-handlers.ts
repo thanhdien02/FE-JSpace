@@ -5,6 +5,7 @@ import {
   companyUpdateCompanyRedux,
   companyUpdateFollowedCompanyPaginationRedux,
   companyUpdateFollowedCompanyRedux,
+  companyUpdateListLogoRedux,
   companyUpdateLoadingRedux,
   companyUpdatePaginationRedux,
   companyUpdateRelativeCompanyPaginationRedux,
@@ -14,6 +15,7 @@ import {
   requestCompanyGetCompany,
   requestCompanyGetCompanyById,
   requestCompanyGetFollowedCompany,
+  requestCompanyGetListLogo,
   requestCompanyGetRelativeCompany,
 } from "./company-requests";
 import { getToken, Token } from "../../utils/auth";
@@ -138,10 +140,25 @@ function* handleCompanyGetCompanyById(dataGetById: any): Generator<any> {
     yield put(companyUpdateLoadingRedux({ loadingCompany: false }));
   }
 }
+function* handleCompanyGetListLogo(): Generator<any> {
+  try {
+    yield put(companyUpdateLoadingRedux({ loadingCompany: true }));
+    const response: any = yield call(requestCompanyGetListLogo);
+    console.log("🚀 ~ function*handleCompanyGetListLogo ~ response:", response);
+    if (response?.data?.code === 1000) {
+      yield put(companyUpdateListLogoRedux({ listLogo: response.data.result }));
+    }
+  } catch (error: any) {
+    message.error(error?.response?.data?.message);
+  } finally {
+    yield put(companyUpdateLoadingRedux({ loadingCompany: false }));
+  }
+}
 
 export {
   handleCompanyGetCompany,
   handleCompanyGetCompanyById,
   handleCompanyGetRelativeCompany,
   handleCompanyGetFollowedCompany,
+  handleCompanyGetListLogo,
 };

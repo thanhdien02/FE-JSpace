@@ -164,7 +164,7 @@ const SuggestJobThroughEmailPage: React.FC = () => {
           <p className="mt-2 text-gray-500 md:text-base text-sm">
             {t("jobsuggestion.content")}
           </p>
-          {loadingCandidate ? (
+          {loadingCandidate && locations?.length > 0 ? (
             <div className="mt-5">
               <Skeleton />
             </div>

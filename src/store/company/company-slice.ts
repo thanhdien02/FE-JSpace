@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface ICompany {
   companys: any;
+  listLogo: any;
   relativeCompanys: any;
   followedCompanys: any;
   companyById: any;
@@ -14,6 +15,7 @@ interface ICompany {
 
 const init: ICompany = {
   companys: {},
+  listLogo: {},
   relativeCompanys: {},
   followedCompanys: {},
   companyById: {},
@@ -28,9 +30,14 @@ const companySlice: any = createSlice({
   initialState: init,
   reducers: {
     companyGetCompany: () => {},
+    companyGetListLogo: () => {},
     companyGetRelativeCompany: () => {},
     companyGetFollowedCompany: () => {},
     companyGetCompanyById: () => {},
+    companyUpdateListLogoRedux: (state, action) => ({
+      ...state,
+      listLogo: action.payload.listLogo,
+    }),
     companyUpdateLoadingRedux: (state, action) => ({
       ...state,
       loadingCompany: action.payload.loadingCompany,
@@ -83,5 +90,7 @@ export const {
   companyGetFollowedCompany,
   companyUpdateFollowedCompanyPaginationRedux,
   companyUpdateFollowedCompanyRedux,
+  companyGetListLogo,
+  companyUpdateListLogoRedux,
 } = companySlice.actions;
 export default companySlice.reducer;
