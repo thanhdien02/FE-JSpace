@@ -78,11 +78,11 @@ const HomeListJobPage: React.FC = () => {
               options={[
                 {
                   value: "2",
-                  label: "Tăng dần theo thời gian",
+                  label: "Tin tuyển dụng cũ nhất",
                 },
                 {
                   value: "3",
-                  label: "Giảm dần theo thời gian",
+                  label: "Tin tuyển dụng mới nhất",
                 },
               ]}
               onChange={handleChangeFilter}

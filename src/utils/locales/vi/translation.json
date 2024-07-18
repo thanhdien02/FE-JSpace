@@ -76,7 +76,7 @@
     "placeholdercompany": "Tên công ty"
   },
   "companydetail": {
-    "companylink": "Đường dẫn công ty",
+    "companylink": "Website công ty",
     "companysize": "Quy mô",
     "address": "Địa chỉ",
     "follow": "Theo dõi công ty",
@@ -87,7 +87,7 @@
     "reviewcompany": "Đánh giá công ty",
     "companyaddress": "Địa chỉ công ty",
     "map": "Bản đồ",
-    "companywork": "Công việc của công ty",
+    "companywork": "Tin tuyển dụng của công ty",
     "relatedcompany": "Công ty liên quan",
     "comment": "Bình luận",
     "shareoptionaboutcompany": "Hãy chia sẽ ý kiến của bạn về công ty này",
@@ -182,7 +182,6 @@
   },
   "fullname": "Họ và tên",
   "confirm": "Xác nhận",
-
   "showpassword": "Hiện mật khẩu",
   "enterinformationforegister": "Hãy nhập thông tin để đăng ký",
   "informationterm": "Bằng việc xác nhận, bạn đồng ý với các Điều khoản dịch vụ và Chính sách quyền riêng tư của JSPACE liên quan đến thông tin riêng tư của bạn."
