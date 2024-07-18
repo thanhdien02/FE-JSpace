@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardManageJobSavePage from "../../components/card/CardManageJobSavePage";
-import { Empty, Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
+import { Empty, Pagination, Skeleton } from "antd";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { jobGetSavedJob } from "../../store/job/job-slice";
@@ -13,12 +13,12 @@ const ManageJobSavePage: React.FC = () => {
   );
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [value, setValue] = useState(1);
+  // const [value, setValue] = useState(1);
   const [page, setPage] = useState(1);
-  const onChange = (e: RadioChangeEvent) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
-  };
+  // const onChange = (e: RadioChangeEvent) => {
+  //   console.log("radio checked", e.target.value);
+  //   setValue(e.target.value);
+  // };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -31,7 +31,7 @@ const ManageJobSavePage: React.FC = () => {
     <>
       <div className="p-5">
         <h2 className="text-xl font-bold">{t("manage.savedjob.title")}</h2>
-        <div className="lg:mt-5 mt-3 flex flex-wrap lg:gap-5 gap-2 items-center">
+        {/* <div className="lg:mt-5 mt-3 flex flex-wrap lg:gap-5 gap-2 items-center">
           <h3 className="text-base text-gray-500">
             {t("manage.savedjob.showby")}:
           </h3>
@@ -39,7 +39,7 @@ const ManageJobSavePage: React.FC = () => {
             <Radio value={1}>{t("manage.savedjob.mostrecent")}</Radio>
             <Radio value={2}>{t("manage.savedjob.highestsalary")}</Radio>
           </Radio.Group>
-        </div>
+        </div> */}
         <div className="flex flex-col gap-5 mt-5">
           {loadingJob ? (
             <Skeleton />

@@ -1,4 +1,4 @@
-import { Empty, Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
+import { Empty, Pagination, Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 import CardManageJobHadApplyPage from "../../components/card/CardManageJobHadApplyPage";
 import { useTranslation } from "react-i18next";
@@ -12,11 +12,11 @@ const ManageJobHadApplyPage: React.FC = () => {
   );
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [value, setValue] = useState(1);
+  // const [value, setValue] = useState(1);
   const [page, setPage] = useState(1);
-  const onChange = (e: RadioChangeEvent) => {
-    setValue(e.target.value);
-  };
+  // const onChange = (e: RadioChangeEvent) => {
+  //   setValue(e.target.value);
+  // };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -31,7 +31,7 @@ const ManageJobHadApplyPage: React.FC = () => {
     <>
       <div className="p-5">
         <h3 className="text-lg font-bold">{t("manage.appliedjob.title")}</h3>
-        <div className="lg:mt-5 mt-3 flex flex-wrap lg:gap-5 gap-3 items-center">
+        {/* <div className="lg:mt-5 mt-3 flex flex-wrap lg:gap-5 gap-3 items-center">
           <div className="flex items-center gap-2">
             <input
               placeholder={t("placeholdernamejob")}
@@ -54,7 +54,7 @@ const ManageJobHadApplyPage: React.FC = () => {
             <Radio value={1}>{t("manage.appliedjob.mostrecent")}</Radio>
             <Radio value={3}>{t("manage.appliedjob.highestsalary")}</Radio>
           </Radio.Group>
-        </div>
+        </div> */}
         <div className="flex flex-col gap-5 mt-7">
           {loadingJob ? (
             <Skeleton />

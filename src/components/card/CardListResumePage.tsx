@@ -18,7 +18,7 @@ const CardListResumePage: React.FC<PropComponent> = ({
   item,
   checkMainCV,
 }) => {
-  const { user } = useSelector((state: any) => state.auth);
+  const { user, defaultResume } = useSelector((state: any) => state.auth);
   const dispath = useDispatch();
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,8 +27,12 @@ const CardListResumePage: React.FC<PropComponent> = ({
   };
 
   const handleOk = () => {
-    setIsModalOpen(false);
-    dispath(fileDeleteFile({ candidate_id: user?.id, resume_id: item?.id }));
+    if (defaultResume?.file?.id == item?.id) {
+      message.error("Không thể xóa hồ sơ chính");
+    } else {
+      setIsModalOpen(false);
+      dispath(fileDeleteFile({ candidate_id: user?.id, resume_id: item?.id }));
+    }
   };
 
   const handleCancel = () => {
@@ -62,7 +66,7 @@ const CardListResumePage: React.FC<PropComponent> = ({
           >
             {item?.name}
           </a>
-          <p className="text-base">Cập nhật lần cuối 17-04-2024 00:39 AM</p>
+          {/* <p className="text-base">Cập nhật lần cuối 17-04-2024 00:39 AM</p> */}
           <div className="flex gap-2 mt-5">
             <div
               onClick={() => {

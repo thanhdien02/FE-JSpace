@@ -132,7 +132,7 @@ const SuggestJobThroughEmailPage: React.FC = () => {
   };
   return (
     <>
-      <div className="fixed inset-0 flex z-40">
+      <div className="fixed inset-0 flex z-50">
         <div
           className="absolute inset-0 bg-black/50"
           onClick={() => {
@@ -295,7 +295,7 @@ const SuggestJobThroughEmailPage: React.FC = () => {
                     }
                     onChange={handleOnchangeGender}
                   />
-                  {errors?.location?.type == "required" && (
+                  {errors?.gender?.type == "required" && (
                     <p className="text-red-500 mt-1 text-sm">
                       *Bạn chưa điền giới tính
                     </p>

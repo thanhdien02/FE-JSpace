@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import LayoutHomeUserHeader from "../module/common/LayoutHomeUserHeader";
-import { Avatar, Switch } from "antd";
+import { Avatar, message, Switch } from "antd";
 import { getToken } from "../utils/auth";
 import { useDispatch } from "react-redux";
 import { authFetchMe } from "../store/auth/auth-slice";
@@ -27,7 +27,7 @@ import { CSSTransition } from "react-transition-group";
 import SuggestJobThroughEmailPage from "../page/CommonPage/SuggestJobThroughEmailPage";
 
 const LayoutManageCandidate: React.FC = () => {
-  const { user, accessToken, publicProfile } = useSelector(
+  const { user, accessToken, publicProfile, defaultResume } = useSelector(
     (state: any) => state.auth
   );
   const { inputHeaderSearchCheck, suggestJobCheck } = useSelector(
@@ -53,12 +53,16 @@ const LayoutManageCandidate: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
   const handleChangePublicResume = () => {
-    dispatch(
-      candidateUpdatePublicResume({
-        candidate_id: user?.id,
-        publicProfile: !publicProfile,
-      })
-    );
+    if (defaultResume) {
+      dispatch(
+        candidateUpdatePublicResume({
+          candidate_id: user?.id,
+          publicProfile: !publicProfile,
+        })
+      );
+    } else {
+      message.info("Bạn cần xác định CV chính trước.");
+    }
   };
   return (
     <>

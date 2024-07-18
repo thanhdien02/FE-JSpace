@@ -160,7 +160,7 @@ const JobShortDetailPage: React.FC<PropComponent> = ({ dataJob }) => {
           )}
         </div>
         <div className="flex gap-2 px-5 pb-5 items-center">
-          <span className="font-semibold"> Kỹ năng: </span>
+          <span className="font-semibold"> {t("skillsort")}: </span>
           {dataJob?.post?.skills.length > 0 &&
             dataJob?.post?.skills.map((item: any, index: number) => (
               <span key={index} className="py-1 px-2 bg-gray-200">

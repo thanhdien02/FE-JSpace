@@ -1,4 +1,4 @@
-import { Empty, Pagination, Radio, RadioChangeEvent, Skeleton } from "antd";
+import { Empty, Pagination, Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 import CardCompanyFollowedPage from "../../components/card/CardCompanyFollowedPage";
 import { useTranslation } from "react-i18next";
@@ -16,11 +16,11 @@ const ManageCompanyFollowedPage: React.FC = () => {
 
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
-  const [value, setValue] = useState(1);
-  const onChange = (e: RadioChangeEvent) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
-  };
+  // const [value, setValue] = useState(1);
+  // const onChange = (e: RadioChangeEvent) => {
+  //   console.log("radio checked", e.target.value);
+  //   setValue(e.target.value);
+  // };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -62,7 +62,7 @@ const ManageCompanyFollowedPage: React.FC = () => {
         <h3 className="text-lg font-bold">
           {t("manage.followedcompany.title")}
         </h3>
-        <div className="lg:mt-5 mt-3 flex flex-wrap lg:gap-5 gap-3 items-center">
+        {/* <div className="lg:mt-5 mt-3 flex flex-wrap lg:gap-5 gap-3 items-center">
           <div className="flex items-center gap-2">
             <input
               placeholder={t("placeholdercompany")}
@@ -85,7 +85,7 @@ const ManageCompanyFollowedPage: React.FC = () => {
             <Radio className="font-medium" value={1}>{t("manage.followedcompany.mostrecent")}</Radio>
             <Radio className="font-medium" value={3}>{t("manage.followedcompany.mostfollowers")}</Radio>
           </Radio.Group>
-        </div>
+        </div> */}
 
         {loadingCompany ? (
           <Skeleton />
@@ -104,13 +104,15 @@ const ManageCompanyFollowedPage: React.FC = () => {
         )}
 
         <div className="flex justify-end mt-5 mb-10">
-          <Pagination
-            total={paginationFollowedCompany?.totalElements}
-            onChange={handleOnchangePage}
-            className="inline-block"
-            current={page}
-            pageSize={paginationFollowedCompany?.pageSize}
-          />
+          {followedCompanys?.length > 0 && (
+            <Pagination
+              total={paginationFollowedCompany?.totalElements}
+              onChange={handleOnchangePage}
+              className="inline-block"
+              current={page}
+              pageSize={paginationFollowedCompany?.pageSize}
+            />
+          )}
         </div>
       </div>
     </>
