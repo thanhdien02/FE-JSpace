@@ -25,11 +25,14 @@ import OverlaySearchHeader from "../components/overlay/OverlaySearchHeader";
 import { candidateUpdatePublicResume } from "../store/candidate/candidate-slice";
 import { CSSTransition } from "react-transition-group";
 import SuggestJobThroughEmailPage from "../page/CommonPage/SuggestJobThroughEmailPage";
+import {
+  commonUpdateLoginRedux,
+  commonUpdateSuggestJobRedux,
+} from "../store/common/common-slice";
 
 const LayoutManageCandidate: React.FC = () => {
-  const { user, accessToken, publicProfile, defaultResume } = useSelector(
-    (state: any) => state.auth
-  );
+  const { user, accessToken, publicProfile, defaultResume, surveyed } =
+    useSelector((state: any) => state.auth);
   const { inputHeaderSearchCheck, suggestJobCheck } = useSelector(
     (state: any) => state.common
   );
@@ -54,12 +57,20 @@ const LayoutManageCandidate: React.FC = () => {
   }, []);
   const handleChangePublicResume = () => {
     if (defaultResume) {
-      dispatch(
-        candidateUpdatePublicResume({
-          candidate_id: user?.id,
-          publicProfile: !publicProfile,
-        })
-      );
+      if (!surveyed) {
+        dispatch(
+          commonUpdateSuggestJobRedux({
+            suggestJobCheck: true,
+          })
+        );
+      } else {
+        dispatch(
+          candidateUpdatePublicResume({
+            candidate_id: user?.id,
+            publicProfile: !publicProfile,
+          })
+        );
+      }
     } else {
       message.info("Bạn cần xác định CV chính trước.");
     }
@@ -184,6 +195,24 @@ const LayoutManageCandidate: React.FC = () => {
           </div>
         </div>
       </div>
+      {user?.id && (
+        <div
+          onClick={() => {
+            if (!user?.id) {
+              dispatch(commonUpdateLoginRedux({ loginCheck: true }));
+            } else {
+              dispatch(
+                commonUpdateSuggestJobRedux({
+                  suggestJobCheck: !suggestJobCheck,
+                })
+              );
+            }
+          }}
+          className="fixed z-10 right-0 top-1/2 bg-primary py-3 px-1 text-white rounded-r-lg text-base cursor-pointer vertical-text"
+        >
+          {t("jobsuggestion.header")}
+        </div>
+      )}
       <CSSTransition
         in={suggestJobCheck}
         timeout={200}

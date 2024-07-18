@@ -78,7 +78,7 @@ const SuggestJobThroughEmailPage: React.FC = () => {
     if (user?.id) {
       dispatch(candidateGetSurvey({ candidate_id: user.id }));
     }
-  }, []);
+  }, [user?.id]);
   useEffect(() => {
     if (messageCandidate == "surveysuccess") {
       dispatch(
